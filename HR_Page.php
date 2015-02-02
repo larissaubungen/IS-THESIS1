@@ -34,7 +34,7 @@
                             class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="http://localhost/ISTHESIS/logout.php">Logout</a></li>
+              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -57,12 +57,12 @@
         <li><a href="index.html"><i class="icon-user"></i><span>Employees</span> </a> </li>
         
         <li><a href="reports.html"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-        <li><a href="guidely.html"><i class="icon-table"></i><span>Attendance</span> </a></li>
+        <li><a href="http://localhost/IS-THESIS1/ListOfApplicant.php"><i class="icon-table"></i><span>Attendance</span> </a></li>
         <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
         <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="http://localhost/ISTHESIS/Signup.php">Add Applicant</a></li>
+            <li><a href="http://localhost/IS-THESIS1/Signup.php">Add Applicant</a></li>
           </ul>
         </li>
       </ul>
