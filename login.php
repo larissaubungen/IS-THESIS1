@@ -40,20 +40,7 @@
 			<div class="nav-collapse">
 				<ul class="nav pull-right">
 					
-					<li class="">						
-						<a href="signup.html" class="">
-							Don't have an account?
-						</a>
-						
-					</li>
-					
-					<li class="">						
-						<a href="index.html" class="">
-							<i class="icon-chevron-left"></i>
-							Back to Homepage
-						</a>
-						
-					</li>
+				
 				</ul>
 				
 			</div><!--/.nav-collapse -->	
