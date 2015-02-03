@@ -147,10 +147,10 @@ if($_POST['resume'] == "Submit")
 				$updateResume = mysql_query($sql2);
 	
 		if ($updatePerson && $updateResume){
-				echo 'fuck yeah';
+				echo 'Updated';
 		}
 		else {
-				echo 'fuck no';
+				echo 'Not updated';
 				
 		}
 	}
@@ -213,10 +213,50 @@ if($_POST['resume'] == "Submit")
     padding: 7px;
 	}
   </style>
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+
+  <script type="text/javascript">
+		$(document).ready(function(){
+			var counter = 2;
+
+		$("#addButton").click(function () {
+
+			if(counter>5)
+			{
+		        alert("Please limit to 5 professional awards");
+		        return false;
+			}   
+ 
+	var newTextBoxDiv = $(document.createElement('div'))
+	     .attr("id", 'TextBoxDiv' + counter);
+ 
+	newTextBoxDiv.after().html('<label>Award #'+ counter + ' : </label>' +
+	      '<input type="text" name="textbox' + counter + 
+	      '" id="textbox' + counter + '" value="" >');
+ 
+	newTextBoxDiv.appendTo("#TextBoxesGroup");
+	counter++;
+     });
+
+		$("#removeButton").click(function () {
+			if(counter==1)
+			{
+          		alert("No more textbox to remove");
+          		return false;
+       		}
+       		counter--;   
+						 
+		$("#TextBoxDiv" + counter).remove();});
+								 
+	     $("#getButtonValue").click(function () {						 
+			var msg = '';
+			for(i=1; i<counter; i++){
+		   	  msg += "\n Textbox #" + i + " : " + $('#textbox' + i).val();
+			}
+		    	  alert(msg);
+		     });
+		  });
+   </script>
+
 </head>
 <body>
 	<?php
@@ -280,7 +320,7 @@ if($_POST['resume'] == "Submit")
 	  <div class="panel-body">	   <!--/Panel Heading only-->
 		<form action="resume.php" method="POST">
 		  <div class="table-responsive">	<!--Resume Form into table-->
-		  <table class="table"> 
+		 <table class="table"> 
 			<thead>
 				<tr>
 					<th>Personal Information</th>
@@ -355,19 +395,29 @@ if($_POST['resume'] == "Submit")
 					<td>
 						<input type="text" name="street" value="<?=$street;?>"> <br>
 					</td>
-					<td id="resume-label">College/University:</td>
+					<td id="resume-label">High School:</td>
 					<td>
-						<input type="text" name="college" value="<?=$college;?>"><br>
+						<input type="text" name="highschool" value="<?=$highSchool;?>"><br>
 					</td>
 				</tr>
 				<tr>
-					<td id="resume-label">City/Province:</td>
+					<td id="resume-label">City:</td>
 					<td>	
 						<input type="select" name="city" value="<?=$city;?>"> <br>
 					</td>
 					<td id="resume-label">Year Graduated:</td>
 					<td>
-						<input type="text" name="yearGraduated" value="<?=$yearGraduated;?>"> <br>
+						<input type="text" name="HSyearGraduated" value="<?=$HSyearGraduated;?>"> <br>
+					</td>
+				</tr>
+				<tr>
+					<td id="resume-label">Province:</td>
+					<td>	
+						<input type="select" name="province" value="<?=$province;?>"> <br>
+					</td>
+					<td id="resume-label">College/University:</td>
+					<td>
+						<input type="text" name="ColyearGraduated" value="<?=$ColyearGraduated;?>"> <br>
 					</td>
 				</tr>
 				<tr>
@@ -375,11 +425,37 @@ if($_POST['resume'] == "Submit")
 					<td>
 						<input type="text" name="zip" value="<?=$zip;?>"><br>
 					</td>
-					<td id="resume-label">Awards:</td>
+					<td id="resume-label">Year Graduated:</td>
 					<td>
-						<input type="text" name="awards" value="<?=$awards;?>"><br>
+						<input type="text" name="yearGraduated" value="<?=$yearGraduated;?>"> <br>
 					</td>
 				</tr>
+
+				<tr>
+					<td id="resume-label"><br><b>Awards</b></td>
+					<td></td>
+					<td id="resume-label"><br><b></b></td>
+				</tr>
+
+				<tr>
+					
+					<td>
+						<div id='TextBoxesGroup'>
+							<div id="TextBoxDiv1">
+						<label>Award #1 : </label><input type='textbox' id='textbox1' >
+						<input type='button' value='+' id='addButton'>
+						<input type='button' value='-' id='removeButton'>
+						</div>
+						</div>
+					</td>
+					
+					<!--<td id="resume-label">Awards:</td>
+					<td>
+						<input type="text" name="awards" value="<?=$awards;?>"><br>
+					</td>-->
+					
+				</tr>
+
 				<tr>
 					<td id="resume-label"><br><b>Experience</b></td>
 					<td></td>
