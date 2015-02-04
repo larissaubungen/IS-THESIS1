@@ -218,43 +218,81 @@ if($_POST['resume'] == "Submit")
 
   <script type="text/javascript">
 		  $(document).ready(function() {
-        var iCnt = 0;
-        // CREATE A "DIV" ELEMENT AND DESIGN IT USING JQUERY ".css()" CLASS.
-        var container = $(document.createElement('div')).css({
-            padding: '5px', margin: '20px', width: '170px', border: '1px dashed',
-            borderTopColor: '#999', borderBottomColor: '#999',
-            borderLeftColor: '#999', borderRightColor: '#999'
-        });
-        $('#addButton').click(function() {
-            if (iCnt <= 4) {
-                iCnt = iCnt + 1;
-                // ADD TEXTBOX.
-                $(container).append('<input type=text class="input" id=tb' + iCnt + ' ' +
-                            'placeholder="Award ' + iCnt + '" />');
+            var count = 0;
+	        var count1 = 0;
+	        // CREATE A "DIV" ELEMENT AND DESIGN IT USING JQUERY ".css()" CLASS.
+	        var divAward = $(document.createElement('div')).css({
+	            padding: '5px', margin: '20px', width: '170px', border: '1px dashed',
+	            borderTopColor: '#999', borderBottomColor: '#999',
+	            borderLeftColor: '#999', borderRightColor: '#999'
+	        });
 
-                if (iCnt == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
-                    var divSubmit = $(document.createElement('div'));
-                    $(divSubmit).append('<input type=button class="bt" onclick="GetTextValue()"' + 
-                            'id=btSubmit value=Submit />');   
-                }
-                $('#Awards').after(container, divSubmit);   // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
-            }
-            else {      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
-                $(container).append('<label>Reached the limit</label>'); 
-                $('#addButton').attr('class', 'bt-disable'); 
-                $('#addButton').attr('disabled', 'disabled');
-            }
-        });
-        $('#removeButton').click(function() {   // REMOVE ELEMENTS ONE PER CLICK.
-            if (iCnt != 0) { $('#tb' + iCnt).remove(); iCnt = iCnt - 1; }
-            if (iCnt == 0) { $(container).empty(); 
-                $(container).remove(); 
-                $('#btSubmit').remove(); 
-                $('#addButton').removeAttr('disabled'); 
-                $('#addButton').attr('class', 'bt') 
-            }
-        });
-    });
+	        var divOrg = $(document.createElement('div')).css({
+	            padding: '5px', margin: '20px', width: '170px', border: '1px dashed',
+	            borderTopColor: '#999', borderBottomColor: '#999',
+	            borderLeftColor: '#999', borderRightColor: '#999'
+	        });
+
+	        $('#addAward').click(function() {
+	            if (count <= 4) {
+	                count = count + 1;
+	                // ADD TEXTBOX.
+	                $(divAward).append('<input type=text class="input" id=tb' + count + ' ' +
+	                            'placeholder="Award ' + count + '" />');
+
+	                if (count == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
+	                    var divSubmit = $(document.createElement('div'));
+	                }
+	                $('#Awards').after(divAward, divSubmit);   // ADD BOTH THE DIV ELEMENTS TO THE "main" divAward.
+	            }
+	            else{      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
+	                $(divAward).append('<label>-</label>'); 
+	                $('#addAward').attr('class', 'bt-disable'); 
+	                $('#addAward').attr('disabled', 'disabled');
+	            }
+	        });
+
+	        $('#addOrg').click(function() {
+	            if (count1 <= 4) {
+	                count1 = count1 + 1;
+	                // ADD TEXTBOX.
+	                $(divOrg).append('<input type=text class="input" id=tb1' + count1 + ' ' +
+	                            'placeholder="Organization' + count1 + '" />');
+
+	                if (count1 == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
+	                    var divSub = $(document.createElement('div'));
+	                }
+	                $('#Organizations').after(divOrg, divSub);   // ADD BOTH THE DIV ELEMENTS TO THE "main" divAward.
+	            }
+	            else{      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
+	                $(divOrg).append('<label>--</label>'); 
+	                $('#addOrg').attr('class', 'bt-disable'); 
+	                $('#addOrg').attr('disabled', 'disabled');
+	            }
+	        });
+
+	        $('#removeAward').click(function() {   // REMOVE ELEMENTS ONE PER CLICK.
+	            if (count > 0 && count<=5) { $('#tb' + count).remove(); count = count - 1; }
+	            if (count == 0 || count <0) { $(divAward).empty(); 
+	                $(divAward).remove(); 
+	                $('#addAward').removeAttr('disabled'); 
+	                $('#addAward').attr('class', 'bt');
+	                count = 0;
+	            }
+	        });
+
+	        $('#removeOrg').click(function() {   // REMOVE ELEMENTS ONE PER CLICK.
+	            if (count1 > 0 && count1<=5) { $('#tb1' + count1).remove(); count1 = count1 - 1; }
+	            if (count1 == 0 || count1 <0) { $(divOrg).empty(); 
+	                $(divOrg).remove(); 
+	                $('#addOrg').removeAttr('disabled'); 
+	                $('#addOrg').attr('class', 'bt'); 
+	                count1 = 0;
+	            }
+	        });
+	    } 	);
+
+		 
 
     // PICK THE VALUES FROM EACH TEXTBOX WHEN "SUBMIT" BUTTON IS CLICKED.
     var divValue, values = '';
@@ -389,10 +427,10 @@ if($_POST['resume'] == "Submit")
 				<tr>
 					<td id="resume-label"><br>Civil Status:</td>
 					<td>
-						<input type="radio" name="sex" value="single" checked>Single
-						<input type="radio" name="sex" value="married">Married
-						<input type="radio" name="sex" value="Divorced">Divorced
-						<input type="radio" name="sex" value="Divorced">Widowed
+						<input type="radio" name="sex" value="single" checked>Single 
+						<input type="radio" name="sex" value="married">Married <br>
+						<input type="radio" name="sex" value="Divorced">Divorced 
+						<input type="radio" name="sex" value="Divorced">Widowed 
 					</td>
 					<td id="resume-label">Degree:</td>
 					<td>
@@ -449,15 +487,22 @@ if($_POST['resume'] == "Submit")
 				<tr>
 					<td id="resume-label"><br><b>Awards</b></td>
 					<td></td>
-					<td id="resume-label"><br><b></b></td>
+					<td id="resume-label"><br><b>Organization(s) Affiliated</b></td>
 				</tr>
 
 				<tr>
 					
 					<td>
 						<div id='Awards'>
-								<input class="bt" type='button' value='Add' id='addButton'>
-								<input class="bt" type='button' value='remove' id='removeButton'>
+								<input class="bt" type='button' value='+' id='addAward'>
+								<input class="bt" type='button' value='-' id='removeAward'>
+						</div>
+					</td>
+					<td></td>
+					<td>
+						<div id='Organizations'>
+								<input class="bt" type='button' value='+' id='addOrg'>
+								<input class="bt" type='button' value='-' id='removeOrg'>
 						</div>
 					</td>
 					
@@ -474,21 +519,26 @@ if($_POST['resume'] == "Submit")
 					<td id="resume-label"><br><b>Skill</b></td>
 				</tr>
 				<tr>
-					<td id="resume-label">Previous Experience (Position, Company):</td>
+					<td id="resume-label">Former Employer (Position, Company):</td>
 					<td>						
 						<input type="text" name="experience" value="<?=$experience;?>"><br>
 						
 					</td>
+
+					<td>
+						<textarea placeholder="Technical Skills" name="skills" value="<?=$skills;?>" />
+					</td>
+					 <!--
 					<td id="resume-label">Extra Curricular Actvities</td> <br>
 					<td>
 						<input type="text" name="extraActivities" value="<?=$extraActivities;?>"><br>
-					</td>
+					</td> -->
 				</tr>
-				<tr>
+				<tr><!--
 					<td id="resume-label">Seminars Attended(Year, Title):</td>
 					<td>
 						<input type="text" name="seminarsAttendded" value="<?=$seminarsAttendded;?>"><br>
-					</td>
+					</td> -->
 					<td id="resume-label">Specialties and Technical Skills <br> &nbsp (Year, Title):</td>
 					<td>
 						<input type="text" name="skills" value="<?=$skills;?>"><br>
