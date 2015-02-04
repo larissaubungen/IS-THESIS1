@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Evaluation of Advisory Work(EAHW-B)</title>
+        <title>Evaluation for School Nurse (Form C)</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -31,7 +31,7 @@
         <script src="js/base.js"></script>
 
 
-                <!--Javascript code to calculate result of radio buttons for evaluation form result-->
+        <!--Javascript code to calculate result of radio buttons for evaluation form result-->
     <script type="text/javascript">
         function DisplayPrice(price){
             var val1 = 0;
@@ -106,71 +106,14 @@
                     val10 = document.form10.price10[i].value;
                 }
             }
-
-            var val11 = 0;
-            for( i = 0; i < document.form11.price11.length; i++ ){
-                if( document.form11.price11[i].checked == true ){
-                    val11 = document.form11.price11[i].value;
-                }
-            }
-
-            var val12 = 0;
-            for( i = 0; i < document.form12.price12.length; i++ ){
-                if( document.form12.price12[i].checked == true ){
-                    val12 = document.form12.price12[i].value;
-                }
-            }
-
-            var val13 = 0;
-            for( i = 0; i < document.form13.price13.length; i++ ){
-                if( document.form13.price13[i].checked == true ){
-                    val13 = document.form13.price13[i].value;
-                }
-            }
-
-            var val14 = 0;
-            for( i = 0; i < document.form14.price14.length; i++ ){
-                if( document.form14.price14[i].checked == true ){
-                    val14 = document.form14.price14[i].value;
-                }
-            }
-
-            var val15 = 0;
-            for( i = 0; i < document.form15.price15.length; i++ ){
-                if( document.form15.price15[i].checked == true ){
-                    val15 = document.form15.price15[i].value;
-                }
-            }
-
-            var val16 = 0;
-            for( i = 0; i < document.form16.price16.length; i++ ){
-                if( document.form16.price16[i].checked == true ){
-                    val16 = document.form16.price16[i].value;
-                }
-            }
-
-             var val17 = 0;
-            for( i = 0; i < document.form17.price17.length; i++ ){
-                if( document.form17.price17[i].checked == true ){
-                    val17 = document.form17.price17[i].value;
-                }
-            }
-
-             var val18 = 0;
-            for( i = 0; i < document.form18.price18.length; i++ ){
-                if( document.form18.price18[i].checked == true ){
-                    val18 = document.form18.price18[i].value;
-                }
-            }
+   
 
 
             var sum=(parseInt(val1) + parseInt(val2) + parseInt(val3) + parseInt(val4)
                     + parseInt(val5) + parseInt(val6) + parseInt(val7) + parseInt(val8)
-                    + parseInt(val9) + parseInt(val10) + + parseInt(val11) + parseInt(val12)
-                    + parseInt(val13) + parseInt(val14) + parseInt(val15) + parseInt(val16)
-                    + parseInt(val17) + parseInt(val18)) / 18 ;
+                    + parseInt(val9) + parseInt(val10)) / 10 ;
             document.getElementById('totalSum').value=sum;
-            
+
             if (sum >= 4.85 && sum <= 5) {
                      document.getElementById('equivalent').value="Outstanding";
                 } else if (sum >= 4.21 && sum <= 4.84) {
@@ -182,10 +125,11 @@
                 } else if (sum >= 1.00 && sum <= 2.49) {
                      document.getElementById('equivalent').value="Unsatisfactory";
                 }
-
         }
     </script>
-      <!--Javascript code to calculate result of radio buttons for evaluation form result-->   
+      <!--Javascript code to calculate result of radio buttons for evaluation form result-->
+
+
     </head>
 <body>
 
@@ -233,12 +177,13 @@
     </div>
     <!-- /subnavbar -->
     <div class="well" align="center">
-    <h4>Evaluation of Advisory Work(EAHW-B)</h4>
+    <h4>Evaluation for School Nurse  (Form C)</h4>
+    <h4>(For use by Students)</h4>
 
-        <h5>Name of Teacher:</h5>
-        <input type="text" placeholder="Name of Teacher">
-        <h5>Level/Section:</h5>
-        <input type="text" placeholder="(Grade,Section)"> <br>
+    <br>
+    
+<h5>Name of School Nurse: </h5>
+        <input type="text" placeholder="Name of School Nurse ">
         <div class="well" align="center">
         <table border="1">
             <thead>
@@ -270,6 +215,10 @@
                 </tr>
             </tbody>
         </table>
+
+        <br><br>
+     
+
         <div class="well" align="center">
         <table>
             <thead>
@@ -280,7 +229,8 @@
             </thead>
             <tbody>
                   <tr>
-                        <td> 1. Developing a healthy relationship in the class  </td>
+                        <td> 1. Has general program that responds to the health needs of the students </td>
+                          
                     <form name="form1" id="form1" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -289,8 +239,9 @@
                         <td><input id="rdo_5" type="radio" value="5" name="price" onclick="DisplayPrice(this.value);"> 5<br></td>
                   </form>
                   </tr>
+
                   <tr>
-                        <td> 2. Creating a physical classroom setting conducive to a healthy atmosphere </td>
+                        <td> 2. Effectively assists students when they go to the clinic </td>
                     <form name="form2" id="form2" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price2" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price2" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -300,7 +251,8 @@
                    </form>
                   </tr>
                   <tr>
-                        <td> 3. Developing a team spirit and camaraderie in the class </td>
+                        <td> 3. Enjoys the trust and confidence of the students </td>
+
                     <form name="form3" id="form3" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price3" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price3" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -308,9 +260,10 @@
                         <td><input id="rdo_4" type="radio" value="4" name="price3" onclick="DisplayPrice(this.value);"> 4<br></td>    
                         <td><input id="rdo_5" type="radio" value="5" name="price3" onclick="DisplayPrice(this.value);"> 5<br></td>
                   </form>
+
                   </tr>
                   <tr>
-                        <td> 4. Sensing/Detecting academic and other problems in students/class </td>
+                        <td> 4. Is approachable and welcoming </td>
                   <form name="form4" id="form4" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price4" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price4" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -319,8 +272,7 @@
                         <td><input id="rdo_5" type="radio" value="5" name="price4" onclick="DisplayPrice(this.value);"> 5<br></td>
                   </form>
                   </tr>
-                  <tr>
-                        <td> 5. Holding private consultations/counseling with the class </td>
+                  <tr> <td> 5. Attends to all students fairly and equally with no favoritism </td>
                   <form name="form5" id="form5" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price5" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price5" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -330,7 +282,7 @@
                   </form>
                   </tr>
                   <tr>
-                        <td> 6. Giving attention to daily problems; not passing on immediatelyy to SFC/OPD </td>
+                        <td> 6. Attends to students with promptness and diligence </td>
                   <form name="form6" id="form6" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price6" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price6" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -340,7 +292,7 @@
                   </form>
                   </tr>
                   <tr>
-                        <td> 7. Maintaining good contact with parents; doing home visits when needed </td>
+                        <td> 7. Is caring, patient, and understanding to students who are sick </td>
                   <form name="form7" id="form7" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price7" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price7" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -350,17 +302,20 @@
                   </form>
                   </tr>
                   <tr>
-                        <td> 8. Exhibiting discretion, tact, and confidentiality in dealing with the class </td>
+                        <td> 8. Has a well-organized system in place </td>
                   <form name="form8" id="form8" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price8" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price8" onclick="DisplayPrice(this.value);"> 2<br></td>
                         <td><input id="rdo_3" type="radio" value="3" name="price8" onclick="DisplayPrice(this.value);"> 3<br></td>
                         <td><input id="rdo_4" type="radio" value="4" name="price8" onclick="DisplayPrice(this.value);"> 4<br></td>    
                         <td><input id="rdo_5" type="radio" value="5" name="price8" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>>
+                  </form>
                   </tr>
                     <tr>
-                        <td> 9. Enforcing Student Handbook provisions in general </td>
+                        <td> 9. Effectively coordinates/facilitates concerns of students, parents and teachers when needed </td>
+
+
+                      
                   <form name="form9" id="form9" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price9" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price9" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -370,8 +325,9 @@
                   </form>
                   </tr>
                     <tr>
-                        <td> 10. Supervising the class during flag ceremonies, programs, educational tours, and other similar activities </td>
-                   <form name="form10" id="form10" runat="server">
+                        <td> 10. Maintains a clean and orderly clinic </td>
+
+                  <form name="form10" id="form10" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price10" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price10" onclick="DisplayPrice(this.value);"> 2<br></td>
                         <td><input id="rdo_3" type="radio" value="3" name="price10" onclick="DisplayPrice(this.value);"> 3<br></td>
@@ -379,8 +335,10 @@
                         <td><input id="rdo_5" type="radio" value="5" name="price10" onclick="DisplayPrice(this.value);"> 5<br></td>
                   </form>
                   </tr>
-                    <tr>
-                        <td> 11. Monitoring/recording habitual minor offenses and reporting the same to the OPD </td>
+
+                  <tr>
+                        <td> 11. Maintains a clean and orderly clinic </td>
+
                   <form name="form11" id="form11" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price11" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price11" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -389,8 +347,11 @@
                         <td><input id="rdo_5" type="radio" value="5" name="price11" onclick="DisplayPrice(this.value);"> 5<br></td>
                   </form>
                   </tr>
-                    <tr>
-                        <td> 12. Making referrals to the SFC Personnel/Prefect of Discipline </td>
+
+
+                  <tr>
+                        <td> 12. Has clear rules and regulations and implements these fairly </td>
+
                   <form name="form12" id="form12" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price12" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price12" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -399,75 +360,16 @@
                         <td><input id="rdo_5" type="radio" value="5" name="price12" onclick="DisplayPrice(this.value);"> 5<br></td>
                   </form>
                   </tr>
-                    <tr>
-                        <td>  13. Creating and implementing a system of maintaining order/cleanliness in the room</td>
-                    <form name="form13" id="form13" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price13" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price13" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price13" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price13" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price13" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>
-                  </tr>
-                  <tr>
-                        <td> 14. Conducting daily routine checks on uniform and ID </td>
-                  <form name="form14" id="form14" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price14" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price14" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price14" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price14" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price14" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>
-                  </tr>
-                  <tr>
-                        <td> 15. Conducting daily routine checks on attendance </td>
-                  <form name="form15" id="form15" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price15" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price15" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price15" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price15" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price15" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>
-                  </tr>
-                  <tr>
-                        <td> 16. Conducting routine checks on haircut (first Monday of the month) </td>
-                  <form name="form16" id="form16" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price16" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price16" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price16" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price16" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price16" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>
-                  </tr>
-                  <tr>
-                        <td>17. Guiding/inspiring the class in relation to environmental thrust </td>
-                  <form name="form17" id="form17" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price17" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price17" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price17" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price17" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price17" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>
-                  </tr> 
-                  <tr>
-                        <td>18. Encouraging by word and example the living out of the LBASS core values </td>
+        
 
-                  <form name="form18" id="form18" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price18" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price18" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price18" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price18" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price18" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>
-                  </tr>
                  
-            </tbody>
-        </table>
 
-        <br><br>
+                </tbody>
+        </table>
+          <br><br>
             <center>
                 <form action="/html/tags/html_form_tag_action.cfm" method="post">
-                Comments:<br />
+                Comments and Suggestions: <br />
                 <textarea name="comments" id="comments">
                 
                 </textarea><br />
@@ -477,13 +379,13 @@
 
         <br><br>
         <center>
-         Rating: <input type="text" name="totalSum" id="totalSum" value="" size="18" readonly="readonly">
+         Rating: <input type="text" name="totalSum" id="totalSum" value="" size="12" readonly="readonly">
          Equivalent: <input type="text" name="equivalent" id="equivalent" value=""  readonly="readonly">
         </center>
         <br>
 
             <input type="submit" value="submit">
             
-    
+   
 </body>
 </html>

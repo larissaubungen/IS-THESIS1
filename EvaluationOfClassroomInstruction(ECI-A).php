@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Evaluation of Advisory Work and Homeroom Work(EAHW-A)</title>
+        <title>Evaluation of Classroom Instruction</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -163,28 +163,28 @@
                 }
             }
 
-             var val19 = 0;
+            var val19 = 0;
             for( i = 0; i < document.form19.price19.length; i++ ){
                 if( document.form19.price19[i].checked == true ){
                     val19 = document.form19.price19[i].value;
                 }
             }
 
-             var val20 = 0;
+            var val20 = 0;
             for( i = 0; i < document.form20.price20.length; i++ ){
                 if( document.form20.price20[i].checked == true ){
                     val20 = document.form20.price20[i].value;
                 }
             }
 
-             var val21 = 0;
+            var val21 = 0;
             for( i = 0; i < document.form21.price21.length; i++ ){
                 if( document.form21.price21[i].checked == true ){
                     val21 = document.form21.price21[i].value;
                 }
             }
 
-             var val22 = 0;
+            var val22 = 0;
             for( i = 0; i < document.form22.price22.length; i++ ){
                 if( document.form22.price22[i].checked == true ){
                     val22 = document.form22.price22[i].value;
@@ -205,14 +205,144 @@
                 }
             }
 
+            var val25 = 0;
+            for( i = 0; i < document.form25.price25.length; i++ ){
+                if( document.form25.price25[i].checked == true ){
+                    val25 = document.form25.price25[i].value;
+                }
+            }
+
+            var val26 = 0;
+            for( i = 0; i < document.form26.price26.length; i++ ){
+                if( document.form26.price26[i].checked == true ){
+                    val26 = document.form26.price26[i].value;
+                }
+            }
+
+            var val27 = 0;
+            for( i = 0; i < document.form27.price27.length; i++ ){
+                if( document.form27.price27[i].checked == true ){
+                    val27 = document.form27.price27[i].value;
+                }
+            }
+
+            var val28 = 0;
+            for( i = 0; i < document.form28.price28.length; i++ ){
+                if( document.form28.price28[i].checked == true ){
+                    val28 = document.form28.price28[i].value;
+                }
+            }
+
+            var val29 = 0;
+            for( i = 0; i < document.form29.price29.length; i++ ){
+                if( document.form29.price29[i].checked == true ){
+                    val29 = document.form29.price29[i].value;
+                }
+            }
+
+            var val30 = 0;
+            for( i = 0; i < document.form30.price30.length; i++ ){
+                if( document.form30.price30[i].checked == true ){
+                    val30 = document.form30.price30[i].value;
+                }
+            }
+
+            var val31 = 0;
+            for( i = 0; i < document.form31.price31.length; i++ ){
+                if( document.form31.price31[i].checked == true ){
+                    val31 = document.form31.price31[i].value;
+                }
+            }
+
+            var val32 = 0;
+            for( i = 0; i < document.form32.price32.length; i++ ){
+                if( document.form32.price32[i].checked == true ){
+                    val32 = document.form32.price32[i].value;
+                }
+            }
+
+            var val33 = 0;
+            for( i = 0; i < document.form33.price33.length; i++ ){
+                if( document.form33.price33[i].checked == true ){
+                    val33 = document.form33.price33[i].value;
+                }
+            }
+
+            var val34 = 0;
+            for( i = 0; i < document.form34.price34.length; i++ ){
+                if( document.form34.price34[i].checked == true ){
+                    val34 = document.form34.price34[i].value;
+                }
+            }
+
+            var val35 = 0;
+            for( i = 0; i < document.form35.price35.length; i++ ){
+                if( document.form35.price35[i].checked == true ){
+                    val35 = document.form35.price35[i].value;
+                }
+            }
+
+            var val36 = 0;
+            for( i = 0; i < document.form36.price36.length; i++ ){
+                if( document.form36.price36[i].checked == true ){
+                    val36 = document.form36.price36[i].value;
+                }
+            }
+
+            var val37 = 0;
+            for( i = 0; i < document.form37.price37.length; i++ ){
+                if( document.form37.price37[i].checked == true ){
+                    val37 = document.form37.price37[i].value;
+                }
+            }
+
+            var val38 = 0;
+            for( i = 0; i < document.form38.price38.length; i++ ){
+                if( document.form38.price38[i].checked == true ){
+                    val38 = document.form38.price38[i].value;
+                }
+            }
+
+            var val39 = 0;
+            for( i = 0; i < document.form39.price39.length; i++ ){
+                if( document.form39.price39[i].checked == true ){
+                    val39 = document.form39.price39[i].value;
+                }
+            }
+
+            var val40 = 0;
+            for( i = 0; i < document.form40.price40.length; i++ ){
+                if( document.form40.price40[i].checked == true ){
+                    val40 = document.form40.price40[i].value;
+                }
+            }
+
+            var val41 = 0;
+            for( i = 0; i < document.form41.price41.length; i++ ){
+                if( document.form41.price41[i].checked == true ){
+                    val41 = document.form41.price41[i].value;
+                }
+            }
+
+             var val42 = 0;
+            for( i = 0; i < document.form42.price42.length; i++ ){
+                if( document.form42.price42[i].checked == true ){
+                    val42 = document.form42.price42[i].value;
+                }
+            }
 
 
-            var sum=(parseInt(val1) + parseInt(val2) + parseInt(val3) + parseInt(val4)
+            var sum= ((parseInt(val1) * 2) + (parseInt(val2) * 2) + parseInt(val3) + parseInt(val4)
                     + parseInt(val5) + parseInt(val6) + parseInt(val7) + parseInt(val8)
-                    + parseInt(val9) + parseInt(val10) + + parseInt(val11) + parseInt(val12)
-                    + parseInt(val13) + parseInt(val14) + parseInt(val15) + parseInt(val16)
-                    + parseInt(val17) + parseInt(val18) + parseInt(val19) + parseInt(val20)
-                    + parseInt(val21) + parseInt(val22) + parseInt(val23) + parseInt(val24)) / 24 ;
+                    + parseInt(val9) + parseInt(val10) + + (parseInt(val11) * 2) + (parseInt(val12) * 3)
+                    + (parseInt(val13) * 5) + (parseInt(val14) * 5) + (parseInt(val15) * 5) + parseInt(val16)
+                    + (parseInt(val17) * 3) + parseInt(val18) + (parseInt(val19) * 2) + (parseInt(val20) * 2)
+                    + (parseInt(val21) * 4) + (parseInt(val22) * 3) + (parseInt(val23) * 2) + (parseInt(val24) * 2)
+                    + (parseInt(val25) * 5) + parseInt(val26) + (parseInt(val27) * 2) + (parseInt(val28) * 2) 
+                    + (parseInt(val29) * 5) + (parseInt(val30) * 5) + (parseInt(val31) * 4) + (parseInt(val32) * 5)
+                    + (parseInt(val33) * 4) + (parseInt(val34) * 4) + parseInt(val35) + parseInt(val36)
+                    + parseInt(val37) + (parseInt(val38) * 4) + (parseInt(val39) * 2) + parseInt(val40)
+                    + parseInt(val41) + (parseInt(val42) * 2)) / 102 ;
             document.getElementById('totalSum').value=sum;
 
             if (sum >= 4.85 && sum <= 5) {
@@ -276,12 +406,31 @@
     </div>
     <!-- /subnavbar -->
     <div class="well" align="center">
-    <h4>Evaluation of Advisory Work and Homeroom Work(EAHW-A)</h4>
+    <h4>Evaluation of Advisory Work(EAHW-B)</h4>
 
         <h5>Name of Teacher:</h5>
         <input type="text" placeholder="Name of Teacher">
         <h5>Level/Section:</h5>
         <input type="text" placeholder="(Grade,Section)"> <br>
+        <h5>Subject of Instruction:</h5>
+        <input type="text" placeholder="Subject of Instruction">
+
+        <h5>Type of Observation:</h5>
+        <br>
+
+        <form action="">
+        <input type="checkbox" name="clinicalVisit">Clinical Visit<br>
+        <input type="checkbox" name="vehicle">Formal Visit
+        </form>
+
+        <form action="">
+        <select name="typeOfObservation">
+        <option>Announced</option>
+        <option>Unannounced</option>
+
+        </select>
+        </form>
+
         <div class="well" align="center">
         <table border="1">
             <thead>
@@ -323,7 +472,11 @@
             </thead>
             <tbody>
                   <tr>
-                        <td> 1. Developing a "homeroom" relationship in the advisory class  </td>
+
+                        <td> <h4>A. TEACHER </h4> <br>
+
+
+                            1. Articulation (x2) </td>
                     <form name="form1" id="form1" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -333,7 +486,7 @@
                   </form>
                   </tr>
                   <tr>
-                        <td> 2. Creating a physical classroom setting conducive to a homeroom atmosphere </td>
+                        <td> 2. Modulation of Voice (x2) </td>
                     <form name="form2" id="form2" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price2" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price2" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -343,7 +496,7 @@
                    </form>
                   </tr>
                   <tr>
-                        <td> 3. Developing team spirit and camaraderie in the advisory class </td>
+                        <td> 3. Enthsiasm </td>
                     <form name="form3" id="form3" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price3" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price3" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -353,7 +506,7 @@
                   </form>
                   </tr>
                   <tr>
-                        <td> 4. Holding regular homeroom meetings </td>
+                        <td> 4. Vitality </td>
                   <form name="form4" id="form4" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price4" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price4" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -363,7 +516,7 @@
                   </form>
                   </tr>
                   <tr>
-                        <td> 5. Sensing/Detecting academic and other problems in students/class </td>
+                        <td> 5. Poise </td>
                   <form name="form5" id="form5" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price5" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price5" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -373,7 +526,7 @@
                   </form>
                   </tr>
                   <tr>
-                        <td> 6. Holding friendly individual/group consultations/counselling with advisory students </td>
+                        <td> 6. Good grooming </td>
                   <form name="form6" id="form6" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price6" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price6" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -383,7 +536,7 @@
                   </form>
                   </tr>
                   <tr>
-                        <td> 7. Maintaining good contact with parents; doing home visits when needed </td>
+                        <td> 7. Punctuality </td>
                   <form name="form7" id="form7" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price7" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price7" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -393,7 +546,10 @@
                   </form>
                   </tr>
                   <tr>
-                        <td> 8. Exhibiting discretion, tact, and confidentiality in dealing with students/ parents/guardians </td>
+
+                        <td><br> <h4>B. OBJECTIVES: Were they: </h4> <br>
+
+                         1. Known by the students? </td>
                   <form name="form8" id="form8" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price8" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price8" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -403,7 +559,7 @@
                   </form>>
                   </tr>
                     <tr>
-                        <td> 9. Enforcing Student Handbook provisions in general </td>
+                        <td> 2. Understood by students? </td>
                   <form name="form9" id="form9" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price9" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price9" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -413,7 +569,7 @@
                   </form>
                   </tr>
                     <tr>
-                        <td> 10. Checking students' names in advisory class relatve to Forms 1, 137, and 138 </td>
+                        <td> 3. Clear? </td>
                    <form name="form10" id="form10" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price10" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price10" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -423,7 +579,7 @@
                   </form>
                   </tr>
                     <tr>
-                        <td> 11. Submitting promotion report (Form 18-E) at the end of the year </td>
+                        <td> 4. Specific? (x2) </td>
                   <form name="form11" id="form11" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price11" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price11" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -433,7 +589,7 @@
                   </form>
                   </tr>
                     <tr>
-                        <td> 12. Showing quality participation in the deliberation meetings every grading period(3) </td>
+                        <td> 5. Comprehensive? [Covering all important phases of content] (x3) </td>
                   <form name="form12" id="form12" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price12" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price12" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -443,7 +599,7 @@
                   </form>
                   </tr>
                     <tr>
-                        <td>  13. Performing well during Parent-Teacher Conferences (3) </td>
+                        <td> 6. Attained (x5) </td>
                     <form name="form13" id="form13" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price13" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price13" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -453,7 +609,7 @@
                   </form>
                   </tr>
                   <tr>
-                        <td> 14. Supervising the students during flag ceremonies, programs, field trips, and other similar activities </td>
+                        <td> 7. Encouraging students to live out the LBASS core values, with emphasis on stewardship? (x5) </td>
                   <form name="form14" id="form14" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price14" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price14" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -463,7 +619,9 @@
                   </form>
                   </tr>
                   <tr>
-                        <td> 15. Monitoring and following up the release/retrieval of communications to parents </td>
+                        <td> <br> <h4>C. CONTENT: Was it:</h4> <br>
+
+                         1. Adequate to achieve objectives? (x5)</td>
                   <form name="form15" id="form15" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price15" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price15" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -473,7 +631,7 @@
                   </form>
                   </tr>
                   <tr>
-                        <td> 16. Monitoring/Recording habitual minor offenses and reporting the same to the POD </td>
+                        <td> 2. Related to daily life? </td>
                   <form name="form16" id="form16" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price16" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price16" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -483,7 +641,7 @@
                   </form>
                   </tr>
                   <tr>
-                        <td>17. Making referrals to the Guidance Conselors/Prefect of Discipline </td>
+                        <td>3. Related to human or LBASS core values? </td>
                   <form name="form17" id="form17" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price17" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price17" onclick="DisplayPrice(this.value);"> 2<br></td>
@@ -493,7 +651,7 @@
                   </form>
                   </tr> 
                   <tr>
-                        <td>18. Reporting damages and repair needs in the classroom </td>
+                        <td>4. Related to current events? </td>
 
                   <form name="form18" id="form18" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price18" onclick="DisplayPrice(this.value);"> 1<br></td>
@@ -503,9 +661,11 @@
                         <td><input id="rdo_5" type="radio" value="5" name="price18" onclick="DisplayPrice(this.value);"> 5<br></td>
                   </form>
                   </tr>
-                  <tr>
-                        <td>19. Creating and implementing a system of maintaining order/cleanliness in the room (5) </td>
-                   <form name="form19" id="form19" runat="server">
+
+                     <tr>
+                        <td>5. Suited to the students' needs (x2) </td>
+
+                  <form name="form19" id="form19" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price19" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price19" onclick="DisplayPrice(this.value);"> 2<br></td>
                         <td><input id="rdo_3" type="radio" value="3" name="price19" onclick="DisplayPrice(this.value);"> 3<br></td>
@@ -513,9 +673,11 @@
                         <td><input id="rdo_5" type="radio" value="5" name="price19" onclick="DisplayPrice(this.value);"> 5<br></td>
                   </form>
                   </tr>
-                  <tr>
-                        <td>20. Coordinating with subject teachres on the schedules of long tests, projects, etc. (5) </td>
-                      <form name="form20" id="form20" runat="server">
+
+                      <tr>
+                        <td>6. Suited to the students' level of understanding? (x2) </td>
+
+                  <form name="form20" id="form20" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price20" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price20" onclick="DisplayPrice(this.value);"> 2<br></td>
                         <td><input id="rdo_3" type="radio" value="3" name="price20" onclick="DisplayPrice(this.value);"> 3<br></td>
@@ -523,53 +685,289 @@
                         <td><input id="rdo_5" type="radio" value="5" name="price20" onclick="DisplayPrice(this.value);"> 5<br></td>
                   </form>
                   </tr>
-                  <tr>
-                        <td>21. Conducting daily routine checks on haircut, uniform, and ID (5) </td>
-                      <form name="form21" id="form21" runat="server">
+
+
+                    <tr>
+                        <td> <br><h4> D. TEACHING PROCEDURE </h4> <br>
+                           1. Approach is student-centered (x4) </td>
+
+                 
+                  <form name="form21" id="form21" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price21" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price21" onclick="DisplayPrice(this.value);"> 2<br></td>
                         <td><input id="rdo_3" type="radio" value="3" name="price21" onclick="DisplayPrice(this.value);"> 3<br></td>
                         <td><input id="rdo_4" type="radio" value="4" name="price21" onclick="DisplayPrice(this.value);"> 4<br></td>    
                         <td><input id="rdo_5" type="radio" value="5" name="price21" onclick="DisplayPrice(this.value);"> 5<br></td>
                   </form>
-                  </tr>
-                  <tr>
-                        <td>22. Conducting daily routine checks on attendance/submission of reports related thereto(3) </td>
-                      <form name="form22" id="form22" runat="server">
+              </tr>
+
+               <tr>
+                        <td> 2. Correlation of topic to the broader aspect of the lesson (x3) </td>
+
+                  <form name="form22" id="form22" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price22" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price22" onclick="DisplayPrice(this.value);"> 2<br></td>
                         <td><input id="rdo_3" type="radio" value="3" name="price22" onclick="DisplayPrice(this.value);"> 3<br></td>
                         <td><input id="rdo_4" type="radio" value="4" name="price22" onclick="DisplayPrice(this.value);"> 4<br></td>    
                         <td><input id="rdo_5" type="radio" value="5" name="price22" onclick="DisplayPrice(this.value);"> 5<br></td>
                   </form>
-                  </tr>
-                  <tr>
-                        <td>23. Guiding/Inspiring the advisory class in relation to environmental thrust </td>
-                      <form name="form23" id="form23" runat="server">
+              </tr>
+
+               <tr>
+                        <td> 3. Evidence of careful planning (x2) </td>
+
+                  <form name="form23" id="form23" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price23" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price23" onclick="DisplayPrice(this.value);"> 2<br></td>
                         <td><input id="rdo_3" type="radio" value="3" name="price23" onclick="DisplayPrice(this.value);"> 3<br></td>
                         <td><input id="rdo_4" type="radio" value="4" name="price23" onclick="DisplayPrice(this.value);"> 4<br></td>    
                         <td><input id="rdo_5" type="radio" value="5" name="price23" onclick="DisplayPrice(this.value);"> 5<br></td>
                   </form>
-                  </tr>
-                  <tr>
-                        <td>24. Encouraging by word and example the living out of the LBAS core values.</td>
-                      <form name="form24" id="form24" runat="server">
+              </tr>
+
+                <tr>
+                        <td> 4. Creativity (x2) </td>
+
+                  <form name="form24" id="form24" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price24" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price24" onclick="DisplayPrice(this.value);"> 2<br></td>
                         <td><input id="rdo_3" type="radio" value="3" name="price24" onclick="DisplayPrice(this.value);"> 3<br></td>
                         <td><input id="rdo_4" type="radio" value="4" name="price24" onclick="DisplayPrice(this.value);"> 4<br></td>    
                         <td><input id="rdo_5" type="radio" value="5" name="price24" onclick="DisplayPrice(this.value);"> 5<br></td>
-                    </form>
-                  </tr>
+                  </form>
+              </tr>
+
+                 <tr>
+                        <td> 5. Mastery of the subject matter (x5) </td>
+
+                  <form name="form25" id="form25" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price25" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price25" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price25" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price25" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price25" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+               <tr>
+                        <td> 6. Evidence of effor at integration (subject and theme) </td>
+
+                  <form name="form26" id="form26" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price26" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price26" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price26" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price26" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price26" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+                <tr>
+                        <td> 7. Technique of questioning (x2) </td>
+
+                  <form name="form27" id="form27" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price27" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price27" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price27" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price27" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price27" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+              <tr>
+                        <td> 8. Handling of students' reponses (x2) </td>
+
+                  <form name="form28" id="form28" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price28" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price28" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price28" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price28" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price28" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+              <tr>
+                        <td> 9. Flexibility in teaching procedures (x5) </td>
+
+                  <form name="form29" id="form29" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price29" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price29" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price29" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price29" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price29" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+              <tr>
+                        <td> <br> <h4> E. Medium of Instruction</h4> <br>
+
+                         1. Ability to make information comprehensible to the students (x5) </td>
+
+                  <form name="form30" id="form30" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price30" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price30" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price30" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price30" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price30" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+              <tr>
+                        <td> 2. Mastery of the Language (x4) </td>
+
+                  <form name="form31" id="form31" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price31" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price31" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price31" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price31" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price31" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+              <tr>
+                        <td> <br> <h4>F. INSTRUCTIONAL TOOLS</h4> <br>
+
+                          1. Adequacy in arousing interest (x5) </td>
+
+                  <form name="form32" id="form32" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price32" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price32" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price32" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price32" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price32" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+              <tr>
+                        <td> 2. Effective utilization (x4) </td>
+
+                  <form name="form33" id="form33" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price33" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price33" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price33" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price33" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price33" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+              <tr>
+                        <td> 3. Variety (x4) </td>
+
+                  <form name="form34" id="form34" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price34" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price34" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price34" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price34" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price34" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+              <tr>
+                        <td> <br> <h4>G. STUDENTS</h4> <br>
+
+                            1. Activity </td>
+
+                  <form name="form35" id="form35" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price35" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price35" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price35" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price35" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price35" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+              <tr>
+                        <td> 2. Participation </td>
+
+                  <form name="form36" id="form36" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price36" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price36" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price36" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price36" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price36" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+              <tr>
+                        <td> 3. Cooperation </td>
+
+                  <form name="form37" id="form37" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price37" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price37" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price37" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price37" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price37" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+              <tr>
+                        <td> 4. Evidence of Critical Thinking (x4) </td>
+
+                  <form name="form38" id="form38" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price38" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price38" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price38" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price38" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price38" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+              <tr>
+                        <td> 5. Evidence of learning (x5) </td>
+
+                  <form name="form39" id="form39" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price39" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price39" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price39" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price39" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price39" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+              <tr>
+                        <td> <br> <h4>H. CLASSROOM MANAGEMENT </h4> <br>
+
+                         1. Human atmosphere [congenial and conducive to learning] </td>
+
+                  <form name="form40" id="form40" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price40" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price40" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price40" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price40" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price40" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+              <tr>
+                        <td> 2. Freedom from disturbance </td>
+
+                  <form name="form41" id="form41" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price41" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price41" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price41" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price41" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price41" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+
+              <tr>
+                        <td> 3. Order and cleanliness (x2) </td>
+
+                  <form name="form42" id="form42" runat="server">
+                        <td><input id="rdo_1" type="radio" value="1" name="price42" onclick="DisplayPrice(this.value);"> 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price42" onclick="DisplayPrice(this.value);"> 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price42" onclick="DisplayPrice(this.value);"> 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price42" onclick="DisplayPrice(this.value);"> 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price42" onclick="DisplayPrice(this.value);"> 5<br></td>
+                  </form>
+              </tr>
+                 
             </tbody>
         </table>
 
         <br><br>
             <center>
                 <form action="/html/tags/html_form_tag_action.cfm" method="post">
-                Comments:<br />
+                Comments and Other observations:<br />
                 <textarea name="comments" id="comments">
                 
                 </textarea><br />
@@ -579,7 +977,7 @@
 
         <br><br>
         <center>
-         Rating: <input type="text" name="totalSum" id="totalSum" value="" size="24" readonly="readonly">
+         Rating: <input type="text" name="totalSum" id="totalSum" value="" size="42" readonly="readonly">
          Equivalent: <input type="text" name="equivalent" id="equivalent" value=""  readonly="readonly">
         </center>
         <br>
