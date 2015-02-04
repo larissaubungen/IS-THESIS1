@@ -185,7 +185,8 @@ if($_POST['resume'] == "Submit")
     
            <!-- Placed at the end of the document so the pages load faster --> 
 	<script src="js/jquery-1.7.2.min.js"></script> 
-	<script src="js/jquery-1.3.2.min.js"></script> 
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 	<script src="js/excanvas.min.js"></script> 
 	<script src="js/chart.min.js" type="text/javascript"></script> 
 	<script src="js/bootstrap.js"></script>
@@ -216,46 +217,59 @@ if($_POST['resume'] == "Submit")
   </style>
 
   <script type="text/javascript">
-		$(document).ready(function(){
-			var counter = 2;
+		  $(document).ready(function() {
+        var iCnt = 0;
+        // CREATE A "DIV" ELEMENT AND DESIGN IT USING JQUERY ".css()" CLASS.
+        var container = $(document.createElement('div')).css({
+            padding: '5px', margin: '20px', width: '170px', border: '1px dashed',
+            borderTopColor: '#999', borderBottomColor: '#999',
+            borderLeftColor: '#999', borderRightColor: '#999'
+        });
+        $('#addButton').click(function() {
+            if (iCnt <= 4) {
+                iCnt = iCnt + 1;
+                // ADD TEXTBOX.
+                $(container).append('<input type=text class="input" id=tb' + iCnt + ' ' +
+                            'placeholder="Award ' + iCnt + '" />');
 
-		$("#addButton").click(function () {
+                if (iCnt == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
+                    var divSubmit = $(document.createElement('div'));
+                    $(divSubmit).append('<input type=button class="bt" onclick="GetTextValue()"' + 
+                            'id=btSubmit value=Submit />');   
+                }
+                $('#Awards').after(container, divSubmit);   // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
+            }
+            else {      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
+                $(container).append('<label>Reached the limit</label>'); 
+                $('#addButton').attr('class', 'bt-disable'); 
+                $('#addButton').attr('disabled', 'disabled');
+            }
+        });
+        $('#removeButton').click(function() {   // REMOVE ELEMENTS ONE PER CLICK.
+            if (iCnt != 0) { $('#tb' + iCnt).remove(); iCnt = iCnt - 1; }
+            if (iCnt == 0) { $(container).empty(); 
+                $(container).remove(); 
+                $('#btSubmit').remove(); 
+                $('#addButton').removeAttr('disabled'); 
+                $('#addButton').attr('class', 'bt') 
+            }
+        });
+    });
 
-			if(counter>5)
-			{
-		        alert("Please limit to 5 professional awards");
-		        return false;
-			}   
- 
-	var newTextBoxDiv = $(document.createElement('div'))
-	     .attr("id", 'TextBoxDiv' + counter);
- 
-	newTextBoxDiv.after().html('<label>Award #'+ counter + ' : </label>' +
-	      '<input type="text" name="textbox' + counter + 
-	      '" id="textbox' + counter + '" value="" >');
- 
-	newTextBoxDiv.appendTo("#TextBoxesGroup");
-	counter++;
-     });
-
-		$("#removeButton").click(function () {
-			if(counter==1)
-			{
-          		alert("No more textbox to remove");
-          		return false;
-       		}
-       		counter--;   
-						 
-		$("#TextBoxDiv" + counter).remove();});
-								 
-	     $("#getButtonValue").click(function () {						 
-			var msg = '';
-			for(i=1; i<counter; i++){
-		   	  msg += "\n Textbox #" + i + " : " + $('#textbox' + i).val();
-			}
-		    	  alert(msg);
-		     });
-		  });
+    // PICK THE VALUES FROM EACH TEXTBOX WHEN "SUBMIT" BUTTON IS CLICKED.
+    var divValue, values = '';
+    function GetTextValue() {
+        $(divValue).empty(); 
+        $(divValue).remove(); values = '';
+        $('.input').each(function() {
+            divValue = $(document.createElement('div')).css({
+                padding:'5px', width:'200px'
+            });
+            values += this.value + '<br />'
+        });
+        $(divValue).append('<p><b>Your selected values</b></p>' + values);
+        $('body').append(divValue);
+    }
    </script>
 
 </head>
@@ -441,12 +455,9 @@ if($_POST['resume'] == "Submit")
 				<tr>
 					
 					<td>
-						<div id='TextBoxesGroup'>
-							<div id="TextBoxDiv1">
-						<label>Award #1 : </label><input type='textbox' id='textbox1' >
-						<input type='button' value='+' id='addButton'>
-						<input type='button' value='-' id='removeButton'>
-						</div>
+						<div id='Awards'>
+								<input class="bt" type='button' value='Add' id='addButton'>
+								<input class="bt" type='button' value='remove' id='removeButton'>
 						</div>
 					</td>
 					
@@ -500,6 +511,7 @@ if($_POST['resume'] == "Submit")
 			
 			</tbody>
 			</table>
+		  	</script>
 			</form>
 	  </div>
 	</div>
