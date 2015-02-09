@@ -51,10 +51,13 @@ $user=$_SESSION['ID_No'];
 					 College = '".$college."',
 					 Course = '".$degree."',
 					 Awards = '".$awards."',
-					 S_Attended = '".$seminarsAttendded."',
-					 S_Facilitated = '".$seminarsFacilitated."',
 					 C_Activities = '".$extraActivities."'
 				 	WHERE ID_No='".$user."'";
+
+				 	mysql_query($sql);
+				 	mysql_query($sql2);
+
+
 
         echo ("Your first name is ".$firstName."<br/>");
         echo ("Your last name is".$lastName."<br/>");
