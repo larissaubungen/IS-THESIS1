@@ -292,23 +292,23 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Outstanding(4.85-5.00)</td>
+                    <td>Outstanding</td>
                     <td>exceptional/excellent</td>
                 </tr>
                 <tr>
-                    <td>Very Satisfactory(4.21-4.84)</td>
+                    <td>Very Satisfactory</td>
                     <td>way beyond what is expected</td>
                 </tr>
                 <tr>
-                    <td>Satisfactory(3.50-4.20)</td>
+                    <td>Satisfactory</td>
                     <td>of the quality required by the job</td>
                 </tr>
                 <tr>
-                    <td>Fair(2.50-3.49)</td>
+                    <td>Fair</td>
                     <td>"just to get by"</td>
                 </tr>
                  <tr>
-                    <td>Unsatisfactory(1.00-2.49)</td>
+                    <td>Unsatisfactory</td>
                     <td>unacceptable/poor</td>
                 </tr>
             </tbody>
@@ -325,11 +325,11 @@
                   <tr>
                         <td> 1. Developing a "homeroom" relationship in the advisory class  </td>
                     <form name="form1" id="form1" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price" onclick="DisplayPrice(this.value);"> 5<br></td>
+                   <td><input id="rdo_1" type="radio" value="1" name="price" onclick="DisplayPrice(this.value);"> 1&nbsp</td>
+                        <td><input id="rdo_2" type="radio" value="2" name="price" onclick="DisplayPrice(this.value);"> 2&nbsp&nbsp&nbsp&nbsp</td>
+                        <td><input id="rdo_3" type="radio" value="3" name="price" onclick="DisplayPrice(this.value);"> 3&nbsp&nbsp&nbsp&nbsp</td>
+                        <td><input id="rdo_4" type="radio" value="4" name="price" onclick="DisplayPrice(this.value);"> 4&nbsp&nbsp&nbsp&nbsp</td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="price" onclick="DisplayPrice(this.value);"> 5&nbsp&nbsp&nbsp&nbsp</td>
                   </form>
                   </tr>
                   <tr>
@@ -453,7 +453,7 @@
                   </form>
                   </tr>
                   <tr>
-                        <td> 14. Supervising the students during flag ceremonies, programs, field trips, and other similar activities </td>
+                        <td> 14. Supervising the students during flag ceremonies, programs, field trips, and other <br> similar activities </td>
                   <form name="form14" id="form14" runat="server">
                         <td><input id="rdo_1" type="radio" value="1" name="price14" onclick="DisplayPrice(this.value);"> 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="price14" onclick="DisplayPrice(this.value);"> 2<br></td>
