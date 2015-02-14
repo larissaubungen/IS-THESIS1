@@ -97,7 +97,7 @@
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li class="active"><a href="HRofficerPage.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
+        <li class="active"><a href="HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
         <li><a href="EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
         
         <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>

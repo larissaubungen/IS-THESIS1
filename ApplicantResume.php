@@ -2,19 +2,21 @@
   session_start();
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
-}
+	}
 
 $user=$_SESSION['ID_No'];
 
 
 
-error_reporting(0);
+//error_reporting(0);
 if($_POST['resume'] == "Submit")
 {
 	$errorMessage = "";
 	$lastName = $_POST['lastName'];
 	$firstName = $_POST['firstName'];
 	$middleName = $_POST['middleName'];
+	$gender = $_POST['sex'];
+	$civil = $_POST['Civil'];
 	$street = $_POST['street'];
 	$city = $_POST['city'];
 	$zip = $_POST['zip'];
@@ -25,12 +27,27 @@ if($_POST['resume'] == "Submit")
 	$college = $_POST['college'];
 	$degree = $_POST['degree'];
 	$yearGraduated = $_POST ['yearGraduated'];
-	$awards = $_POST ['awards'];
-	$seminarsAttendded = $_POST['seminarsAttendded'];
-	$seminarsFacilitated = $_POST ['seminarsFacilitated'];
-	$extraActivities = $_POST ['extraActivities'];
-	$skills = $_POST ['skills'];
-	$experience = $_POST ['experience'];
+	$award1=$_POST['Award1'];
+	$award2=$_POST['Award2'];
+	$award3=$_POST['Award3'];
+	$award4=$_POST['Award4'];
+	$award5=$_POST['Award5'];
+	$skill1=$_POST['Skill1'];
+	$skill2=$_POST['Skill2'];
+	$skill3=$_POST['Skill3'];
+	$skill4=$_POST['Skill4'];
+	$skill5=$_POST['Skill5'];
+	$org1=$_POST['Org1'];
+	$org2=$_POST['Org2'];
+	$org3=$_POST['Org3'];
+	$org4=$_POST['Org4'];
+	$org5=$_POST['Org5'];
+	$exp1=$_POST['Exp1'];
+	$exp2=$_POST['Exp2'];
+	$exp3=$_POST['Exp3'];
+	$exp4=$_POST['Exp4'];
+	$exp5=$_POST['Exp5'];
+	$resume = $_POST["Yes"];
 	
 	if(empty($_POST['lastName']))
 	{
@@ -85,6 +102,7 @@ if($_POST['resume'] == "Submit")
 	{
 		$errorMessage .= "<li>Please enter the year you graduated</li>";
 	}
+	/*
 	if(empty($_POST['awards']))
 	{
 		$errorMessage .= "<li>Please enter your awards, if you have non please write not available</li>";
@@ -109,12 +127,10 @@ if($_POST['resume'] == "Submit")
 	if(empty($_POST['experience']))
 	{
 		$errorMessage .= "<li>Please enter your experience, if you have non please write not available</li>";
-	}
+	}*/
 	if(empty($errorMessage))
 	{
-	echo "$lastName";
-	echo "sdad";
-	echo "$user";
+	
 		mysql_connect('localhost', 'root', '')
         or die(mysql_error());
 		
@@ -124,7 +140,10 @@ if($_POST['resume'] == "Submit")
 		$sql = "UPDATE person 
 				SET L_Name = '".$lastName."', 
 					F_Name = '".$firstName."', 
-					M_Name = '".$middleName."'
+					M_Name = '".$middleName."',
+					Gender = '".$gender."',
+					C_Status = '".$civil."',
+					Resume = '".$resume."'
 				WHERE ID_No ='".$user."'";
 				
 		$sql2 = "UPDATE resume
@@ -137,10 +156,26 @@ if($_POST['resume'] == "Submit")
 					 H_School = '".$highSchool."',
 					 College = '".$college."',
 					 Course = '".$degree."',
-					 Awards = '".$awards."',
-					 S_Attended = '".$seminarsAttendded."',
-					 S_Facilitated = '".$seminarsFacilitated."',
-					 C_Activities = '".$extraActivities."'
+					 Award1 = '".$award1."',
+					 Award2 = '".$award2."',
+					 Award3 = '".$award3."',
+					 Award4 = '".$award4."',
+					 Award5 = '".$award5."',
+					 Org_Aff1 = '".$org1."',
+					 Org_Aff2 = '".$org2."',
+					 Org_Aff3 = '".$org3."',
+					 Org_Aff4 = '".$org4."',
+					 Org_Aff5 = '".$org5."',
+					 T_Skills1 = '".$skill1."',
+					 T_Skills2 = '".$skill2."',
+					 T_Skills3 = '".$skill3."',
+					 T_Skills4 = '".$skill4."',
+					 T_Skills5 = '".$skill5."',
+					 Experience1 ='".$exp1."',
+					 Experience2 ='".$exp2."',
+					 Experience3 ='".$exp3."',
+					 Experience4 ='".$exp4."',
+					 Experience5 ='".$exp5."'
 				 WHERE ID_No='".$user."'";
 		
 				$updatePerson = mysql_query($sql);
@@ -151,6 +186,7 @@ if($_POST['resume'] == "Submit")
 		}
 		else {
 				echo 'Not updated';
+				echo mysql_errno();
 				
 		}
 	}
@@ -215,11 +251,15 @@ if($_POST['resume'] == "Submit")
     padding: 7px;
 	}
   </style>
-
+  <?php
+  echo "<form action='' method='POST'>";
+  ?>
   <script type="text/javascript">
 		  $(document).ready(function() {
             var count = 0;
 	        var count1 = 0;
+	        var count2= 0;
+	        var count3 = 0;
 	        // CREATE A "DIV" ELEMENT AND DESIGN IT USING JQUERY ".css()" CLASS.
 	        var divAward = $(document.createElement('div')).css({
 	            padding: '5px', margin: '20px', width: '170px', border: '1px dashed',
@@ -233,12 +273,24 @@ if($_POST['resume'] == "Submit")
 	            borderLeftColor: '#999', borderRightColor: '#999'
 	        });
 
+	         var divExp = $(document.createElement('div')).css({
+	            padding: '5px', margin: '20px', width: '170px', border: '1px dashed',
+	            borderTopColor: '#999', borderBottomColor: '#999',
+	            borderLeftColor: '#999', borderRightColor: '#999'
+	        });
+
+ 	         var divSkill = $(document.createElement('div')).css({
+	            padding: '5px', margin: '20px', width: '170px', border: '1px dashed',
+	            borderTopColor: '#999', borderBottomColor: '#999',
+	            borderLeftColor: '#999', borderRightColor: '#999'
+	        });
+	        
 	        $('#addAward').click(function() {
 	            if (count <= 4) {
 	                count = count + 1;
 	                // ADD TEXTBOX.
 	                $(divAward).append('<input type=text class="input" id=tb' + count + ' ' +
-	                            'placeholder="Award ' + count + '" />');
+	                            'placeholder="Award ' + count + '" name="Award'+ count +'" />');
 
 	                if (count == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
 	                    var divSubmit = $(document.createElement('div'));
@@ -257,17 +309,55 @@ if($_POST['resume'] == "Submit")
 	                count1 = count1 + 1;
 	                // ADD TEXTBOX.
 	                $(divOrg).append('<input type=text class="input" id=tb1' + count1 + ' ' +
-	                            'placeholder="Organization' + count1 + '" />');
+	                            'placeholder="Organization' + count1 + '" name="Org'+ count1 +'" />');
 
 	                if (count1 == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
-	                    var divSub = $(document.createElement('div'));
+	                     var divSubmit1 = $(document.createElement('div'));
 	                }
-	                $('#Organizations').after(divOrg, divSub);   // ADD BOTH THE DIV ELEMENTS TO THE "main" divAward.
+	                $('#Organizations').after(divOrg, divSubmit1);   // ADD BOTH THE DIV ELEMENTS TO THE "main" divAward.
 	            }
 	            else{      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
 	                $(divOrg).append('<label>--</label>'); 
 	                $('#addOrg').attr('class', 'bt-disable'); 
 	                $('#addOrg').attr('disabled', 'disabled');
+	            }
+	        });
+
+	        $('#addExp').click(function() {
+	            if (count2 <= 4) {
+	                count2 = count2 + 1;
+	                // ADD TEXTBOX.
+	                $(divExp).append('<input type=text class="input" id=tb2' + count2 + ' ' +
+	                            'placeholder="Former Job Position' + count2 + '" name="Exp'+ count2 +'" />');
+
+	                if (count2 == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
+	                     var divSubmit2 = $(document.createElement('div'));
+	                }
+	                $('#Experience').after(divExp, divSubmit2);   // ADD BOTH THE DIV ELEMENTS TO THE "main" divAward.
+	            }
+	            else{      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
+	                $(divSkill).append('<label>--</label>'); 
+	                $('#addSkill').attr('class', 'bt-disable'); 
+	                $('#addSkill').attr('disabled', 'disabled');
+	            }
+	        });
+
+	        $('#addSkill').click(function() {
+	            if (count3 <= 4) {
+	                count3 = count3 + 1;
+	                // ADD TEXTBOX.
+	                $(divSkill).append('<input type=text class="input" id=tb3' + count3 + ' ' +
+	                            'placeholder="Skill ' + count3 + '" name="Skill'+ count3 +'" />');
+
+	                if (count3 == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
+	                    var divSubmit3 = $(document.createElement('div'));
+	                }
+	                $('#Skill').after(divSkill, divSubmit3);   // ADD BOTH THE DIV ELEMENTS TO THE "main" divAward.
+	            }
+	            else{      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
+	                $(divSkill).append('<label>-</label>'); 
+	                $('#addSkill').attr('class', 'bt-disable'); 
+	                $('#addSkill').attr('disabled', 'disabled');
 	            }
 	        });
 
@@ -290,7 +380,27 @@ if($_POST['resume'] == "Submit")
 	                count1 = 0;
 	            }
 	        });
-	    } 	);
+
+	        $('#removeExp').click(function() {   // REMOVE ELEMENTS ONE PER CLICK.
+            if (count2 > 0 && count2<=5) { $('#tb2' + count2).remove(); count2 = count2 - 1; }
+            if (count2 == 0 || count2 <0) { $(divExp).empty(); 
+                $(divExp).remove(); 
+                $('#addExp').removeAttr('disabled'); 
+                $('#addExp').attr('class', 'bt'); 
+                count2 = 0;
+            }
+        	});
+
+        	$('#removeSkill').click(function() {   // REMOVE ELEMENTS ONE PER CLICK.
+            if (count3 > 0 && count3<=5) { $('#tb2' + count3).remove(); count3 = count3 - 1; }
+            if (count3 == 0 || count3 <0) { $(divSkill).empty(); 
+                $(divSkill).remove(); 
+                $('#addSkill').removeAttr('disabled'); 
+                $('#addSkill').attr('class', 'bt'); 
+                count3 = 0;
+            }
+        	});
+	    });
 
 		 
 
@@ -339,10 +449,11 @@ if($_POST['resume'] == "Submit")
               <li><a href="javascript:;">Logout</a></li>
             </ul>
           </li>
-        </ul>
+        </ul><!--
             <form class="navbar-search pull-right">
               <input type="text" class="search-query" placeholder="Search">
             </form>
+			--->
           </div>
           <!--/.nav-collapse --> 
         </div>
@@ -371,7 +482,7 @@ if($_POST['resume'] == "Submit")
  	  	<div class="col-lg-6">
  	  <div class="panel-heading"><h4 class="panel-title">Applicant Resume</h4></div>
 	  <div class="panel-body">	   <!--/Panel Heading only-->
-		<form action="resume.php" method="POST">
+		
 		  <div class="table-responsive">	<!--Resume Form into table-->
 		 <table class="table"> 
 			<thead>
@@ -419,18 +530,15 @@ if($_POST['resume'] == "Submit")
 						<input type="radio" name="sex" value="male" checked>Male
 						<input type="radio" name="sex" value="female">Female <br>
 					</td>
-					<td id="resume-label">High School:</td>
-					<td>
-						<input type="text" name="highSchool" value="<?=$highSchool;?>"><br>
-					</td>
+					
 				</tr>
 				<tr>
 					<td id="resume-label"><br>Civil Status:</td>
 					<td>
-						<input type="radio" name="sex" value="single" checked>Single 
-						<input type="radio" name="sex" value="married">Married <br>
-						<input type="radio" name="sex" value="Divorced">Divorced 
-						<input type="radio" name="sex" value="Divorced">Widowed 
+						<input type="radio" name="Civil" value="single" checked>Single 
+						<input type="radio" name="Civil" value="married">Married <br>
+						<input type="radio" name="Civil" value="Divorced">Divorced 
+						<input type="radio" name="Civil" value="Divorced">Widowed 
 					</td>
 					<td id="resume-label">Degree:</td>
 					<td>
@@ -450,7 +558,7 @@ if($_POST['resume'] == "Submit")
 					</td>
 					<td id="resume-label">High School:</td>
 					<td>
-						<input type="text" name="highschool" value="<?=$highSchool;?>"><br>
+						<input type="text" name="highSchool" value="<?=$highSchool;?>"><br>
 					</td>
 				</tr>
 				<tr>
@@ -470,7 +578,7 @@ if($_POST['resume'] == "Submit")
 					</td>
 					<td id="resume-label">College/University:</td>
 					<td>
-						<input type="text" name="ColyearGraduated" value="<?=$ColyearGraduated;?>"> <br>
+						<input type="text" name="college" value="<?=$ColyearGraduated;?>"> <br>
 					</td>
 				</tr>
 				<tr>
@@ -516,17 +624,27 @@ if($_POST['resume'] == "Submit")
 				<tr>
 					<td id="resume-label"><br><b>Experience</b></td>
 					<td></td>
-					<td id="resume-label"><br><b>Skill</b></td>
+					<td id="resume-label"><br><b>Specialties and Technical Skills</b></td>
 				</tr>
 				<tr>
+					<!--
 					<td id="resume-label">Former Employer (Position, Company):</td>
 					<td>						
-						<input type="text" name="experience" value="<?=$experience;?>"><br>
-						
+						<input type="text" name="experience" value="<?=$experience;?>"><br>						
+					</td> -->
+					<td>
+						<div id='Experience'>
+								<input class="bt" type='button' value='+' id='addExp'>
+								<input class="bt" type='button' value='-' id='removeExp'>
+						</div>	
 					</td>
+					<td></td>
 
 					<td>
-						<textarea placeholder="Technical Skills" name="skills" value="<?=$skills;?>" />
+						<div id='Skill'>
+								<input class="bt" type='button' value='+' id='addSkill'>
+								<input class="bt" type='button' value='-' id='removeSkill'>
+						</div>	
 					</td>
 					 <!--
 					<td id="resume-label">Extra Curricular Actvities</td> <br>
@@ -538,7 +656,7 @@ if($_POST['resume'] == "Submit")
 					<td id="resume-label">Seminars Attended(Year, Title):</td>
 					<td>
 						<input type="text" name="seminarsAttendded" value="<?=$seminarsAttendded;?>"><br>
-					</td> -->
+					</td> 
 					<td id="resume-label">Specialties and Technical Skills <br> &nbsp (Year, Title):</td>
 					<td>
 						<input type="text" name="skills" value="<?=$skills;?>"><br>
@@ -549,20 +667,24 @@ if($_POST['resume'] == "Submit")
 					<td id="resume-label">Seminars Facilitated(Year, Title)</td>
 					<td>
 						<input type="text" name="seminarsFacilitated" value="<?=$seminarsFacilitated;?>"><br>
-					</td>
+					</td>-->
 				</tr>
 				<tr>
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><input type="submit" name="resume" value="Submit" /></td>
+					<?php
+					echo"</form>";
+					echo"<td><input type='submit' name='resume' value='Submit' /></td>";
+					?>
+					
 				</tr>	
 											
 			
 			</tbody>
 			</table>
 		  	</script>
-			</form>
+			
 	  </div>
 	</div>
 </div>

@@ -272,7 +272,7 @@
 
                             1. Has poise and well groomed  </td>
                     <form name="form1" id="form1" runat="server">
-  <td><input id="rdo_1" type="radio" value="1" name="price" onclick="DisplayPrice(this.value);"> 1&nbsp</td>
+                        <td><input id="rdo_1" type="radio" value="1" name="price" onclick="DisplayPrice(this.value);"> 1&nbsp</td>
                         <td><input id="rdo_2" type="radio" value="2" name="price" onclick="DisplayPrice(this.value);"> 2&nbsp&nbsp&nbsp&nbsp</td>
                         <td><input id="rdo_3" type="radio" value="3" name="price" onclick="DisplayPrice(this.value);"> 3&nbsp&nbsp&nbsp&nbsp</td>
                         <td><input id="rdo_4" type="radio" value="4" name="price" onclick="DisplayPrice(this.value);"> 4&nbsp&nbsp&nbsp&nbsp</td>    

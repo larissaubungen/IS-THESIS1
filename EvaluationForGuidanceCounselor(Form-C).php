@@ -220,7 +220,7 @@
 
         <br><br>
      
-
+    
         <div class="well" align="center">
         <table>
             <thead>
@@ -345,7 +345,7 @@
         </table>
           <br><br>
             <center>
-                <form action="/html/tags/html_form_tag_action.cfm" method="post">
+                <form action="" method="post">
                 Comments and Suggestions: <br />
                 <textarea name="comments" id="comments">
                 
@@ -356,7 +356,10 @@
 
         <br><br>
         <center>
+      
          Rating: <input type="text" name="totalSum" id="totalSum" value="" size="10" readonly="readonly">
+        </form> 
+
          Equivalent: <input type="text" name="equivalent" id="equivalent" value=""  readonly="readonly">
         </center>
         <br>
