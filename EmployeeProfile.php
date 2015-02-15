@@ -97,7 +97,7 @@
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li class="active"><a href="HRofficerPage.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
+        <li class="active"><a href="HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
         <li><a href="EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
         
         <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
@@ -124,6 +124,10 @@
 
 
 
+
+
+
+
 <hr class="">
 <div class="container target">
     <div class="row">
@@ -143,13 +147,37 @@
         <div class="col-sm-3">
             <!--left col-->
             <ul class="list-group">
-                <li class="list-group-item text-muted" contenteditable="false">Profile</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Employed since:</strong></span> 1998</li>
+
+                 <?php
+        mysql_connect("localhost", "root", "")
+        or die(mysql_error());
+        mysql_select_db("lbas_hr") 
+        or die(mysql_error());
+        
+            $result = mysql_query("
+            SELECT  F_Name, L_Name, ID_No
+            FROM person 
+            WHERE E_Status = 'Applicant'  
+            "); 
+        
+        while($row = mysql_fetch_array($result)){
+            echo $row['F_Name'];
+        
+
+
+
+
+
+          //      <li class="list-group-item text-muted" contenteditable="false">Profile</li>
+            //    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Employed since:</strong></span> 1998</li>
              
-                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Full Name</strong></span> Mercy</li>
-              <li class="list-group-item text-right"><span class="pull-left"><strong class="">Position: </strong></span> Directress
+                    echo '<li class="list-group-item text-right">' . $row['F_Name']. '</li>';
+              //<li class="list-group-item text-right"><span class="pull-left"><strong class="">Position: </strong></span> Directress
                
-                      </li>
+                //      </li>
+                 }
+        ?>
+
             </ul>
            <div class="panel panel-default">
              <div class="panel-heading">Dont know yet
