@@ -139,9 +139,6 @@ if($_POST['resume'] == "Submit")
 					 College = '".$college."',
 					 Course = '".$degree."',
 					 Awards = '".$awards."',
-					 S_Attended = '".$seminarsAttendded."',
-					 S_Facilitated = '".$seminarsFacilitated."',
-					 C_Activities = '".$extraActivities."'
 				 WHERE ID_No='".$user."'";
 		
 				$updatePerson = mysql_query($sql);
@@ -177,15 +174,15 @@ if($_POST['resume'] == "Submit")
 
     <link rel="stylesheet" href="jquery/jquery-ui.css">
     <link href="content/shared/styles/examples-offline.css" rel="stylesheet">
-    <link href="dateTimePicker/styles/kendo.common.min.css" rel="stylesheet">
-    <link href="dateTimePicker/styles/kendo.rtl.min.css" rel="stylesheet">
-    <link href="dateTimePicker/styles/kendo.default.min.css" rel="stylesheet">
-    <link href="dateTimePicker/styles/kendo.dataviz.min.css" rel="stylesheet">
-    <link href="dateTimePicker/styles/kendo.dataviz.default.min.css" rel="stylesheet">
+    <!--DatePicker-->
+    <link rel='stylesheet' type='text/css' media="screen" href='datePicker/datepicker.css' />
+	<script type="text/javascript" src="datePicker/datepicker.js"></script>
 
     
            <!-- Placed at the end of the document so the pages load faster --> 
 	<script src="js/jquery-1.7.2.min.js"></script> 
+	<script src="js/jquery.min.js"></script>
+	<script src="js/kendo.all.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 	<script src="js/excanvas.min.js"></script> 
@@ -215,11 +212,20 @@ if($_POST['resume'] == "Submit")
     td {
     padding: 7px;
 	}
+	#date_select2_day{
+		width: 5em;
+	}
+	#date_select2_month{
+		width: 7em;
+	}
+	#date_select2_year{
+		width: 5em;
+	}
   </style>
 
   <script type="text/javascript">
 		  $(document).ready(function() {
-            var count = 0;
+		  	var count = 0;
 	        var count1 = 0;
 	        var count2= 0;
 	        var count3 = 0;
@@ -299,9 +305,9 @@ if($_POST['resume'] == "Submit")
 	                $('#Experience').after(divExp, divSubmit2);   // ADD BOTH THE DIV ELEMENTS TO THE "main" divAward.
 	            }
 	            else{      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
-	                $(divSkill).append('<label>--</label>'); 
-	                $('#addSkill').attr('class', 'bt-disable'); 
-	                $('#addSkill').attr('disabled', 'disabled');
+	                $(divExp).append('<label>--</label>'); 
+	                $('#addExp').attr('class', 'bt-disable'); 
+	                $('#addExp').attr('disabled', 'disabled');
 	            }
 	        });
 
@@ -355,7 +361,7 @@ if($_POST['resume'] == "Submit")
         	});
 
         	$('#removeSkill').click(function() {   // REMOVE ELEMENTS ONE PER CLICK.
-            if (count3 > 0 && count3<=5) { $('#tb2' + count3).remove(); count3 = count3 - 1; }
+            if (count3 > 0 && count3<=5) { $('#tb3' + count3).remove(); count3 = count3 - 1; }
             if (count3 == 0 || count3 <0) { $(divSkill).empty(); 
                 $(divSkill).remove(); 
                 $('#addSkill').removeAttr('disabled'); 
@@ -363,10 +369,36 @@ if($_POST['resume'] == "Submit")
                 count3 = 0;
             }
         	});
-	    });
 
-		 
+			$("input[name='status']").change(function(){ //Displaying Spouse Label and Textboxes
 
+			   if($(this).val()=="married")
+			   {
+			      $("#FNspouseName").show();
+       			  $("#LNspouseName").show();
+       			  $('#lbl_spouse').show();
+			   }
+			   else
+			   {
+			       $("#FNspouseName").hide();
+       			   $("#LNspouseName").hide(); 
+       			   $('#lbl_spouse').hide();
+			   }
+
+			});
+
+			//datepicker
+		(function() {
+		var d = new Date();
+		var date_button_val = d.getFullYear()+'-'+(((d.getMonth()+1)<10)?'0'+(d.getMonth()+1):d.getMonth())+'-'+d.getDate();
+		DP.gbi('date_button').value = date_button_val;
+		DP.gbi('date_position').value = date_button_val;
+		DP.gbi('date_no_position').value = date_button_val;
+		DP.gbi('date_callback').value = date_button_val;
+		myFunction(date_button_val,'date_callback_text');
+		})();
+
+		}); //end of scripting
     // PICK THE VALUES FROM EACH TEXTBOX WHEN "SUBMIT" BUTTON IS CLICKED.
     var divValue, values = '';
     function GetTextValue() {
@@ -463,7 +495,7 @@ if($_POST['resume'] == "Submit")
 					</td>
 					<td id="resume-label">E-mail: </td>
 					<td>
-						<input type="text" name="email" value="<?=$email;?>"><br>
+						<input type="email" name="email" value="<?=$email;?>"><br>
 					</td>
 				</tr>	
 				<tr>
@@ -486,6 +518,7 @@ if($_POST['resume'] == "Submit")
 						<input type="text" name="telNumber" value="<?=$telNumber;?>"><br>
 					</td>
 				</tr>
+				<tr></tr>
 				<tr>
 					<td id="resume-label">Gender:</td>
 					<td>
@@ -495,62 +528,196 @@ if($_POST['resume'] == "Submit")
 					
 				</tr>
 				<tr>
-					<td id="resume-label"><br>Civil Status:</td>
+					<td id="resume-label"><br>Civil Status: <br>
+						<label id="lbl_spouse" style="display:none;">Spouse:</label>
+					</td> 
+					
 					<td>
-						<input type="radio" name="sex" value="single" checked>Single 
-						<input type="radio" name="sex" value="married">Married <br>
-						<input type="radio" name="sex" value="Divorced">Divorced 
-						<input type="radio" name="sex" value="Divorced">Widowed 
-					</td>
-					<td id="resume-label">Degree:</td>
-					<td>
-						<input type="text" name="degree" value="<?=$degree;?>"><br>
+						<input type="radio" name="status" value="single" checked>Single 
+						<input type="radio" name="status" value="married">Married <br>
+						<input type="radio" name="status" value="divorced">Divorced 
+						<input type="radio" name="status" value="widowed">Widowed <br> <br>						
+						<input type="text" name="FNspouseName" id="FNspouseName" value="<?=$FNspouseName;?>" placeholder="First Name" style="display:none;"> <br/>
+						<input type="text" name="LNspouseName" id="LNspouseName" value="<?=$LNspouseName;?>" placeholder="Last Name" style="display:none;">					
 					</td>
 				</tr>
+				<tr>
+
+				<tr>
+					<td id="resume-label"><br>Birthdate:</td>
+					<td>
+						<div>
+				    		<label for="date_select2_day"> </label>
+							<select name="date_select2_day" id="date_select2_day" size="1" class="text day" onblur="DP.update('date_select2')">
+								<option value="">--</option>
+								<option value="01">01</option>
+								<option value="02">02</option>
+								<option value="03">03</option>
+								<option value="04">04</option>
+								<option value="05">05</option>
+								<option value="06">06</option>
+								<option value="07">07</option>
+								<option value="08">08</option>
+								<option value="09">09</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+								<option value="21">21</option>
+								<option value="22">22</option>
+								<option value="23">23</option>
+								<option value="24">24</option>
+								<option value="25">25</option>
+								<option value="26">26</option>
+								<option value="27">27</option>
+								<option value="28">28</option>
+								<option value="29">29</option>
+								<option value="30">30</option>
+								<option value="31">31</option>
+							</select>
+
+							<select name="date_select2_month" id="date_select2_month" size="1" class="text month" onblur="DP.update('date_select2')">
+								<option value="">--</option>
+								<option value="01">01 - january</option>
+								<option value="02">02 - february</option>
+								<option value="03">03 - march</option>
+								<option value="04">04 - april</option>
+								<option value="05">05 - may</option>
+								<option value="06">06 - june</option>
+								<option value="07">07 - july</option>
+								<option value="08">08 - august</option>
+								<option value="09">09 - september</option>
+								<option value="10">10 - october</option>
+								<option value="11">11 - november</option>
+								<option value="12">12 - december</option>
+							</select>
+
+							<select name="date_select2_year" id="date_select2_year" size="1" class="text year" onblur="DP.update('date_select2')">
+								<option value="">--</option>
+								<option value="2021">2021</option>
+								<option value="2020">2020</option>
+								<option value="2019">2019</option>
+								<option value="2018">2018</option>
+								<option value="2017">2017</option>
+								<option value="2016">2016</option>
+								<option value="2015">2015</option>
+								<option value="2014">2014</option>
+								<option value="2013">2013</option>
+								<option value="2012">2012</option>
+								<option value="2011">2011</option>
+								<option value="2010">2010</option>
+								<option value="2009">2009</option>
+								<option value="2008">2008</option>
+								<option value="2007">2007</option>
+								<option value="2006">2006</option>
+								<option value="2005">2005</option>
+								<option value="2004">2004</option>
+								<option value="2003">2003</option>
+								<option value="2002">2002</option>
+								<option value="2001">2001</option>
+								<option value="2000">2000</option>
+								<option value="1999">1999</option>
+								<option value="1998">1998</option>
+								<option value="1997">1997</option>
+								<option value="1996">1996</option>
+								<option value="1995">1995</option>
+								<option value="1994">1994</option>
+								<option value="1993">1993</option>
+								<option value="1992">1992</option>
+								<option value="1991">1991</option>
+								<option value="1990">1990</option>
+								<option value="1989">1989</option>
+								<option value="1988">1988</option>
+								<option value="1987">1987</option>
+								<option value="1986">1986</option>
+								<option value="1985">1985</option>
+								<option value="1984">1984</option>
+								<option value="1983">1983</option>
+								<option value="1982">1982</option>
+								<option value="1981">1981</option>
+								<option value="1980">1980</option>
+								<option value="1979">1979</option>
+								<option value="1978">1978</option>
+								<option value="1977">1977</option>
+								<option value="1976">1976</option>
+								<option value="1975">1975</option>
+								<option value="1974">1974</option>
+								<option value="1973">1973</option>
+								<option value="1972">1972</option>
+								<option value="1971">1971</option>
+								<option value="1970">1970</option>
+							</select>
+							<input type="hidden" class="hidden" name="date_select2" id="date_select2">
+							<a href="javascript:DP.open('date_select2', document.getElementById('date_select2_day'))"><img src="datePicker/datepicker_cal.gif" /></a>
+						</div>
+
+						<table id="datepicker" class="dp_calendar" style="display:none;font-size:14px;" cellpadding="0" cellspacing="0"></table>
+
+					</td>
+				</tr>
+
+				</tr>
+
 				<tr></tr>
 				<tr>
-					<td id="resume-label"><br><b>Address</b></td>
-					<td id="resume-label"></td>
 					<td id="resume-label"><br><b>Education</b></td>
+					<td id="resume-label"></td>
+					<td id="resume-label"><br><b>Address</b></td>
+					
 				</tr>
 				<tr>
+					<td id="resume-label">High School:</td>
+					<td>
+						<input type="text" name="highsSchool" value="<?=$highSchool;?>"><br>
+					</td>
 					<td id="resume-label">Street:</td>
 					<td>
 						<input type="text" name="street" value="<?=$street;?>"> <br>
 					</td>
-					<td id="resume-label">High School:</td>
-					<td>
-						<input type="text" name="highschool" value="<?=$highSchool;?>"><br>
-					</td>
+					
 				</tr>
 				<tr>
-					<td id="resume-label">City:</td>
-					<td>	
-						<input type="select" name="city" value="<?=$city;?>"> <br>
-					</td>
 					<td id="resume-label">Year Graduated:</td>
 					<td>
 						<input type="text" name="HSyearGraduated" value="<?=$HSyearGraduated;?>"> <br>
 					</td>
+					<td id="resume-label">City:</td>
+					<td>	
+						<input type="select" name="city" value="<?=$city;?>"> <br>
+					</td>
 				</tr>
 				<tr>
+					<td id="resume-label">College/University:</td>
+					<td>
+						<input type="text" name="college" value="<?=$college;?>"> <br>
+					</td>
 					<td id="resume-label">Province:</td>
 					<td>	
 						<input type="select" name="province" value="<?=$province;?>"> <br>
 					</td>
-					<td id="resume-label">College/University:</td>
+				</tr>
+				<tr>
+					<td id="resume-label">Year Graduated:</td>
 					<td>
 						<input type="text" name="ColyearGraduated" value="<?=$ColyearGraduated;?>"> <br>
 					</td>
-				</tr>
-				<tr>
 					<td id="resume-label">Zip Code:</td>
 					<td>
 						<input type="text" name="zip" value="<?=$zip;?>"><br>
-					</td>
-					<td id="resume-label">Year Graduated:</td>
+					</td>					
+				</tr>
+
+				<tr>
+					<td id="resume-label">Degree:</td>
 					<td>
-						<input type="text" name="yearGraduated" value="<?=$yearGraduated;?>"> <br>
+						<input type="text" name="degree" value="<?=$degree;?>"><br>
 					</td>
 				</tr>
 
