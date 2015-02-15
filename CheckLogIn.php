@@ -23,7 +23,7 @@ proper page
 			");
 			
 		$check=mysql_fetch_array($result);
-		 if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant'  && $check['Resume'] == null){
+		 if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant'  && $check['Resume'] == null || $check['Resume'] == 'no'){
 					header('location:ApplicantResume.php');
 					//start of sessions
 					session_start();
