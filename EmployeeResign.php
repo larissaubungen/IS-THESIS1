@@ -10,7 +10,7 @@ $user=$_SESSION['ID_No'];
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>LBASS Employee Leave Page</title>
+	<title>LBASS Employee Resignation Request Page</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -37,7 +37,18 @@ $user=$_SESSION['ID_No'];
     	}
 
     	$(function() {
-  		  $( "#datepicker" ).datepicker({ minDate: +30, maxDate: "+2M +10D" });
+  		  $( "#dateRequest" ).datepicker(
+          { 
+            defaultDate: "+30D",
+            minDate: 1, 
+            maxDate: "+2M +10D",
+            showOtherMonths: true,
+            changeMonth: true,
+            selectOtherMonths: true,
+            required: true,
+            showOn: "focus",
+            numberOfMonths: 1, 
+          });
  		 });
 
 	    	(function() {
@@ -119,7 +130,7 @@ $user=$_SESSION['ID_No'];
 
     <form action="SubmitResignation.php" method="post" id="resignation" onsubmit="return reminder();">
 
-    	<!--
+    	
     	<div>
 			<label for="date_button">Date for Filing:</label><br>
 			<input type="date" name="date_button" id="date_button" onclick="DP.open('date_button','date_button')" required>
@@ -127,10 +138,10 @@ $user=$_SESSION['ID_No'];
 
 		<table id="datepicker" class="dp_calendar" style="display:none;font-size:14px;" cellpadding="0" cellspacing="0"></table>   
 
-	-->
+
 
 	Date for filing:
-	<input type="text" id="datepicker" required> 
+	<input type="text" id="dateRequest" required> 
 
     	<label>Reason:</label> <textarea form="resignation" name="reason" rows="3" col="3" required></textarea><br/>
     	<input type="submit" value="submit">
