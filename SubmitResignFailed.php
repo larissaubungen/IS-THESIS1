@@ -4,22 +4,12 @@
     header('Location:login.php');
 	}
 
-$user=$_SESSION['ID_No'];
-
-  $result = mysql_query("
-    SELECT  resignation.ID_No as ID_No
-    FROM resignation
-    WHERE ID_No = '" . $user . "' ");
-
-  while($result){
-    header('Location:SubmitResignFailed.php');
-  }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>LBASS Employee Resignation Request Page</title>
+	<title>LBASS Employee Resignation Request Failed</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
@@ -44,60 +34,7 @@ $user=$_SESSION['ID_No'];
     	function reminder(){
     		confirm("Reminder: \n Please ensure your submission with letter of resignation. \n Your request will be subject for HR's approval.");
     	}
-
-     
-
-
-
-      $( "#datepicker" ).datepicker(
-          { 
-            minDate: "+30D", 
-            maxDate: "+2M +10D",
-            showOtherMonths: true,
-            changeMonth: true,
-            selectOtherMonths: true,
-            required: true,
-            showOn: "focus",
-            numberOfMonths: 1, 
-          });
-
-      /*
-         $( "#datepicker").datepicker
-      ({
-        changeMonth: "true",
-        changeYear: "true", 
-        minDate: "-20", 
-        maxDate: "+1M +10D"; 
-        });
-
-
-        $(function() {
-        $( "#dateRequest" ).datepicker(
-          { 
-            defaultDate: "+30D",
-            minDate: 1, 
-            maxDate: "+2M +10D",
-            showOtherMonths: true,
-            changeMonth: true,
-            selectOtherMonths: true,
-            required: true,
-            showOn: "focus",
-            numberOfMonths: 1, 
-          });
-      
-        (function() {
-      var d = new Date();
-      var date_button_val = d.getFullYear()+'-'+(((d.getMonth()+1)<10)?'0'+(d.getMonth()+1):d.getMonth())+'-'+d.getDate();
-      DP.gbi('date_button').value = date_button_val;
-      DP.gbi('date_position').value = date_button_val;
-      DP.gbi('date_no_position').value = date_button_val;
-      DP.gbi('date_callback').value = date_button_val;
-      myFunction(date_button_val,'date_callback_text');
-      })();
-
-      */
-      
-    	
+	
  		 });
 
 	    	
@@ -169,27 +106,12 @@ $user=$_SESSION['ID_No'];
     <h3>Filing of Resignation</h3>
     <hr/>
 
-    <form action="SubmitResignation.php" method="post" id="resignation" onsubmit="return reminder();">
-        <!--
-			<label for="date_button">Date for Filing:</label><br>
-			<input type="date" name="date_button" id="date_button" onclick="DP.open('date_button','date_button')" required>
-		</div> 
-
-		<table id="datepicker" class="dp_calendar" style="display:none;font-size:14px;" cellpadding="0" cellspacing="0"></table>   
-
-      -->
-
-      <div class="container">
-        <div class="form-group">
-           <label for="datepicker"></label>   
-              Date for filing:
-              <input type="date" name="dateFiled"> 
-
-              <label>Reason:</label> <textarea form="resignation" name="reason" rows="3" col="3" required></textarea><br/>
-              <input type="submit" value="submit">
+    <div class="container">
+        <div class="alert alert-error">
+          <b>Request Submission Failed.</b> Duplication of request or submission error. <br/><br/>
         </div>
-      </div>
-
+        <button><a href="EmployeeResign.php">Retry</a></button>
+    </div>
   
     </form>
     </div>

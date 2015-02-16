@@ -8,7 +8,7 @@ $user=$_SESSION['ID_No'];
 
 
 
-//error_reporting(0);
+error_reporting(0);
 if($_POST['resume'] == "Submit")
 {
 	$errorMessage = "";
@@ -546,7 +546,7 @@ if($_POST['resume'] == "Submit")
 				<tr>
 					<td id="resume-label">Last Name:</td>
 					<td>						
-						<input type="text" name="lastName" value="<?php echo"$lastName";?>">
+						<input type="text" name="lastName" value="<?php "$lastName";?>">
 					</td>
 					<td id="resume-label">Mobile Number: </td>
 					<td>
@@ -578,19 +578,13 @@ if($_POST['resume'] == "Submit")
 					</td> 
 					
 					<td>
-<<<<<<< HEAD
+
 						<input type="radio" name="status" value="single" checked>Single 
 						<input type="radio" name="status" value="married">Married <br>
 						<input type="radio" name="status" value="divorced">Divorced 
 						<input type="radio" name="status" value="widowed">Widowed <br> <br>						
 						<input type="text" name="FNspouseName" id="FNspouseName" value="<?=$FNspouseName;?>" placeholder="First Name" style="display:none;"> <br/>
 						<input type="text" name="LNspouseName" id="LNspouseName" value="<?=$LNspouseName;?>" placeholder="Last Name" style="display:none;">					
-=======
-						<input type="radio" name="Civil" value="single" checked>Single 
-						<input type="radio" name="Civil" value="married">Married <br>
-						<input type="radio" name="Civil" value="Divorced">Divorced 
-						<input type="radio" name="Civil" value="Divorced">Widowed 
->>>>>>> origin/master
 					</td>
 				</tr>
 				<tr>
@@ -731,11 +725,11 @@ if($_POST['resume'] == "Submit")
 					</td>
 					<td id="resume-label">Street:</td>
 					<td>
-<<<<<<< HEAD
+
 						<input type="text" name="street" value="<?=$street;?>"> <br>
-=======
+
 						<input type="text" name="highSchool" value="<?=$highSchool;?>"><br>
->>>>>>> origin/master
+
 					</td>
 					
 				</tr>
@@ -760,21 +754,21 @@ if($_POST['resume'] == "Submit")
 					</td>
 				</tr>
 				<tr>
-					<td id="resume-label">Year Graduated:</td>
+					<td id="resume-label">Degree:</td>
 					<td>
-						<input type="text" name="college" value="<?=$ColyearGraduated;?>"> <br>
+						<input type="text" name="degree" value="<?=$degree;?>"><br>
 					</td>
 					<td id="resume-label">Zip Code:</td>
 					<td>
 						<input type="text" name="zip" value="<?=$zip;?>"><br>
 					</td>					
 				</tr>
-
-				<tr>
-					<td id="resume-label">Degree:</td>
+					<td id="resume-label">Year Graduated:</td>
 					<td>
-						<input type="text" name="degree" value="<?=$degree;?>"><br>
+						<input type="text" name="college" value="<?=$ColyearGraduated;?>"> <br>
 					</td>
+				<tr>
+					
 				</tr>
 
 				<tr>
