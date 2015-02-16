@@ -60,6 +60,7 @@
         <li><a href="AttendancePage.php"><i class="icon-table"></i><span>Attendance</span> </a></li>
         <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
         <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
+        <li><a href="HR_Resignation.php"><i class="icon-list"></i><span>Requests</span></a></li>
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="http://localhost/IS-THESIS1/Signup.php">Add Applicant</a></li>
