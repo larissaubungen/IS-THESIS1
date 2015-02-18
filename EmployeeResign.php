@@ -20,7 +20,7 @@ $user=$_SESSION['ID_No'];
 <html lang="en">
 <head>
 	<title>LBASS Employee Resignation Request Page</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta  charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
@@ -29,80 +29,31 @@ $user=$_SESSION['ID_No'];
     <link href="css/style.css" rel="stylesheet">
     <link href="css/pages/dashboard.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="styles/kendo.common.min.css">
+    <link rel="stylesheet" href="styles/kendo.rtl.min.css">
+    <link rel="stylesheet" href="styles/kendo.default.min.css">
+    <link rel="stylesheet" href="styles/kendo.dataviz.min.css">
+    <link rel="stylesheet" href="kendo.dataviz.default.min.css">
+    <link rel="stylesheet" href="styles/kendo.mobile.all.min.css">
+
     <link href="css/bootstrap.min.css" rel="stylesheet">    
     <link rel="stylesheet" href="js/jquery1.11.3/jquery-ui.css">
 
-    <script src="js/jquery1.11.3/jquery-ui.min.js"></script>
-    <script src="js/jquery1.11.3/jquery.min.js"></script>
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/kendo.all.min.js"></script>
 
     <!--Boostrap
       <script src="js/jquery.min.js"></script>
     <script src="js/jquery-1.7.2.min.js"></script>
-  -->
     <script src="js/bootstrap.js"></script>
+  -->
+    
     <script type="text/javascript">
-    	function reminder(){
+    	function reminder()
+      {
     		confirm("Reminder: \n Please ensure your submission with letter of resignation. \n Your request will be subject for HR's approval.");
-    	}
-
-     
-
-
-
-      $( "#datepicker" ).datepicker(
-          { 
-            minDate: "+30D", 
-            maxDate: "+2M +10D",
-            showOtherMonths: true,
-            changeMonth: true,
-            selectOtherMonths: true,
-            required: true,
-            showOn: "focus",
-            numberOfMonths: 1, 
-          });
-
-      /*
-         $( "#datepicker").datepicker
-      ({
-        changeMonth: "true",
-        changeYear: "true", 
-        minDate: "-20", 
-        maxDate: "+1M +10D"; 
-        });
-
-
-        $(function() {
-        $( "#dateRequest" ).datepicker(
-          { 
-            defaultDate: "+30D",
-            minDate: 1, 
-            maxDate: "+2M +10D",
-            showOtherMonths: true,
-            changeMonth: true,
-            selectOtherMonths: true,
-            required: true,
-            showOn: "focus",
-            numberOfMonths: 1, 
-          });
-      
-        (function() {
-      var d = new Date();
-      var date_button_val = d.getFullYear()+'-'+(((d.getMonth()+1)<10)?'0'+(d.getMonth()+1):d.getMonth())+'-'+d.getDate();
-      DP.gbi('date_button').value = date_button_val;
-      DP.gbi('date_position').value = date_button_val;
-      DP.gbi('date_no_position').value = date_button_val;
-      DP.gbi('date_callback').value = date_button_val;
-      myFunction(date_button_val,'date_callback_text');
-      })();
-
-      */
-      
-    	
- 		 });
-
-	    	
+    	} 	
     </script>
-
     <style = "text/css">
     	textarea{
     		margin-left: 3em;
@@ -181,12 +132,28 @@ $user=$_SESSION['ID_No'];
 
       <div class="container">
         <div class="form-group">
+
            <label for="datepicker"></label>   
               Date for filing:
-              <input type="date" name="dateFiled"> 
+              <input id="datepicker" name="dateFiled" required/>
+                  <script>
+                    $(document).ready(function(){
+                     var restrictedDate = new Date().setDate(+44);
+                     var currentDate = new Date();
+
+
+                     $("#datepicker").kendoDatePicker({
+                       value: new Date(currentDate),
+                       min: new Date(currentDate),
+                       max: new Date(2049, 11, 31),
+                       dateFormat: 'mm/dd/yy' 
+                     })
+                    });   
+                  </script>
 
               <label>Reason:</label> <textarea form="resignation" name="reason" rows="3" col="3" required></textarea><br/>
-              <input type="submit" value="submit">
+              <br/>
+              <input type="submit" value="submit" onclick="return reminder();">
         </div>
       </div>
 
