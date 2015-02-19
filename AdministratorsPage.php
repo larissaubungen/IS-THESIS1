@@ -138,7 +138,7 @@
             $result = mysql_query("
             SELECT  F_Name, L_Name, ID_No
             FROM person 
-            WHERE E_Status = 'Applicant'  
+            WHERE E_Status = 'Admin'  
             "); 
         
         while($row = mysql_fetch_array($result)){

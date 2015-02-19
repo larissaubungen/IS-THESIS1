@@ -127,9 +127,10 @@ $date = mysql_query("
         <input type="text" value="<?=$status;?>" readonly><br/>
         Date Approved:
         <input type="text" value="<?=$date;?>" readonly>
+
     </div>
   
-    </form>
+
     </div>
 
 </body>

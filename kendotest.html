@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="styles/kendo.dataviz.min.css" />
+    <link rel="stylesheet" href="styles/kendo.dataviz.default.min.css" />
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/kendo.all.min.js"></script>
+</head>
+<body>
+
+        <div id="example">
+            <div class="demo-section k-header">
+               Datepucker: <input id="datepicker" value="2/16/2015" style="width:200px;" />
+            </div>
+        <script>
+            $(document).ready(function() {
+                // create DatePicker from input HTML element
+                var today = new Date();
+               $("#datepicker").kendoDatePicker({
+                    max: new Date(today.setDate(today.getDate()+30));
+                });
+            });
+        </script>
+        <style scoped>
+            .demo-section {
+                width: 400px;
+            }
+            .demo-section p {
+                margin-top: 2em;
+            }
+            .demo-section label {
+                display: inline-block;
+                width: 180px;
+                padding-right: 5px;
+                text-align: right;
+            }
+            
+            #example .k-datepicker {
+                vertical-align: middle;
+            }
+        </style>
+        </div>
+
+
+</body>
+</html>
