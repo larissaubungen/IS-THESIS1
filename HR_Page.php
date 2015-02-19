@@ -161,7 +161,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
 <script>     
 		function openwindow()
 		{
-			window.open("prompt.php","mywindow","menubar=1,resizable=1,width=500,height=250");
+			window.open("ScheduleEvent.php","mywindow","menubar=1,resizable=1,width=500,height=250");
 		}
 
         var lineChartData = {
