@@ -1,4 +1,4 @@
-<?php
+<?php 
   session_start();
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
@@ -89,7 +89,44 @@ $user=$_SESSION['ID_No'];
       <div class="row">
         <div class="span6">
           
-          
+          <?php
+
+           mysql_connect("localhost", "root", "")
+                or die(mysql_error());
+            
+            mysql_select_db("lbas_hr") 
+              or die(mysql_error());   
+
+          $result = mysql_query(
+                  "SELECT DISTINCT person.F_Name, person.M_Name,person.L_Name, resignation.reason, resignation.D_Filed, resignation.ID_No
+                  FROM person
+                  INNER JOIN resignation
+                  ON person.ID_No LIKE resignation.ID_No
+                  ORDER BY person.L_Name ASC") or die (mysql_error());
+
+          echo "<h4>Resignation Request</h4>";
+
+          while($row = mysql_fetch_array($result)){
+
+          $idNumber = $row["ID_No"];
+          echo '<li class="span5 clearfix">';
+          echo '<div class="thumbnail clearfix">';
+          echo '<img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style="margin-right:10px">';
+          echo '<div class="caption" class="pull-left">';
+          echo'<form action="HR_ResignationApprove.php" method= "POST">';
+          echo "<input type='hidden' name='id' value='$'/>";
+          echo '<input type= "submit" class="btn btn-primary icon  pull-right" value="Approve">';
+          echo '</form>';
+          echo '<h4>';      
+            echo '<a href="#" >'. $row["F_Name"] . " " . $row["L_Name"] .'</a>';
+            echo '</h4>';
+          echo '<small><b>ID Number: </b>'. $row["ID_No"] .'</small>';
+                    echo'</div>';
+                  echo'</div>';
+                echo'</li>';
+          }
+
+          ?>          
         </div>
         <!-- /span6 --> 
       </div>

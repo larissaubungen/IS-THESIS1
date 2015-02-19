@@ -14,6 +14,8 @@ $user=$_SESSION['ID_No'];
   while($result){
     header('Location:SubmitResignFailed.php');
   }
+
+  
 ?>
 
 <!DOCTYPE html>
