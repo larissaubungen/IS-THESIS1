@@ -5,16 +5,15 @@
         or die(mysql_error());
         
             $result = mysql_query("
-            SELECT  F_Name, L_Name, ID_No, B_Day, Age
-            FROM person 
+            SELECT  F_Name, L_Name, ID_No, B_Day
+            FROM person
+            WHERE ID_No like 'Admin' 
               
             "); 
 
-            
         
         while($row = mysql_fetch_array($result)){
           $birthday = $row['B_Day'];
-          $age = $row['Age'];
        
         function age ($birthday)
           {
@@ -38,7 +37,7 @@
           echo '</script>';
         }
         
-        //ISSUE: Hindi ung age sa db ung nag iincrement
+        // Ung B_day na ung nagserserve as variable para magdisplay ung age.
 
   
         }

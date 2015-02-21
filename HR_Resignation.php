@@ -89,6 +89,33 @@ $user=$_SESSION['ID_No'];
       <div class="row">
         <div class="span6">
           
+          <?php 
+
+            $user=$_SESSION['ID_No'];
+
+              mysql_connect("localhost", "root", "")
+              or die(mysql_error());
+              mysql_select_db("lbas_hr") 
+              or die(mysql_error());
+
+            $resign_ID = mysql_query("
+              SELECT resignation.ID_No
+              FROM resignation
+              ")
+
+            $resign_List = mysql_query("
+              SELECT resignation.ID_No, resignation.F_Name, resignation.M_Name, resignation.L_Name
+              FROM resignation
+              WHERE resignation.ID_No = '".$resign_ID."'
+              ")
+              
+            $applicant_list = mysql_query("
+            SELECT  F_Name, L_Name, ID_No
+            FROM person 
+            WHERE E_Status = 'Applicant   
+            "); 
+
+          ?>
           
         </div>
         <!-- /span6 --> 

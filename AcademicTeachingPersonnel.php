@@ -129,78 +129,34 @@
     <div class="row">
         <div class="span12">
             <ul class="thumbnails">
-                <li class="span5 clearfix">
-                  <div class="thumbnail clearfix">
-                    <img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-                    <div class="caption" class="pull-left">
-                      <a href="http://bootsnipp.com/" class="btn btn-primary icon  pull-right">Select</a>
-                      <h4>      
-                      <a href="#" >Luis Felipe Kaufmann</a>
-                      </h4>
-                      <small><b>RG: </b>99384877</small>  
-                    </div>
-                  </div>
-                </li>
-                  <li class="span5 clearfix">
-                  <div class="thumbnail clearfix">
-                    <img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-                    <div class="caption" class="pull-left">
-                      <a href="http://bootsnipp.com/" class="btn btn-primary icon  pull-right">Select</a>
-                      <h4>      
-                      <a href="#" >Luis Felipe Kaufmann</a>
-                      </h4>
-                      <small><b>RG: </b>99384877</small>  
-                    </div>
-                  </div>
-                </li>
-                  <li class="span5 clearfix">
-                  <div class="thumbnail clearfix">
-                    <img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-                    <div class="caption" class="pull-left">
-                      <a href="http://bootsnipp.com/" class="btn btn-primary icon  pull-right">Select</a>
-                      <h4>      
-                      <a href="#" >Luis Felipe Kaufmann</a>
-                      </h4>
-                      <small><b>RG: </b>99384877</small>  
-                    </div>
-                  </div>
-                </li>
-                  <li class="span5 clearfix">
-                  <div class="thumbnail clearfix">
-                    <img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-                    <div class="caption" class="pull-left">
-                      <a href="http://bootsnipp.com/" class="btn btn-primary icon  pull-right">Select</a>
-                      <h4>      
-                      <a href="#" >Luis Felipe Kaufmann</a>
-                      </h4>
-                      <small><b>RG: </b>99384877</small>     
-                    </div>
-                  </div>
-                </li>
-                  <li class="span5 clearfix">
-                  <div class="thumbnail clearfix">
-                    <img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-                    <div class="caption" class="pull-left">
-                      <a href="http://bootsnipp.com/" class="btn btn-primary icon  pull-right">Select</a>
-                      <h4>      
-                      <a href="#" >Luis Felipe Kaufmann</a>
-                      </h4>
-                      <small><b>RG: </b>99384877</small>
-                    </div>
-                  </div>
-                </li>
-                  <li class="span5 clearfix">
-                  <div class="thumbnail clearfix">
-                    <img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-                    <div class="caption" class="pull-left">
-                      <a href="http://bootsnipp.com/" class="btn btn-primary icon  pull-right">Select</a>
-                      <h4>      
-                      <a href="#" >Luis Felipe Kaufmann</a>
-                      </h4>
-                      <small><b>RG: </b>99384877</small>
-                    </div>
-                  </div>
-                </li>
+        <?php
+        mysql_connect("localhost", "root", "")
+        or die(mysql_error());
+        mysql_select_db("lbas_hr") 
+        or die(mysql_error());
+        
+            $result = mysql_query("
+            SELECT  F_Name, L_Name, ID_No
+            FROM person 
+            WHERE E_Status = 'Employee' AND E_Position1 = 'Teacher' OR E_Position1 = 'Licensed Teacher' 
+                                        OR E_Position2 ='Licensed Teacher'  
+            "); 
+        
+        while($row = mysql_fetch_array($result)){
+                  echo '<li class="span5 clearfix">';
+          echo '<div class="thumbnail clearfix">';
+          echo '<img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style="margin-right:10px">';
+            echo '<div class="caption" class="pull-left">';
+              echo '<a href="EmployeeProfile.php" class="btn btn-primary icon  pull-right">Select</a>';
+            echo '<h4>';      
+              echo '<a href="#" >'. $row["F_Name"] . " " . $row["L_Name"] .'</a>';
+            echo '</h4>';
+            echo '<small><b>ID Number: </b>'. $row["ID_No"] .'</small>';
+                    echo'</div>';
+                  echo'</div>';
+                echo'</li>';
+        }
+        ?>
             </ul>
         </div>
     </div>
