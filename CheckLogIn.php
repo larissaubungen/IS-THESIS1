@@ -36,6 +36,16 @@ proper page
 					session_start();
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
+<<<<<<< HEAD
+=======
+		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
+
+					header('location:EmployeeResign.php');
+					//start of sessions
+					session_start();
+					//iniating a sessions variable and it's value
+					$_SESSION['ID_No']=$check['ID_No'];
+>>>>>>> origin/master
 					
 		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
 					header('location:EmployeesPage.php');

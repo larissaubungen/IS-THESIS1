@@ -10,6 +10,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+function pop_up(){
+window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=1076,height=768,directories=no,location=no') 
+}
+</script>
 <meta charset="utf-8">
 <title>LBASS HR Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -37,7 +42,12 @@
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                             class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
             <ul class="dropdown-menu">
+<<<<<<< HEAD
               <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
+=======
+              <li><a href="javascript:;">Profile</a></li>
+              <li><a href="http://localhost/ISTHESIS/logout.php">Logout</a></li>
+>>>>>>> origin/master
             </ul>
           </li>
 
@@ -59,23 +69,39 @@
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
+<<<<<<< HEAD
         <li class="active"><a href="http://localhost/IS-THESIS1/HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
         <li><a href="http://localhost/IS-THESIS1/EmployeesPage.php"><i class="icon-group"></i><span>Employees</span> </a> </li>
         
         <li><a href="ReportsPage.php"><i class="icon-signal"></i><span>Reports</span> </a> </li>
         <li><a href="AttendancePage.php"><i class="icon-table"></i><span>Attendance</span> </a></li>
+=======
+        <li class="active"><a href="index.html"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
+        <li><a href="index.html"><i class="icon-user"></i><span>Employees</span> </a> </li>
+        
+        <li><a href="reports.html"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
+        <li><a href="guidely.html"><i class="icon-table"></i><span>Attendance</span> </a></li>
+        <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
+        <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
+>>>>>>> origin/master
         <li><a href="HR_Resignation.php"><i class="icon-list"></i><span>Requests</span></a></li>
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i><span>Employee Applications</span> <b class="caret"></b></a>
           <ul class="dropdown-menu">
+<<<<<<< HEAD
             
             <li><a href="http://localhost/IS-THESIS1/ListOfApplicant.php">View Current Applicants</a></li>
             <li><a href="http://localhost/IS-THESIS1/Signup.php">Add Applicant</a></li>
 
+=======
+            <li><a href="http://localhost/ISTHESIS/Signup.php">Add Applicant</a></li>
+>>>>>>> origin/master
           </ul>
         </li>
       </ul>
     </div>
     <!-- /container --> 
+  </div>
+  </div>
   </div>
   <!-- /subnavbar-inner --> 
 </div>
@@ -94,6 +120,8 @@
             <!-- /widget-header -->
             <div class="widget-content">
               <div id='calendar'>
+			  
+			  <input type=button onClick="openwindow();" value='Create event'>
               </div>
             </div>
             <!-- /widget-content --> 
@@ -110,10 +138,15 @@
             <!-- /widget-header -->
             <div class="widget-content">
               <div class="shortcuts"> <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-table"></i><span
+<<<<<<< HEAD
                                         class="shortcut-label">Attendance</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Summary of Reports</span> </a>
                                         <a href="EmployeesPage.php" class="shortcut"><i class="shortcut-icon icon-group"></i><span class="shortcut-label">Employees</span></a>
+=======
+                                        class="shortcut-label">Attendance</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Summary of Reports</span> 
+                                        <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-group"></i><span class="shortcut-label">Employees</span></a>
+>>>>>>> origin/master
 
-                                        <a href="http://localhost/IS-THESIS1/ListOfApplicant.php" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Applicants</span></a>
+                                        <a href="http://localhost/ISTHESIS/ListOfApplicant.php" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Applicants</span></a>
 
 
                                          </div>
@@ -177,6 +210,10 @@
  
 <script src="js/base.js"></script> 
 <script>     
+		function openwindow()
+		{
+			window.open("ScheduleEvent.php","mywindow","menubar=1,resizable=1,width=500,height=250");
+		}
 
         var lineChartData = {
             labels: ["January", "February", "March", "April", "May", "June", "July"],
@@ -233,6 +270,7 @@
           selectable: true,
           selectHelper: true,
           select: function(start, end, allDay) {
+		  /*
             var title = prompt('Event Title:');
             if (title) {
               calendar.fullCalendar('renderEvent',
@@ -246,47 +284,38 @@
               );
             }
             calendar.fullCalendar('unselect');
-          },
+          */
+		  },
           editable: true,
           events: [
-            {
-              title: 'All Day Event',
-              start: new Date(y, m, 1)
-            },
-            {
-              title: 'Long Event',
-              start: new Date(y, m, d+5),
-              end: new Date(y, m, d+7)
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: new Date(y, m, d-3, 16, 0),
-              allDay: false
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: new Date(y, m, d+4, 16, 0),
-              allDay: false
-            },
-            {
-              title: 'Meeting',
-              start: new Date(y, m, d, 10, 30),
-              allDay: false
-            },
-            {
-              title: 'Lunch',
-              start: new Date(y, m, d, 12, 0),
-              end: new Date(y, m, d, 14, 0),
-              allDay: false
-            },
-            {
-              title: 'Birthday Party',
-              start: new Date(y, m, d+1, 19, 0),
-              end: new Date(y, m, d+1, 22, 30),
-              allDay: false
-            },
+		  <?php
+		  error_reporting(0);
+		  
+			mysql_connect("localhost", "root", "")
+				or die(mysql_error());
+	
+			mysql_select_db("lbas_hr") 
+				or die(mysql_error());
+				
+				$events=mysql_query("
+				SELECT HR_Date, HR_Time, HR_Status
+				FROM applicant_schedule
+				");
+				
+			while($row = mysql_fetch_array($events)) {
+			//$hr_Date = $row['HR_Date'];
+			list($year,$month,$day)=explode("-", $row['HR_Date']);
+			list($hour,$minute,$seconds)=explode(":", $row['HR_Time']);
+			?>
+			{
+			  title: 'Applicant human resource interview',
+              start: new Date(<?php echo $year; ?>,<?php echo $month; ?>-1, <?php echo $day; ?>, <?php echo $hour; ?>, <?php echo $minute; ?>),
+			  allDay: false
+			
+			},
+			<?php
+			}
+		  ?>
            
           ]
         });

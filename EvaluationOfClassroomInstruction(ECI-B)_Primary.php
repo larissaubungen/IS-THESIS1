@@ -33,108 +33,11 @@
 
                 <!--Javascript code to calculate result of radio buttons for evaluation form result-->
     <script type="text/javascript">
-        function DisplayPrice(price){
-            var val1 = 0;
-            for( i = 0; i < document.form1.price.length; i++ ){
-                if( document.form1.price[i].checked == true ){
-                    val1 = document.form1.price[i].value;
-                }
-            }
-
-            var val2 = 0;
-            for( i = 0; i < document.form2.price2.length; i++ ){
-                if( document.form2.price2[i].checked == true ){
-                    val2 = document.form2.price2[i].value;
-                }
-            }
-
-            var val3 = 0;
-            for( i = 0; i < document.form3.price3.length; i++ ){
-                if( document.form3.price3[i].checked == true ){
-                    val3 = document.form3.price3[i].value;
-                }
-            }
-
-
-            var val4 = 0;
-            for( i = 0; i < document.form4.price4.length; i++ ){
-                if( document.form4.price4[i].checked == true ){
-                    val4 = document.form4.price4[i].value;
-                }
-            }
-
-
-            var val5 = 0;
-            for( i = 0; i < document.form5.price5.length; i++ ){
-                if( document.form5.price5[i].checked == true ){
-                    val5 = document.form5.price5[i].value;
-                }
-            }
-
-
-            var val6 = 0;
-            for( i = 0; i < document.form6.price6.length; i++ ){
-                if( document.form6.price6[i].checked == true ){
-                    val6 = document.form6.price6[i].value;
-                }
-            }
-
-            var val7 = 0;
-            for( i = 0; i < document.form7.price7.length; i++ ){
-                if( document.form7.price7[i].checked == true ){
-                    val7 = document.form7.price7[i].value;
-                }
-            }
-
-            var val8 = 0;
-            for( i = 0; i < document.form8.price8.length; i++ ){
-                if( document.form8.price8[i].checked == true ){
-                    val8 = document.form8.price8[i].value;
-                }
-            }
-
-            var val9 = 0;
-            for( i = 0; i < document.form9.price9.length; i++ ){
-                if( document.form9.price9[i].checked == true ){
-                    val9 = document.form9.price9[i].value;
-                }
-            }
-
-            var val10 = 0;
-            for( i = 0; i < document.form10.price10.length; i++ ){
-                if( document.form10.price10[i].checked == true ){
-                    val10 = document.form10.price10[i].value;
-                }
-            }
-
-            var val11 = 0;
-            for( i = 0; i < document.form11.price11.length; i++ ){
-                if( document.form11.price11[i].checked == true ){
-                    val11 = document.form11.price11[i].value;
-                }
-            }
-
-
-
-
-            var sum=(parseInt(val1) + parseInt(val2) + parseInt(val3) + parseInt(val4)
-                    + parseInt(val5) + parseInt(val6) + parseInt(val7) + parseInt(val8)
-                    + parseInt(val9) + parseInt(val10) +  parseInt(val11)) / 11 ;
-            document.getElementById('totalSum').value= Math.round(sum);
-
-            if (sum >= 4.85 && sum <= 5) {
-                     document.getElementById('equivalent').value="Outstanding";
-                } else if (sum >= 4.21 && sum <= 4.84) {
-                    document.getElementById('equivalent').value="Very Satisfactory";
-                } else if (sum >= 3.50 && sum <= 4.20) {
-                    document.getElementById('equivalent').value="Satisfactory";
-                } else if (sum >= 2.50 && sum <= 3.49) {
-                     document.getElementById('equivalent').value="Fair";
-                } else if (sum >= 1.00 && sum <= 2.49) {
-                     document.getElementById('equivalent').value="Unsatisfactory";
-                }
-
-        }
+        function target_popup(form) {
+			window.open('', 'formpopup', 'width=200,height=200,resizeable,scrollbars');
+			form.target = 'formpopup';
+		}
+            
     </script>
       <!--Javascript code to calculate result of radio buttons for evaluation form result-->   
     </head>
@@ -162,7 +65,7 @@
         </ul>
             <form class="navbar-search pull-right">
               <input type="text" class="search-query" placeholder="Search">
-            </form>
+            
           </div>
           <!--/.nav-collapse --> 
         </div>
@@ -186,6 +89,7 @@
     <div class="well" align="center">
     <h4>Evaluation of Classroom Instruction(ECI-B) for Primary Students</h4>
     <br>
+		<form action="SubmitEvalECIBPrimary.php" method="POST" onsubmit="target_popup(this)">
         <h5>Name of Teacher:</h5>
         <input type="text" placeholder="Name of Teacher">
         <h5>Level/Section:</h5>
@@ -236,115 +140,115 @@
                         <td> <br> <h4>A. TEACHER</h4> <br> 
 
                             1. Has good posture and is well groomed  </td>
-                    <form name="form1" id="form1" runat="server">
-                       <td><input id="rdo_1" type="radio" value="1" name="price" onclick="DisplayPrice(this.value);"> 1&nbsp</td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price" onclick="DisplayPrice(this.value);"> 2&nbsp&nbsp&nbsp&nbsp</td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price" onclick="DisplayPrice(this.value);"> 3&nbsp&nbsp&nbsp&nbsp</td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price" onclick="DisplayPrice(this.value);"> 4&nbsp&nbsp&nbsp&nbsp</td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price" onclick="DisplayPrice(this.value);"> 5&nbsp&nbsp&nbsp&nbsp</td>
+                    
+                       <td><input id="rdo_1" type="radio" value="1" name="1" > 1&nbsp</td>
+                        <td><input id="rdo_2" type="radio" value="2" name="1" > 2&nbsp&nbsp&nbsp&nbsp</td>
+                        <td><input id="rdo_3" type="radio" value="3" name="1" > 3&nbsp&nbsp&nbsp&nbsp</td>
+                        <td><input id="rdo_4" type="radio" value="4" name="1" > 4&nbsp&nbsp&nbsp&nbsp</td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="1" > 5&nbsp&nbsp&nbsp&nbsp</td>
 
-                  </form>
+                  
                   </tr>
                   <tr>
                         <td> 2. Speaks clearly and correctly </td>
-                    <form name="form2" id="form2" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price2" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price2" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price2" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price2" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price2" onclick="DisplayPrice(this.value);"> 5<br></td>
-                   </form>
+                    
+                        <td><input id="rdo_1" type="radio" value="1" name="2" > 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="2" > 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="2" > 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="2" > 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="2" > 5<br></td>
+                   
                   </tr>
                   <tr>
                         <td> 3. Has a well modulated voice (not too loud nor too soft) </td>
-                    <form name="form3" id="form3" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price3" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price3" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price3" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price3" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price3" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>
+                    
+                        <td><input id="rdo_1" type="radio" value="1" name="3" > 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="3" > 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="3" > 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="3" > 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="3" > 5<br></td>
+                  
                   </tr>
                   <tr>
                         <td> 4. Comes to class on time </td>
-                  <form name="form4" id="form4" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price4" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price4" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price4" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price4" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price4" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>
+                  
+                        <td><input id="rdo_1" type="radio" value="1" name="4" > 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="4" > 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="4" > 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="4" > 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="4" > 5<br></td>
+                  
                   </tr>
                   <tr>
                         <td> 5. Knows what he/she teaches </td>
-                  <form name="form5" id="form5" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price5" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price5" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price5" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price5" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price5" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>
+                  
+                        <td><input id="rdo_1" type="radio" value="1" name="5" > 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="5" > 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="5" > 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="5" > 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="5" > 5<br></td>
+                  
                   </tr>
                   <tr>
                         <td> 6. Makes lessons easy to understand </td>
-                  <form name="form6" id="form6" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price6" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price6" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price6" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price6" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price6" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>
+                  
+                        <td><input id="rdo_1" type="radio" value="1" name="6" > 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="6" > 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="6" > 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="6" > 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="6" > 5<br></td>
+                  
                   </tr>
                   <tr>
                         <td> 7. Checks that the classroom is clean and orderly </td>
-                  <form name="form7" id="form7" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price7" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price7" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price7" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price7" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price7" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>
+                  
+                        <td><input id="rdo_1" type="radio" value="1" name="7" > 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="7" > 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="7" > 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="7" > 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="7" > 5<br></td>
+                  
                   </tr>
                   <tr>
                         <td> 8. Talks about daily life and what is happening in our surroundings </td>
-                  <form name="form8" id="form8" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price8" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price8" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price8" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price8" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price8" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>>
+                  
+                        <td><input id="rdo_1" type="radio" value="1" name="8" > 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="8" > 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="8" > 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="8" > 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="8" > 5<br></td>
+                  
                   </tr>
                     <tr>
                         <td> <br> <h4>B. LEARNING AIDS (audio-video tapes, computers, maps, pictures, chalk/whiteboard, etc.)</h4> <br> 
                            1. Are interesting and well prepared </td>
-                  <form name="form9" id="form9" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price9" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price9" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price9" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price9" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price9" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>
+                  
+                        <td><input id="rdo_1" type="radio" value="1" name="9" > 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="9" > 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="9" > 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="9" > 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="9" > 5<br></td>
+                  
                   </tr>
                     <tr>
                         <td> 2. Are used well </td>
-                   <form name="form10" id="form10" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price10" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price10" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price10" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price10" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price10" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>
+                  
+                        <td><input id="rdo_1" type="radio" value="1" name="10" > 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="10" > 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="10" > 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="10" > 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="10" > 5<br></td>
+                  
                   </tr>
                     <tr>
                         <td> 3. Are of different kinds </td>
-                  <form name="form11" id="form11" runat="server">
-                        <td><input id="rdo_1" type="radio" value="1" name="price11" onclick="DisplayPrice(this.value);"> 1<br></td>
-                        <td><input id="rdo_2" type="radio" value="2" name="price11" onclick="DisplayPrice(this.value);"> 2<br></td>
-                        <td><input id="rdo_3" type="radio" value="3" name="price11" onclick="DisplayPrice(this.value);"> 3<br></td>
-                        <td><input id="rdo_4" type="radio" value="4" name="price11" onclick="DisplayPrice(this.value);"> 4<br></td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="price11" onclick="DisplayPrice(this.value);"> 5<br></td>
-                  </form>
+                  
+                        <td><input id="rdo_1" type="radio" value="1" name="11" > 1<br></td>
+                        <td><input id="rdo_2" type="radio" value="2" name="11" > 2<br></td>
+                        <td><input id="rdo_3" type="radio" value="3" name="11" > 3<br></td>
+                        <td><input id="rdo_4" type="radio" value="4" name="11" > 4<br></td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="11" > 5<br></td>
+                  
                   </tr>
              
                  
@@ -353,24 +257,22 @@
 
         <br><br>
             <center>
-                <form action="/html/tags/html_form_tag_action.cfm" method="post">
+                
                 Comments:<br />
                 <textarea name="comments" id="comments">
                 
                 </textarea><br />
               
-                </form>
+                
             </center>
 
         <br><br>
         <center>
-         Rating: <input type="text" name="totalSum" id="totalSum" value="" size="11" readonly="readonly">
-         Equivalent: <input type="text" name="equivalent" id="equivalent" value=""  readonly="readonly">
         </center>
         <br>
 
             <input type="submit" value="submit">
-            
+        </form>    
     
 </body>
 </html>
