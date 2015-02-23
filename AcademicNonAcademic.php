@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>Academic Non-Teaching & Non-Academic Personnel</title>
+    <title>Academic Non-Teaching and Non-Academic Personnel</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 
@@ -97,7 +97,7 @@
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li class="active"><a href="index.html"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
+        <li class="active"><a href="HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
         <li><a href="EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
         
         <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
@@ -129,78 +129,38 @@
     <div class="row">
         <div class="span12">
             <ul class="thumbnails">
-                <li class="span5 clearfix">
-                  <div class="thumbnail clearfix">
-                    <img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-                    <div class="caption" class="pull-left">
-                      <a href="http://bootsnipp.com/" class="btn btn-primary icon  pull-right">Select</a>
-                      <h4>      
-                      <a href="#" >Luis Felipe Kaufmann</a>
-                      </h4>
-                      <small><b>RG: </b>99384877</small>  
-                    </div>
-                  </div>
-                </li>
-                  <li class="span5 clearfix">
-                  <div class="thumbnail clearfix">
-                    <img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-                    <div class="caption" class="pull-left">
-                      <a href="http://bootsnipp.com/" class="btn btn-primary icon  pull-right">Select</a>
-                      <h4>      
-                      <a href="#" >Luis Felipe Kaufmann</a>
-                      </h4>
-                      <small><b>RG: </b>99384877</small>  
-                    </div>
-                  </div>
-                </li>
-                  <li class="span5 clearfix">
-                  <div class="thumbnail clearfix">
-                    <img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-                    <div class="caption" class="pull-left">
-                      <a href="http://bootsnipp.com/" class="btn btn-primary icon  pull-right">Select</a>
-                      <h4>      
-                      <a href="#" >Luis Felipe Kaufmann</a>
-                      </h4>
-                      <small><b>RG: </b>99384877</small>  
-                    </div>
-                  </div>
-                </li>
-                  <li class="span5 clearfix">
-                  <div class="thumbnail clearfix">
-                    <img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-                    <div class="caption" class="pull-left">
-                      <a href="http://bootsnipp.com/" class="btn btn-primary icon  pull-right">Select</a>
-                      <h4>      
-                      <a href="#" >Luis Felipe Kaufmann</a>
-                      </h4>
-                      <small><b>RG: </b>99384877</small>     
-                    </div>
-                  </div>
-                </li>
-                  <li class="span5 clearfix">
-                  <div class="thumbnail clearfix">
-                    <img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-                    <div class="caption" class="pull-left">
-                      <a href="http://bootsnipp.com/" class="btn btn-primary icon  pull-right">Select</a>
-                      <h4>      
-                      <a href="#" >Luis Felipe Kaufmann</a>
-                      </h4>
-                      <small><b>RG: </b>99384877</small>
-                    </div>
-                  </div>
-                </li>
-                  <li class="span5 clearfix">
-                  <div class="thumbnail clearfix">
-                    <img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-                    <div class="caption" class="pull-left">
-                      <a href="http://bootsnipp.com/" class="btn btn-primary icon  pull-right">Select</a>
-                      <h4>      
-                      <a href="#" >Luis Felipe Kaufmann</a>
-                      </h4>
-                      <small><b>RG: </b>99384877</small>
-                    </div>
-                  </div>
-                </li>
+        <?php
+        mysql_connect("localhost", "root", "")
+        or die(mysql_error());
+        mysql_select_db("lbas_hr") 
+        or die(mysql_error());
+        
+            $result = mysql_query("
+            SELECT  F_Name, L_Name, ID_No
+            FROM person 
+            WHERE E_Status = 'Employee' AND Department = 'Non-Academic'  
+            "); 
+        
+        while($row = mysql_fetch_array($result)){
+
+        $idNumber = $row["ID_No"]; 
+                  echo '<li class="span5 clearfix">';
+          echo '<div class="thumbnail clearfix">';
+          echo '<img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style="margin-right:10px">';
+            echo '<div class="caption" class="pull-left">';
+              echo'<form action="AcademicNonAcademicProfile.php" method= "POST">';
+              echo "<input type='hidden' name='id' value='$idNumber'/>";
+              echo '<input type= "submit" class="btn btn-primary icon  pull-right" value="Select">';
+              echo '</form>';
+            echo '<h4>';      
+              echo '<a href="#" >'. $row["F_Name"] . " " . $row["L_Name"] .'</a>';
+            echo '</h4>';
+            echo '<small><b>ID Number: </b>'. $row["ID_No"] .'</small>';
+                    echo'</div>';
+                  echo'</div>';
+                echo'</li>';
+        }
+        ?>
             </ul>
         </div>
     </div>

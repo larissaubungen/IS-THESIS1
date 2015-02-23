@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>Administrators</title>
+    <title>Academic Teaching Personnel</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 
@@ -133,10 +133,37 @@
     <div class="row">
         <div class="col-sm-10">
 
-             <h1 class="">Employee</h1>
+        <?php
+                
+                 $idNo = $_POST['id'];
+
+                    mysql_connect("localhost", "root", "")
+                    or die(mysql_error());
+                    mysql_select_db("lbas_hr") 
+                    or die(mysql_error());
+                    
+                        $result = mysql_query("
+                                    SELECT  F_Name, L_Name, M_Name, E_Position1, E_Position2, B_Day, Gender, C_Status, E_Status 
+                                    FROM person
+                                    WHERE person.ID_No = '$idNo' AND E_Status = 'Employee' AND Department = 'Faculty' 
+                                    "); 
+                    
+                    while($row = mysql_fetch_array($result)){
+                            $firstName = $row["F_Name"];
+                            $middleName = $row["M_Name"];
+                            $lastName = $row["L_Name"];
+                            $position1 = $row["E_Position1"];
+                            $position2 = $row["E_Position2"];
+                            $birthday = $row["B_Day"];
+                            $gender = $row['Gender'];
+                            $civilStatus = $row["C_Status"];
+
+
+
+    echo '<h1 class="">' .$row['F_Name'] . " " . $row['M_Name'] . "." . " " . $row['L_Name'] . '</h1>
          <br><br>
           <button type="button" class="btn btn-info">Send a message</button>
-<br>
+                <br>
         </div>
       <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.lagunabelairschool.com.ph/images/danenberg.jpg"></a>
 
@@ -146,35 +173,18 @@
     <div class="row">
         <div class="col-sm-3">
             <!--left col-->
-            <ul class="list-group">
+            <ul class="list-group">';
 
-                 <?php
-        mysql_connect("localhost", "root", "")
-        or die(mysql_error());
-        mysql_select_db("lbas_hr") 
-        or die(mysql_error());
-        
-            $result = mysql_query("
-            SELECT  F_Name, L_Name, ID_No
-            FROM person 
-            WHERE E_Status = 'Applicant'  
-            "); 
-        
-        while($row = mysql_fetch_array($result)){
-            echo $row['F_Name'];
-        
-
-
-
-
-
-          //      <li class="list-group-item text-muted" contenteditable="false">Profile</li>
-            //    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Employed since:</strong></span> 1998</li>
              
-                    echo '<li class="list-group-item text-right">' . $row['F_Name']. '</li>';
-              //<li class="list-group-item text-right"><span class="pull-left"><strong class="">Position: </strong></span> Directress
-               
-                //      </li>
+
+
+
+
+          echo  '<li class="list-group-item text-muted" contenteditable="false">Profile</li>';
+          echo '<li class="list-group-item text-right"><span class="pull-left"><strong class="">Full Name:</strong></span>' . $row['F_Name'] . " " . $row['M_Name'] . "." . " " . $row['L_Name'] . '</li>';
+          echo '<li class="list-group-item text-right"><span class="pull-left"><strong class="">Employed since:</strong></span> 1998</li>';
+
+          echo '<li class="list-group-item text-left"><span class="pull-left"><strong class="">Position/s:</strong></span>' . '<br> <br>' . $row['E_Position1'] . '<br> <br>' .  $row['E_Position2'] . '</li>';
                  }
         ?>
 
@@ -190,6 +200,10 @@
 
                 </div>
             </div>
+
+
+
+            
             <div class="panel panel-default">
                 <div class="panel-heading">Dont know yet <i class="fa fa-link fa-1x"></i>
 
@@ -220,15 +234,21 @@
         <div class="col-sm-9" contenteditable="false" style="">
             <div class="panel panel-default">
               <ul class="nav nav-tabs">
-                <li role="presentation" class="active"><a href="#">Home</a></li>
-                <li role="presentation"><a href="#">Profile</a></li>
+                
+                <li role="presentation" class="active"><a href="#">Profile</a></li>
                 <li role="presentation"><a href="#">Records</a></li>
               </ul> 
 
-                <div class="panel-heading">Bio</div>
-                <div class="panel-body"> Descriptions.
+                <div class="panel-body">
+
+
+
+
 
                 </div>
+            
+
+
             </div>
             <div class="panel panel-default target">
                 <div class="panel-heading" contenteditable="false">Dont know yet</div>

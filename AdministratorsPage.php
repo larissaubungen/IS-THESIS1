@@ -142,11 +142,16 @@
             "); 
         
         while($row = mysql_fetch_array($result)){
+
+        $idNumber = $row["ID_No"]; 
                   echo '<li class="span5 clearfix">';
           echo '<div class="thumbnail clearfix">';
           echo '<img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style="margin-right:10px">';
             echo '<div class="caption" class="pull-left">';
-              echo '<a href="EmployeeProfile.php" class="btn btn-primary icon  pull-right">Select</a>';
+              echo'<form action="AdminProfile.php" method= "POST">';
+              echo "<input type='hidden' name='id' value='$idNumber'/>";
+              echo '<input type= "submit" class="btn btn-primary icon  pull-right" value="Select">';
+              echo '</form>';
             echo '<h4>';      
               echo '<a href="#" >'. $row["F_Name"] . " " . $row["L_Name"] .'</a>';
             echo '</h4>';

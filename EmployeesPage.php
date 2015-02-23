@@ -24,19 +24,16 @@
                     class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">LBASS Human Resource Information System </a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
-      
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Settings</a></li>
-              <li><a href="javascript:;">Help</a></li>
-            </ul>
-          </li>
+    
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                             class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="javascript:;">Profile</a></li>
               <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
             </ul>
           </li>
+
+
+
         </ul>
         <form class="navbar-search pull-right">
           <input type="text" class="search-query" placeholder="Search">
@@ -53,16 +50,18 @@
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li ><a href="http://localhost/IS-THESIS1/HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
-        <li class="active"><a href="http://localhost/IS-THESIS1/EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
+        <li><a href="http://localhost/IS-THESIS1/HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
+        <li  class="active"><a href="http://localhost/IS-THESIS1/EmployeesPage.php"><i class="icon-group"></i><span>Employees</span> </a> </li>
         
-        <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
+        <li><a href="ReportsPage.php"><i class="icon-signal"></i><span>Reports</span> </a> </li>
         <li><a href="AttendancePage.php"><i class="icon-table"></i><span>Attendance</span> </a></li>
-        <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
-        <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
-        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
+        <li><a href="HR_Resignation.php"><i class="icon-list"></i><span>Requests</span></a></li>
+        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i><span>Employee Applications</span> <b class="caret"></b></a>
           <ul class="dropdown-menu">
+            
+            <li><a href="http://localhost/IS-THESIS1/ListOfApplicant.php">View Current Applicants</a></li>
             <li><a href="http://localhost/IS-THESIS1/Signup.php">Add Applicant</a></li>
+
           </ul>
         </li>
       </ul>
