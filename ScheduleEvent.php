@@ -8,6 +8,9 @@
 <input type=button onClick="location='interviewlist.php'" value='Schedule Interview'>
 <br><br>
 
+<input type=button onClick="location='TeachingDemoList.php'" value='Schedule a teaching demo'>
+
+<br><br>
 <input type=button onClick="location='TestList.php'" value='Schedule a testing date'>
 <br><br>
 

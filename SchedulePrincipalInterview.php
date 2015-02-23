@@ -117,6 +117,6 @@ Hr Interview: <input type="text" value="<?php echo $principal_Date ?>" id="princ
 			  <input id="time1" value="<?php echo $principal_Time1?>" name="principalTime" required/></br>
 			  <textarea rows="4" cols="50" name="comments" placeholder="Comments"></textarea></br>
 <input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
-<input type='submit' value='Submit' class='Log' name='schedule'>;
+<input type='submit' value='Submit' class='Log' name='schedule'>
 </body>
 </html>

@@ -1,10 +1,10 @@
-	<?php
+<?php
 error_reporting(0);
 if($_POST['schedule'] == "Submit")
 {
 ?>
 <script type="text/javascript">
-function hrAlert (){
+function teachingAlert (){
 	alert("There is someone else scheduled at your HR interview ");
 	
 }
@@ -15,12 +15,11 @@ function successfulAlert (){
 
 <?php
 	
-	$hr_Date=$_POST['hrInterview'];
-	$hr_Time1=$_POST['hrTime'];
-	$hr_Comments=$_POST['comments'];
+	$teaching_Date=$_POST['teachingInterview'];
+	$teaching_Time1=$_POST['teachingTime'];
+	$teaching_Comments=$_POST['comments'];
 	$ID_No = $_POST['id'];
 	$Status= 'Pending';
-	$Status2 = 'TBD';
 
 
 	mysql_connect("localhost", "root", "")
@@ -30,53 +29,37 @@ function successfulAlert (){
 		or die(mysql_error());
 
 	
-	function getRandomString($length = 10) {
-		$validCharacters = "1234567890";
-		$validCharNumber = strlen($validCharacters);
-			 
-		$result = "";
-			 
-		for ($i = 0; $i < $length; $i++) {
-		$index = mt_rand(0, $validCharNumber - 1);
-		$result .= $validCharacters[$index];
-		}
-			 
-			return $result;
-		}
 		
-	$hr_Date=$_POST['hrInterview'];
-	$hr_Time1=$_POST['hrTime'];
+	$teaching_Date=$_POST['teachingInterview'];
+	$teaching_Time1=$_POST['teachingTime'];
 	
 	
-	$hr_Time = date('H:i:s', strtotime($hr_Time1));
+	$teaching_Time = date('H:i:s', strtotime($teaching_Time1));
 
 			
-	$Schedule_ID=getRandomString();
 	
 	$sameTime1=mysql_query("
 	SELECT Schedule_ID 
 	FROM applicant_schedule
-	where HR_Time = '$hr_Time' and HR_Date = '$hr_Date'
+	where Teaching_Time = '$teaching_Time' and Teaching_Date = '$teaching_Date'
 	");
 	
-	if($hrTime > 0){
-		echo"hrAlert();";
+	if($teachingTime > 0){
+		echo"teachingAlert();";
 	}else{
 	
-	$insert="INSERT INTO applicant_schedule (Schedule_ID, ID_No, HR_Date, HR_Time, HR_Status, HR_Comments, Test_Status, Coordinator_Status, Teaching_Status, Principal_Status)
-			 VALUES('". $Schedule_ID ."', '". $ID_No ."', '". $hr_Date ."', '". $hr_Time ."', '". $Status ."', '". $hr_Comments ."', '". $Status2 ."', '". $Status2 ."', '". $Status2 ."', '". $Status2 ."' )";
 	
-	$update = "UPDATE person 
-			   SET Schedule_ID = '".$Schedule_ID."'
+	$sql = "UPDATE applicant_schedule 
+			   SET Teaching_Time = '".$teaching_Time."',
+				   Teaching_Date = '".$teaching_Date."',
+				   Teaching_Status = '".$Status."',
+				   Teaching_Comments = '".$teaching_Comments."'
 			   WHERE ID_No='".$ID_No."'";
 	
-	$result=mysql_query($insert);
-	$result2=mysql_query($update);
-	
+	$result=mysql_query($sql);
 			//condition that check if inserting is successful
-			if($result && $result2){
+			if($result){
 				echo"successfulAlert();";
-				//echo 'window.location.href = "listofapplicant.php";';
 			} else {
 				echo "&nbsp Error".mysql_error();
 			}
@@ -102,7 +85,7 @@ function successfulAlert (){
     <script src="content/shared/js/console.js"></script>
  <script>
   $(document).ready(function(){
-    $("#hr").datepicker({
+    $("#teaching").datepicker({
         minDate: "+1D",
         maxDate: "+60D",
         numberOfMonths: 1,
@@ -126,12 +109,12 @@ function successfulAlert (){
 <body>
 <?php
 	$idNo = $_POST['id'];
+	//echo "$idNo";
 	
-	//echo"<input type ='hidden' value='$user' name='id'>";
 ?>
-<form action='ScheduleHRInterview.php' method='post'>
-Hr Interview: <input type="text" value="<?php echo $hr_Date ?>" id="hr" placeholder="Start Date" name="hrInterview" class="selector" />
-			  <input id="time1" value="<?php echo $hr_Time1?>" name="hrTime" required/></br>
+<form action='ScheduleTeaching.php' method='post'>
+Hr Interview: <input type="text" value="<?php echo $teaching_Date ?>" id="teaching" placeholder="Start Date" name="teachingInterview" class="selector" />
+			  <input id="time1" value="<?php echo $teaching_Time1?>" name="teachingTime" required/></br>
 			  <textarea rows="4" cols="50" name="comments" placeholder="Comments"></textarea></br>
 <input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
 <input type='submit' value='Submit' class='Log' name='schedule'>;

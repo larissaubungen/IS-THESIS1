@@ -1,6 +1,6 @@
 <html>
 <?php
-//error_reporting(0);
+error_reporting(0);
 if($_POST['schedule'] == "Submit")
 {
 ?>
@@ -43,7 +43,8 @@ function successfulAlert (){
 			$sql = "UPDATE applicant_schedule 
 				   SET Test_Time = '$test_Time',
 					   Test_Date = '$test_Date',
-					   Test_Comments = '$test_Comments'
+					   Test_Comments = '$test_Comments',
+					   Test_Status = '$Status'
 				   WHERE ID_No='$check'";
 		
 			$result=mysql_query($sql);
@@ -54,6 +55,8 @@ function successfulAlert (){
 				} else {
 					echo "&nbsp Error";
 				}
+				
+		//echo"successfulAlert();";
 		
 		
 		
