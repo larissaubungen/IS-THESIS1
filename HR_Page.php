@@ -115,7 +115,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
                                         class="shortcut-label">Attendance</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Summary of Reports</span> 
                                         <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-group"></i><span class="shortcut-label">Employees</span></a>
 
-                                        <a href="http://localhost/IS-THESIS1/ListOfApplicant.php" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Applicants</span></a>
+                                        <a href="http://localhost/ISTHESIS/ListOfApplicant.php" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Applicants</span></a>
 
 
                                          </div>

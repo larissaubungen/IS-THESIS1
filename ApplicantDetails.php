@@ -1,112 +1,3 @@
-<?php
-error_reporting(0);
-if($_POST['Pass'] == "Select")
-{
-?>
-	<script type="text/javascript">
-	function successful (){
-		alert("The status of the applicant has been changed!");
-		
-	}
-
-<?php
-	$ID_No = $_POST['id'];
-	$hr = $_POST['hr'];
-	$test = $_POST['test'];
-	$teaching = $_POST['teaching'];
-	$coor = $_POST['coor'];
-	$principal = $_POST['principal'];
-	
-	mysql_connect("localhost", "root", "")
-			or die(mysql_error());
-	
-	mysql_select_db("lbas_hr") 
-		or die(mysql_error());
-
-	if(!empty($hr) && empty($test) && empty($teaching) && empty($coor) && empty($principal)){
-		
-		$sql = "UPDATE applicant_schedule 
-			   SET HR_Status = '".$hr."'
-			   WHERE ID_No='".$ID_No."'";
-	
-		$result=mysql_query($sql);
-			//condition that check if inserting is successful
-			if($result){
-				echo"successful();";
-			} else {
-				echo "&nbsp Error".mysql_error();
-			}
-				
-	}else if(empty($hr) && !empty($test) && empty($teaching) && empty($coor) && empty($principal)){
-		
-		$sql = "UPDATE applicant_schedule 
-				SET Test_Status = '".$Test."'
-				WHERE ID_No='".$ID_No."'";
-	
-		$result=mysql_query($sql);
-			//condition that check if inserting is successful
-			if($result){
-				echo"successful();";
-			} else {
-				echo "&nbsp Error".mysql_error();
-			}
-		
-	}else if(empty($hr) && empty($test) && !empty($teaching) && empty($coor) && empty($principal)){
-		
-		$sql = "UPDATE applicant_schedule 
-			   SET Teaching_Status = '".$teaching."'
-			   WHERE ID_No='".$ID_No."'";
-	
-		$result=mysql_query($sql);
-			//condition that check if inserting is successful
-			if($result){
-				echo"successful();";
-			} else {
-				echo "&nbsp Error".mysql_error();
-			}
-		
-		
-	}else if(empty($hr) && empty($test) && empty($teaching) && !empty($coor) && empty($principal)){
-		
-		$sql = "UPDATE applicant_schedule 
-			   SET Coordinator_Status = '".$coor."'
-			   WHERE ID_No='".$ID_No."'";
-	
-		$result=mysql_query($sql);
-			//condition that check if inserting is successful
-			if($result){
-				echo"successful();";
-			} else {
-				echo "&nbsp Error".mysql_error();
-			}
-		
-	}else if(empty($hr) && empty($test) && empty($teaching) && empty($coor) && !empty($principal)){
-		
-		$sql = "UPDATE applicant_schedule 
-			   SET Principal_Status = '".$principal."'
-			   WHERE ID_No='".$ID_No."'";
-	
-		$result=mysql_query($sql);
-			//condition that check if inserting is successful
-			if($result){
-				echo"successful();";
-			} else {
-				echo "&nbsp Error".mysql_error();
-			}
-		
-	}
-
-}
-
-
-?>
-</script>
-
-
-
-
-
-
 <html>
   <head>
     <meta charset="utf-8">
@@ -121,6 +12,14 @@ if($_POST['Pass'] == "Select")
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/pages/dashboard.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="jquery/jquery-ui.css">
+    <link href="content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="dateTimePicker/styles/kendo.common.min.css" rel="stylesheet">
+    <link href="dateTimePicker/styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="dateTimePicker/styles/kendo.default.min.css" rel="stylesheet">
+    <link href="dateTimePicker/styles/kendo.dataviz.min.css" rel="stylesheet">
+    <link href="dateTimePicker/styles/kendo.dataviz.default.min.css" rel="stylesheet">
 
     
            <!-- Placed at the end of the document so the pages load faster --> 
@@ -346,140 +245,27 @@ if($_POST['Pass'] == "Select")
 	
 			
 					$result2 = mysql_query("
-						SELECT  HR_Status, Teaching_Status, Test_Status, Coordinator_Status, Principal_Status
+						SELECT  Schedule_ID
 						FROM applicant_schedule
 						WHERE ID_No = '$idNo'	
 					");	
-					$statusPending = 'Pending';
-					echo '<table id="tfhover" class="tftable" border="1">';
-					echo        '<tr>';
-					echo        '<th>Hiring Process</th>';
-					echo        '<th>Status</th>';
-					echo        '<th>Pass Applicant</th>';
-					
-					while($row = mysql_fetch_array($result2)){
-					echo '<tr>';
-					
-					echo   '<td>' . '<b>HR Interview: </b>' .'</td>';
-					echo   '<td>' .  $row['HR_Status'] .  '</br>' . '</td>';
-					
-						if($row['HR_Status'] == $statusPending){
-						
-						?>
-							<td>
-							<form action="ApplicantDetails.php" method="post">
-							<input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
-							<input type="hidden" name="hr" value="Pass"/>
-							<input type="submit" value="Select" name="Pass"> 
-							</form>
-							</td>
-						<?php
-						
-						}else{
-						?>
-							<td>
-							</td>
-						<?php
-						}
-					echo '</tr>';
-						
-					echo '<tr>';
-					echo   '<td>' . '<b> Teaching demo: </b>' .'</td>';
-					echo   '<td>' .  $row['Teaching_Status'] .  '</br>' . '</td>';
-					
-						if ($row['Teaching_Status'] == $statusPending){ 
-				
-						?>
-							<td>
-							<form action="ApplicantDetails.php" method="post">
-							<input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
-							<input type="hidden" name="teaching" value="Pass"/>
-							<input type="submit" value="Select" name="Pass"> 
-							</form>
-							</td>
-						<?php
-						
-						}else{
-						?>
-							<td>
-							</td>
-						<?php	
-						
-						}
-					echo '</tr>';
-						
-					echo '<tr>';
-					echo   '<td>' . '<b> Test schedule: </b>' .'</td>';
-					echo   '<td>' .  $row['Test_Status'] .  '</br>' . '</td>';	
-						if($row['Test_Status'] == $statusPending){
-						
-						?>
-							<td>
-							<form action="ApplicantDetails.php" method="post">
-							<input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
-							<input type="hidden" name="test" value="Pass"/>
-							<input type="submit" value="Select" name="Pass"> 
-							</form>
-							</td>
-						<?php
-						}else{
-						?>
-							<td>
-							</td>
-						<?php
-						}				
-					echo '</tr>';
-					
-					echo '<tr>';
-					echo   '<td>' . '<b> Coordinator interview schedule: </b>' .'</td>';
-					echo   '<td>' .  $row['Coordinator_Status'] .  '</br>' . '</td>';	
-						if($row['Coordinator_Status'] == $statusPending){
-						
-						?>
-							<td>
-							<form action="ApplicantDetails.php" method="post">
-							<input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
-							<input type="hidden" name="coor" value="Pass"/>
-							<input type="submit" value="Select" name="Pass"> 
-							</form>
-							</td>
-						<?php
-						}else{
-						?>
-							<td>
-							</td>
-						<?php
-						}				
-					echo '</tr>';
-					
-					echo '<tr>';
-					echo   '<td>' . '<b> Principal interview schedule: </b>' .'</td>';
-					echo   '<td>' .  $row['Principal_Status'] .  '</br>' . '</td>';
-						
-						if($row['Principal_Status'] == $statusPending){
-						
-						?>
-							<td>
-							<form action="ApplicantDetails.php" method="post">
-							<input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
-							<input type="hidden" name="principal" value="Pass"/>
-							<input type="submit" value="Select" name="Pass"> 
-							</form>
-							</td>
-						<?php
-						}else{
-						?>
-							<td>
-							</td>
-						<?php
-						}				
-					echo '</tr>';
-					
+					//$scheduleID= $row["Schedule_ID"];
+					if(mysql_num_rows($result2) > 0){
+					?>
+					<form action="ViewApplicantSchedule.php" method="post">
+					<input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
+					<input type="submit" value="View applicant's schedule"> 
+					</form>
+					<?php
+					}else if(mysql_num_rows($result2) == 0){
+					?>
+					<form action="Schedule.php" method="post">
+					<input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
+					<input type="submit" value="Set schedule"> 
+					</form>
+					<?php
 					}
-					
-					
-					echo '</table>';
-									
+				
 				?>
 			</tbody>
 			</table>

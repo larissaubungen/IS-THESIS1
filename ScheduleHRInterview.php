@@ -20,7 +20,6 @@ function successfulAlert (){
 	$hr_Comments=$_POST['comments'];
 	$ID_No = $_POST['id'];
 	$Status= 'Pending';
-	$Status2 = 'TBD';
 
 
 	mysql_connect("localhost", "root", "")
@@ -63,8 +62,8 @@ function successfulAlert (){
 		echo"hrAlert();";
 	}else{
 	
-	$insert="INSERT INTO applicant_schedule (Schedule_ID, ID_No, HR_Date, HR_Time, HR_Status, HR_Comments, Test_Status, Coordinator_Status, Teaching_Status, Principal_Status)
-			 VALUES('". $Schedule_ID ."', '". $ID_No ."', '". $hr_Date ."', '". $hr_Time ."', '". $Status ."', '". $hr_Comments ."', '". $Status2 ."', '". $Status2 ."', '". $Status2 ."', '". $Status2 ."' )";
+	$insert="INSERT INTO applicant_schedule (Schedule_ID, ID_No, HR_Date, HR_Time, HR_Status, HR_Comments)
+			 VALUES('". $Schedule_ID ."', '". $ID_No ."', '". $hr_Date ."', '". $hr_Time ."', '". $Status ."', '". $hr_Comments ."' )";
 	
 	$update = "UPDATE person 
 			   SET Schedule_ID = '".$Schedule_ID."'
