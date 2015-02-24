@@ -189,7 +189,7 @@
                         <td><input type="radio" name="9" value="5"> 5<br></td>
                   </tr>
                     <tr>
-                        <td> 10. Checking students' names in advisory class relatve to Forms 1, 137, and 138 </td>
+                        <td> 10. Checking students' names in advisory class relative to Forms 1, 137, and 138 </td>
                         <td><input type="radio" name="10" value="1"> 1<br></td>
                         <td><input type="radio" name="10" value="2"> 2<br></td>
                         <td><input type="radio" name="10" value="3"> 3<br></td>
