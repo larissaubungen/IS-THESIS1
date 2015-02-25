@@ -21,9 +21,9 @@ proper page
 		WHERE ID_No = '" . $userName . "' 
 		AND P_Word = '" . $userPass . "' 	
 			");
-			
+			//&& is_null($check['Resume']) || $check['Resume'] == 'no'
 		$check=mysql_fetch_array($result);
-		 if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant'  && $check['Resume'] == null || $check['Resume'] == 'no'){
+		 if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant'){
 					header('location:ApplicantResume.php');
 					//start of sessions
 					session_start();
