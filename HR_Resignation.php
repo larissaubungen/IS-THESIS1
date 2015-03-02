@@ -5,8 +5,6 @@
   }
 
 $user=$_SESSION['ID_No'];
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +24,17 @@ $user=$_SESSION['ID_No'];
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+<script>
+  function pop_up(){
+    window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=1076,height=768,directories=no,location=no') 
+    }
+  function openwindow()
+      {
+        window.open("HR_ResignationApprove.php","mywindow","menubar=1,resizable=1,width=500,height=250");
+      }
+</script> 
+
 </head>
 <body>
 <div class="navbar navbar-fixed-top">
@@ -89,7 +98,6 @@ $user=$_SESSION['ID_No'];
       <div class="row">
         <div class="span6">
           
-<<<<<<< HEAD
           <?php
 
            mysql_connect("localhost", "root", "")
@@ -114,13 +122,12 @@ $user=$_SESSION['ID_No'];
           echo '<div class="thumbnail clearfix">';
           echo '<img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style="margin-right:10px">';
           echo '<div class="caption" class="pull-left">';
-          echo'<form action="HR_ResignationApprove.php" method= "POST">';
-          echo "<input type='hidden' name='id' value='$'/>";
-          echo '<input type= "submit" class="btn btn-primary icon  pull-right" value="Approve">';
-          echo '</form>';
+            //echo'<form action="HR_ResignationApprove.php" method= "POST">';
+              echo '<input type= "submit" class="btn btn-primary icon  pull-right" value="Approve" onClick="openwindow();">';
+            //echo '</form>';
           echo '<h4>';      
             echo '<a href="#" >'. $row["F_Name"] . " " . $row["L_Name"] .'</a>';
-            echo '</h4>';
+          echo '</h4>';
           echo '<small><b>ID Number: </b>'. $row["ID_No"] .'</small>';
                     echo'</div>';
                   echo'</div>';
@@ -128,36 +135,8 @@ $user=$_SESSION['ID_No'];
           }
 
           ?>          
-=======
-          <?php 
 
-            $user=$_SESSION['ID_No'];
-
-              mysql_connect("localhost", "root", "")
-              or die(mysql_error());
-              mysql_select_db("lbas_hr") 
-              or die(mysql_error());
-
-            $resign_ID = mysql_query("
-              SELECT resignation.ID_No
-              FROM resignation
-              ")
-
-            $resign_List = mysql_query("
-              SELECT resignation.ID_No, resignation.F_Name, resignation.M_Name, resignation.L_Name
-              FROM resignation
-              WHERE resignation.ID_No = '".$resign_ID."'
-              ")
-              
-            $applicant_list = mysql_query("
-            SELECT  F_Name, L_Name, ID_No
-            FROM person 
-            WHERE E_Status = 'Applicant   
-            "); 
-
-          ?>
-          
->>>>>>> origin/master
+         
         </div>
         <!-- /span6 --> 
       </div>

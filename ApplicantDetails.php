@@ -1,3 +1,12 @@
+<?php 
+	session_start();
+    if (!isset($_SESSION['ID_No'])) {
+    header('Location:login.php');
+	}
+
+	$user=$_SESSION['ID_No'];
+	$applicantID = $_POST['id'];
+	?>
 <html>
   <head>
     <meta charset="utf-8">
@@ -129,144 +138,224 @@
 					mysql_select_db('lbas_hr') 
 						or die(mysql_error());
 						
-						$result = mysql_query("
-						SELECT  *
-						FROM person, resume
-						WHERE person.ID_No = '$idNo'	
-						");	
-						
-					while($row = mysql_fetch_array($result)){
+						 //retrieving details from the person table
+    $applicantDetails = "SELECT `person.L_Name`, `person.F_Name`, `person.M_Name`,
+    						 `person.B_Day`, `person.Gender`, `person.C_Status`,
+    						 `resume.Email`, `resume.M_No`, `resume.T_No`, `resume.Street`, `resume.City`, 
+							 `resume.Province`, `resume.Z_Code`, `resume.C_Status`, `resume.H_School`, 
+							 `resume.HS_Graduated`, `resume.College`, `resume.College_Graduated`, 
+							 `resume.Course`, `resume.Masteral`, `resume.Course2`, `resume.Award1`, 
+							 `resume.Award2`, `resume.Award3`, `resume.Award4`, `resume.Award5`, 
+							 `resume.Org_Aff1`, `resume.Org_Aff2`, `resume.Org_Aff3`, `resume.Org_Aff4`, 
+							 `resume.Org_Aff5`, `resume.T_Skills1`, `resume.T_Skills2`, `resume.T_Skills3`, 
+							 `resume.T_Skills4`, `resume.T_Skills5`, `resume.Experience1`, `resume.Experience2`, 
+							 `resume.Experience3`, `resume.Experience4`, `resume.Experience5`, `resume.ID_No`
+					  FROM `person`, `resume`
+					  WHERE `ID_No` = '".$idNo."'";
+
+	  while($row = mysql_fetch_array($applicantDetails))
+	  {
+	  		$applicantID = $row["ID_No"];
+	  		$lastName = $row["L_Name"];
+	  		$firstName = $row["F_Name"];
+	  		$middleName = $row["M_Name"];
+	  		$bDay = $row["B_Day"];
+	  		$gender = $row["Gender"];
+	  		$civil = $row["C_Status"];
+
+	  		$email = $row["Email"];
+	  		$telNumber = $row["T_No"];
+	  		$street = $row["Street"];
+	  		$city = $row["City"];
+	  		$province = $row["Province"];
+	  		$zip = $row["Z_Code"];
+	  		$highSchool = $row["H_School"];
+	  		$HS_Grad = $row["HS_Graduated"];
+	  		$college = $row["College"];
+	  		$College_Grad = $row["College_Graduated"];
+	  		$degree = $row["Course"];
+	  		$masteral = $row["Masteral"];
+	  		$degree2 = $row["Course2"];
+	  		$award1 = $row["Award1"];
+	  		$award2 = $row["Award2"];
+	  		$award3 = $row["Award3"];
+	  		$award4 = $row["Award4"];
+	  		$award5 = $row["Award5"];
+	  		$org1 = $row["Org_Aff1"];
+	  		$org2 = $row["Org_Aff2"];
+	  		$org3 = $row["Org_Aff3"];
+	  		$org4 = $row["Org_Aff4"];
+	  		$org5 = $row["Org_Aff5"];
+	  		$exp1 = $row["Experience1"];
+	  		$exp2 = $row["Experience2"];
+	  		$exp3 = $row["Experience3"];
+	  		$exp4 = $row["Experience4"];
+	  		$exp5 = $row["Experience5"];
+
+		echo '<div class="container"><!--Panel Heading only-->
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="panel-heading">
+						<h4 class="panel-title">Applicant Resume</h4></div>
+				
+				<div class="panel-body">	   
+				<!--/Panel Heading only-->';
+		echo ' <div class="table-responsive">	<!--Resume Form into table-->';
+		echo ' <table class="table">
+					<thead>
+				<tr>
+					<th>Personal Information</th>
+					<th></th>
+					<th>Contact details</th>
+				</tr>
+				</thead>
+				<tbody>	
+				<tr>
+					<td id="resume-label">First Name: </td>
+					<td>'.$firstName.'</td>
+					<td id="resume-label">E-mail: </td>
+					<td>'.$email.'</td>
+				</tr>	
+				<tr>
+					<td id="resume-label">Last Name:</td>
+					<td>'.$lastName.'</td>
+					<td id="resume-label">Mobile Number: </td>
+					<td>'.$mobNumber.'
+					</td>
+				</tr>
+				<tr>
+					<td id="resume-label">Middle Name:</td>
+					<td>'.$middleName.'</td>
+					<td id="resume-label">Telephone Number: </td>
+					<td>'.$telNumber.'</td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td id="resume-label">Gender:</td>
+					<td>'.$gender.'<br>
+					</td>				
+				</tr>
+				<tr>
+					<td id="resume-label"><br>Civil Status: <br>
+						<label id="lbl_spouse" style="display:none;">Spouse:</label>
+					</td> 
+					<td>'.$civil.'</td>
+				</tr>
+				<tr>
+				<tr>
+					<td id="resume-label"><br>Birthdate:</td>
+					<td>'.$bDay.'</td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td id="resume-label"><br><b>Education</b></td>
+					<td id="resume-label"></td>
+					<td id="resume-label"><br><b>Address</b></td>					
+				</tr>
+				<tr>
+					<td id="resume-label">High School:</td>
+					<td>'.$highSchool.'</td>
+					<td id="resume-label">Street:</td>
+					<td>'.$street.'</td>
+				</tr>
+				<tr>
+					<td id="resume-label">Year Graduated:</td>
+					<td>'.$HS_Grad.'</td>
+					<td id="resume-label">City:</td>
+					<td>'.$city.'</td>
+				</tr>
+				<tr>
+					<td id="resume-label">College/University:</td>
+					<td>'.$college.'</td>
+					<td id="resume-label">Province:</td>
+					<td>'.$province.'</td>
+				</tr>
+				<tr>
+					<td id="resume-label">College Degree:</td>
+					<td>'.$degree.'</td>
+					<td id="resume-label">Zip Code:</td>
+					<td>'.$zip.'</td>					
+				</tr>
+				<tr>
+					<td id="resume-label">Year Graduated:</td>
+					<td>'.$College_Grad.'</td>
+				</tr>	
+				<tr>
+					<td id="resume-label">Masteral Degree:</td>
+					<td>'.$degree2.'</td>
+				</tr>
+				<tr>
+					<td id="resume-label">College/University:</td>
+					<td>'.$masteral.'</td>
+				</tr>
+				<tr>
+					<td id="resume-label"><br><b>Awards</b></td>
+					<td></td>
+					<td id="resume-label"><br><b>Organization(s) Affiliated</b></td>
+				</tr>
+				<tr>
+					<td><textarea readonly>'.$award1.',  '.$award2.'
+								,  '.$award3.',  '.$award4.'
+								,  '.$award5.'
+								 </textarea></td>
+
+					<td></td>
+
+					<td><textarea readonly>'.$org1.', '.$org2.'
+								,'.$org3.', '.$org4.'
+								,'.$org5.'</textarea></td>
+				</tr>	
+				</tr>
+				<tr>
+					<td id="resume-label"><br><b>Experience</b></td>
+					<td></td>
+					<td id="resume-label"><br><b>Specialties and Technical Skills</b></td>
+				</tr>
+				<tr>
+					<td><textarea readonly>'.$exp1.', '.$exp2.'
+								,'.$exp3.', '.$exp4.'
+								,'.$exp5.'</textarea></td>
+					<td></td>
+					<td><textarea readonly>'.$skill1.', '.$skill2.'
+								,'.$skill3.', '.$skill4.'
+								,'.$skill45.'</textarea></td>
+				</tr>
+				</tbody>
+					</table>
+				  	</script>
 					
-					$firstName = $row["F_Name"]; 
-					$email = $row["Email"];
-					$lastName = $row["L_Name"];
-					$mobNumber = $row["M_No"];
-					$telNumber  =$row["T_No"];
-					$gender = $row["Gender"];
-					$highSchool= $row["H_School"];
-					$cStatus= $row["C_Status"];
-					$degree= $row["Course"];
-					$street= $row["Street"];
-					$college= $row["College"];
-					$city = $row["City"];
-					$yearGraduated = $row["Y_Graduated"];
-					$zip = $row["Z_Code"];
-					$awards = $row["Awards"];
-					$previousExperience= $row["P_Position"];
-					$seminarsAttended= $row["S_Attended"];
-					$skills = $row["Specialty"];
-					$seminarsFacilitated = $row["S_Facilitated"];
-					
-					
-					echo'<tr>';
-					echo'<td id="resume-label">First Name: </td>';
-					echo'<td>' . $firstName . '</td>';
-					echo'<td id="resume-label">E-mail: </td>';
-					echo'<td>' . $email . '</td>';
-					echo'</tr>';	
-					echo'<tr>';
-						echo'<td id="resume-label">Last Name:</td>';
-						echo'<td>' . $lastName . '</td>';
-						echo'<td id="resume-label">Mobile Number: </td>:';
-						echo'<td>' . $mobNumber . '</td>';
-					echo'</tr>';
-					echo'<tr>';
-						echo'<td id="resume-label">Middle Name:</td>';
-						echo'<td>';
-							echo'';
-						echo'</td>';
-						echo'<td id="resume-label">Telephone Number: </td>';
-						echo'<td>' . $telNumber . '</td>';
-					echo'</tr>';
-					echo'<tr>';
-						echo'<td id="resume-label">Gender:</td>';
-						echo'<td>' . $gender . '</td>';
-						echo'<td id="resume-label">High School:</td>';
-						echo'<td>' . $highSchool . '</td>';
-					echo'</tr>';
-					echo'<tr>';
-						echo'<td id="resume-label"><br>Civil Status:</td>';
-						echo'<td>' . $cStatus . '</td>';
-						echo'<td id="resume-label">Degree:</td>';
-						echo'<td>' . $degree . '</td>';
-					echo'</tr>';
-					echo'<tr></tr>';
-					echo'<tr>';
-						echo'<td id="resume-label"><br><b>Address</b></td>';
-						echo'<td id="resume-label"></td>';
-						echo'<td id="resume-label"><br><b>Education</b></td>';
-					echo'</tr>';
-					echo'<tr>';
-						echo'<td id="resume-label">Street:</td>';
-						echo'<td>' . $street . '</td>';
-						echo'<td id="resume-label">College/University:</td>';
-						echo'<td>' . $college . '</td>';
-					echo'</tr>';
-					echo'<tr>';
-						echo'<td id="resume-label">City/Province:</td>';
-						echo'<td>' . $city . '</td>';
-						echo'<td id="resume-label">Year Graduated:</td>';
-						echo'<td>' . $yearGraduated . '</td>';
-					echo'</tr>';
-					echo'<tr>';
-						echo'<td id="resume-label">Zip Code:</td>';
-						echo'<td>' . $zip . '</td>';
-						echo'<td id="resume-label">Awards:</td>';
-						echo'<td>';
-							echo'';//awards
-						echo'</td>';
-					echo'</tr>';
-					echo'<tr>';
-						echo'<td id="resume-label"><br><b>Experience</b></td>';
-						echo'<td></td>';
-						echo'<td id="resume-label"><br><b>Skill</b></td>';
-					echo'</tr>';
-					echo'<tr>';
-						echo'<td id="resume-label">Previous Experience (Position, Company):</td>';
-						echo'<td>' . $previousExperience . '</td>';
-						echo'<td id="resume-label">Extra Curricular Actvities</td> <br>';
-						echo'<td>';
-							echo'';
-						echo'</td>';
-					echo'</tr>';
-					echo'<tr>';
-						echo'<td id="resume-label">Seminars Attended(Year, Title):</td>';
-						echo'<td>' . $seminarsAttended . '</td>';
-						echo'<td id="resume-label">Specialties and Technical Skills <br> &nbsp (Year, Title):</td>';
-						echo'<td>' . $skills . '</td>';
-						
-					echo'</tr>';
-					echo'<tr>';
-						echo'<td id="resume-label">Seminars Facilitated(Year, Title)</td>';
-						echo'<td>' . $seminarsFacilitated . '</td>';
-					echo'</tr>';
-					
-			}		
-	
-			
-					$result2 = mysql_query("
+			  </div>
+			</div>
+		</div>
+		</div>
+		</div>';
+
+	  }
+	  		$result2 = mysql_query("
 						SELECT  Schedule_ID
 						FROM applicant_schedule
-						WHERE ID_No = '$idNo'	
-					");	
-					//$scheduleID= $row["Schedule_ID"];
-					if(mysql_num_rows($result2) > 0){
-					?>
-					<form action="ViewApplicantSchedule.php" method="post">
-					<input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
-					<input type="submit" value="View applicant's schedule"> 
-					</form>
-					<?php
-					}else if(mysql_num_rows($result2) == 0){
-					?>
-					<form action="Schedule.php" method="post">
-					<input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
-					<input type="submit" value="Set schedule"> 
-					</form>
-					<?php
-					}
-				
-				?>
+						WHERE ID_No = '$idNo'");
+
+	  		if(mysql_num_rows($result2) > 0)
+	  		{					
+		?>
+			<form action="ViewApplicantSchedule.php" method="post">
+			<input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
+			<input type="submit" value="View applicant's schedule"> 
+			</form>
+		<?php
+			}elseif (mysql_num_rows($result2) == 0) 
+			{
+		?>
+			<form action="Schedule.php" method="post">
+			<input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
+			<input type="submit" value="Set schedule">	
+			</form>
+		<?php
+			}
+		?>
+
+
 			</tbody>
 			</table>
 	  </div>

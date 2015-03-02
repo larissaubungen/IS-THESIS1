@@ -260,49 +260,137 @@
             </div>
         </div>
         <!--/col-3-->
-        <div class="col-sm-9" contenteditable="false" style="">
+         <div class="col-sm-9" contenteditable="false" style="">
             <div class="panel panel-default">
-              <ul class="nav nav-tabs">
-                <li role="presentation" class="active"><a href="#">Profile</a></li>
-                <li role="presentation"><a href="#2">Records</a></li>
-              </ul> 
-
-                <div class="panel-body"> 
-
-                <?php
-                    echo '<center>';
-                    echo '<table>';
-                        echo '<table style="width:50%">';
-                              
-                              echo '<tr>';
-                                echo '<td><strong>Full Name</td>';
-                                echo '<td>'  . $firstName . ' ' . $middleName . '.' . ' '. $lastName .   '</td>';      
-                              echo '</tr>';
-                              echo '<tr>';
-                                echo '<td><strong>Birthday</td>';
-                                echo '<td>' . $birthday . '</td>';
-                              echo '</tr>';
-                              echo '<tr>';
-                                echo '<td><strong>Gender</td>';
-                                echo '<td>' . $gender . '</td>';
-                              echo '</tr>';
-                              echo '<tr>';
-                                echo '<td><strong>Civil Status</td>';
-                                echo '<td>' . $cStatus . '</td>';
-                              echo '</tr>';
-                        echo '</table>';
-                        echo '</center>';
 
 
+                    <link type="text/css" rel="stylesheet" href="http://onlinehtmltools.com/tab-generator/skins/skin4/top.css"></script>
+
+                    <div class="tabs_holder">
+                     <ul>
+                      <li><a href="#your-tab-id-1">Profile</a></li>
+                      <li class="tab_selected"><a href="#your-tab-id-2">Records</a></li>
+                     </ul>
+                     <div class="content_holder">
+                      <div id="your-tab-id-1">
+                        
+
+                            <?php
+                                
+                                echo '<div id="profile">';
+                                echo '<div class="panel-body">';
+
+                                
+                                    echo '<center>';
+                                    echo '<table>';
+                                        echo '<table style="width:50%">';
+                                              
+                                              echo '<tr>';
+                                                echo '<td><strong>Full Name</td>';
+                                                echo '<td>'  . $firstName . ' ' . $middleName . '.' . ' '. $lastName .   '</td>';      
+                                              echo '</tr>';
+                                              echo '<tr>';
+                                                echo '<td><strong>Birthday</td>';
+                                                echo '<td>' . $birthday . '</td>';
+                                              echo '</tr>';
+                                              echo '<tr>';
+                                                echo '<td><strong>Gender</td>';
+                                                echo '<td>' . $gender . '</td>';
+                                              echo '</tr>';
+                                              echo '<tr>';
+                                                echo '<td><strong>Civil Status</td>';
+                                                echo '<td>' . $cStatus . '</td>';
+                                              echo '</tr>';
+                                        echo '</table>';
+                                        echo '</center>';
+
+                                echo '</div>';
 
 
-                echo '</div>
-            </div>';
 
-                
+                                echo '</div>
+                            </div>';
+                                
 
-            ?>
+                            ?>
 
+                      </div>
+                      
+
+
+
+
+                      <div id="your-tab-id-2">
+                       
+                        <?php
+                                
+                                echo '<div id="profile">';
+                                echo '<div class="panel-body">';
+
+                                
+
+                                /*
+                                  USED TO FILTER EVALUATION RESULTS FORMS FROM DIFFERENT YEARS
+
+
+                                */
+                                        echo 'Year: <select>
+                                                    <option>2012</option>
+                                                    <option>2012</option>
+                                                    </select>';
+
+
+
+                                    echo '<br>';
+                                    echo '<br>';
+
+                                    echo '<center>';
+                                    echo '<table>';
+                                        echo '<table style="width:80%">';
+                                              
+                                             
+                                              echo '<tr>';
+                                                echo '<td><strong>GPE for Non-Teaching Staff (2-A)</td>';
+                                                echo '<td><a href=" "> See Results </a></td>';
+                                              echo '</tr>';
+
+                                               echo '<tr>';
+                                                echo '<td><strong>GPE for Non-Teaching Staff (2-B)</td>';
+                                                echo '<td><a href=" "> See Results </a></td>';
+                                              echo '</tr>';
+
+                                        echo '</table>';
+                                        echo '</center>';
+
+
+
+                                echo '</div>';
+
+
+
+                                echo '</div>';
+                                
+
+                            ?>
+
+
+
+
+                      </div>
+                     </div><!-- /.content_holder -->
+                    </div><!-- /.tabs_holder -->
+
+                    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+                    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
+                    <script type="text/javascript" src="http://onlinehtmltools.com/tab-generator/skinable_tabs.min.js"></script>
+                    
+                    <script type="text/javascript">
+                      $('.tabs_holder').skinableTabs({
+                        effect: 'basic_display',
+                        skin: 'skin4',
+                        position: 'top'
+                      });
+                    </script>
 
 
 
