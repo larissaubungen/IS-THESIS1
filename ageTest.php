@@ -5,40 +5,27 @@
         or die(mysql_error());
         
             $result = mysql_query("
-            SELECT  F_Name, L_Name, ID_No, B_Day
+            SELECT  F_Name, L_Name, ID_No, Department, TIMESTAMPDIFF(YEAR,B_Day,CURDATE()) AS age
             FROM person
-            WHERE ID_No like 'Admin' 
+			where B_Day IS NOT NULL AND TIMESTAMPDIFF(YEAR,B_Day,CURDATE()) > 1
               
             "); 
 
         
         while($row = mysql_fetch_array($result)){
-          $birthday = $row['B_Day'];
-       
-        function age ($birthday)
-          {
-            list($year,$month,$day) = explode("-",$birthday);
-            $year_diff  = date("Y") - $year;
-            $month_diff = date("m") - $month;
-            $day_diff   = date("d") - $day;
+		  $id = $row['ID_No'];
+		  $fName = $row['F_Name'];
+		  $lName = $row['L_Name'];
+		  $department = $row['Department'];
+
+		  echo "$fName $lName $department";
+		  echo "<form action='SelectCandidatesRetirements.php' method='POST'>";	  
+		  echo "<input type ='hidden' value='".$row['ID_No']."' name='id'>";
+		  echo "<input type ='hidden' value='$department' name='department'>";
+		  echo "<input type='submit' value='See candidates for replacement'>";
+		  echo "</form>";
+		  
             
-            if ($month_diff < 0) $year_diff--;
-            elseif (($month_diff==0) && ($day_diff < 0)) $year_diff--;
-            return $year_diff;
-          }
- 
-        echo age($birthday); // age of employee
-
-        if (age($birthday) == 59) {
-          echo "Ready for Retirement next school year";
-
-          echo '<script language="javascript">';
-          echo 'alert("Ready for retirment")';
-          echo '</script>';
-        }
-        
-        // Ung B_day na ung nagserserve as variable para magdisplay ung age.
-
-  
+				
         }
 ?>

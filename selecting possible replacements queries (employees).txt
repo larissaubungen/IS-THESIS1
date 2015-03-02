@@ -1,0 +1,3 @@
+Select person.ID_No, F_Name, L_Name
+from person, eval_gpe_nonteaching_2a, eval_gpe_nonteaching_2b
+where eval_gpe_nonteaching_2a.Result >= 82.00 and eval_gpe_nonteaching_2b.Result >= 82.00 and person.Department = 'HR department' and person.ID_No LIKE eval_gpe_nonteaching_2a.ID_No
