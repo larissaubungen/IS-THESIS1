@@ -7,9 +7,8 @@
 $user=$_SESSION['ID_No'];
 
 	mysql_connect('localhost', 'root', '')
-        or die(mysql_error());
-		
-        mysql_select_db('lbas_hr') 
+        or die(mysql_error());	
+    mysql_select_db('lbas_hr') 
         or die(mysql_error());
 
 
@@ -25,6 +24,7 @@ if($_POST['resume'] == "Submit")
 	$spouseFName = $_POST['spouseFName'];
 	$spouseLName = $_POST['spouseLName'];
 
+	//getting value from the Calendar
 	$birth = array($_POST['date_select2_month'],$_POST['date_select2_day'], $_POST['date_select2_year']);
 	$bDay = implode(" ", $birth);
 	//	$bDay = $_POST['date_select2'];
@@ -41,6 +41,8 @@ if($_POST['resume'] == "Submit")
 	$college = $_POST['college'];
 	$College_Grad = $_POST['College_Grad'];
 	$degree = $_POST['degree'];	
+	$masteral = $_POST['masteral'];
+	$degree2 = $_POST['degree2'];
 	$award1=$_POST['Award1'];
 	$award2=$_POST['Award2'];
 	$award3=$_POST['Award3'];
@@ -61,7 +63,7 @@ if($_POST['resume'] == "Submit")
 	$exp3=$_POST['Exp3'];
 	$exp4=$_POST['Exp4'];
 	$exp5=$_POST['Exp5'];
-	$resume = $_POST["Yes"];
+	$resume = "Yes";
 	
 	if(empty($_POST['lastName']))
 	{
@@ -130,10 +132,8 @@ if($_POST['resume'] == "Submit")
 	if(empty($errorMessage))
 	{
 		header('Location:ApplicantSubmitRes.php');
-	}
-	
-	
-}		
+	}	
+	}		
 ?>
 
 <html>
@@ -153,7 +153,7 @@ if($_POST['resume'] == "Submit")
 
     <link rel="stylesheet" href="jquery/jquery-ui.css">
     <link href="content/shared/styles/examples-offline.css" rel="stylesheet">
-    <!--DatePicker-->
+    	<!--DatePicker-->
     <link rel='stylesheet' type='text/css' media="screen" href='datePicker/datepicker.css' />
 	<script type="text/javascript" src="datePicker/datepicker.js"></script>
 
@@ -201,7 +201,7 @@ if($_POST['resume'] == "Submit")
 		width: 5em;
 	}
   </style>
-  <script type="text/javascript">
+  <script type="text/javascript"> // JavaScript for Awards, Experience, Skills and Organizations
 		  $(document).ready(function() {
 		  	var count = 0;
 	        var count1 = 0;
@@ -438,9 +438,7 @@ if($_POST['resume'] == "Submit")
     <div class="subnavbar">
       <div class="subnavbar-inner">
         <div class="container">
-          <ul class="mainnav">
-            <li><a href="ApplicantPage.php"><i class="icon-home"></i><span>Home</span> </a> </li>
-            <li><a href="ApplicantGuidelines.html"><i class="icon-list-alt"></i><span>Guidelines</span> </a> </li>
+          <ul class="mainnav">          
             <li class="active"><a href="#"><i class="icon-file"></i><span>Resume</span> </a> </li>
           </ul>
         </div>
@@ -458,7 +456,7 @@ if($_POST['resume'] == "Submit")
 
 	  	<form action="ApplicantSubmitRes.php" method="post">
 		
-		  <div class="table-responsive">	<!--Resume Form into table-->
+		 <div class="table-responsive">	<!--Resume Form into table-->
 		 <table class="table"> 
 			<thead>
 				<tr>
@@ -470,61 +468,60 @@ if($_POST['resume'] == "Submit")
 				<tbody>
 
 				<tr>
-					<td id="resume-label">First Name: </td>
+					<td id="resume-label"> First Name: </td>
 					<td>
 						<input type="text" name="firstName" value="<?=$firstName;?>">
 					</td>
-					<td id="resume-label">E-mail: </td>
+					<td id="resume-label"> E-mail: </td>
 					<td>
 						<input type="email" name="email" value="<?=$email;?>"><br>
 					</td>
 				</tr>	
 				<tr>
-					<td id="resume-label">Last Name:</td>
+					<td id="resume-label"> Last Name:</td>
 					<td>						
 						<input type="text" name="lastName" value="<?=$lastName;?>">
 					</td>
-					<td id="resume-label">Mobile Number: </td>
+					<td id="resume-label"> Mobile Number: </td>
 					<td>
 						<input type="text" name="mobNumber" value="<?=$mobNumber;?>"><br>
 					</td>
 				</tr>
 				<tr>
-					<td id="resume-label">Middle Name:</td>
+					<td id="resume-label"> Middle Name:</td>
 					<td>
 						<input type="text" name="middleName" value="<?=$middleName;?>">
 					</td>
-					<td id="resume-label">Telephone Number: </td>
+					<td id="resume-label"> Telephone Number: </td>
 					<td>
 						<input type="text" name="telNumber" value="<?=$telNumber;?>"><br>
 					</td>
 				</tr>
 				<tr></tr>
 				<tr>
-					<td id="resume-label">Gender:</td>
+					<td id="resume-label"> Gender:</td>
 					<td>
-						<input type="radio" name="sex" value="male" checked>Male
-						<input type="radio" name="sex" value="female">Female <br>
+						<input type="radio" name="sex" value="male" checked> Male
+						<input type="radio" name="sex" value="female"> Female <br>
 					</td>
 					
 				</tr>
 				<tr>
-					<td id="resume-label"><br>Civil Status: <br>
-						<label id="lbl_spouse" style="display:none;">Spouse:</label>
+					<td id="resume-label"><br> Civil Status: <br>
+						<label id="lbl_spouse" style="display:none;"> Spouse:</label>
 					</td> 
 					
 					<td>
 
-						<input type="radio" name="status" value="single" checked>Single 
-						<input type="radio" name="status" value="married">Married <br>
-						<input type="radio" name="status" value="divorced">Divorced 
-						<input type="radio" name="status" value="widowed">Widowed <br> <br>						
+						<input type="radio" name="status" value="single" checked> Single 
+						<input type="radio" name="status" value="married"> Married <br>
+						<input type="radio" name="status" value="divorced"> Divorced 
+						<input type="radio" name="status" value="widowed"> Widowed <br> <br>						
 						<input type="text" name="FNspouseName" id="FNspouseName" value="<?=$FNspouseName;?>" placeholder="First Name" style="display:none;"> <br/>
 						<input type="text" name="LNspouseName" id="LNspouseName" value="<?=$LNspouseName;?>" placeholder="Last Name" style="display:none;">					
 					</td>
 				</tr>
 				<tr>
-
 				<tr>
 					<td id="resume-label"><br>Birthdate:</td>
 					<td>
@@ -655,55 +652,71 @@ if($_POST['resume'] == "Submit")
 					
 				</tr>
 				<tr>
-					<td id="resume-label">High School:</td>
+					<td id="resume-label"> High School:</td>
 					<td>
 						<input type="text" name="highSchool" value="<?=$highSchool;?>"><br>
 					</td>
-					<td id="resume-label">Street:</td>
+					<td id="resume-label"> Street:</td>
 					<td>
 
 						<input type="text" name="street" value="<?=$street;?>"> <br>
-
 					</td>
-					
 				</tr>
 				<tr>
-					<td id="resume-label">Year Graduated:</td>
+					<td id="resume-label"> Year Graduated:</td>
 					<td>
 						<input type="text" name="HSyearGraduated" value="<?=$HS_Grad;?>"> <br>
 					</td>
-					<td id="resume-label">City:</td>
+					<td id="resume-label"> City:</td>
 					<td>	
 						<input type="select" name="city" value="<?=$city;?>"> <br>
 					</td>
 				</tr>
 				<tr>
-					<td id="resume-label">College/University:</td>
+					<td id="resume-label"> College/University:</td>
 					<td>
 						<input type="text" name="college" value="<?=$college;?>"> <br>
 					</td>
-					<td id="resume-label">Province:</td>
+					<td id="resume-label"> Province:</td>
 					<td>	
-						<input type="select" name="province" value="<?=$province;?>"> <br>
+						<input type="text" name="province" value="<?=$province;?>"> <br>
 					</td>
 				</tr>
 				<tr>
-					<td id="resume-label">Degree:</td>
+					<td id="resume-label"> College Degree:</td>
 					<td>
 						<input type="text" name="degree" value="<?=$degree;?>"><br>
 					</td>
-					<td id="resume-label">Zip Code:</td>
+					<td id="resume-label"> Zip Code:</td>
 					<td>
 						<input type="text" name="zip" value="<?=$zip;?>"><br>
 					</td>					
 				</tr>
-					<td id="resume-label">Year Graduated:</td>
+				<tr>
+					<td id="resume-label"> Year Graduated:</td>
 					<td>
 						<input type="text" name="College_Grad" value="<?=$College_Grad;?>"> <br>
 					</td>
+					<td></td>
+					<td></td>
+				</tr>	
 				<tr>
-					
+					<td id="resume-label"> College/University for Masteral:</td>
+					<td>
+						<input type="text" name="masteral" value="<?=$masteral;?>">	
+					</td>
+					<td></td>
+					<td></td>
+				</tr>			
+				<tr>
+					<td id="resume-label"> asteral Degree:</td>
+					<td>
+						<input type="text" name="degree2" value="<?=$degree2;?>">	
+					</td>
+					<td></td>
+					<td></td>
 				</tr>
+				
 
 				<tr>
 					<td id="resume-label"><br><b>Awards</b></td>
@@ -765,22 +778,7 @@ if($_POST['resume'] == "Submit")
 						<input type="text" name="extraActivities" value="<?=$extraActivities;?>"><br>
 					</td> -->
 				</tr>
-				<tr><!--
-					<td id="resume-label">Seminars Attended(Year, Title):</td>
-					<td>
-						<input type="text" name="seminarsAttendded" value="<?=$seminarsAttendded;?>"><br>
-					</td> 
-					<td id="resume-label">Specialties and Technical Skills <br> &nbsp (Year, Title):</td>
-					<td>
-						<input type="text" name="skills" value="<?=$skills;?>"><br>
-					</td>
-					
-				</tr>
 				<tr>
-					<td id="resume-label">Seminars Facilitated(Year, Title)</td>
-					<td>
-						<input type="text" name="seminarsFacilitated" value="<?=$seminarsFacilitated;?>"><br>
-					</td>-->
 				</tr>
 				<tr>
 					<td></td>
@@ -790,9 +788,7 @@ if($_POST['resume'] == "Submit")
 					<td><input type='submit' name='resume' value='Submit' /></td>
 					</form>
 					
-				</tr>	
-											
-			
+				</tr>
 			</tbody>
 			</table>
 		  	</script>

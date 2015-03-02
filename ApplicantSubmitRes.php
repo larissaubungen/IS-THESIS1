@@ -17,6 +17,7 @@
 	$spouseFName = $_POST['spouseFName'];
 	$spouseLName = $_POST['spouseLName'];
 
+	//getting value from the Calendar
 	$birth = array($_POST['date_select2_month'],$_POST['date_select2_day'], $_POST['date_select2_year']);
 	$bDay = implode(" ", $birth);
 	//	$bDay = $_POST['date_select2'];
@@ -33,6 +34,8 @@
 	$college = $_POST['college'];
 	$College_Grad = $_POST['College_Grad'];
 	$degree = $_POST['degree'];	
+	$masteral = $_POST['masteral'];
+	$degree2 = $_POST['degree2'];
 	$award1=$_POST['Award1'];
 	$award2=$_POST['Award2'];
 	$award3=$_POST['Award3'];
@@ -53,7 +56,7 @@
 	$exp3=$_POST['Exp3'];
 	$exp4=$_POST['Exp4'];
 	$exp5=$_POST['Exp5'];
-	$resume = $_POST["Yes"];
+	$resume = "Yes";
 
 	?>
 
@@ -103,7 +106,17 @@
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     }
-    </style>
+    #resume-label{
+    	text-indent: .5em;
+    }
+    td {
+    padding: 7px;
+	}
+	input{
+		background-color: rgba(0,0,0,0.1);
+	}
+
+  </style>
 
     <!--main navbar-->
  <div class="navbar navbar-fixed-top">
@@ -165,100 +178,41 @@
         mysql_select_db('lbas_hr') 
         or die(mysql_error());
 
-		$sql = "UPDATE person 
-			SET L_Name = '".$lastName."', 
-				F_Name = '".$firstName."', 
-				M_Name = '".$middleName."',
-				B_Day = '".$bDay."',
-				Resume = '".$resume."',
-				WHERE ID_No ='".$user."'";
+		$updatePerson = "UPDATE person 
+						 SET 	`L_Name` = '".$lastName."', 
+						 		`F_Name` = '".$firstName."', 
+						 		`M_Name` = '".$middleName."',
+						 		`B_Day` = '".$bDay."',
+						 		`Resume` = '".$resume."'
+				 		 WHERE `ID_No` ='".$user."'";
 
-		$sql2 = "INSERT INTO resume(ID_No, Email, M_No, T_No, City, Street, Z_Code, 
-			C_Status, H_School,  HS_Graduated ,  College ,  College_Graduated , 
-			 Course ,  Award1 ,  Award2 ,  Award3 ,  Award4 ,  Award5 , 
-			 Org_Aff1 ,  Org_Aff2 ,  Org_Aff3 ,  Org_Aff4 ,  Org_Aff5 ,  T_Skills1 , 
-			 T_Skills2 ,  T_Skills3 ,  T_Skills4 ,  T_Skills5 ,  Experience1 ,  Experience2 , 
-			 Experience3 ,  Experience4 ,  Experience5 ) 
-				VALUES ('".$user."','".$email."','".$mobNumber."','".$telNumber."',
-					'".$city."','".$street."','".$zip."','".$civil."','".$highSchool."','".$HS_Grad."',
-					'".$college."','".$College_Grad."','".$degree."','".$award1."','".$award2."','".$award3."',
-					'".$award4."','".$award5."','".$org1."','".$org2."','".$org3."','".$org4."',
-					'".$org5."','".$skill1."','".$skill2."','".$skill3."','".$skill4."','".$skill5."',
-					'".$exp1."','".$exp2."','".$exp3."','".$exp4."','".$exp5."')";
-
-/*
-		$sql2 = "INSERT INTO resume
-					 ID_No='".$user."',
-					 Email = '".$email."',
-					 M_No = '".$mobNumber."',
-					 T_No = '".$telNumber."',
-					 City = '".$city."',
-					 Street = '".$street."',
-					 Z_Code = '".$zip."',
-					 C_Status = '".$civil."',
-					 H_School = '".$highSchool."',
-					 College = '".$college."',
-					 Course = '".$degree."',
-					 HS_Graduated = '".$HS_Grad."',
-					 College_Graduated = '".$College_Grad."',
-					 Award1 = '".$award1."',
-					 Award2 = '".$award2."',
-					 Award3 = '".$award3."',
-					 Award4 = '".$award4."',
-					 Award5 = '".$award5."',
-					 Org_Aff1 = '".$org1."',
-					 Org_Aff2 = '".$org2."',
-					 Org_Aff3 = '".$org3."',
-					 Org_Aff4 = '".$org4."',
-					 Org_Aff5 = '".$org5."',
-					 T_Skills1 = '".$skill1."'
-					 T_Skills2 = '".$skill2."'
-					 T_Skills3 = '".$skill3."'
-					 T_Skills4 = '".$skill4."'
-					 T_Skills5 = '".$skill5."'
-					 Experience1 = '".$exp1."',
-					 Experience2 = '".$exp2."',
-					 Experience3 = '".$exp3."',
-					 Experience4 = '".$exp4."',
-					 Experience5 = '".$exp5."'"; */
-
-				 	mysql_query($sql);
-				 	mysql_query($sql2);
+		$updateResume = "INSERT INTO resume
+			(`ID_No`, `Email`, `M_No`, `T_No`, `Street`,`City`, `Province`, `Z_Code`, 
+			`C_Status`, `H_School`, `HS_Graduated`, `College`, `College_Graduated`, 
+			`Course`, `Masteral`, `Course2`, `Award1`, `Award2`, `Award3`, `Award4`, 
+			`Award5`, `Org_Aff1`, `Org_Aff2`, `Org_Aff3`, `Org_Aff4`, `Org_Aff5`, 
+			`T_Skills1`, `T_Skills2`, `T_Skills3`, `T_Skills4`, `T_Skills5`, 
+			`Experience1`, `Experience2`, `Experience3`, `Experience4`, `Experience5`) 
+		VALUES ('".$user."','".$email."','".$mobNumber."','".$telNumber."','".$street."','".$city."','".$province."','".$zip."',
+			'".$civil."','".$highSchool."','".$HS_Grad."','".$college."','".$College_Grad."',
+			'".$degree."', '".$masteral."','".$degree2."','".$award1."','".$award2."','".$award3."',
+			'".$award4."','".$award5."','".$org1."','".$org2."','".$org3."','".$org4."',
+			'".$org5."','".$skill1."','".$skill2."','".$skill3."','".$skill4."','".$skill5."',
+			'".$exp1."','".$exp2."','".$exp3."','".$exp4."','".$exp5."')";
 
 
-        echo ("Your first name is ".$firstName."<br/>");
-        echo ("Your mid name is ".$middleName."<br/>");
-        echo ("Your last name is".$lastName."<br/>");
-        echo ("Your birthdate is".$bDay."<br/>");
-        echo ("Your Spouse's Name is".$spouseLName.", ".$spouseFName."<br/>");
+		$checkUpdate1 = mysql_query($updatePerson);
+		$checkUpdate2 = mysql_query($updateResume);
 
-        echo "Resume";
-        echo ("Your email is".$email."<br/>");   
-        echo ("Your mobile number is".$mobNumber."<br/>");    
-        echo ("Your mobile number is".$telNumber."<br/>"); 
-       	echo ("Street:".$street ."<br/>");
-       	echo ("City: ".$city."<br/>");
-       	echo ("Zip Codesss:".$zip."<br/>");
-       	echo ("HS:".$highSchool."<br/>");
-       	echo ("You graduated in highschool by".$HS_Grad."<br/>");
-       	echo ("College yow: ".$college."<br/>");
-       	echo ("Degree mo bruh:".$degree."<br/>");
-       	echo ("Yead Grad:".$College_Grad."<br/>");
-       	echo ("Awards isa:".$award1."<br/>");
-       	echo ("Awards dalawa:".$award2."<br/>");
-       	echo ("Awards tatlo:".$award3."<br/>");
-       	echo ("Awards apat:".$award4."<br/>");
-       	echo ("Awards lima:".$award5."<br/>");
-       	echo ("Ang skill mo puta:".$skill1."<br/>");
-       	echo ("Ang skill mo puta:".$skill2."<br/>");
-       	echo ("Ang skill mo puta:".$skill3."<br/>");
-       	echo ("Ang skill mo puta:".$skill4."<br/>");
-       	echo ("Ang skill mo puta:".$skill5."<br/>");
-       	echo ("Ang exp mo dung:".$exp1."<br/>");
-       	echo ("Ang exp mo dung:".$exp2."<br/>");
-       	echo ("Ang exp mo dung:".$exp3."<br/>");
-       	echo ("Ang exp mo dung:".$exp4."<br/>");
-       	echo ("Ang exp mo dung:".$exp5."<br/>");
+		//Redirecting to Applicant Page once Resume is submitted
+		if ($checkUpdate1 || $checkUpdate2) { 
+			header('Location:ApplicantPage.php');			
+		 } 
+
+		//Redirecting to SubmitFailed
+		else{
+			header('Location:ApplicantSubmitFailed.php');
+		}
 
 
 	?>
