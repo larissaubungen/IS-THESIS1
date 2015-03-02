@@ -37,6 +37,7 @@ proper page
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
 
@@ -53,6 +54,8 @@ proper page
 					session_start();
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
+=======
+>>>>>>> parent of 4b13d76... Updated pages
 		}else{ header('location:ErrorLogIn.html');
 
 		}

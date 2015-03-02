@@ -1,12 +1,3 @@
-<?php
-    session_start();
-    if (!isset($_SESSION['ID_No'])) {
-    header('Location:LogInPage.php');
-    }
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,21 +29,24 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
                     class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">LBASS Human Resource Information System </a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
-    
+      
+            <ul class="dropdown-menu">
+              <li><a href="javascript:;">Settings</a></li>
+              <li><a href="javascript:;">Help</a></li>
+            </ul>
+          </li>
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                             class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
             <ul class="dropdown-menu">
-<<<<<<< HEAD
+
+              <li><a href="javascript:;">Profile</a></li>
               <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
-=======
+
               <li><a href="javascript:;">Profile</a></li>
               <li><a href="http://localhost/ISTHESIS/logout.php">Logout</a></li>
->>>>>>> origin/master
+
             </ul>
           </li>
-
-
-
         </ul>
         <form class="navbar-search pull-right">
           <input type="text" class="search-query" placeholder="Search">
@@ -69,32 +63,20 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-<<<<<<< HEAD
+
         <li class="active"><a href="http://localhost/IS-THESIS1/HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
-        <li><a href="http://localhost/IS-THESIS1/EmployeesPage.php"><i class="icon-group"></i><span>Employees</span> </a> </li>
+        <li><a href="http://localhost/IS-THESIS1/EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
         
-        <li><a href="ReportsPage.php"><i class="icon-signal"></i><span>Reports</span> </a> </li>
+        <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
         <li><a href="AttendancePage.php"><i class="icon-table"></i><span>Attendance</span> </a></li>
-=======
-        <li class="active"><a href="index.html"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
-        <li><a href="index.html"><i class="icon-user"></i><span>Employees</span> </a> </li>
-        
-        <li><a href="reports.html"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-        <li><a href="guidely.html"><i class="icon-table"></i><span>Attendance</span> </a></li>
-        <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
-        <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
->>>>>>> origin/master
+
         <li><a href="HR_Resignation.php"><i class="icon-list"></i><span>Requests</span></a></li>
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i><span>Employee Applications</span> <b class="caret"></b></a>
           <ul class="dropdown-menu">
-<<<<<<< HEAD
-            
+
             <li><a href="http://localhost/IS-THESIS1/ListOfApplicant.php">View Current Applicants</a></li>
             <li><a href="http://localhost/IS-THESIS1/Signup.php">Add Applicant</a></li>
 
-=======
-            <li><a href="http://localhost/ISTHESIS/Signup.php">Add Applicant</a></li>
->>>>>>> origin/master
           </ul>
         </li>
       </ul>
@@ -133,20 +115,15 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
         <div class="span6">
           <div class="widget">
             <div class="widget-header"> <i class="icon-bookmark"></i>
-              <h3>Shortcuts</h3>
+              <h3>Important Shortcuts</h3>
             </div>
             <!-- /widget-header -->
             <div class="widget-content">
               <div class="shortcuts"> <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-table"></i><span
-<<<<<<< HEAD
                                         class="shortcut-label">Attendance</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Summary of Reports</span> </a>
                                         <a href="EmployeesPage.php" class="shortcut"><i class="shortcut-icon icon-group"></i><span class="shortcut-label">Employees</span></a>
-=======
-                                        class="shortcut-label">Attendance</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Summary of Reports</span> 
-                                        <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-group"></i><span class="shortcut-label">Employees</span></a>
->>>>>>> origin/master
-
-                                        <a href="http://localhost/ISTHESIS/ListOfApplicant.php" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Applicants</span></a>
+                                        </a>
+                                        <a href="http://localhost/IS-THESIS1/ListOfApplicant.php" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Applicants</span></a>
 
 
                                          </div>
@@ -166,18 +143,13 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
             </div>
             <!-- /widget-content --> 
           </div>
-
           <!-- /widget -->
             <!-- /widget-content --> 
           </div>
           <!-- /widget -->
         </div>
 
-         <!-- /widget -->
-
-
-         <!--CHIKKA MESSENGER-->
-          <div class="widget">
+   <div class="widget">
             <div class="widget-header"> <i class="icon-file"></i>
               <h3> Message for Announcments</h3>
             </div>
@@ -190,7 +162,9 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
             </div>
             <!-- /widget-content --> 
           </div>
-          <!-- /widget --> 
+
+
+
         <!-- /span6 --> 
       </div>
       <!-- /row --> 

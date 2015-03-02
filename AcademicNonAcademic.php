@@ -78,7 +78,7 @@
                             class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
+              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -97,21 +97,16 @@
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li class="active"><a href="HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
-        <li><a href="EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
+        <li class="active"><a href="http://localhost/IS-THESIS1/HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
+        <li><a href="http://localhost/IS-THESIS1/EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
         
-        <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-        <li><a href="guidely.html"><i class="icon-table"></i><span>Attendance</span> </a></li>
-        <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
-        <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
+        <li><a href=""><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
+        <li><a href=""><i class="icon-table"></i><span>Attendance</span> </a></li>
+        <li><a href=""><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
+        <li><a href=""><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="icons.html">Icons</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="pricing.html">Pricing Plans</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="signup.html">Signup</a></li>
-            <li><a href="error.html">404</a></li>
+            <li><a href="http://localhost/IS-THESIS1/Signup.php">Add Applicant</a></li>
           </ul>
         </li>
       </ul>
@@ -138,11 +133,11 @@
             $result = mysql_query("
             SELECT  F_Name, L_Name, ID_No
             FROM person 
-            WHERE E_Status = 'Employee' AND Department = 'Non-Academic'  
+            WHERE E_Status = 'Employee' AND Department = 'Non-Academic' 
             "); 
         
         while($row = mysql_fetch_array($result)){
-
+        
         $idNumber = $row["ID_No"]; 
                   echo '<li class="span5 clearfix">';
           echo '<div class="thumbnail clearfix">';

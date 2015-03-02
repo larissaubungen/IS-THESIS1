@@ -149,21 +149,19 @@
             <ul class="list-group">
 
                  <?php
-                 $idNo = $_POST['id'];
-
-                    mysql_connect("localhost", "root", "")
-                    or die(mysql_error());
-                    mysql_select_db("lbas_hr") 
-                    or die(mysql_error());
-                    
-                        $result = mysql_query("
-                                    SELECT  F_Name, L_Name, M_Name, E_Position1, E_Position2, B_Day, Gender, C_Status, E_Status, 
-                                    FROM person
-                                    WHERE person.ID_No = '$idNo' AND E_Status = 'Admin'  
-                                    "); 
-                    
-                    while($row = mysql_fetch_array($result)){
-                        echo $row['F_Name'];
+        mysql_connect("localhost", "root", "")
+        or die(mysql_error());
+        mysql_select_db("lbas_hr") 
+        or die(mysql_error());
+        
+            $result = mysql_query("
+            SELECT  F_Name, L_Name, ID_No
+            FROM person 
+            WHERE E_Status = 'Applicant'  
+            "); 
+        
+        while($row = mysql_fetch_array($result)){
+            echo $row['F_Name'];
         
 
 
@@ -173,7 +171,7 @@
           //      <li class="list-group-item text-muted" contenteditable="false">Profile</li>
             //    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Employed since:</strong></span> 1998</li>
              
-                    echo '<li class="list-group-item text-right">' . $row['F_Name']. '</li>';
+                    echo '<li class="list-group-item text-right">full name;' . $row['F_Name']. '</li>';
               //<li class="list-group-item text-right"><span class="pull-left"><strong class="">Position: </strong></span> Directress
                
                 //      </li>

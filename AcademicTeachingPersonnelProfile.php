@@ -3,7 +3,35 @@
 <head>
     <meta charset="utf-8">
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>Academic Teaching Personnel</title>
+
+<?php
+
+        $idNo = $_POST['id'];
+        mysql_connect("localhost", "root", "")
+        or die(mysql_error());
+        mysql_select_db("lbas_hr") 
+        or die(mysql_error());
+        
+            $result = mysql_query("
+            SELECT *
+            FROM person 
+            WHERE person.ID_No = '$idNo' 
+            "); 
+        
+        while($row = mysql_fetch_array($result)){
+                    $firstName = $row["F_Name"];
+                    $lastName = $row["L_Name"];
+                    $middleName = $row["M_Name"];
+
+                echo '<title>' . $firstName . ' ' . $middleName . '.' . ' '. $lastName .  '</title>';
+                    
+                 }
+        ?> 
+
+
+
+
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 
@@ -17,6 +45,16 @@
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/pages/dashboard.css" rel="stylesheet">
+
+    <style>
+       table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+        }
+    </style>
 
     <!--CSS code for profiles-->
     <style type="text/css">
@@ -124,46 +162,41 @@
 
 
 
-
-
-
-
 <hr class="">
 <div class="container target">
     <div class="row">
         <div class="col-sm-10">
 
-        <?php
-                
-                 $idNo = $_POST['id'];
 
-                    mysql_connect("localhost", "root", "")
-                    or die(mysql_error());
-                    mysql_select_db("lbas_hr") 
-                    or die(mysql_error());
-                    
-                        $result = mysql_query("
-                                    SELECT  F_Name, L_Name, M_Name, E_Position1, E_Position2, B_Day, Gender, C_Status, E_Status 
-                                    FROM person
-                                    WHERE person.ID_No = '$idNo' AND E_Status = 'Employee' AND Department = 'Faculty' 
-                                    "); 
-                    
-                    while($row = mysql_fetch_array($result)){
-                            $firstName = $row["F_Name"];
-                            $middleName = $row["M_Name"];
-                            $lastName = $row["L_Name"];
-                            $position1 = $row["E_Position1"];
-                            $position2 = $row["E_Position2"];
-                            $birthday = $row["B_Day"];
-                            $gender = $row['Gender'];
-                            $civilStatus = $row["C_Status"];
+       <?php
 
+        $idNo = $_POST['id'];
+        mysql_connect("localhost", "root", "")
+        or die(mysql_error());
+        mysql_select_db("lbas_hr") 
+        or die(mysql_error());
+        
+            $result = mysql_query("
+            SELECT *
+            FROM person 
+            WHERE person.ID_No = '$idNo' 
+            "); 
+        
+        while($row = mysql_fetch_array($result)){
+                    $firstName = $row["F_Name"];
+                    $lastName = $row["L_Name"];
+                    $middleName = $row["M_Name"];
+                    $birthday = $row["B_Day"];
+                    $gender = $row["Gender"];
+                    $cStatus = $row["C_Status"];
+                    $eStatus = $row["E_Status"];
+                    $department = $row["Department"];
+                    $ePosition1 = $row["E_Position1"];
+                    $ePosition2 = $row["E_Position2"];
 
-
-    echo '<h1 class="">' .$row['F_Name'] . " " . $row['M_Name'] . "." . " " . $row['L_Name'] . '</h1>
-         <br><br>
-          <button type="button" class="btn btn-info">Send a message</button>
-                <br>
+          echo '<h1 class="">' . $firstName . ' ' . $middleName . '.' . ' '. $lastName . '</h1>';
+         echo '<br><br>
+          
         </div>
       <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.lagunabelairschool.com.ph/images/danenberg.jpg"></a>
 
@@ -175,16 +208,16 @@
             <!--left col-->
             <ul class="list-group">';
 
-             
+          
 
 
 
 
-          echo  '<li class="list-group-item text-muted" contenteditable="false">Profile</li>';
-          echo '<li class="list-group-item text-right"><span class="pull-left"><strong class="">Full Name:</strong></span>' . $row['F_Name'] . " " . $row['M_Name'] . "." . " " . $row['L_Name'] . '</li>';
-          echo '<li class="list-group-item text-right"><span class="pull-left"><strong class="">Employed since:</strong></span> 1998</li>';
-
-          echo '<li class="list-group-item text-left"><span class="pull-left"><strong class="">Position/s:</strong></span>' . '<br> <br>' . $row['E_Position1'] . '<br> <br>' .  $row['E_Position2'] . '</li>';
+             echo '<li class="list-group-item text" contenteditable="false">Profile</li>';
+             echo '<li class="list-group-item text-left"><span class="pull-left"><strong class="">Full Name: </strong></span>' . '&nbsp&nbsp' . $firstName . ' ' . $middleName . '.' . ' '. $lastName .   '</li>';
+             echo '<li class="list-group-item text-left"><span class="pull-left"><strong class="">Position/s and Occupation/s: </strong></span>' . '<br>' . '<br>' . $ePosition1 . '<br>' . '<br>' .  $ePosition2 . '</li>';
+             echo '<li class="list-group-item text-left"><span class="pull-left"><strong class="">Department: </strong></span>' . '&nbsp&nbsp' . $department . '</li>';
+                    
                  }
         ?>
 
@@ -200,10 +233,6 @@
 
                 </div>
             </div>
-
-
-
-            
             <div class="panel panel-default">
                 <div class="panel-heading">Dont know yet <i class="fa fa-link fa-1x"></i>
 
@@ -231,25 +260,148 @@
             </div>
         </div>
         <!--/col-3-->
-        <div class="col-sm-9" contenteditable="false" style="">
+               <div class="col-sm-9" contenteditable="false" style="">
             <div class="panel panel-default">
-              <ul class="nav nav-tabs">
-                
-                <li role="presentation" class="active"><a href="#">Profile</a></li>
-                <li role="presentation"><a href="#">Records</a></li>
-              </ul> 
-
-                <div class="panel-body">
 
 
+                    <link type="text/css" rel="stylesheet" href="http://onlinehtmltools.com/tab-generator/skins/skin4/top.css"></script>
+
+                    <div class="tabs_holder">
+                     <ul>
+                      <li><a href="#your-tab-id-1">Profile</a></li>
+                      <li class="tab_selected"><a href="#your-tab-id-2">Records</a></li>
+                     </ul>
+                     <div class="content_holder">
+                      <div id="your-tab-id-1">
+                        
+
+                            <?php
+                                
+                                echo '<div id="profile">';
+                                echo '<div class="panel-body">';
+
+                                
+                                    echo '<center>';
+                                    echo '<table>';
+                                        echo '<table style="width:50%">';
+                                              
+                                              echo '<tr>';
+                                                echo '<td><strong>Full Name</td>';
+                                                echo '<td>'  . $firstName . ' ' . $middleName . '.' . ' '. $lastName .   '</td>';      
+                                              echo '</tr>';
+                                              echo '<tr>';
+                                                echo '<td><strong>Birthday</td>';
+                                                echo '<td>' . $birthday . '</td>';
+                                              echo '</tr>';
+                                              echo '<tr>';
+                                                echo '<td><strong>Gender</td>';
+                                                echo '<td>' . $gender . '</td>';
+                                              echo '</tr>';
+                                              echo '<tr>';
+                                                echo '<td><strong>Civil Status</td>';
+                                                echo '<td>' . $cStatus . '</td>';
+                                              echo '</tr>';
+                                        echo '</table>';
+                                        echo '</center>';
+
+                                echo '</div>';
 
 
 
-                </div>
-            
+                                echo '</div>
+                            </div>';
+                                
+
+                            ?>
+
+                      </div>
+                      
 
 
-            </div>
+
+
+                      <div id="your-tab-id-2">
+                       
+                        <?php
+                                
+                                echo '<div id="profile">';
+                                echo '<div class="panel-body">';
+
+                                
+
+                                /*
+                                  USED TO FILTER EVALUATION RESULTS FORMS FROM DIFFERENT YEARS
+
+
+                                */
+                                        echo 'Year: <select>
+                                                    <option>2012</option>
+                                                    <option>2012</option>
+                                                    </select>';
+
+
+
+                                    echo '<br>';
+                                    echo '<br>';
+
+                                    echo '<center>';
+                                    echo '<table>';
+                                        echo '<table style="width:80%">';
+                                              
+                                              echo '<tr>';
+                                                echo '<td><strong>Evaluation Of Advisory and HomeroomWork (EAHW-A)</td>';
+                                                echo '<td><a href="ResultEAHWForm.php"> See Results </a></td>';      
+                                              echo '</tr>';
+                                              echo '<tr>';
+                                                echo '<td><strong>Evaluation Of Classroom Instruction (ECI-A)</td>';
+                                                echo '<td><a href=" "> See Results </a></td>';
+                                              echo '</tr>';
+                                              echo '<tr>';
+                                                echo '<td><strong>Evaluation Of Classroom Instruction(ECI-B) (For Highschool and Intermmediate )</td>';
+                                                echo '<td><a href=" "> See Results </a></td>';
+                                              echo '</tr>';
+                                              echo '<tr>';
+                                                echo '<td><strong>Evaluation Of Classroom Instruction(ECI-B) (For Primary )</td>';
+                                                echo '<td><a href=" "> See Results </a></td>';
+                                              echo '</tr>';
+                                              echo '<tr>';
+                                                echo '<td><strong>GPE for Teachers</td>';
+                                                echo '<td><a href=" "> See Results </a></td>';
+                                              echo '</tr>';
+
+                                        echo '</table>';
+                                        echo '</center>';
+
+
+
+                                echo '</div>';
+
+
+
+                                echo '</div>';
+                                
+
+                            ?>
+
+
+
+
+                      </div>
+                     </div><!-- /.content_holder -->
+                    </div><!-- /.tabs_holder -->
+
+                    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+                    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
+                    <script type="text/javascript" src="http://onlinehtmltools.com/tab-generator/skinable_tabs.min.js"></script>
+                    
+                    <script type="text/javascript">
+                      $('.tabs_holder').skinableTabs({
+                        effect: 'basic_display',
+                        skin: 'skin4',
+                        position: 'top'
+                      });
+                    </script>
+
             <div class="panel panel-default target">
                 <div class="panel-heading" contenteditable="false">Dont know yet</div>
                 <div class="panel-body">

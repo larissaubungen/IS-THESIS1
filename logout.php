@@ -9,6 +9,6 @@ unset($_SESSION['ID_No']);
 // session_destroy();
 
 // Jump to login page
-header('Location: login.php');
+header('Location: LogInPage.php');
 
 ?>

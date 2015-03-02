@@ -70,7 +70,7 @@
     <div class="well" align="center">
     <h4>Evaluation of Advisory Work and Homeroom Work(EAHW-A)</h4>
 	
-        <form action='SubmitEAHWForm.php' method='POST'onsubmit="target_popup(this)">
+        <form action='SubmitEAHWAForm.php' method='POST'onsubmit="target_popup(this)">
 		<h5>Name of Teacher:</h5>
         <input type="text" placeholder="Name of Teacher" name="idNo" >
         <h5>Level/Section:</h5>
@@ -115,6 +115,7 @@
                 </tr>
             </thead>
             <tbody>
+            
                   <tr>
 					
                         <td> 1. Developing a "homeroom" relationship in the advisory class  </td>
@@ -310,6 +311,7 @@
                   </tr>
             </tbody>
         </table>
+        <br>
             <input type='submit' value='Submit' class='Log' name='eval'>
 	</form>
 </body>
