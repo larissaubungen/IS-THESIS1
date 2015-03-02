@@ -117,7 +117,7 @@
 	}
 
   </style>
-
+  <body>
     <!--main navbar-->
  <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
@@ -216,3 +216,5 @@
 
 
 	?>
+</body>
+</html>
