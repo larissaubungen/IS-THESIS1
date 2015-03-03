@@ -39,36 +39,8 @@ $user=$_SESSION['ID_No'];
     <script src="js/base.js"></script>   
 
     <style type="text/css">
-        table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        width: 30%;        
-        }
-        td.table-header{
-            background-color: lightgray;
-        }
-        .panel-heading {
-        padding: 10px 15px;
-        border-bottom: 1px solid transparent;
-        border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
-        }
-        .panel-default {
-
-        color: #333;
-        background-color: #f5f5f5;
-        border-color: #ddd;
-        }
-        /*
-        .well{
-          width: 60em;
-        }
-        h4{
-          text-indent: 5em;
-        }
-        li{
-          list-style-position: inside;
-          text-indent: 5em;
+        .borderless td {
+            border: none;
         }
         */
         
@@ -118,7 +90,6 @@ $user=$_SESSION['ID_No'];
           <ul class="mainnav">
             <li><a href="ApplicantPage.php"><i class="icon-home"></i><span>Home</span> </a> </li>
             <li class="active"><a href="#"><i class="icon-list-alt"></i><span>Guidelines</span> </a> </li>
-            <li><a href="ApplicantResume.php"><i class="icon-file"></i><span>Resume</span> </a> </li>
           </ul>
         </div>
         <!-- /container --> 
@@ -127,14 +98,71 @@ $user=$_SESSION['ID_No'];
     </div>
     <!-- /subnavbar -->
 
-    <div class= "well">
-      <h4>Applicant Guidelines</h4>    
-      <ol>
-        <li>The applicant must submit requirements ten(10) days before the interview.</li>
-        <li>Guideline #2</li>
-        <li>Guideline #3</li>
-        <li>Rest to be followed.</li>
-      </ol>
+<div class="container">  <!--Panel Heading only-->
+    <div class="row">
+      <div class="col-lg-6">
+        <div class= "well">
+
+          <table class = "table borderless">
+            <tr>
+              <th><h4>Applicant Guidelines</h4><br/></th>             
+              <th><h4>Other Reminders</h4></th>
+            </tr>
+            <tr>
+              <td>
+                <ol>
+                  <b><i>For Teaching Personnel Applicants</i></b>
+                  <li>The applicant must be able to submit (1) hard copy of his/her transcript of records. </li>
+                  <li>The applicant must accomplish and yield satisfactory results from the following:</li>
+                  <ol>
+                    <li type="a">Preliminary Interview with HR Officer</li>
+                    <li type="a">Teaching demonstration before a screening committee</li>
+                    <li type="a">Content test according to specialization</li>
+                    <li type="a">Series of psychological tests given by the HR Officer.</li>
+                  </ol>
+                  <li>The Academic Coordinator will interview the applicant.</li>
+                  <li>The Principal/Director will conduct the final interview.</li>                                   
+                </ol> <br>
+                  
+                <ol>
+                  <b><i>For Non Teaching Personnel Applicants</i></b>
+                  <li>The applicant must be able to submit (1) hard copy of his/her transcript of records. </li>
+                  <li>The applicant will undergo preliminary interview and series of psychological tests with HR OFficer</li>
+                  <li>If the result is satisfatory, the applicant will have a recommendation from the HR Officer.</li>
+                  <li>The applicant will be interviewed by the Director.</li>
+                </ol>
+              </td>
+              <td>
+                <ol>
+                  <b><i>Admission Requirements</i></b>
+                  <li>Please bring the following requirements during the preliminary schedule interview.</li>
+                  <ol>
+                    <li type="a">Original Transcript of Records.</li>
+                    <li type="a">Photocopy of College Diploma.</li>
+                    <li type="a">Certificate of employement from previous employer.</li>
+                    <li type="a">BIR- Form 2316 from previous employer</li>
+                    <li type="a">Photocopy of Seminar Certificates.</li>
+                    <li type="a">Photocopy of PRC (for ATP), SSS, TIN, and Pag-IBIG IDs, MRD.</li>
+                    <li type="a">Physical Examination Results.</li>
+                    <li type="a">NBI Clearance.</li>
+                    <li type="a">Birth Certificate</li>
+                    <li type="a">Marriage Contract</li>
+                    <li type="a">and Birth Certificates of Children(if applicable)</li>
+                  </ol> <br>
+
+                  <ol>
+                  <b><i>References and Background Check</i></b>
+                    <li type="a">Documents shall be subject to verificaiton for validity and authencity.</li>
+                    <li type="a">Background investigastion shall also be conducted.</li>
+                    <li type="a">Applicants found falsying information at the point of entry or after hiring shall be disqualified or terminated
+                      depending upon their status.</li>
+                  </ol>
+              </td>
+            </tr>
+          </table>
+    </div>
+    </div>
+    </div>
     </div>
   </body>
 </html>

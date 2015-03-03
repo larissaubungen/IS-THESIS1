@@ -129,7 +129,7 @@ $user=$_SESSION['ID_No'];
                   <!-- Default panel contents -->
                   <div class="panel-heading">
                
-                  <!-- Table -->
+                  <!-- Table 
                   <table class="table">
                     <tr>
                         <td colspan="2"class="table-header"><center><b>Please schedule Activities and Dates</b></center></td>
@@ -138,6 +138,7 @@ $user=$_SESSION['ID_No'];
                     <tr>
                       <td>Teaching Demonstration @ Grade 11-Newton (Dummy Data)</td>
                       <td>
+                        -->
 						<?php
 								mysql_connect("localhost", "root", "")
 										or die(mysql_error());
@@ -147,7 +148,9 @@ $user=$_SESSION['ID_No'];
 									
 									//method for finding a match in the database from $userName, $userPass
 								$result = mysql_query("
-									SELECT  Schedule_ID, ID_No, HR_Date, HR_Time, HR_Status, Teaching_Date, Teaching_Time, Teaching_Status, Test_Date, Test_Time, Test_Status, Coordinator_Date, Coordinator_Time, Coordinator_Status, Principal_Date, Principal_Time, Principal_Status, HR_Comments
+									SELECT  Schedule_ID, ID_No, HR_Date, HR_Time, HR_Status, Teaching_Date, 
+                  Teaching_Time, Teaching_Status, Test_Date, Test_Time, Test_Status, Coordinator_Date,
+                   Coordinator_Time, Coordinator_Status, Principal_Date, Principal_Time, Principal_Status, HR_Comments
 									FROM applicant_schedule
 									WHERE ID_No = '" . $user . "' 
 								");

@@ -11,6 +11,17 @@ $user=$_SESSION['ID_No'];
     mysql_select_db('lbas_hr') 
         or die(mysql_error());
 
+ $checkResume = "SELECT `ID_No`, `Resume` FROM `person` WHERE `ID_No` = '".$user."' AND `Resume` = 'YES'";
+
+ $check = mysql_query($checkResume);
+
+ if ($check){
+ 	header('Location:ApplicantPage.php');
+ }
+ else{
+ 	header('Location:ApplicantPage.php');	
+ }
+
 
 error_reporting(0);
 if($_POST['resume'] == "Submit")
