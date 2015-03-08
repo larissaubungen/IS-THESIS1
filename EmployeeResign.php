@@ -13,9 +13,7 @@ $user=$_SESSION['ID_No'];
 
   while($result){
     header('Location:SubmitResignFailed.php');
-  }
-
-  
+  }  
 ?>
 
 <!DOCTYPE html>
@@ -51,10 +49,13 @@ $user=$_SESSION['ID_No'];
   -->
     
     <script type="text/javascript">
-    	function reminder()
+    $(document.ready(){
+      function reminder()
       {
-    		confirm("Reminder: \n Please ensure your submission with letter of resignation. \n Your request will be subject for HR's approval.");
-    	} 	
+        confirm("Reminder: \n Please ensure your submission with letter of resignation. \n Your request will be subject for HR's approval.");
+      }   
+    }
+    	
     </script>
     <style = "text/css">
     	textarea{
@@ -145,8 +146,8 @@ $user=$_SESSION['ID_No'];
 
 
                      $("#datepicker").kendoDatePicker({
-                       value: new Date(currentDate),
-                       min: new Date(currentDate),
+                       value: new Date(restrictedDate),
+                       min: new Date(restrictedDate),
                        max: new Date(2049, 11, 31),
                        dateFormat: 'mm/dd/yy' 
                      })
