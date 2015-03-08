@@ -231,35 +231,25 @@ if($_POST['resume'] == "Submit")
 	<!--main navbar-->
  <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
-    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="ApplicantPage.php">LBASS Human Resource Information System </a>
-      <div class="nav-collapse">
-        <ul class="nav pull-right">
+    <div class="container"> 
+    	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+    		<span class="icon-bar"></span>
+    		<span class="icon-bar">
+    		</span><span class="icon-bar"></span> </a>
+		<a class="brand" href="ApplicantPage.php">LBASS Human Resource Information System </a>
+		<div class="nav-collapse">
+        <ul class="nav pull-right">      
             <ul class="dropdown-menu">
               <li><a href="javascript:;">Settings</a></li>
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
-            </ul>
-          </li>
-        </ul><!--
-            <form class="navbar-search pull-right">
-              <input type="text" class="search-query" placeholder="Search">
-            </form>
-			--->
-          </div>
-          <!--/.nav-collapse --> 
-        </div>
+        </div>  
         <!-- /container --> 
-      </div>
-      <!-- /navbar-inner --> 
-    </div>
-    <!-- /navbar -->
+      </div>      <!-- /navbar-inner --> 
+    </div>   <!-- /navbar -->
+</div> <!--Main Navbar-->
+
     <div class="subnavbar">
       <div class="subnavbar-inner">
         <div class="container">
@@ -303,8 +293,7 @@ if($_POST['resume'] == "Submit")
 	  		<select id="position" name="position"></select>
 	  		&nbsp Level:
 	  		<select id="level" name="level"></select>
-
-  		</div>	
+  		</div>	<br/>
 
 		 <div class="table-responsive">	<!--Resume Form into table-->
 		 <table class="table"> 
@@ -503,7 +492,7 @@ if($_POST['resume'] == "Submit")
 				<tr>
 					<td id="resume-label"><br><b>Education</b></td>
 					<td id="resume-label"></td>
-					<td id="resume-label"><b>Contact details</b></td>
+					<td id="resume-label"><b>Personal Contact details</b></td>
 					
 				</tr>
 				<tr>

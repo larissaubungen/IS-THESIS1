@@ -30,7 +30,7 @@ proper page
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
 
-		//condition for no match found
+		//condition for applicant with resume
 		}else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && $check['Resume'] == 'Yes') {
 			
 			header('location:ApplicantPage.php');
@@ -39,6 +39,7 @@ proper page
 			//iniating a sessions variable and it's value
 			$_SESSION['ID_No']=$check['ID_No'];
 		}
+		//condition for employees
 		else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Admin'){
 					header('location:HR_Page.php');
 					//start of sessions
@@ -46,7 +47,9 @@ proper page
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
 
-		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
+		}
+
+		/*else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
 
 					header('location:EmployeeResign.php');
 					//start of sessions
@@ -54,7 +57,9 @@ proper page
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
 
-		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
+		}*/
+
+		else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
 					header('location:EmployeesPage.php');
 					//start of sessions
 					session_start();
