@@ -39,7 +39,7 @@
 	$award1=$_POST['Award1'];
 	$award2=$_POST['Award2'];
 	$award3=$_POST['Award3'];
-	$award4=$_POST['Award4'];
+	$award4=$_POST['Award4'];	
 	$award5=$_POST['Award5'];
 	$skill1=$_POST['Skill1'];
 	$skill2=$_POST['Skill2'];
@@ -56,6 +56,9 @@
 	$exp3=$_POST['Exp3'];
 	$exp4=$_POST['Exp4'];
 	$exp5=$_POST['Exp5'];
+	$dept=$_POST['department'];
+	$position=$_POST['position'];
+	$level=$_POST['level'];
 	$resume = "Yes";
 
 	?>
@@ -186,20 +189,24 @@
 						 		`Resume` = '".$resume."'
 				 		 WHERE `ID_No` ='".$user."'";
 
-		$updateResume = "INSERT INTO resume
-			(`ID_No`, `Email`, `M_No`, `T_No`, `Street`,`City`, `Province`, `Z_Code`, 
-			`C_Status`, `H_School`, `HS_Graduated`, `College`, `College_Graduated`, 
-			`Course`, `Masteral`, `Course2`, `Award1`, `Award2`, `Award3`, `Award4`, 
-			`Award5`, `Org_Aff1`, `Org_Aff2`, `Org_Aff3`, `Org_Aff4`, `Org_Aff5`, 
-			`T_Skills1`, `T_Skills2`, `T_Skills3`, `T_Skills4`, `T_Skills5`, 
-			`Experience1`, `Experience2`, `Experience3`, `Experience4`, `Experience5`) 
-		VALUES ('".$user."','".$email."','".$mobNumber."','".$telNumber."','".$street."','".$city."','".$province."','".$zip."',
-			'".$civil."','".$highSchool."','".$HS_Grad."','".$college."','".$College_Grad."',
-			'".$degree."', '".$masteral."','".$degree2."','".$award1."','".$award2."','".$award3."',
-			'".$award4."','".$award5."','".$org1."','".$org2."','".$org3."','".$org4."',
-			'".$org5."','".$skill1."','".$skill2."','".$skill3."','".$skill4."','".$skill5."',
-			'".$exp1."','".$exp2."','".$exp3."','".$exp4."','".$exp5."')";
+		$updateResume = "INSERT INTO `resume`
+				 		 (`ID_No`, `Email`, `M_No`, `T_No`, `Street`, `City`, `Province`, 
+				 		 	`Z_Code`, `C_Status`, `H_School`, `HS_Graduated`, `College`, 
+				 		 	`College_Graduated`, `Course`, `Masteral`, `Course2`, `Award1`, 
+				 		 	`Award2`, `Award3`, `Award4`, `Award5`, `Org_Aff1`, `Org_Aff2`, 
+				 		 	`Org_Aff3`, `Org_Aff4`, `Org_Aff5`, `T_Skills1`, `T_Skills2`, 
+				 		 	`T_Skills3`, `T_Skills4`, `T_Skills5`, `Experience1`, `Experience2`, 
+				 		 	`Experience3`, `Experience4`, `Experience5`, `App_Department`, `App_Position`, 
+				 		 	`App_Level`) 
 
+		 VALUES ('".$user."','".$email."','".$mobNumber."','".$telNumber."','".$street."','".$city."',
+				 		 	'".$province."','".$zip."','".$civil."','".$highSchool."','".$HS_Grad."',
+				 		 	'".$college."','".$College_Grad."','".$degree."','".$masteral."','".$degree2."',
+				 		 	'".$award1."','".$award2."','".$award3."','".$award4."','".$award5."',
+				 		 	'".$org1."','".$org2."','".$org3."','".$org4."','".$org5."',
+				 		 	'".$skill1."','".$skill2."','".$skill3."','".$skill4."',
+				 		 	'".$skill5."','".$exp1."','".$exp2."','".$exp3."','".$exp4."',
+				 		 	'".$exp5."','".$dept."','".$position."', '".$level."')";
 
 		$checkUpdate1 = mysql_query($updatePerson);
 		$checkUpdate2 = mysql_query($updateResume);

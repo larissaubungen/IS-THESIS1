@@ -23,22 +23,29 @@ proper page
 			");
 			//&& is_null($check['Resume']) || $check['Resume'] == 'no'
 		$check=mysql_fetch_array($result);
-		 if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant'){
+		 if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && IS_NULL($check['Resume'] )){
 					header('location:ApplicantResume.php');
 					//start of sessions
 					session_start();
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
+
 		//condition for no match found
-		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Admin'){
+		}else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && $check['Resume'] == 'Yes') {
+			
+			header('location:ApplicantPage.php');
+			//start of sessions
+				session_start();
+			//iniating a sessions variable and it's value
+			$_SESSION['ID_No']=$check['ID_No'];
+		}
+		else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Admin'){
 					header('location:HR_Page.php');
 					//start of sessions
 					session_start();
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
 
 					header('location:EmployeeResign.php');
@@ -46,16 +53,14 @@ proper page
 					session_start();
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
->>>>>>> origin/master
-					
+
 		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
 					header('location:EmployeesPage.php');
 					//start of sessions
 					session_start();
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
-=======
->>>>>>> parent of 4b13d76... Updated pages
+
 		}else{ header('location:ErrorLogIn.html');
 
 		}
