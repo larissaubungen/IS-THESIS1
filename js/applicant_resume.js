@@ -264,7 +264,18 @@ $("#department").change(function(){
         padding: '5px', margin: '20px', width: '170px', border: '1px dashed',
         borderTopColor: '#999', borderBottomColor: '#999',
         borderLeftColor: '#999', borderRightColor: '#999'
+
     });
+
+        var divChildren = $(document.createElement('div')).css({
+        padding: '5px', margin: '20px', width: '170px', border: '1px dashed',
+        borderTopColor: '#999', borderBottomColor: '#999',
+        borderLeftColor: '#999', borderRightColor: '#999'
+
+        
+    });
+
+
 
      $('#addAward').click(function() {
         if (count <= 4) {
@@ -384,17 +395,59 @@ $("#department").change(function(){
 
     	$("input[name='status']").change(function(){ //Displaying Spouse Label and Textboxes
 
+			var count4 = 0;				   
+
+
 			   if($(this).val()=="married")
 			   {
 			      $("#FNspouseName").show();
        			  $("#LNspouseName").show();
+       			  $("#FNchildName").show();
+       			  $("#LNchildName").show();
+       			  
        			  $('#lbl_spouse').show();
+
+
+       		$('#addChild').click(function() {
+	            if (count4 <= 4) {
+	                count4 = count4 + 1;
+	                // ADD TEXTBOX.
+	                $(divChildren).append('<input type=text class="input" id=tb3' + count4 + ' ' + 
+	                            'placeholder="First Name ' + count4 + '" name="Child '+ count4 +'" />');
+
+	                $(divChildren).append('<input type=text class="input" id=tb3' + count4 + ' ' +
+	                            'placeholder="Last Name ' + count4 + '" name="Child '+ count4 +'" />');
+
+	                if (count4 < 0) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
+	                    var divSubmit3 = $(document.createElement('div'));
+	                }
+	                $('#Children').after(divChildren, divSubmit3);   // ADD BOTH THE DIV ELEMENTS TO THE "main" divAward.
+	            }
+	            else{      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
+	                $(divChildren).append('<label>-</label>'); 
+	                $('#addSkill').attr('class', 'bt-disable'); 
+	                $('#addSkill').attr('disabled', 'disabled');
+	            }
+	        });
+
+       		$('#removeChild').click(function() {   // REMOVE ELEMENTS ONE PER CLICK.
+		        if (count4 > 0 && count4<=5) { $('#tb3' + count4).remove(); count4 = count4 - 1; }
+		        if (count4 == 0 || count4 <0) { $(divChildren).empty(); 
+		            $(divChildren).remove(); 
+		            $('#addChild').removeAttr('disabled'); 
+		            $('#addChild').attr('class', 'bt'); 
+		            count4 = 0;
+		        }
+		    	});
+
+
 			   }
 			   else
 			   {
 			       $("#FNspouseName").hide();
        			   $("#LNspouseName").hide(); 
        			   $('#lbl_spouse').hide();
+       			   $('#lbl_children').hide();
 			   }
 
 			});

@@ -5,28 +5,13 @@
 	}
 
 $user=$_SESSION['ID_No'];
+$ResignCode=$_POST['RCode'];
 $dateFiled = $_POST['dateFiled'];
+$dateApprove = $_POST['D_Approve'];
 $reason = $_POST['reason'];
 $status = 'Pending';
-
-
-	//database connection
-	mysql_connect("localhost", "root", "")
-			or die(mysql_error());
+?>
 	
-	mysql_select_db("lbas_hr") 
-		or die(mysql_error());
-		
-	
-	$DateStat = "INSERT INTO resignation(ID_No, D_Filed, reason, R_Status)
-			VALUES ('".$user."','".$dateFiled."', '".$reason."','".$status."')";
-
-	$result = mysql_query($DateStat);
-
-	if ($result) {
-		//header('Location:SubmitResignSuccess.php');
-		?>
-
 	<!DOCTYPE html>
 	<html lang="en">
 	<head>
@@ -51,30 +36,51 @@ $status = 'Pending';
 	    <script src="js/jquery-1.7.2.min.js"></script>
 	  -->
 	    <script src="js/bootstrap.js"></script>
-	    <script type="text/javascript">
-	    	function reminder(){
-	    		confirm("Reminder: \n Please ensure your submission with letter of resignation. \n Your request will be subject for HR's approval.");
-	    	}
-	 		 });	
-	    </script>
-
 	    <style = "text/css">
-	    	textarea{
-	    		margin-left: 3em;
-	    	}
-	    	#date_select2_day{
-	    		width: 5em;
-	    	}
-	    	#date_select2_month{
-	    		width: 7em;
-	    	}
-	    	#date_select2_year{
-	    		width: 5em;
+	    	.mainnav{
+	    		padding-top: 3em;
 	    	}
 	    </style>
 	</head>
 	<body>
-				<!--Main Navbar-->
+				
+
+	<?php
+	//database connection
+	mysql_connect("localhost", "root", "")
+			or die(mysql_error());
+	
+	mysql_select_db("lbas_hr") 
+		or die(mysql_error());
+
+
+		
+	$DateStat = "INSERT INTO resignation(R_Code, ID_No, D_Filed, reason, R_Status)
+			VALUES ('".$ResignCode."','".$user."','".$dateFiled."', '".$reason."','".$status."')";
+
+	$result = mysql_query($DateStat);
+
+	/*
+	$dateApprove = mysql_query("SELECT D_Approved 
+								FROM resignation
+								WHERE R_Code ='".$ResignCode."'");	
+
+	$checkRecord = mysql_query("SELECT R_Code, ID_No
+								FROM resignation
+								WHERE ID_No ='".$user."'");
+
+	while ($row = mysql_fetch_array($checkRecord)) {
+		$code = $row["R_Code"];
+		$id = $row
+		echo "'".$code."'";
+	}
+	*/
+
+	if ($result) {
+		//header('Location:SubmitResignSuccess.php');
+		?>
+
+		<!--Main Navbar-->
 		<div class="navbar navbar-fixed-top">
 	  <div class="navbar-inner">
 	    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
@@ -119,7 +125,6 @@ $status = 'Pending';
 	    </div>
 	    <!-- /subnavbar -->
 
-
 	    <div class="container">	
 	    <h3>Filing of Resignation</h3>
 	    <hr/>
@@ -134,12 +139,21 @@ $status = 'Pending';
 	            <td><input type="text" value="<?=$status;?>" readonly><br/></td>
 	          </tr>
 	          <tr>
-	            <td>Date Approved:</td>
-	            <td><input type="text" value="<?=$dateFiled;?>" readonly></td>
+	          	<?php
+	          		if($status=='Pending'){
+	          			echo "<td>Date Approved:</td>";
+	          			echo "<td><input type='text' value='' readonly></td>";
+	          		}
+	          		else{
+	          			echo "<td>Date Approved:</td>";
+	          			echo "<td><input type='text' value='".$dateApprove."'> readonly></td>";
+
+	          		}
+	          	?>
 	          </tr>
 	        </table>
 	    </div>
-	  
+				  
 
 	    </div>
 
@@ -152,62 +166,8 @@ $status = 'Pending';
 	
 	//else statement and page for failed resignation submit
 	else{					
-			  session_start();
-			    if (!isset($_SESSION['ID_No'])) {
-			    header('Location:login.php');
-				}
-
+			 
 			?>
-
-			<!DOCTYPE html>
-			<html lang="en">
-			<head>
-				<title>LBASS Employee Resignation Request Failed</title>
-				<meta http-equiv="X-UA-Compatible" content="IE=edge">
-			    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-			    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-			    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
-			            rel="stylesheet">
-			    <link href="css/font-awesome.css" rel="stylesheet">
-			    <link href="css/style.css" rel="stylesheet">
-			    <link href="css/pages/dashboard.css" rel="stylesheet">
-
-			    <link href="css/bootstrap.min.css" rel="stylesheet">    
-			    <link rel="stylesheet" href="js/jquery1.11.3/jquery-ui.css">
-
-			    <script src="js/jquery1.11.3/jquery-ui.min.js"></script>
-			    <script src="js/jquery1.11.3/jquery.min.js"></script>
-
-			    <!--Boostrap
-			      <script src="js/jquery.min.js"></script>
-			    <script src="js/jquery-1.7.2.min.js"></script>
-			  -->
-			    <script src="js/bootstrap.js"></script>
-			    <script type="text/javascript">
-			    	function reminder(){
-			    		confirm("Reminder: \n Please ensure your submission with letter of resignation. \n Your request will be subject for HR's approval.");
-			    	}
-				
-			 		 });
-			    	
-			    </script>
-
-			    <style = "text/css">
-			    	textarea{
-			    		margin-left: 3em;
-			    	}
-			    	#date_select2_day{
-			    		width: 5em;
-			    	}
-			    	#date_select2_month{
-			    		width: 7em;
-			    	}
-			    	#date_select2_year{
-			    		width: 5em;
-			    	}
-			    </style>
-			</head>
-			<body>
 						<!--Main Navbar-->
 				<div class="navbar navbar-fixed-top">
 			  <div class="navbar-inner">
@@ -260,13 +220,15 @@ $status = 'Pending';
 
 			    <div class="container">
 			        <div class="alert alert-error">
-			          <b>Request Submission Failed.</b> Duplication of request or submission error. <br/><br/>
+			          <b>Request Submission Failed.</b> <br/>
+			           Duplication of request or submission error. <br/><br/>
 			        </div>
-			        <button><a href="EmployeeResign.php">Retry</a></button>
+			        <button type="button" class="btn btn-default"><a href="EmployeeResign.php">Retry</a></button>
 			    </div>
 			    </form>
 			    </div>
 			</body>
 			</html>
+   <?php
 	}
 ?>
