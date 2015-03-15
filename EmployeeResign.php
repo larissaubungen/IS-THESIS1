@@ -13,9 +13,21 @@ $user=$_SESSION['ID_No'];
 
   while($result){
     header('Location:SubmitResignFailed.php');
-  }
+  }  
 
-  
+  function getResignCode($length = 7) {
+            $validCode = "1234567890qwerty";
+            $validCharNumber = strlen($validCode);
+         
+            $result = "";
+         
+            for ($i = 0; $i < $length; $i++) {
+                $index = mt_rand(0, $validCharNumber - 1);
+                $result .= $validCode[$index];
+            }
+            return $result;
+        }
+        $RCode=getResignCode();
 ?>
 
 <!DOCTYPE html>
@@ -51,10 +63,16 @@ $user=$_SESSION['ID_No'];
   -->
     
     <script type="text/javascript">
-    	function reminder()
+       
+    
+      function reminder()
       {
-    		confirm("Reminder: \n Please ensure your submission with letter of resignation. \n Your request will be subject for HR's approval.");
-    	} 	
+        confirm("Reminder: \n Please ensure your submission with letter of resignation. \n Your request will be subject for HR's approval.");
+      } 
+      function setDate(){
+        document.getElementById("Date_Approved").value="0000-00-00";
+    }
+    	
     </script>
     <style = "text/css">
     	textarea{
@@ -122,7 +140,7 @@ $user=$_SESSION['ID_No'];
     <h3>Filing of Resignation</h3>
     <hr/>
 
-    <form action="SubmitResignation.php" method="post" id="resignation" onsubmit="return reminder();">
+    <form action="SubmitResignation.php" method="post" id="resignation">
         <!--
 			<label for="date_button">Date for Filing:</label><br>
 			<input type="date" name="date_button" id="date_button" onclick="DP.open('date_button','date_button')" required>
@@ -134,10 +152,13 @@ $user=$_SESSION['ID_No'];
 
       <div class="container">
         <div class="form-group">
-
+              <!--For Resignation Code-->
+          <input type="hidden" id="RCode" name="RCode" value="<?php echo "$RCode";?>">
+          <input type="hidden" id="D_Approve" name="D_Approve" value="0000-00-00">
+          
            <label for="datepicker"></label>   
               Date for filing:
-              <input id="datepicker" name="dateFiled" required/>
+              <input type ="text"id="datepicker" name="dateFiled" required/>
                   <script>
                     $(document).ready(function(){
                      var restrictedDate = new Date().setDate(+44);
@@ -145,10 +166,10 @@ $user=$_SESSION['ID_No'];
 
 
                      $("#datepicker").kendoDatePicker({
-                       value: new Date(currentDate),
-                       min: new Date(currentDate),
+                       value: new Date(restrictedDate),
+                       min: new Date(restrictedDate),
                        max: new Date(2049, 11, 31),
-                       dateFormat: 'mm/dd/yy' 
+                       format: 'yyyy-MM-dd' 
                      })
                     });   
                   </script>
@@ -158,11 +179,7 @@ $user=$_SESSION['ID_No'];
               <input type="submit" value="submit" onclick="return reminder();">
         </div>
       </div>
-
-  
     </form>
     </div>
-
 </body>
-
 </html>

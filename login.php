@@ -57,7 +57,7 @@
 	
 	<div class="content clearfix">
 		
-			<h1>Employee Login</h1>		
+			<h1>Account Login</h1>		
 			
 			<div class="login-fields">
 				
