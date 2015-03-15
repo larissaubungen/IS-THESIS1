@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+	mysql_connect("localhost", "root", "")
+				or die(mysql_error());
+	mysql_select_db("lbas_hr") 
+				or die(mysql_error());
+?>
 <html lang="en">
 <head>
 <script>
@@ -65,12 +71,34 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
         <li><a href="guidely.html"><i class="icon-table"></i><span>Attendance</span> </a></li>
         <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
         <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
-        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+        <?php
+		$leaves=mysql_query("SELECT * 
+							 FROM leave_table 
+							 WHERE L_Status ='Pending'");
+		
+		if(mysql_num_rows($leaves) > 0){
+		?>
+		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests*</span></a>
            <ul class="dropdown-menu">
               <li><a href="HR_Resignation.php">Resignations</a></li>
               <li><a href="HR_Transfer.php">Transfers</a></li>
+			  <li><a href="LeaveRequest.php">Leaves*</a></li>
            </ul> 
         </li>
+		<?php
+		}else{
+		?>
+		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+           <ul class="dropdown-menu">
+              <li><a href="HR_Resignation.php">Resignations</a></li>
+              <li><a href="HR_Transfer.php">Transfers</a></li>
+			  <li><a href="HR_Transfer.php">Leaves</a></li>
+           </ul> 
+        </li>
+		<?php
+		}
+		?>
+		
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="Signup.php">Add Applicant</a></li>
@@ -244,12 +272,6 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
           events: [
 		  <?php
 		  error_reporting(0);
-		  
-			mysql_connect("localhost", "root", "")
-				or die(mysql_error());
-	
-			mysql_select_db("lbas_hr") 
-				or die(mysql_error());
 				
 				$events=mysql_query("
 				SELECT HR_Date, HR_Time, HR_Status

@@ -19,7 +19,8 @@
 						    ");
 		
 		echo"Possible replacements are: </br>";
-		while($row = mysql_fetch_array($result)){
+		while($row = mysql_fetch_array($result)){	
+			
 			$IdNo=$row['Id'];
 			$Fname=$row['F_Name'];
 			$Lname=$row['L_Name'];
@@ -28,11 +29,9 @@
 			echo"First name: $Fname</br>";
 			echo"Last name: $Lname</br>";
 			echo"</br>";
-			
+		
+		
 		}
-	}else{
-	echo"No one is available for that position";
-	
 	}
 
 	
