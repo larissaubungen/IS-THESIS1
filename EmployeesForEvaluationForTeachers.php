@@ -2,15 +2,14 @@
   session_start();
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
-  } ?>      
-
+  } ?>  
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>Academic Non-Teaching and Non-Academic Personnel</title>
+    <title>Employees For Evaluation</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 
@@ -81,7 +80,7 @@
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <?php
               mysql_connect('localhost', 'root', '')
               or die(mysql_error());  
@@ -99,11 +98,13 @@
                 $firstName = $row["F_Name"];
                 echo "<i class='icon-user'> $lastName , $firstName </i>";
                 echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
-              }?> 
+                
+              echo '<li><a href="javascript:;">Profile</a></li>
+              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>';
+
+              }?>
+
               
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Profile</a></li>
-              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -122,21 +123,24 @@
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li class="active"><a href="http://localhost/IS-THESIS1/HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
-        <li><a href="http://localhost/IS-THESIS1/EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
-        
-        <li><a href=""><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-        <li><a href=""><i class="icon-table"></i><span>Attendance</span> </a></li>
-        <li><a href=""><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
-        <li><a href=""><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
-        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="http://localhost/IS-THESIS1/Signup.php">Add Applicant</a></li>
-          </ul>
+
+        <li class="active"><a href="EmployeeProfileHome.php"><i class="icon-dashboard"></i><span>Home</span> </a> </li>
+        <li><a href="EmployeeProfilePage.php"><i class="icon-dashboard"></i><span>Profile</span> </a> </li>
+        <li><a href=""><i class="icon-list-alt"></i><span>Reports and Records</span> </a> </li>
+
+        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+         <ul class="dropdown-menu">
+            <li><a href="">File for Leave</a></li>
+            <li><a href="">File for Transfer</a></li>
+            <li><a href="">File for Resignation</a></li>
+         </ul> 
+      </li>
         </li>
       </ul>
     </div>
     <!-- /container --> 
+  </div>
+  </div>
   </div>
   <!-- /subnavbar-inner --> 
 </div>
@@ -150,38 +154,92 @@
         <div class="span12">
             <ul class="thumbnails">
         <?php
+
+        $user=$_SESSION['ID_No'];
         mysql_connect("localhost", "root", "")
         or die(mysql_error());
         mysql_select_db("lbas_hr") 
         or die(mysql_error());
         
+
+         
+            $department = "";
+            $subject= "";
+
             $result = mysql_query("
-            SELECT  F_Name, L_Name, ID_No
+            SELECT  F_Name, L_Name, ID_No, Department, Subject
             FROM person 
-            WHERE E_Status = 'Employee' AND Department = 'HR department' OR  Department = 'Accounting' OR  Department = 'Guidance Counselling'
-                                        OR Department = 'IT' OR Department = 'while'
+            WHERE ID_No LIKE '".$user."' 
             "); 
+
+
         
-          while($row = mysql_fetch_array($result)){
+        while($row = mysql_fetch_array($result)){
+          
+        $department = $row["Department"];
+        $subject = $row["Subject"];
         
-        $idNumber = $row["ID_No"]; 
-                  echo '<li class="span5 clearfix">';
-          echo '<div class="thumbnail clearfix">';
-          echo '<img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style="margin-right:10px">';
-            echo '<div class="caption" class="pull-left">';
-              echo'<form action="AcademicNonAcademicProfile.php" method= "POST">';
-              echo "<input type='hidden' name='id' value='$idNumber'/>";
-              echo '<input type= "submit" class="btn btn-primary icon  pull-right" value="Select">';
-              echo '</form>';
-            echo '<h4>';      
-              echo '<a href="#" >'. $row["F_Name"] . " " . $row["L_Name"] .'</a>';
-            echo '</h4>';
-            echo '<small><b>ID Number: </b>'. $row["ID_No"] .'</small>';
-                    echo'</div>';
-                  echo'</div>';
-                echo'</li>';
+
         }
+
+
+        $getUser = mysql_query("
+            SELECT  ID_No, F_Name, L_Name, ID_No, Department
+            FROM person 
+            WHERE Department = '".$department."' AND 
+                  Subject = '" . $subject . "'   OR Subject = 'Biology' AND
+                  ID_No != '".$user."'
+           "); 
+
+
+        while($row = mysql_fetch_array($getUser)){
+
+            echo '<li class="span5 clearfix">';
+            echo '<div class="thumbnail clearfix">';
+            echo '<img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style="margin-right:10px">';
+             
+              echo '<div class="caption" class="pull-left">';
+                
+                echo'<form action="EvaluationFormList.php" method= "POST">';
+                  echo "<input type='hidden' name='id' value='". $row['ID_No']."'/>";
+                  echo "<input type='hidden' name='dept' value='$department'/>";
+                  echo "<input type='hidden' name='dept' value='$subject'/>";
+
+                  echo '<input type= "submit" class="btn btn-primary icon  pull-right" value="Evaluate">';
+
+                echo '</form>';
+             
+              echo '<h4>';      
+                echo '<a href="#" >'. $row["F_Name"] . " " . $row["L_Name"] .'</a>';
+              echo '</h4>';
+              echo '<small><b>ID Number: </b>'. $row["ID_No"] .'</small>';
+
+              echo '<br>';
+              echo '<br>';
+
+               /*Dropdown menu for choosing the type of evaluation (OLD IDEA)
+
+                   echo '<select name="">';
+                    echo '<option>2012</option>';
+                    echo '<option>2012</option>';
+                  echo '</select>'; 
+
+
+
+               */
+
+       }
+                      echo'</div>';
+                    echo'</div>';
+                  echo'</li>';
+
+
+
         ?>
+
+
+
+
             </ul>
         </div>
     </div>
