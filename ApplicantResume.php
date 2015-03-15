@@ -25,6 +25,7 @@ if($_POST['resume'] == "Submit")
 	$gender = $_POST['sex'];
 	$civil = $_POST['status'];
 	$spouseFName = $_POST['spouseFName'];
+	$spouseMName = $_POST['spouseMName'];
 	$spouseLName = $_POST['spouseLName'];
 
 	//getting value from the Calendar
@@ -352,7 +353,6 @@ if($_POST['resume'] == "Submit")
 				</tr>
 				<tr>
 					<td id="resume-label"><br> Civil Status: <br>
-						<label id="lbl_spouse" style="display:none;"> Spouse:</label>
 					</td> 
 					
 					<td>
@@ -360,12 +360,37 @@ if($_POST['resume'] == "Submit")
 						<input type="radio" name="status" value="single" checked> Single 
 						<input type="radio" name="status" value="married"> Married <br>
 						<input type="radio" name="status" value="divorced"> Divorced 
-						<input type="radio" name="status" value="widowed"> Widowed <br> <br>						
-						<input type="text" name="FNspouseName" id="FNspouseName" value="<?=$FNspouseName;?>" placeholder="First Name" style="display:none;"> <br/>
-						<input type="text" name="LNspouseName" id="LNspouseName" value="<?=$LNspouseName;?>" placeholder="Last Name" style="display:none;">					
+						<input type="radio" name="status" value="widowed"> Widowed <br>
 					</td>
 				</tr>
-				<tr>
+				<tr style="text-indent:2em;">
+					<td>
+						<label id="lbl_spouse" style="display:none;"> Spouse:</label>
+					</td>
+					<td>
+						<input type="text" name="LNspouseName" id="LNspouseName" value="<?=$LNspouseName;?>" placeholder="Last Name" style="display:none; margin-left:2.5em;">	
+					</td>
+					<td>
+						<input type="text" name="FNspouseName" id="FNspouseName" value="<?=$FNspouseName;?>" placeholder="First Name" style="display:none;"> <br/>
+					</td>
+					<td>
+						<input type="text" name="MNspouseName" id="MNspouseName" value="<?=$MNspouseName;?>" placeholder="Middle Name" style="display:none; margin-left:2.5em;"> <br/>
+					</td>
+
+				</tr>
+				<tr style="text-indent:2em;">
+					<td>
+						<label id="lbl_children"> Children: </label>
+					</td>
+					
+						<div id='divChildren'>		
+							<td>
+							  <input class="bt" type='button' value='+' id='addChild'>
+							  <input class="bt" type='button' value='-' id='removeChild'>
+							</td>
+						</div>	
+					</td>					
+				</tr>
 				<tr>
 					<td id="resume-label"><br>Birthdate:</td>
 					<td>
