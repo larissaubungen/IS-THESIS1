@@ -1,3 +1,12 @@
+<?php
+  session_start();
+    if (!isset($_SESSION['ID_No'])) {
+    header('Location:login.php');
+  } 
+    else if ($_SESSION['ID_No'] != 'Employee'){
+      header('Location:ErrorAuthentication.php');  
+    }
+  ?>      
 <!DOCTYPE html>
 <html lang="en">
 <head>

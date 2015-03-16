@@ -2,7 +2,11 @@
   session_start();
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
-  } ?>      
+  } 
+    else if ($_SESSION['ID_No'] != 'Admin'){
+      header('Location:ErrorAuthentication.php');  
+    }
+  ?>      
 
 <!DOCTYPE html>
 <html lang="en">
