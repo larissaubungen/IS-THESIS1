@@ -1,3 +1,9 @@
+<?php
+  session_start();
+    if (!isset($_SESSION['ID_No'])) {
+    header('Location:login.php');
+  } ?>      
+
 <!DOCTYPE html>
 <?php
 	mysql_connect("localhost", "root", "")
@@ -41,11 +47,27 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <?php
+              mysql_connect('localhost', 'root', '')
+              or die(mysql_error());  
+              mysql_select_db('lbas_hr') 
+              or die(mysql_error());
+
+              $user=$_SESSION['ID_No'];
+
+              $retrieveName = "SELECT `L_Name`, `F_Name`  
+                               FROM `person` 
+                               WHERE `ID_No` = '".$user."'";
+              $check = mysql_query($retrieveName);
+              while ($row = mysql_fetch_array($check)) {
+                $lastName = $row["L_Name"];
+                $firstName = $row["F_Name"];
+                echo "<i class='icon-user'> $lastName , $firstName </i>";
+                echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+              }?>
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="http://localhost/ISTHESIS/logout.php">Logout</a></li>
+              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -104,6 +126,25 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
             <li><a href="Signup.php">Add Applicant</a></li>
           </ul>
         </li>
+      <li class="active"><a href="http://localhost/IS-THESIS1/HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
+      <li><a href="http://localhost/IS-THESIS1/EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
+      
+
+      <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
+      <li><a href="AttendancePage.php"><i class="icon-table"></i><span>Attendance</span> </a></li>
+      <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i>
+        <span>Applicants</span> <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+
+          <li><a href="http://localhost/IS-THESIS1/ListOfApplicant.php">View Current Applicants</a></li>
+          <li><a href="http://localhost/IS-THESIS1/Signup.php">Add Applicant</a></li>
+        </ul>    
+      <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+         <ul class="dropdown-menu">
+            <li><a href="HR_Resignation.php">Resignations</a></li>
+            <li><a href="HR_Transfer.php">Transfers</a></li>
+         </ul> 
+      </li>
       </ul>
     </div>
     <!-- /container --> 
@@ -145,10 +186,10 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
             <!-- /widget-header -->
             <div class="widget-content">
               <div class="shortcuts"> <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-table"></i><span
-                                        class="shortcut-label">Attendance</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Summary of Reports</span> 
-                                        <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-group"></i><span class="shortcut-label">Employees</span></a>
-
-                                        <a href="http://localhost/ISTHESIS/ListOfApplicant.php" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Applicants</span></a>
+                                        class="shortcut-label">Attendance</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Summary of Reports</span> </a>
+                                        <a href="EmployeesPage.php" class="shortcut"><i class="shortcut-icon icon-group"></i><span class="shortcut-label">Employees</span></a>
+                                        </a>
+                                        <a href="http://localhost/IS-THESIS1/ListOfApplicant.php" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Applicants</span></a>
 
 
                                          </div>
@@ -173,6 +214,23 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
           </div>
           <!-- /widget -->
         </div>
+
+   <div class="widget">
+            <div class="widget-header"> <i class="icon-file"></i>
+              <h3> Message for Announcements</h3>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+                
+
+                    <iframe src="https://im.chikka.com/#" height="600" width="1130" scrolling="auto">Message</iframe>
+
+            </div>
+            <!-- /widget-content --> 
+          </div>
+
+
+
         <!-- /span6 --> 
       </div>
       <!-- /row --> 
@@ -291,8 +349,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
 			},
 			<?php
 			}
-		  ?>
-           
+		  ?>  
           ]
         });
       });

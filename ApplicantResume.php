@@ -11,6 +11,9 @@ $user=$_SESSION['ID_No'];
     mysql_select_db('lbas_hr') 
         or die(mysql_error());
 
+ $checkResume = "SELECT `ID_No`, `Resume` FROM `person` WHERE `ID_No` = '".$user."' AND `Resume` = 'YES'";
+
+ $check = mysql_query($checkResume);
 
 error_reporting(0);
 if($_POST['resume'] == "Submit")
@@ -22,6 +25,7 @@ if($_POST['resume'] == "Submit")
 	$gender = $_POST['sex'];
 	$civil = $_POST['status'];
 	$spouseFName = $_POST['spouseFName'];
+	$spouseMName = $_POST['spouseMName'];
 	$spouseLName = $_POST['spouseLName'];
 
 	//getting value from the Calendar
@@ -167,7 +171,12 @@ if($_POST['resume'] == "Submit")
 	<script src="js/excanvas.min.js"></script> 
 	<script src="js/chart.min.js" type="text/javascript"></script> 
 	<script src="js/bootstrap.js"></script>
-	<script src="js/base.js"></script>   
+	<script src="js/base.js"></script> 
+
+	<!-- include JavaScript file here-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/applicant_resume.js"></script>
+  
 
   <style type="text/css">
     .panel-heading {
@@ -200,197 +209,14 @@ if($_POST['resume'] == "Submit")
 	#date_select2_year{
 		width: 5em;
 	}
+	#prm{
+		text-indent: .5em;
+		padding-left: 1em;
+		font-size: 15px;
+	}
   </style>
   <script type="text/javascript"> // JavaScript for Awards, Experience, Skills and Organizations
-		  $(document).ready(function() {
-		  	var count = 0;
-	        var count1 = 0;
-	        var count2= 0;
-	        var count3 = 0;
-	        // CREATE A "DIV" ELEMENT AND DESIGN IT USING JQUERY ".css()" CLASS.
-	        var divAward = $(document.createElement('div')).css({
-	            padding: '5px', margin: '20px', width: '170px', border: '1px dashed',
-	            borderTopColor: '#999', borderBottomColor: '#999',
-	            borderLeftColor: '#999', borderRightColor: '#999'
-	        });
-
-	        var divOrg = $(document.createElement('div')).css({
-	            padding: '5px', margin: '20px', width: '170px', border: '1px dashed',
-	            borderTopColor: '#999', borderBottomColor: '#999',
-	            borderLeftColor: '#999', borderRightColor: '#999'
-	        });
-
-	         var divExp = $(document.createElement('div')).css({
-	            padding: '5px', margin: '20px', width: '170px', border: '1px dashed',
-	            borderTopColor: '#999', borderBottomColor: '#999',
-	            borderLeftColor: '#999', borderRightColor: '#999'
-	        });
-
- 	         var divSkill = $(document.createElement('div')).css({
-	            padding: '5px', margin: '20px', width: '170px', border: '1px dashed',
-	            borderTopColor: '#999', borderBottomColor: '#999',
-	            borderLeftColor: '#999', borderRightColor: '#999'
-	        });
-	        
-	        $('#addAward').click(function() {
-	            if (count <= 4) {
-	                count = count + 1;
-	                // ADD TEXTBOX.
-	                $(divAward).append('<input type=text class="input" id=tb' + count + ' ' +
-	                            'placeholder="Award ' + count + '" name="Award'+ count +'"/>');
-
-	                if (count == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
-	                    var divSubmit = $(document.createElement('div'));
-	                }
-	                $('#Awards').after(divAward, divSubmit);   // ADD BOTH THE DIV ELEMENTS TO THE "main" divAward.
-	            }
-	            else{      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
-	                $(divAward).append('<label>-</label>'); 
-	                $('#addAward').attr('class', 'bt-disable'); 
-	                $('#addAward').attr('disabled', 'disabled');
-	            }
-	        });
-
-	        $('#addOrg').click(function() {
-	            if (count1 <= 4) {
-	                count1 = count1 + 1;
-	                // ADD TEXTBOX.
-	                $(divOrg).append('<input type=text class="input" id=tb1' + count1 + ' ' +
-	                            'placeholder="Organization' + count1 + '" name="Org'+ count1 +'"/>');
-
-	                if (count1 == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
-	                     var divSubmit1 = $(document.createElement('div'));
-	                }
-	                $('#Organizations').after(divOrg, divSubmit1);   // ADD BOTH THE DIV ELEMENTS TO THE "main" divAward.
-	            }
-	            else{      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
-	                $(divOrg).append('<label>--</label>'); 
-	                $('#addOrg').attr('class', 'bt-disable'); 
-	                $('#addOrg').attr('disabled', 'disabled');
-	            }
-	        });
-
-	        $('#addExp').click(function() {
-	            if (count2 <= 4) {
-	                count2 = count2 + 1;
-	                // ADD TEXTBOX.
-	                $(divExp).append('<input type=text class="input" id=tb2' + count2 + ' ' +
-	                            'placeholder="Former Job Position' + count2 + '" name="Exp'+ count2 +'"/>');
-
-	                if (count2 == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
-	                     var divSubmit2 = $(document.createElement('div'));
-	                }
-	                $('#Experience').after(divExp, divSubmit2);   // ADD BOTH THE DIV ELEMENTS TO THE "main" divAward.
-	            }
-	            else{      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
-	                $(divExp).append('<label>--</label>'); 
-	                $('#addExp').attr('class', 'bt-disable'); 
-	                $('#addExp').attr('disabled', 'disabled');
-	            }
-	        });
-
-	        $('#addSkill').click(function() {
-	            if (count3 <= 4) {
-	                count3 = count3 + 1;
-	                // ADD TEXTBOX.
-	                $(divSkill).append('<input type=text class="input" id=tb3' + count3 + ' ' +
-	                            'placeholder="Skill ' + count3 + '" name="Skill'+ count3 +'" />');
-
-	                if (count3 == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
-	                    var divSubmit3 = $(document.createElement('div'));
-	                }
-	                $('#Skill').after(divSkill, divSubmit3);   // ADD BOTH THE DIV ELEMENTS TO THE "main" divAward.
-	            }
-	            else{      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
-	                $(divSkill).append('<label>-</label>'); 
-	                $('#addSkill').attr('class', 'bt-disable'); 
-	                $('#addSkill').attr('disabled', 'disabled');
-	            }
-	        });
-
-	        $('#removeAward').click(function() {   // REMOVE ELEMENTS ONE PER CLICK.
-	            if (count > 0 && count<=5) { $('#tb' + count).remove(); count = count - 1; }
-	            if (count == 0 || count <0) { $(divAward).empty(); 
-	                $(divAward).remove(); 
-	                $('#addAward').removeAttr('disabled'); 
-	                $('#addAward').attr('class', 'bt');
-	                count = 0;
-	            }
-	        });
-
-	        $('#removeOrg').click(function() {   // REMOVE ELEMENTS ONE PER CLICK.
-	            if (count1 > 0 && count1<=5) { $('#tb1' + count1).remove(); count1 = count1 - 1; }
-	            if (count1 == 0 || count1 <0) { $(divOrg).empty(); 
-	                $(divOrg).remove(); 
-	                $('#addOrg').removeAttr('disabled'); 
-	                $('#addOrg').attr('class', 'bt'); 
-	                count1 = 0;
-	            }
-	        });
-
-	        $('#removeExp').click(function() {   // REMOVE ELEMENTS ONE PER CLICK.
-            if (count2 > 0 && count2<=5) { $('#tb2' + count2).remove(); count2 = count2 - 1; }
-            if (count2 == 0 || count2 <0) { $(divExp).empty(); 
-                $(divExp).remove(); 
-                $('#addExp').removeAttr('disabled'); 
-                $('#addExp').attr('class', 'bt'); 
-                count2 = 0;
-            }
-        	});
-
-        	$('#removeSkill').click(function() {   // REMOVE ELEMENTS ONE PER CLICK.
-            if (count3 > 0 && count3<=5) { $('#tb3' + count3).remove(); count3 = count3 - 1; }
-            if (count3 == 0 || count3 <0) { $(divSkill).empty(); 
-                $(divSkill).remove(); 
-                $('#addSkill').removeAttr('disabled'); 
-                $('#addSkill').attr('class', 'bt'); 
-                count3 = 0;
-            }
-        	});
-
-			$("input[name='status']").change(function(){ //Displaying Spouse Label and Textboxes
-
-			   if($(this).val()=="married")
-			   {
-			      $("#FNspouseName").show();
-       			  $("#LNspouseName").show();
-       			  $('#lbl_spouse').show();
-			   }
-			   else
-			   {
-			       $("#FNspouseName").hide();
-       			   $("#LNspouseName").hide(); 
-       			   $('#lbl_spouse').hide();
-			   }
-
-			});
-
-			//datepicker
-		(function() {
-		var d = new Date();
-		var date_button_val = d.getFullYear()+'-'+(((d.getMonth()+1)<10)?'0'+(d.getMonth()+1):d.getMonth())+'-'+d.getDate();
-		DP.gbi('date_button').value = date_button_val;
-		DP.gbi('date_position').value = date_button_val;
-		DP.gbi('date_no_position').value = date_button_val;
-		DP.gbi('date_callback').value = date_button_val;
-		myFunction(date_button_val,'date_callback_text');
-		})();
-
-		}); //end of scripting
-    // PICK THE VALUES FROM EACH TEXTBOX WHEN "SUBMIT" BUTTON IS CLICKED.
-    var divValue, values = '';
-    function GetTextValue() {
-        $(divValue).empty(); 
-        $(divValue).remove(); values = '';
-        $('.input').each(function() {
-            divValue = $(document.createElement('div')).css({
-                padding:'5px', width:'200px'
-            });
-            values += this.value + '<br />'
-        });
-        $(divValue).append('<p><b>Your selected values</b></p>' + values);
-        $('body').append(divValue);
-    }
+		
    </script>
 
 </head>
@@ -406,35 +232,25 @@ if($_POST['resume'] == "Submit")
 	<!--main navbar-->
  <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
-    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="ApplicantPage.php">LBASS Human Resource Information System </a>
-      <div class="nav-collapse">
-        <ul class="nav pull-right">
+    <div class="container"> 
+    	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+    		<span class="icon-bar"></span>
+    		<span class="icon-bar">
+    		</span><span class="icon-bar"></span> </a>
+		<a class="brand" href="ApplicantPage.php">LBASS Human Resource Information System </a>
+		<div class="nav-collapse">
+        <ul class="nav pull-right">      
             <ul class="dropdown-menu">
               <li><a href="javascript:;">Settings</a></li>
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
-            </ul>
-          </li>
-        </ul><!--
-            <form class="navbar-search pull-right">
-              <input type="text" class="search-query" placeholder="Search">
-            </form>
-			--->
-          </div>
-          <!--/.nav-collapse --> 
-        </div>
+        </div>  
         <!-- /container --> 
-      </div>
-      <!-- /navbar-inner --> 
-    </div>
-    <!-- /navbar -->
+      </div>      <!-- /navbar-inner --> 
+    </div>   <!-- /navbar -->
+</div> <!--Main Navbar-->
+
     <div class="subnavbar">
       <div class="subnavbar-inner">
         <div class="container">
@@ -451,18 +267,42 @@ if($_POST['resume'] == "Submit")
 <div class="container">	 <!--Panel Heading only-->
  	  <div class="row">
  	  	<div class="col-lg-6">
- 	  <div class="panel-heading"><h4 class="panel-title">Applicant Resume</h4></div>
+ 	  		<div class="panel-heading"><h4 class="panel-title">Applicant Resume</h4></div>
 	  <div class="panel-body">	   <!--/Panel Heading only-->
 
+
 	  	<form action="ApplicantSubmitRes.php" method="post">
-		
+	  	
+	  	<br>	
+		<div id="prm">
+	  		For Department:
+	  			<select id="department" name="department">
+	  				<option>--Select--</option>
+					<option>IT</option>
+					<option>Accounting</option>
+					<option>Library</option>
+					<option>Guidance Counselling</option>
+					<option>Principal & Director's Office</option>
+					<option> Registrar </option>
+					<option>HR</option>
+					<option>Humanities</option>
+					<option>SMIT</option>
+					<option>Others</option>
+	  			</select>
+
+	  		&nbsp For Position:
+	  		<select id="position" name="position"></select>
+	  		&nbsp Level:
+	  		<select id="level" name="level"></select>
+  		</div>	<br/>
+
 		 <div class="table-responsive">	<!--Resume Form into table-->
 		 <table class="table"> 
 			<thead>
 				<tr>
 					<th>Personal Information</th>
 					<th></th>
-					<th>Contact details</th>
+					<th>City Address</th>				
 				</tr>
 			</thead>
 				<tbody>
@@ -472,9 +312,10 @@ if($_POST['resume'] == "Submit")
 					<td>
 						<input type="text" name="firstName" value="<?=$firstName;?>">
 					</td>
-					<td id="resume-label"> E-mail: </td>
+					<td id="resume-label"> Street:</td>
 					<td>
-						<input type="email" name="email" value="<?=$email;?>"><br>
+
+						<input type="text" name="street" value="<?=$street;?>"> <br>
 					</td>
 				</tr>	
 				<tr>
@@ -482,19 +323,20 @@ if($_POST['resume'] == "Submit")
 					<td>						
 						<input type="text" name="lastName" value="<?=$lastName;?>">
 					</td>
-					<td id="resume-label"> Mobile Number: </td>
-					<td>
-						<input type="text" name="mobNumber" value="<?=$mobNumber;?>"><br>
+					<td id="resume-label"> City:</td>
+					<td>	
+						<input type="select" name="city" value="<?=$city;?>"> <br>
 					</td>
+					
 				</tr>
 				<tr>
 					<td id="resume-label"> Middle Name:</td>
 					<td>
 						<input type="text" name="middleName" value="<?=$middleName;?>">
 					</td>
-					<td id="resume-label"> Telephone Number: </td>
-					<td>
-						<input type="text" name="telNumber" value="<?=$telNumber;?>"><br>
+					<td id="resume-label"> Province:</td>
+					<td>	
+						<input type="text" name="province" value="<?=$province;?>"> <br>
 					</td>
 				</tr>
 				<tr></tr>
@@ -504,11 +346,13 @@ if($_POST['resume'] == "Submit")
 						<input type="radio" name="sex" value="male" checked> Male
 						<input type="radio" name="sex" value="female"> Female <br>
 					</td>
-					
+					<td id="resume-label"> Zip Code:</td>
+					<td>
+						<input type="text" name="zip" value="<?=$zip;?>"><br>
+					</td>					
 				</tr>
 				<tr>
 					<td id="resume-label"><br> Civil Status: <br>
-						<label id="lbl_spouse" style="display:none;"> Spouse:</label>
 					</td> 
 					
 					<td>
@@ -516,12 +360,37 @@ if($_POST['resume'] == "Submit")
 						<input type="radio" name="status" value="single" checked> Single 
 						<input type="radio" name="status" value="married"> Married <br>
 						<input type="radio" name="status" value="divorced"> Divorced 
-						<input type="radio" name="status" value="widowed"> Widowed <br> <br>						
-						<input type="text" name="FNspouseName" id="FNspouseName" value="<?=$FNspouseName;?>" placeholder="First Name" style="display:none;"> <br/>
-						<input type="text" name="LNspouseName" id="LNspouseName" value="<?=$LNspouseName;?>" placeholder="Last Name" style="display:none;">					
+						<input type="radio" name="status" value="widowed"> Widowed <br>
 					</td>
 				</tr>
-				<tr>
+				<tr style="text-indent:2em;">
+					<td>
+						<label id="lbl_spouse" style="display:none;"> Spouse:</label>
+					</td>
+					<td>
+						<input type="text" name="LNspouseName" id="LNspouseName" value="<?=$LNspouseName;?>" placeholder="Last Name" style="display:none; margin-left:2.5em;">	
+					</td>
+					<td>
+						<input type="text" name="FNspouseName" id="FNspouseName" value="<?=$FNspouseName;?>" placeholder="First Name" style="display:none;"> <br/>
+					</td>
+					<td>
+						<input type="text" name="MNspouseName" id="MNspouseName" value="<?=$MNspouseName;?>" placeholder="Middle Name" style="display:none; margin-left:2.5em;"> <br/>
+					</td>
+
+				</tr>
+				<tr style="text-indent:2em;">
+					<td>
+						<label id="lbl_children"> Children: </label>
+					</td>
+					
+						<div id='divChildren'>		
+							<td>
+							  <input class="bt" type='button' value='+' id='addChild'>
+							  <input class="bt" type='button' value='-' id='removeChild'>
+							</td>
+						</div>	
+					</td>					
+				</tr>
 				<tr>
 					<td id="resume-label"><br>Birthdate:</td>
 					<td>
@@ -648,7 +517,7 @@ if($_POST['resume'] == "Submit")
 				<tr>
 					<td id="resume-label"><br><b>Education</b></td>
 					<td id="resume-label"></td>
-					<td id="resume-label"><br><b>Address</b></td>
+					<td id="resume-label"><b>Personal Contact details</b></td>
 					
 				</tr>
 				<tr>
@@ -656,20 +525,20 @@ if($_POST['resume'] == "Submit")
 					<td>
 						<input type="text" name="highSchool" value="<?=$highSchool;?>"><br>
 					</td>
-					<td id="resume-label"> Street:</td>
+					<td id="resume-label"> E-mail: </td>
 					<td>
-
-						<input type="text" name="street" value="<?=$street;?>"> <br>
+						<input type="email" name="email" value="<?=$email;?>"><br>
 					</td>
+
 				</tr>
 				<tr>
 					<td id="resume-label"> Year Graduated:</td>
 					<td>
 						<input type="text" name="HSyearGraduated" value="<?=$HS_Grad;?>"> <br>
 					</td>
-					<td id="resume-label"> City:</td>
-					<td>	
-						<input type="select" name="city" value="<?=$city;?>"> <br>
+					<td id="resume-label"> Mobile Number: </td>
+					<td>
+						<input type="text" name="mobNumber" value="<?=$mobNumber;?>"><br>
 					</td>
 				</tr>
 				<tr>
@@ -677,9 +546,9 @@ if($_POST['resume'] == "Submit")
 					<td>
 						<input type="text" name="college" value="<?=$college;?>"> <br>
 					</td>
-					<td id="resume-label"> Province:</td>
-					<td>	
-						<input type="text" name="province" value="<?=$province;?>"> <br>
+					<td id="resume-label"> Telephone Number: </td>
+					<td>
+						<input type="text" name="telNumber" value="<?=$telNumber;?>"><br>
 					</td>
 				</tr>
 				<tr>
@@ -687,10 +556,7 @@ if($_POST['resume'] == "Submit")
 					<td>
 						<input type="text" name="degree" value="<?=$degree;?>"><br>
 					</td>
-					<td id="resume-label"> Zip Code:</td>
-					<td>
-						<input type="text" name="zip" value="<?=$zip;?>"><br>
-					</td>					
+										
 				</tr>
 				<tr>
 					<td id="resume-label"> Year Graduated:</td>
@@ -709,7 +575,7 @@ if($_POST['resume'] == "Submit")
 					<td></td>
 				</tr>			
 				<tr>
-					<td id="resume-label"> asteral Degree:</td>
+					<td id="resume-label"> Masteral Degree:</td>
 					<td>
 						<input type="text" name="degree2" value="<?=$degree2;?>">	
 					</td>

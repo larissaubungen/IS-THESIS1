@@ -1,6 +1,13 @@
 <?php
+<<<<<<< HEAD
 	$department = $_POST['department'];
 	$id = $_POST['id'];
+=======
+
+
+$department = $_POST['department'];
+$id = $_POST['id'];
+>>>>>>> origin/master
 
 	mysql_connect("localhost", "root", "")
         or die(mysql_error());

@@ -24,17 +24,6 @@ $user=$_SESSION['ID_No'];
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-<script>
-  function pop_up(){
-    window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=1076,height=768,directories=no,location=no') 
-    }
-  function openwindow()
-      {
-        window.open("HR_ResignationApprove.php","mywindow","menubar=1,resizable=1,width=500,height=250");
-      }
-</script> 
-
 </head>
 <body>
 <div class="navbar navbar-fixed-top">
@@ -49,9 +38,25 @@ $user=$_SESSION['ID_No'];
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <?php
+              mysql_connect('localhost', 'root', '')
+              or die(mysql_error());  
+              mysql_select_db('lbas_hr') 
+              or die(mysql_error());
+
+              $user=$_SESSION['ID_No'];
+
+              $retrieveName = "SELECT `L_Name`, `F_Name`  
+                               FROM `person` 
+                               WHERE `ID_No` = '".$user."'";
+              $check = mysql_query($retrieveName);
+              while ($row = mysql_fetch_array($check)) {
+                $lastName = $row["L_Name"];
+                $firstName = $row["F_Name"];
+                echo "<i class='icon-user'> $lastName , $firstName </i>";
+                echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+              }?>
               <li><a href="javascript:;">Profile</a></li>
               <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
             </ul>
@@ -72,19 +77,25 @@ $user=$_SESSION['ID_No'];
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li class="active"><a href="http://localhost/IS-THESIS1/HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
-        <li><a href="http://localhost/IS-THESIS1/EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
-        
-        <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-        <li><a href="AttendancePage.php"><i class="icon-table"></i><span>Attendance</span> </a></li>
-        <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
-        <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
-        <li><a href="HR_Resignation.php"><i class="icon-list"></i><span>Requests</span></a></li>
-        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="http://localhost/IS-THESIS1/Signup.php">Add Applicant</a></li>
-          </ul>
-        </li>
+      <li class="active"><a href="http://localhost/IS-THESIS1/HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
+      <li><a href="http://localhost/IS-THESIS1/EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
+      
+
+      <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
+      <li><a href="AttendancePage.php"><i class="icon-table"></i><span>Attendance</span> </a></li>
+      <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i>
+        <span>Applicants</span> <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+
+          <li><a href="http://localhost/IS-THESIS1/ListOfApplicant.php">View Current Applicants</a></li>
+          <li><a href="http://localhost/IS-THESIS1/Signup.php">Add Applicant</a></li>
+        </ul>    
+      <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+         <ul class="dropdown-menu">
+            <li><a href="HR_Resignation.php">Resignations</a></li>
+            <li><a href="HR_Transfer.php">Transfers</a></li>
+         </ul> 
+      </li>
       </ul>
     </div>
     <!-- /container --> 
@@ -113,12 +124,11 @@ $user=$_SESSION['ID_No'];
                   ON person.ID_No LIKE resignation.ID_No
                   ORDER BY person.L_Name ASC") or die (mysql_error());
 
-          echo "<h4>Resignation Request</h4>";
+          echo "<h3>Resignation Request</h3><br/>";
 
           while($row = mysql_fetch_array($result)){
 
           $idNumber = $row["ID_No"];
-          echo '<li class="span5 clearfix">';
           echo '<div class="thumbnail clearfix">';
           echo '<img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style="margin-right:10px">';
           echo '<div class="caption" class="pull-left">';
