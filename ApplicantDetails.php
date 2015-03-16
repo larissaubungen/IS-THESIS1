@@ -1,11 +1,13 @@
-<?php 
-	session_start();
+<?php
+  session_start();
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
-	}
+  } 
+    else if ($_SESSION['ID_No'] != 'Admin'){
+      header('Location:ErrorAuthentication.php');  
+    }     
 
 	$user=$_SESSION['ID_No'];
-	$applicantID = $_POST['id'];
 	?>
 <html>
   <head>
@@ -129,7 +131,7 @@
 			</thead>
 				<tbody>
 				<?php
-					$idNo = $_POST['id'];
+					$applicantID = $_POST['id'];
 					//$firstName ='adasdasdasd';
 					
 					mysql_connect('localhost', 'root', '')
@@ -139,23 +141,25 @@
 						or die(mysql_error());
 						
 						 //retrieving details from the person table
-    $applicantDetails = "SELECT `person.L_Name`, `person.F_Name`, `person.M_Name`,
-    						 `person.B_Day`, `person.Gender`, `person.C_Status`,
-    						 `resume.Email`, `resume.M_No`, `resume.T_No`, `resume.Street`, `resume.City`, 
-							 `resume.Province`, `resume.Z_Code`, `resume.C_Status`, `resume.H_School`, 
-							 `resume.HS_Graduated`, `resume.College`, `resume.College_Graduated`, 
-							 `resume.Course`, `resume.Masteral`, `resume.Course2`, `resume.Award1`, 
-							 `resume.Award2`, `resume.Award3`, `resume.Award4`, `resume.Award5`, 
-							 `resume.Org_Aff1`, `resume.Org_Aff2`, `resume.Org_Aff3`, `resume.Org_Aff4`, 
-							 `resume.Org_Aff5`, `resume.T_Skills1`, `resume.T_Skills2`, `resume.T_Skills3`, 
-							 `resume.T_Skills4`, `resume.T_Skills5`, `resume.Experience1`, `resume.Experience2`, 
-							 `resume.Experience3`, `resume.Experience4`, `resume.Experience5`, `resume.ID_No`
-					  FROM `person`, `resume`
-					  WHERE `ID_No` = '".$idNo."'";
+    $applicantDetails = "SELECT DISTINCT person.L_Name, person.F_Name, person.M_Name,
+    						 	person.B_Day, person.Gender, person.C_Status,
+    						 	resume.Email, resume.M_No, resume.T_No, 
+    						 	resume.Street, resume.City, resume.Province, 
+		  						resume.Z_Code, resume.H_School, 
+							 resume.HS_Graduated, resume.College, resume.College_Graduated, 
+							 resume.Course, resume.Masteral, resume.Course2, resume.Award1, 
+							 resume.Award2, resume.Award3, resume.Award4, resume.Award5, 
+							 resume.Org_Aff1, resume.Org_Aff2, resume.Org_Aff3, resume.Org_Aff4, 
+							 resume.Org_Aff5, resume.T_Skills1, resume.T_Skills2, resume.T_Skills3, 
+							 resume.T_Skills4, resume.T_Skills5, resume.Experience1, resume.Experience2, 
+							 resume.Experience3, resume.Experience4, resume.Experience5, resume.ID_No
+					  FROM person, resume
+					  WHERE person.ID_No = '".$applicantID."'";
+		$query = mysql_query($applicantDetails);
 
-	  while($row = mysql_fetch_array($applicantDetails))
+	  while($row = mysql_fetch_array($query))
 	  {
-	  		$applicantID = $row["ID_No"];
+	  		$appIDNum = $row["ID_No"];
 	  		$lastName = $row["L_Name"];
 	  		$firstName = $row["F_Name"];
 	  		$middleName = $row["M_Name"];
@@ -164,6 +168,7 @@
 	  		$civil = $row["C_Status"];
 
 	  		$email = $row["Email"];
+	  		$mobNumber = $row["M_No"];
 	  		$telNumber = $row["T_No"];
 	  		$street = $row["Street"];
 	  		$city = $row["City"];
@@ -176,6 +181,12 @@
 	  		$degree = $row["Course"];
 	  		$masteral = $row["Masteral"];
 	  		$degree2 = $row["Course2"];
+	  		$skill1 = $row["T_Skills1"];
+	  		$skill2 = $row["T_Skills2"];
+	  		$skill3 = $row["T_Skills3"];
+	  		$skill4 = $row["T_Skills4"];
+	  		$skill5 = $row["T_Skills5"];
+
 	  		$award1 = $row["Award1"];
 	  		$award2 = $row["Award2"];
 	  		$award3 = $row["Award3"];
@@ -192,11 +203,12 @@
 	  		$exp4 = $row["Experience4"];
 	  		$exp5 = $row["Experience5"];
 
+	  		echo $firstName;
+	  		echo $lastName;
+
 		echo '<div class="container"><!--Panel Heading only-->
 				<div class="row">
 					<div class="col-lg-6">
-						<div class="panel-heading">
-						<h4 class="panel-title">Applicant Resume</h4></div>
 				
 				<div class="panel-body">	   
 				<!--/Panel Heading only-->';
@@ -318,7 +330,7 @@
 					<td></td>
 					<td><textarea readonly>'.$skill1.', '.$skill2.'
 								,'.$skill3.', '.$skill4.'
-								,'.$skill45.'</textarea></td>
+								,'.$skill5.'</textarea></td>
 				</tr>
 				</tbody>
 					</table>
@@ -334,7 +346,7 @@
 	  		$result2 = mysql_query("
 						SELECT  Schedule_ID
 						FROM applicant_schedule
-						WHERE ID_No = '$idNo'");
+						WHERE ID_No = '$applicantID'");
 
 	  		if(mysql_num_rows($result2) > 0)
 	  		{					
@@ -354,8 +366,10 @@
 		<?php
 			}
 		?>
-
-
+			<form action="ApplicantAccept.php" method="post">
+				<input type="submit" value="Accept">
+				<input type="hidden" class="hidden" name="applicantID" value="<?php echo $applicantID ?>">
+			</form>
 			</tbody>
 			</table>
 	  </div>
