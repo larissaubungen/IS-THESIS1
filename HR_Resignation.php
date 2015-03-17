@@ -41,7 +41,7 @@ $user=$_SESSION['ID_No'];
             <?php
               mysql_connect('localhost', 'root', '')
               or die(mysql_error());  
-              mysql_select_db('lbas_hr') 
+              mysql_select_db('lbass_hr') 
               or die(mysql_error());
 
               $user=$_SESSION['ID_No'];
