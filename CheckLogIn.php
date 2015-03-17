@@ -46,6 +46,12 @@ proper page
 					session_start();
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
+<<<<<<< HEAD
+
+					
+		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
+					header('location:EmployeeProfileHome.php');
+=======
 
 		}
 
@@ -61,6 +67,7 @@ proper page
 
 		else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
 					header('location:EmployeesPage.php');
+>>>>>>> 28858e03f7c1da8c64f3262bb024a4483a363383
 					//start of sessions
 					session_start();
 					//iniating a sessions variable and it's value

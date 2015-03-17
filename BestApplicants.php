@@ -51,10 +51,47 @@
 					echo"&nbsp &nbsp $award4</br>";
 				}if($award5 != null){
 					echo"&nbsp &nbsp $award5</br>";
+				}
+			}else{
+			}
+			if($org1 != null){
+				echo"Organization/s: </br>";
+				echo"&nbsp &nbsp $org1</br>";
+				if($org2 != null){
+					echo"&nbsp &nbsp $org2</br>";
+				}
+				if($org3 != null){
+					echo"&nbsp &nbsp $org3</br>";
+				}
+				if($org4 != null){
+					echo"&nbsp &nbsp $org4</br>";
+				}
+				if($org5 != null){
+					echo"&nbsp &nbsp $org5</br>";
+				}
+			}else{
 			}
 			
-		
-		
+			if($exp1 != null){
+				echo"Experience/: </br>"
+				echo"nbsp &nbsp $exp1</br>";
+				
+				
+				if($exp2 != null){
+					echo"nbsp &nbsp $exp2</br>";
+				}
+				if($exp2 != null){
+					echo"nbsp &nbsp $exp3</br>";
+				}
+				if($exp2 != null){
+					echo"nbsp &nbsp $exp4</br>";
+				}
+				if($exp2 != null){
+					echo"nbsp &nbsp $exp5</br>";
+				}
+			}else {
+			
+			}
 		}
 
 

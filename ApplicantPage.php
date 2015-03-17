@@ -2,7 +2,11 @@
   session_start();
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
-}
+  } 
+    else if ($_SESSION['ID_No'] != 'Applicant'){
+      header('Location:ErrorAuthentication.php');  
+    }
+  ?>      
 
 $user=$_SESSION['ID_No'];
 ?>

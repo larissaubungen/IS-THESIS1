@@ -1,3 +1,17 @@
+<?php
+  session_start();
+    if (!isset($_SESSION['ID_No'])) {
+    header('Location:login.php');
+  } 
+<<<<<<< HEAD
+?>  
+
+=======
+    else if ($_SESSION['ID_No'] != 'Employee'){
+      header('Location:ErrorAuthentication.php');  
+    }
+  ?>      
+>>>>>>> 28858e03f7c1da8c64f3262bb024a4483a363383
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,14 +44,29 @@
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
+       <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <?php
+              mysql_connect('localhost', 'root', '')
+              or die(mysql_error());  
+              mysql_select_db('lbas_hr') 
+              or die(mysql_error());
+
+              $user=$_SESSION['ID_No'];
+
+              $retrieveName = "SELECT `L_Name`, `F_Name`  
+                               FROM `person` 
+                               WHERE `ID_No` = '".$user."'";
+              $check = mysql_query($retrieveName);
+              while ($row = mysql_fetch_array($check)) {
+                $lastName = $row["L_Name"];
+                $firstName = $row["F_Name"];
+                echo "<i class='icon-user'> $lastName , $firstName </i>";
+                echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+              }?>
               <li><a href="javascript:;">Profile</a></li>
               <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
             </ul>
-          </li>
-        </ul>
+          </li>        </ul>
         <form class="navbar-search pull-right">
           <input type="text" class="search-query" placeholder="Search">
         </form>

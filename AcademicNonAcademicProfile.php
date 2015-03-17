@@ -351,12 +351,20 @@
                                              
                                               echo '<tr>';
                                                 echo '<td><strong>GPE for Non-Teaching Staff (2-A)</td>';
-                                                echo '<td><a href=" "> See Results </a></td>';
+                                                   echo'<form action="ResultGPE_2AForm.php" method= "POST">';
+                                                      echo "<input type='hidden' name='id' value='$idNo'/>";
+                                                       echo '<td><input type="submit" value="See Results"></td>';
+                                                   echo'</form>';  
+
+
                                               echo '</tr>';
 
-                                               echo '<tr>';
-                                                echo '<td><strong>GPE for Non-Teaching Staff (2-B)</td>';
-                                                echo '<td><a href=" "> See Results </a></td>';
+                                              echo '<tr>';
+                                                echo '<td><strong>GPE for Non-Teaching Staff (2-A)</td>';
+                                                   echo'<form action="ResultGPE_2AForm.php" method= "POST">';
+                                                      echo "<input type='hidden' name='id' value='$idNo'/>";
+                                                       echo '<td><input type="submit" value="Go to evaluation form"></td>';
+                                                   echo'</form>';  
                                               echo '</tr>';
 
                                         echo '</table>';

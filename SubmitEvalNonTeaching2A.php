@@ -1,3 +1,12 @@
+<?php
+  session_start();
+    if (!isset($_SESSION['ID_No'])) {
+    header('Location:login.php');
+  } 
+?>  
+ 
+
+
  <script type="text/javascript">
 
 		
@@ -10,14 +19,16 @@
   </script>
 <?php
 	 error_reporting(0);
-	mysql_connect("localhost", "root", "")
+	 mysql_connect("localhost", "root", "")
 			or die(mysql_error());
 	
 	mysql_select_db("lbas_hr") 
 		or die(mysql_error());
+
+		$user=$_SESSION['ID_No'];
 		
-		$tbl_name = 'eval_eahw_a';
-		$idNo = $_POST['idNo'];
+		$tbl_name = 'eval_gpe_nonteaching_2a';
+		$idNo = $_POST['id'];
 		$ques_1=$_POST['1'];
 		$ques_2=$_POST['2'];
 		$ques_3=$_POST['3'];
@@ -45,8 +56,8 @@
 		$final = ($sum/5) * 100;
 		echo "percentage = $final";
 		
-		$insert="INSERT INTO $tbl_name (ID_No,Ques_1, Ques_2, Ques_3, Ques_4, Ques_5, Ques_6, Ques_7, Ques_8, Ques_9, Ques_10, Ques_11, Ques_12, Ques_13, Ques_14, Ques_15, Ques_16, Ques_17, Ques_18, Ques_19, Ques_20, Result, Date)
-				VALUES('". $idNo ."', '". $ques_1 ."', '".$ques_2."', '".$ques_3."', '".$ques_4."', '".$ques_5."', '".$ques_6."', '".$ques_7."', '".$ques_8."', '".$ques_9."', '".$ques_10."', '".$ques_11."', '".$ques_12."', '".$ques_13."', '".$ques_14."', '".$ques_15."', '".$ques_16."', '".$ques_17."', '".$ques_18."', '".$ques_19."', '".$ques_20."', '".$final."', '".$date."' )";
+		$insert="INSERT INTO $tbl_name (ID_No,Ques_1, Ques_2, Ques_3, Ques_4, Ques_5, Ques_6, Ques_7, Ques_8, Ques_9, Ques_10, Ques_11, Ques_12, Ques_13, Ques_14, Ques_15, Ques_16, Ques_17, Ques_18, Ques_19, Ques_20, Result, Date, Evaluator_ID)
+				VALUES('". $idNo ."', '". $ques_1 ."', '".$ques_2."', '".$ques_3."', '".$ques_4."', '".$ques_5."', '".$ques_6."', '".$ques_7."', '".$ques_8."', '".$ques_9."', '".$ques_10."', '".$ques_11."', '".$ques_12."', '".$ques_13."', '".$ques_14."', '".$ques_15."', '".$ques_16."', '".$ques_17."', '".$ques_18."', '".$ques_19."', '".$ques_20."', '".$final."', '".$date."', '".$user."' )";
 		
 		
 		$result=mysql_query($insert);
@@ -54,6 +65,7 @@
 		if($result){
 		echo "Thank you for your time! Click the button below to your home page";
 		echo"<input type='button' onClick='CloseForm();' value='Home'>";
+			
 			
 		}else{
 			echo "&nbsp Error".mysql_error();
