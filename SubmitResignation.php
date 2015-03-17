@@ -5,10 +5,10 @@
 	}
 
 $user=$_SESSION['ID_No'];
-$ResignCode=$_POST['RCode'];
+$ResignID=$_POST['ResignID'];
 $dateFiled = $_POST['dateFiled'];
 $dateApprove = $_POST['D_Approve'];
-$reason = $_POST['reason'];
+$reason = $_POST['Reason'];
 $status = 'Pending';
 ?>
 	
@@ -54,9 +54,11 @@ $status = 'Pending';
 		or die(mysql_error());
 
 
+            $user ="0010781881";
+    
 		
-	$DateStat = "INSERT INTO resignation(R_Code, ID_No, D_Filed, reason, R_Status)
-			VALUES ('".$ResignCode."','".$user."','".$dateFiled."', '".$reason."','".$status."')";
+	$DateStat = "INSERT INTO resignation(Resign_ID, ID_No,Reason, Res_Status, Res_Date, Res_DateFiled)
+			VALUES ('".$ResignID."','".$user."','".$reason."','".$status."', '".$dateApprove."','".$dateFiled."')";
 
 	$result = mysql_query($DateStat);
 
@@ -135,19 +137,18 @@ $status = 'Pending';
 	        </div>
 	        <table>
 	          <tr>
-	            <td>Status:</td>
+	            <td><p>Status:</p></td>
 	            <td><input type="text" value="<?=$status;?>" readonly><br/></td>
 	          </tr>
 	          <tr>
 	          	<?php
 	          		if($status=='Pending'){
-	          			echo "<td>Date Approved:</td>";
+	          			echo "<td><p>Date Approved:</p></td>";
 	          			echo "<td><input type='text' value='' readonly></td>";
 	          		}
 	          		else{
-	          			echo "<td>Date Approved:</td>";
+	          			echo "<td><p>Date Approved:</p></td>";
 	          			echo "<td><input type='text' value='".$dateApprove."'> readonly></td>";
-
 	          		}
 	          	?>
 	          </tr>
