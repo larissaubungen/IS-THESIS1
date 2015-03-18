@@ -8,9 +8,9 @@
 
         $idNo = $_POST['id'];
         mysql_connect("localhost", "root", "")
-        or die(mysql_error());
+			or die(mysql_error());
         mysql_select_db("lbas_hr") 
-        or die(mysql_error());
+			or die(mysql_error());
         
             $result = mysql_query("
             SELECT *
