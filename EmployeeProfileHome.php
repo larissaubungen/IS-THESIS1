@@ -109,7 +109,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
 
         <li class="active"><a href="EmployeeProfileHome.php"><i class="icon-dashboard"></i><span>Home</span> </a> </li>
         <li><a href="EmployeeProfilePage.php"><i class="icon-dashboard"></i><span>Profile</span> </a> </li>
-        <li><a href=""><i class="icon-list-alt"></i><span>Reports and Records</span> </a> </li>
+        <li><a href=""><i class="icon-signal"></i><span>Reports and Records</span> </a> </li>
 
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
          <ul class="dropdown-menu">

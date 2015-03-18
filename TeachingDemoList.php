@@ -13,7 +13,7 @@
 		$result = mysql_query("
 				  SELECT  F_Name, L_Name, applicant_schedule.ID_No, applicant_schedule.Schedule_ID, HR_Status, Teaching_Status, Test_Status
 				  FROM person, applicant_schedule
-				  WHERE E_Status = 'Applicant' AND HR_Status = 'Pass' AND Teaching_Status = 'TBD' AND applicant_schedule.ID_No LIKE person.ID_No 
+				  WHERE E_Status = 'Applicant' AND HR_Status = 'Done' AND Teaching_Status = 'TBD' AND applicant_schedule.ID_No LIKE person.ID_No 
 				");
 				
 			echo "<form action='ScheduleTeaching.php' method='POST'>";

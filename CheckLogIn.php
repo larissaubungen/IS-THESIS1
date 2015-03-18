@@ -24,7 +24,7 @@ proper page
 			//&& is_null($check['Resume']) || $check['Resume'] == 'no'
 		$check=mysql_fetch_array($result);
 		 if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && IS_NULL($check['Resume'] )){
-					header('location:ApplicantResume.php');
+					header('location:ApplicantResume2.php');
 					//start of sessions
 					session_start();
 					//iniating a sessions variable and it's value
@@ -46,31 +46,11 @@ proper page
 					session_start();
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
-<<<<<<< HEAD
 
 					
 		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
 					header('location:EmployeeProfileHome.php');
-=======
-
-		}
-
-		/*else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
-
-					header('location:EmployeeResign.php');
-					//start of sessions
 					session_start();
-					//iniating a sessions variable and it's value
-					$_SESSION['ID_No']=$check['ID_No'];
-
-		}*/
-
-		else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
-					header('location:EmployeesPage.php');
->>>>>>> 28858e03f7c1da8c64f3262bb024a4483a363383
-					//start of sessions
-					session_start();
-					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
 
 		}else{ header('location:ErrorLogIn.html');

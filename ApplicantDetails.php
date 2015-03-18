@@ -344,28 +344,24 @@
 
 	  }
 	  		$result2 = mysql_query("
-						SELECT  Schedule_ID
-						FROM applicant_schedule
+						SELECT  
+						FROM 
 						WHERE ID_No = '$applicantID'");
+						
+			echo '<center>';
+			echo '<table id="tfhover" class="tftable" border="1">';
+			echo        '<tr>';
 
-	  		if(mysql_num_rows($result2) > 0)
-	  		{					
-		?>
-			<form action="ViewApplicantSchedule.php" method="post">
-			<input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
-			<input type="submit" value="View applicant's schedule"> 
-			</form>
-		<?php
-			}elseif (mysql_num_rows($result2) == 0) 
-			{
-		?>
-			<form action="Schedule.php" method="post">
-			<input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
-			<input type="submit" value="Set schedule">	
-			</form>
-		<?php
+
+	  		if(mysql_num_rows($result2) > 0){
+			
+				
+			
+			
+			
 			}
-		?>
+			?>
+	  	
 			<form action="ApplicantAccept.php" method="post">
 				<input type="submit" value="Accept">
 				<input type="hidden" class="hidden" name="applicantID" value="<?php echo $applicantID ?>">

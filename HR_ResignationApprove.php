@@ -25,15 +25,58 @@ $user=$_SESSION['ID_No'];
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/kendo.all.min.js"></script>
 
+   <style = "text/css">
+
+   	#yes{
+
+   	}
+   </style>
+
 </head>
 <body>
+	<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
+                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html"><h3>LBASS Human Resource Information System </h3> </a>
+          </div>
+      <!--/.nav-collapse --> 
+    </div>
+    <!-- /container --> 
+  </div>
+  <!-- /navbar-inner --> 
+</div>
+<!-- /navbar -->
 	<div class="container">
 		<?php
 
-		$Applicant = mysql_query("SELECT * FROM `person` WHERE E_Status='Applicant'");
-		$SubEmployee =  mysql_query("SELECT * FROM `person` WHERE E_Position2=' ' OR E_Position2 IS NULL");
-		$FreeEmployee = mysql_query("SELECT * FROM `person` WHERE E_Position2=' ' OR E_Position2 IS NULL OR E_Position1 IS NULL OR E_Position1 IS NULL");
+		//database connection
+	mysql_connect("localhost", "root", "")
+			or die(mysql_error());
+	
+	mysql_select_db("lbas_hr") 
+		or die(mysql_error());
+
+	$resignee_FName = $_POST['firstName'];
+	$resignee_LName = $_POST['lastName'];
+	$resignee_ID = $_POST['idNumber'];
+
+
+
+		//displaying prompt for resignation
+		echo "<br/><h4>Resignation Request</h4><hr>";
+		echo '<div class="thumbnail clearfix">';
+			echo '<div>';
+			echo "<h4>You are to approve the resignation of ".$resignee_LName. ", ". $resignee_FName.
+				 "<br/> Are you sure?</h4><br/><br/>";
+			?>
+			<input type=submit class="btn btn-primary " value="Yes" onClick="location='HR_ResignRecommend.php'">
+			<?php
+			echo "&nbsp &nbsp &nbsp";
+			echo '<input type= "submit" class="btn btn-danger" id="yes"  pull-right" value="No" onClick="self.close();">';
+	      	echo '</div>';
+      	echo '</div>';
 		?>
+
 	</div>
 </body>
 </html>	

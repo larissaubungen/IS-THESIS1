@@ -2,11 +2,9 @@
   session_start();
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
-  }    
-    else if ($_SESSION['ID_No'] != 'Admin'){
-      header('Location:ErrorAuthentication.php');  
-    }
+  } 
   ?>      
+
 <!DOCTYPE html>
 <?php
 	mysql_connect("localhost", "root", "")
@@ -94,8 +92,6 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
         
         <li><a href="reports.html"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
         <li><a href="guidely.html"><i class="icon-table"></i><span>Attendance</span> </a></li>
-        <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
-        <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
         <?php
 		$leaves=mysql_query("SELECT * 
 							 FROM leave_table 
@@ -129,27 +125,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
             <li><a href="Signup.php">Add Applicant</a></li>
           </ul>
         </li>
-      <li class="active"><a href="http://localhost/IS-THESIS1/HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
-      <li><a href="http://localhost/IS-THESIS1/EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
-      
-
-      <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-      <li><a href="AttendancePage.php"><i class="icon-table"></i><span>Attendance</span> </a></li>
-      <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i>
-        <span>Applicants</span> <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-
-          <li><a href="http://localhost/IS-THESIS1/ListOfApplicant.php">View Current Applicants</a></li>
-          <li><a href="http://localhost/IS-THESIS1/Signup.php">Add Applicant</a></li>
-        </ul>    
-      <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
-         <ul class="dropdown-menu">
-            <li><a href="HR_Resignation.php">Resignations</a></li>
-            <li><a href="HR_Transfer.php">Transfers</a></li>
-         </ul> 
-      </li>
-      </ul>
-    </div>
+     </div>
     <!-- /container --> 
   </div>
   </div>
@@ -171,8 +147,8 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
             <!-- /widget-header -->
             <div class="widget-content">
               <div id='calendar'>
-        
-        <input type=button onClick="openwindow();" value='Create event'>
+			  
+			  <input type=button onClick="openwindow();" value='Create event'>
               </div>
             </div>
             <!-- /widget-content --> 
@@ -193,7 +169,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
                                         <a href="EmployeesPage.php" class="shortcut"><i class="shortcut-icon icon-group"></i><span class="shortcut-label">Employees</span></a>
                                         </a>
                                         <a href="http://localhost/IS-THESIS1/ListOfApplicant.php" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Applicants</span></a>
-                                        <a href="EmployeesForEvaluationHRonly.php" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Employees for Evaluation<n/span> </a>
+
 
                                          </div>
               <!-- /shortcuts --> 
@@ -253,29 +229,29 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
  
 <script src="js/base.js"></script> 
 <script>     
-    function openwindow()
-    {
-      window.open("ScheduleEvent.php","mywindow","menubar=1,resizable=1,width=500,height=250");
-    }
+		function openwindow()
+		{
+			window.open("ScheduleEvent.php","mywindow","menubar=1,resizable=1,width=500,height=250");
+		}
 
         var lineChartData = {
             labels: ["January", "February", "March", "April", "May", "June", "July"],
             datasets: [
-        {
-            fillColor: "rgba(220,220,220,0.5)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            data: [65, 59, 90, 81, 56, 55, 40]
-        },
-        {
-            fillColor: "rgba(151,187,205,0.5)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            data: [28, 48, 40, 19, 96, 27, 100]
-        }
-      ]
+				{
+				    fillColor: "rgba(220,220,220,0.5)",
+				    strokeColor: "rgba(220,220,220,1)",
+				    pointColor: "rgba(220,220,220,1)",
+				    pointStrokeColor: "#fff",
+				    data: [65, 59, 90, 81, 56, 55, 40]
+				},
+				{
+				    fillColor: "rgba(151,187,205,0.5)",
+				    strokeColor: "rgba(151,187,205,1)",
+				    pointColor: "rgba(151,187,205,1)",
+				    pointStrokeColor: "#fff",
+				    data: [28, 48, 40, 19, 96, 27, 100]
+				}
+			]
 
         }
 
@@ -285,17 +261,17 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
         var barChartData = {
             labels: ["January", "February", "March", "April", "May", "June", "July"],
             datasets: [
-        {
-            fillColor: "rgba(220,220,220,0.5)",
-            strokeColor: "rgba(220,220,220,1)",
-            data: [65, 59, 90, 81, 56, 55, 40]
-        },
-        {
-            fillColor: "rgba(151,187,205,0.5)",
-            strokeColor: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 96, 27, 100]
-        }
-      ]
+				{
+				    fillColor: "rgba(220,220,220,0.5)",
+				    strokeColor: "rgba(220,220,220,1)",
+				    data: [65, 59, 90, 81, 56, 55, 40]
+				},
+				{
+				    fillColor: "rgba(151,187,205,0.5)",
+				    strokeColor: "rgba(151,187,205,1)",
+				    data: [28, 48, 40, 19, 96, 27, 100]
+				}
+			]
 
         }    
 
@@ -313,7 +289,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
           selectable: true,
           selectHelper: true,
           select: function(start, end, allDay) {
-      /*
+		  /*
             var title = prompt('Event Title:');
             if (title) {
               calendar.fullCalendar('renderEvent',
@@ -328,7 +304,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
             }
             calendar.fullCalendar('unselect');
           */
-      },
+		  },
           editable: true,
           events: [
 		  <?php
@@ -346,41 +322,14 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
 			?>
 			{
 			  title: 'Applicant human resource interview',
-      <?php
-      error_reporting(0);
-      
-      mysql_connect("localhost", "root", "")
-        or die(mysql_error());
-  
-      mysql_select_db("lbas_hr") 
-        or die(mysql_error());
-        
-        $events=mysql_query("
-        SELECT HR_Date, HR_Time, HR_Status
-        FROM applicant_schedule
-        ");
-        
-      while($row = mysql_fetch_array($events)) {
-      //$hr_Date = $row['HR_Date'];
-      list($year,$month,$day)=explode("-", $row['HR_Date']);
-      list($hour,$minute,$seconds)=explode(":", $row['HR_Time']);
-      ?>
-      {
-        title: 'Applicant human resource interview',
               start: new Date(<?php echo $year; ?>,<?php echo $month; ?>-1, <?php echo $day; ?>, <?php echo $hour; ?>, <?php echo $minute; ?>),
-        allDay: false
-      
-      },
-      <?php
-      }
-      ?>  
 			  allDay: false
 			
 			},
 			<?php
 			}
-		  ?>            
-		  ]
+		  ?>  
+          ]
         });
       });
     </script><!-- /Calendar -->

@@ -38,11 +38,12 @@
 	$LNChild8 = $_POST['LNChild8'];
 	$LNChild9 = $_POST['LNChild9'];
 	$LNChild10 = $_POST['LNChild10'];
-
+	
 	//getting value from the Calendar
-	//$birth = array($_POST['date_select2_month'],$_POST['date_select2_day'], $_POST['date_select2_year']);
-	//$bDay = implode(" ", $birth);
-	$bDay = $_POST['date_select2'];
+	$birth = array($_POST['date_select2_year'], $_POST['date_select2_month'],$_POST['date_select2_day']);
+	$bDay = implode("-", $birth);
+	//$bDay = ;
+	//echo "Birthday: $bDay";
 
 	$email = $_POST['email'];
 	$street = $_POST['street'];
@@ -83,159 +84,33 @@
 	$level=$_POST['level'];
 	$resume = "Yes";
 
-	?>
-
-	<html>
-  	<head>
-    <meta charset="utf-8">
-    <title>LBASS Applicant Resume</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
-            rel="stylesheet">
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/pages/dashboard.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="jquery/jquery-ui.css">
-    <link href="content/shared/styles/examples-offline.css" rel="stylesheet">
-    <!--DatePicker-->
-    <link rel='stylesheet' type='text/css' media="screen" href='datePicker/datepicker.css' />
-	<script type="text/javascript" src="datePicker/datepicker.js"></script>
-
-    
-           <!-- Placed at the end of the document so the pages load faster --> 
-	<script src="js/jquery-1.7.2.min.js"></script> 
-	<script src="js/jquery.min.js"></script>
-	<script src="js/excanvas.min.js"></script> 
-	<script src="js/chart.min.js" type="text/javascript"></script> 
-	<script src="js/bootstrap.js"></script>
-	<script src="js/base.js"></script>   
-
-  <style type="text/css">
-    .panel-heading {
-    width: 20em;
-    height: 2em;
-    text-align: center;	
-    background-color: lightgray;
-    border-bottom: 1px solid transparent;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    text-align: center;
-    }
-    .panel-body{
-	border-bottom: 1px solid transparent;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    }
-    #resume-label{
-    	text-indent: .5em;
-    }
-    td {
-    padding: 7px;
-	}
-	input{
-		background-color: rgba(0,0,0,0.1);
-	}
-
-  </style>
-  <body>
-    <!--main navbar-->
- <div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="ApplicantPage.php">LBASS Human Resource Information System </a>
-      <div class="nav-collapse">
-        <ul class="nav pull-right">
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Settings</a></li>
-              <li><a href="javascript:;">Help</a></li>
-            </ul>
-          </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-          </div>
-          <!--/.nav-collapse --> 
-        </div>
-        <!-- /container --> 
-      </div>
-      <!-- /navbar-inner --> 
-    </div>
-    <!-- /navbar -->
-    <div class="subnavbar">
-      <div class="subnavbar-inner">
-        <div class="container">
-          <ul class="mainnav">
-            <li><a href="ApplicantPage.php"><i class="icon-home"></i><span>Home</span> </a> </li>
-            <li><a href="ApplicantGuidelines.html"><i class="icon-list-alt"></i><span>Guidelines</span> </a> </li>
-            <li class="active"><a href="#"><i class="icon-file"></i><span>Resume</span> </a> </li>
-          </ul>
-        </div>
-        <!-- /container --> 
-      </div>
-      <!-- /subnavbar-inner --> 
-    </div>
-    <!-- /subnavbar -->
-
-    <div class="container">	 <!--Panel Heading only-->
- 	  <div class="row">
- 	  	<div class="col-lg-6">
-	  <div class="panel-body">	
-	  </div>
-	  </div>
-	  </div>
-    </div>
-
-	<?php
-	error_reporting(0);
 	mysql_connect('localhost', 'root', '')
         or die(mysql_error());
 		
         mysql_select_db('lbas_hr') 
         or die(mysql_error());
 
+		
 		$updatePerson = "UPDATE person 
-						 SET 	`L_Name` = '".$lastName."', 
-						 		`F_Name` = '".$firstName."', 
-						 		`M_Name` = '".$middleName."',
-						 		`B_Day` = '".$bDay."',
-						 		`Resume` = '".$resume."',
-						 		`C_Status` = '".$civil."'
-				 		 		WHERE `ID_No` ='".$user."'";
+						 SET 	L_Name = '".$lastName."', 
+						 		F_Name = '".$firstName."', 
+						 		M_Name = '".$middleName."',
+						 		B_Day = '".$bDay."',
+						 		Resume = '".$resume."',
+						 		C_Status = '".$civil."'
+				 		 		WHERE ID_No ='".$user."'";
 
-		$updateFamily = "INSERT INTO `family`
-						(`ID_No`, `Spouse_Lname`, `Spouse_Fname`, `Spouse_Mname`, `Child1_Fname`,
-						`Child1_Lname`, `Child2_Fname`, `Child2_Lname`, `Child3_Fname`, `Child3_Lname`, 
-						`Child4_Fname`, `Child4_Lname`, `Child5_Fname`, `Child5_Lname`, `Child6_Fname`,
-						`Child6_Lname`, `Child7_Fname`, `Child7_Lname`, `Child8_Fname`, `Child8_Lname`,
-						`Child9_Fname`, `Child9_Lname`, `Child10_Fname`, `Child10_Lname`)
+		
 
-		VALUES ('".$user."','".$Spouse_Lname."','".$Spouse_Fname."','".$Spouse_Mname."',
-				'".$Child1_Fname."','".$Child1_Lname."','".$Child2_Fname."','".$Child2_Lname."',
-				'".$Child3_Fname."','".$Child3_Lname."','".$Child4_Fname."','".$Child4_Lname."',
-				'".$Child5_Fname."','".$Child5_Lname."','".$Child6_Fname."','".$Child6_Lname."',
-				'".$Child7_Fname."','".$Child5_Lname."','".$Child8_Fname."','".$Child8_Lname."',
-				'".$Child9_Fname."','".$Child9_Lname."','".$Child10_Fname."','".$Child10_Fname."')";	
-
-
-		$updateResume = "INSERT INTO `resume`
-				 		 (`ID_No`, `Email`, `M_No`, `T_No`, `Street`, 
-						 `City`, `Province`, `Z_Code`, `H_School`, `HS_Graduated`, 
-						 `College`,`College_Graduated`, `Course`, `Masteral`, `Course2`, 
-						 `Award1`, `Award2`, `Award3`, `Award4`, `Award5`, 
-						 `Org_Aff1`, `Org_Aff2`, `Org_Aff3`, `Org_Aff4`, `Org_Aff5`, 
-						 `T_Skills1`, `T_Skills2`, `T_Skills3`, `T_Skills4`, `T_Skills5`, 
-						 `Experience1`, `Experience2`, `Experience3`, `Experience4`, `Experience5`, 
-						 `App_Department`, `App_Position`, `App_Level`)
+		$updateResume = "INSERT INTO resume
+				 		 (ID_No, Email, M_No, T_No, Street, 
+						 City, Province, Z_Code, H_School, HS_Graduated, 
+						 College,College_Graduated, Course, Masteral, Course2, 
+						 Award1, Award2, Award3, Award4, Award5, 
+						 Org_Aff1, Org_Aff2, Org_Aff3, Org_Aff4, Org_Aff5, 
+						 T_Skills1, T_Skills2, T_Skills3, T_Skills4, T_Skills5, 
+						 Experience1, Experience2, Experience3, Experience4, Experience5, 
+						 App_Department, App_Position, App_Level)
 
 
 		VALUES ('".$user."','".$email."','".$mobNumber."','".$telNumber."','".$street."',
@@ -247,20 +122,36 @@
 				'".$skill5."','".$exp1."','".$exp2."','".$exp3."','".$exp4."',
 				'".$exp5."','".$dept."','".$position."','".$level."')";
 
+		if($Spouse_Lname != '' or $Child1_Fname != ''){
+		$updateFamily = "INSERT INTO family
+						(ID_No, Spouse_Lname, Spouse_Fname, Spouse_Mname, Child1_Fname,
+						Child1_Lname, Child2_Fname, Child2_Lname, Child3_Fname, Child3_Lname, 
+						Child4_Fname, Child4_Lname, Child5_Fname, Child5_Lname, Child6_Fname,
+						Child6_Lname, Child7_Fname, Child7_Lname, Child8_Fname, Child8_Lname,
+						Child9_Fname, Child9_Lname, Child10_Fname, Child10_Lname)
+
+		VALUES ('".$user."','".$Spouse_Lname."','".$Spouse_Fname."','".$Spouse_Mname."',
+				'".$Child1_Fname."','".$Child1_Lname."','".$Child2_Fname."','".$Child2_Lname."',
+				'".$Child3_Fname."','".$Child3_Lname."','".$Child4_Fname."','".$Child4_Lname."',
+				'".$Child5_Fname."','".$Child5_Lname."','".$Child6_Fname."','".$Child6_Lname."',
+				'".$Child7_Fname."','".$Child5_Lname."','".$Child8_Fname."','".$Child8_Lname."',
+				'".$Child9_Fname."','".$Child9_Lname."','".$Child10_Fname."','".$Child10_Fname."')";	
+		
+			$checkUpdate3 = msql_query($updateFamily);
+		}
+		
 		$checkUpdate1 = mysql_query($updatePerson);
 		$checkUpdate2 = mysql_query($updateResume);
-		$checkUpdate3 = msql_query($updateFamily);
+		
 
 		//Redirecting to Applicant Page once Resume is submitted
-		if ($checkUpdate1 && $checkUpdate2 && $checkUpdate3) { 
+		if ($checkUpdate1 && $checkUpdate2) { 
 			header('Location:ApplicantPage.php');			
 		 } 
-
-		//Redirecting to SubmitFailed
 		else{
-			header('Location:ApplicantSubmitFailed.php');
+			//header('Location:ApplicantSubmitFailed.php');
+			die('Invalid query: ' . mysql_error());
 		}
-
 
 	?>
 </body>
