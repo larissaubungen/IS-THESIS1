@@ -54,11 +54,15 @@ $status = 'Pending';
 		or die(mysql_error());
 
 
-            $user ="0010781881";
+            $user ="0010781881";  //for changing ID no since no session_regenerateID()
     
 		
 	$DateStat = "INSERT INTO resignation(Resign_ID, ID_No,Reason, Res_Status, Res_Date, Res_DateFiled)
 			VALUES ('".$ResignID."','".$user."','".$reason."','".$status."', '".$dateApprove."','".$dateFiled."')";
+
+	$updatePerson = "UPDATE `person` 
+					 SET `Resign_ID`= '".$ResignID."' 
+					 WHERE ID_No LIKE '".$user."' ";
 
 	$result = mysql_query($DateStat);
 
