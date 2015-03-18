@@ -2,15 +2,13 @@
   session_start();
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
-<<<<<<< HEAD
-  } ?>      
-=======
-  } 
+
+  }  
     else if ($_SESSION['ID_No'] != 'Admin'){
       header('Location:ErrorAuthentication.php');  
     }
   ?>      
->>>>>>> 28858e03f7c1da8c64f3262bb024a4483a363383
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -312,21 +310,18 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
       {
         title: 'Applicant human resource interview',
               start: new Date(<?php echo $year; ?>,<?php echo $month; ?>-1, <?php echo $day; ?>, <?php echo $hour; ?>, <?php echo $minute; ?>),
-<<<<<<< HEAD
         allDay: false
       
       },
       <?php
       }
       ?>  
-=======
 			  allDay: false
 			
 			},
 			<?php
-			}
+			
 		  ?>  
->>>>>>> 28858e03f7c1da8c64f3262bb024a4483a363383
           ]
         });
       });
