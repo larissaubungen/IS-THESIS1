@@ -150,42 +150,51 @@
             
             mysql_select_db("lbas_hr") 
               or die(mysql_error());   
-          
-          $result = mysql_query("
-              SELECT DISTINCT person.F_Name as firstName, person.M_Name as middleName, person.L_Name as lastName,work.E_Position1 as position1, work.E_Position2 as position2, work.Department as dept, work.Level, work.Subject as subject, work.Subject_Type as subj_type, work.Grade as grade, work.Date_Assigned as dateAssigned,resignation.ID_No as resIDNo, resignation.Res_DateFiled as dateFiled, resignation.Reason
-              FROM person, work, resignation
-              WHERE person.ID_No LIKE resignation.ID_No and resignation.Resign_ID Like person.Resign_ID and person.ID_No like work.ID_No");
-
 
           echo "<h3>Resignation Request</h3><br/>";
 
-           $flag = $_POST["deleteFlag"];
-           $idNumber = $_POST["idNumber"];
+          $flag = $_POST["deleteFlag"]; //variable indicator if the Admin user approve the resignation
+          $idNumber = $_POST["idNumber"]; 
+
+          date_default_timezone_set('Asia/Manila'); //Setting up the timezone to Philippines   
+           $today = date('Y-m-d', strtotime($date .' -1 day'));  //setting the date 1 day late because of the timezone problem?
+           $date = date_create($today, timezone_open('Asia/Manila')); //creating procedural date
+           $datePH = date_format($date, 'Y-m-d'); //formating the date today
+
+           $archiveYES = "Yes";
            $approvedStat = "Approve";
-           $today = getdate();
-           $dateToday = date_format($today, "Y-m-d");
 
-
-          if (!(is_null($flag))){  //not sure with the work.ID_No
-
+          if (!(is_null($flag))){  //approving the list based on the flag
+            /*
             $approveResign = mysql_query("
-                      UPDATE `person`,`resignation`,`work`
-                      SET person.Resign_ID = NULL, person.E_Status= NULL, person.CurrentWork_ID = NULL,
-                          resignation.Res_Status = '".$approvedStat."', resignation.Res_Date = '".$dateToday."',
-                          work.ID_No=NULL
-                      WHERE person.Resign_ID = '".$idNumber."', resignation.ID_No = '".$idNumber."', work.ID_No = '".$idNumber."'
+            UPDATE `person`,`resignation`,`work`
+            SET person.E_Status= 'NULL', person.CurrentWork_ID = 'NULL', person.Archive = '".$archiveYES."',
+                resignation.Res_Status = '".$approvedStat."', resignation.Res_Date = '".$datePH."', work.ID_No ='NULL'
+            WHERE person.ID_No = '".$idNumber."' AND resignation.ID_No = '".$idNumber."' AND work.ID_No= '".$idNumber."'                  
               ");
 
-            ?>
-            <div class="alert alert-success alert-dismissible" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <strong>Resignation Approved.</strong> 
-            </div>
+            if ($approveResign) {
+                //dismissible alert for approval success
+              */?>            
+              <div id="alert" class="alert alert-success alert-dismissible" role="alert" onclick="close()">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" onclick="close">&times;</span></button>
+                <strong>Resignation Approved.</strong> 
+              </div>
+                
+            <?php /*}else{
+                $flag = NULL;
+              }*/
 
-          <?php }
+           }
           else{
             $flag = NULL;
           }
+          //query for the list of resignation requests filtered to pending status
+          $result = mysql_query("
+              SELECT DISTINCT person.F_Name as firstName, person.M_Name as middleName, person.L_Name as lastName,work.E_Position1 as position1, work.E_Position2 as position2, work.Department as dept, work.Level, work.Subject as subject, work.Subject_Type as subj_type, work.Grade as grade, work.Date_Assigned as dateAssigned,resignation.ID_No as resIDNo, resignation.Res_DateFiled as dateFiled, resignation.Reason
+              FROM person, work, resignation
+              WHERE person.ID_No LIKE resignation.ID_No and resignation.Resign_ID Like person.Resign_ID and person.ID_No like work.ID_No and resignation.Res_Status LIKE 'Pending'");
+
 
           while($row = mysql_fetch_array($result)){
 
@@ -255,8 +264,9 @@
             }
        }elseif (is_null($position2) && !(is_null($position1))) {
           echo ' <p><b>Position 1: </b>'. $position1 .' <br/>'.'  </p>';  
-          echo ' <p><b>Department: </b>'. $dept .' <br/>'.'  </p>';
-
+         if (!is_null($dept)) {
+                echo ' <p><b>Department: </b>'. $dept .' <br/>'.'  </p>';    
+            } 
        }else{
           echo ' <p><b>Position 1: </b>'. $position1 .' <br/>'.'  </p>';  
           echo ' <p><b>Position 2: </b>'. $position2 .' <br/>'.'  </p>';  
@@ -290,7 +300,7 @@
     <!-- <button class="btn" data-toggle="modal" href="#stack3">Select</button>  -->
   </div>
   <div class="modal-footer">
-    <button type="button" data-dismiss="modal" class="btn">Return</button>
+    
 
     <form id="resignForm" action="HR_Resignation.php" method= "POST">
       <?php
@@ -307,6 +317,7 @@
         echo '<input type="hidden" id="subj_type" name="subj_type" value="'.$subj_type.'">';
 
       ?>
+      <button type="button" data-dismiss="modal" class="btn">Return</button>
         <input type="submit" class="btn btn-primary" value="Proceed">      
     </form>
   </div>
@@ -330,9 +341,13 @@
         function modal(){
           $("#stack1").getElementById().show();          
         }
+       function close(){
+          $("#alert").getElementById().hide();
+        }
       );
 </script>  
 <script src="js/jquery-1.7.2.min.js"></script> 
+<script src="js/boostrap.min.js"></script> 
 <script src="js/excanvas.min.js"></script> 
 <script src="js/chart.min.js" type="text/javascript"></script> 
 <script language="javascript" type="text/javascript" src="js/full-calendar/fullcalendar.min.js"></script>

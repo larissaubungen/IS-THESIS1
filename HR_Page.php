@@ -95,9 +95,8 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
         <li><a href="reports.html"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
         <li><a href="guidely.html"><i class="icon-table"></i><span>Attendance</span> </a></li>
         <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
-        <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
         <?php
-		$leaves=mysql_query("SELECT * 
+		            $leaves=mysql_query("SELECT * 
 							 FROM leave_table 
 							 WHERE L_Status ='Pending'");
 		
