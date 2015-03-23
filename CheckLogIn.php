@@ -16,7 +16,7 @@ proper page
 		
 		//method for finding a match in the database from $userName, $userPass
 		$result = mysql_query("
-		SELECT  person.ID_No as 'ID_No', person.P_Word as 'password', E_Status as 'status', Resume
+		SELECT  person.ID_No as 'ID_No', person.P_Word as 'password', E_Status as 'status'
 		FROM person 
 		WHERE ID_No = '" . $userName . "' 
 		AND P_Word = '" . $userPass . "' 	
@@ -30,6 +30,7 @@ proper page
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
 		//condition for no match found
+
 		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Admin'){
 					header('location:HR_Page.php');
 					//start of sessions
@@ -45,7 +46,9 @@ proper page
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
 
-		}else{ header('location:ErrorLogIn.html');
+		} else { 
+
+			header('location:ErrorLogIn.html');
 
 		}
 ?>
