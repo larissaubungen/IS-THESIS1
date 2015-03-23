@@ -1,11 +1,3 @@
-<?php
-  session_start();
-    if (!isset($_SESSION['ID_No'])) {
-    header('Location:login.php');
-  } 
-?>  
- 
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -80,58 +72,31 @@
     <!-- /subnavbar -->
     <div class="well" align="center">
     <h4>Evaluation of Advisory Work(EAHW-B)</h4>
-	  <br>
-
-  <?php
-
-        $idNo = $_POST['id'];
-        mysql_connect("localhost", "root", "")
-        or die(mysql_error());
-        mysql_select_db("lbas_hr") 
-        or die(mysql_error());
-
-
-            $result = mysql_query("
-            SELECT *
-            FROM person 
-            WHERE person.ID_No = '$idNo' 
-            "); 
-
-
-          while($row = mysql_fetch_array($result)){
-          $firstName = $row["F_Name"];
-          $lastName = $row["L_Name"];
-          $middleName = $row["M_Name"];
-          $subjectType = $row['Subject_Type'];
-
 	
-    echo '<h5>Name of Teacher: </h5>';
-        echo '<form action="SubmitECIAForm.php" method="POST" onsubmit="target_popup(this)">';  
-        echo '<input type="text" placeholder="Name of Teacher" value="'. $row['L_Name'] . "," . " " . $row['F_Name'] .  '" readonly>';
-        echo "<input type='hidden' name='id' value='$idNo'/>";
-        echo '<h5>Level/Section:</h5>';
-        echo '<input type="text" placeholder="(Grade,Section)"> <br>';
-        
-        echo '<h5>Subject of Instruction:</h5>';
-        echo '<input type="text" placeholder="Subject of Instruction" value="' . $row['Subject_Type'] . '" readonly> <br>';
+	<form action='SubmitECIAForm.php' method='POST' onsubmit="target_popup(this)>
+        <h5>Name of Teacher:</h5>
+        <input type="text" placeholder="Name of Teacher">
+        <h5>Level/Section:</h5>
+        <input type="text" placeholder="(Grade,Section)"> <br>
+        <h5>Subject of Instruction:</h5>
+        <input type="text" placeholder="Subject of Instruction">
 
-        echo '<h5>Type of Observation:</h5>';
-        echo '<br>';
+        <h5>Type of Observation:</h5>
+        <br>
 
         
-        echo '<input type="checkbox" name="clinicalVisit">Clinical Visit<br>';
-        echo '<input type="checkbox" name="vehicle">Formal Visit';
-        
-        echo '<br><br>';
-  
+        <input type="checkbox" name="clinicalVisit">Clinical Visit<br>
+        <input type="checkbox" name="vehicle">Formal Visit
        
-        echo '<select name="typeOfObservation">';
-          echo '<option>Announced</option>';
-          echo '<option>Unannounced</option>';
-        echo '</select>';
-      }
+
+       
+        <select name="typeOfObservation">
+        <option>Announced</option>
+        <option>Unannounced</option>
+
+        </select>
       
-?>
+
         <div class="well" align="center">
         <table border="1">
             <thead>

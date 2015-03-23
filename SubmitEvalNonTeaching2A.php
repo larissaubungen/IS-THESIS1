@@ -61,13 +61,12 @@
 		
 		
 		$result=mysql_query($insert);
+		
 		if($result){
 		echo "Thank you for your time! Click the button below to your home page";
 		echo"<input type='button' onClick='CloseForm();' value='Home'>";
 			
-
-
-	11
+			
 		}else{
 			echo "&nbsp Error".mysql_error();
 		}

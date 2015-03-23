@@ -2,9 +2,18 @@
   session_start();
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
-  } ?>      
-
+  }    
+    else if ($_SESSION['ID_No'] != 'Admin'){
+      header('Location:ErrorAuthentication.php');  
+    }
+  ?>      
 <!DOCTYPE html>
+<?php
+	mysql_connect("localhost", "root", "")
+				or die(mysql_error());
+	mysql_select_db("lbas_hr") 
+				or die(mysql_error());
+?>
 <html lang="en">
 <head>
 <script>
@@ -80,6 +89,45 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
+        <li class="active"><a href="index.html"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
+        <li><a href="index.html"><i class="icon-user"></i><span>Employees</span> </a> </li>
+        
+        <li><a href="reports.html"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
+        <li><a href="guidely.html"><i class="icon-table"></i><span>Attendance</span> </a></li>
+        <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
+        <?php
+		            $leaves=mysql_query("SELECT * 
+							 FROM leave_table 
+							 WHERE L_Status ='Pending'");
+		
+		if(mysql_num_rows($leaves) > 0){
+		?>
+		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests*</span></a>
+           <ul class="dropdown-menu">
+              <li><a href="HR_Resignation.php">Resignations</a></li>
+              <li><a href="HR_Transfer.php">Transfers</a></li>
+			  <li><a href="LeaveRequest.php">Leaves*</a></li>
+           </ul> 
+        </li>
+		<?php
+		}else{
+		?>
+		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+           <ul class="dropdown-menu">
+              <li><a href="HR_Resignation.php">Resignations</a></li>
+              <li><a href="HR_Transfer.php">Transfers</a></li>
+			  <li><a href="HR_Transfer.php">Leaves</a></li>
+           </ul> 
+        </li>
+		<?php
+		}
+		?>
+		
+        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="Signup.php">Add Applicant</a></li>
+          </ul>
+        </li>
       <li class="active"><a href="http://localhost/IS-THESIS1/HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
       <li><a href="http://localhost/IS-THESIS1/EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
       
@@ -282,6 +330,21 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
       },
           editable: true,
           events: [
+		  <?php
+		  error_reporting(0);
+				
+				$events=mysql_query("
+				SELECT HR_Date, HR_Time, HR_Status
+				FROM applicant_schedule
+				");
+				
+			while($row = mysql_fetch_array($events)) {
+			//$hr_Date = $row['HR_Date'];
+			list($year,$month,$day)=explode("-", $row['HR_Date']);
+			list($hour,$minute,$seconds)=explode(":", $row['HR_Time']);
+			?>
+			{
+			  title: 'Applicant human resource interview',
       <?php
       error_reporting(0);
       
@@ -310,7 +373,13 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
       <?php
       }
       ?>  
-          ]
+			  allDay: false
+			
+			},
+			<?php
+			}
+		  ?>            
+		  ]
         });
       });
     </script><!-- /Calendar -->

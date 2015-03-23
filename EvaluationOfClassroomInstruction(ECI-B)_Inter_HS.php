@@ -1,12 +1,3 @@
-<?php
-  session_start();
-    if (!isset($_SESSION['ID_No'])) {
-    header('Location:login.php');
-  } 
-?>  
- 
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -63,33 +54,17 @@
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <?php
-              mysql_connect('localhost', 'root', '')
-              or die(mysql_error());  
-              mysql_select_db('lbas_hr') 
-              or die(mysql_error());
-
-              $user=$_SESSION['ID_No'];
-
-              $retrieveName = "SELECT `L_Name`, `F_Name`  
-                               FROM `person` 
-                               WHERE `ID_No` = '".$user."'";
-              $check = mysql_query($retrieveName);
-              while ($row = mysql_fetch_array($check)) {
-                $lastName = $row["L_Name"];
-                $firstName = $row["F_Name"];
-                echo "<i class='icon-user'> $lastName , $firstName </i>";
-                echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
-              }?>
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
+            <ul class="dropdown-menu">
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="logout.php">Logout</a></li>
+              <li><a href="javascript:;">Logout</a></li>
             </ul>
           </li>
         </ul>
             <form class="navbar-search pull-right">
               <input type="text" class="search-query" placeholder="Search">
-            </form>            
+            
           </div>
           <!--/.nav-collapse --> 
         </div>
@@ -113,46 +88,13 @@
     <div class="well" align="center">
     <h4>Evaluation of Class Instruction (ECI-B) for Intermediate and High School Students</h4>
     <br>
-
-    <?php
-
-        $idNo = $_POST['id'];
-        mysql_connect("localhost", "root", "")
-        or die(mysql_error());
-        mysql_select_db("lbas_hr") 
-        or die(mysql_error());
-
-
-            $result = mysql_query("
-            SELECT *
-            FROM person 
-            WHERE person.ID_No = '$idNo' 
-            "); 
-
-
-          while($row = mysql_fetch_array($result)){
-          $firstName = $row["F_Name"];
-          $lastName = $row["L_Name"];
-          $middleName = $row["M_Name"];
-          $subjectType = $row['Subject_Type'];
-
-
-          echo '<h5>Name of Teacher:</h5>';
-
-		echo '<form action="SubmitEvalECIB.php" method="POST" onsubmit="target_popup(this)">';
-        echo '<input type="text" placeholder="Name of Teacher" value="'. $row['L_Name'] . "," . " " . $row['F_Name'] .  '" readonly>';
-        echo "<input type='hidden' name='id' value='$idNo'/>";
-
-        echo '<h5>Level/Section:</h5>';
-        echo '<input type="text" placeholder="(Grade,Section)"> <br>';
-
-        echo '<h5>Subject of Instruction:</h5>';
-        echo '<input type="text" placeholder="Subject of Instruction" value="' . $row['Subject_Type'] . '" readonly> <br>';
-
-        
-       }
-    ?>
-
+		<form action="SubmitEvalECIB.php" method="POST" onsubmit="target_popup(this)">
+        <h5>Name of Teacher:</h5>
+        <input type="text" placeholder="Name of Teacher">
+        <h5>Level/Section:</h5>
+        <input type="text" placeholder="(Grade,Section)"> <br>
+        <h5>Subject</h5>
+        <input type="text" placeholder="Subject"> <br>
         <div class="well" align="center">
         <table border="1">
             <thead>
@@ -184,7 +126,6 @@
                 </tr>
             </tbody>
         </table>
-       
         <div class="well" align="center">
         <table>
             <thead>
