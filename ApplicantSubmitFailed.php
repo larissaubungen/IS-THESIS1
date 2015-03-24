@@ -74,11 +74,8 @@
 
     <div class="alert alert-danger" role="alert">
 
-      <?php
-      echo '<div class=/"alert-link"/> <b> Sorry, </b>
-      your resume was not submitted successfully. Please try again.</div>';
-      ?>
-  		
+  		<div class="alert-link"> <b> Sorry, </b>
+  		your resume was not submitted successfully. Please try again.</div>
 	</div>
 </body>
 </html>

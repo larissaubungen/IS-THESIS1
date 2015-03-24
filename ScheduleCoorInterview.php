@@ -52,7 +52,8 @@ function successfulAlert (){
 	$sql = "UPDATE applicant_schedule 
 			   SET Coordinator_Time = '".$coor_Time."',
 				   Coordinator_Date = '".$coor_Date."',
-				   Coordinator_Comments = '".$coor_Comments."'
+				   Coordinator_Comments = '".$coor_Comments."',
+				   Coordinator_Status = 'Pending'
 			   WHERE ID_No='".$ID_No."'";
 	
 	$result=mysql_query($sql);

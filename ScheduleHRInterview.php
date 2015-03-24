@@ -1,4 +1,4 @@
-	<?php
+<?php
 error_reporting(0);
 if($_POST['schedule'] == "Submit")
 {
@@ -20,7 +20,6 @@ function successfulAlert (){
 	$hr_Comments=$_POST['comments'];
 	$ID_No = $_POST['id'];
 	$Status= 'Pending';
-
 
 	mysql_connect("localhost", "root", "")
 			or die(mysql_error());
@@ -79,7 +78,6 @@ function successfulAlert (){
 			} else {
 				echo "&nbsp Error".mysql_error();
 			}
-	
 	}
 }
 		

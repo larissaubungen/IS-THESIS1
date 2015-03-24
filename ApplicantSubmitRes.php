@@ -45,6 +45,11 @@
 	//$bDay = ;
 	//echo "Birthday: $bDay";
 
+
+	$birth = array($_POST['date_select2_month'],$_POST['date_select2_day'], $_POST['date_select2_year']);
+	$bDay = implode(" ", $birth);
+	//	$bDay = $_POST['date_select2'];
+
 	$email = $_POST['email'];
 	$street = $_POST['street'];
 	$city = $_POST['city'];
@@ -57,8 +62,6 @@
 	$college = $_POST['college'];
 	$College_Grad = $_POST['College_Grad'];
 	$degree = $_POST['degree'];	
-	$masteral = $_POST['masteral'];
-	$degree2 = $_POST['degree2'];
 	$award1=$_POST['Award1'];
 	$award2=$_POST['Award2'];
 	$award3=$_POST['Award3'];
@@ -82,13 +85,129 @@
 	$dept=$_POST['department'];
 	$position=$_POST['position'];
 	$level=$_POST['level'];
-	$resume = "Yes";
 
+	?>
+
+	<html>
+  	<head>
+    <meta charset="utf-8">
+    <title>LBASS Applicant Resume</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
+            rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/pages/dashboard.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="jquery/jquery-ui.css">
+    <link href="content/shared/styles/examples-offline.css" rel="stylesheet">
+    <!--DatePicker-->
+    <link rel='stylesheet' type='text/css' media="screen" href='datePicker/datepicker.css' />
+	<script type="text/javascript" src="datePicker/datepicker.js"></script>
+
+    
+           <!-- Placed at the end of the document so the pages load faster --> 
+	<script src="js/jquery-1.7.2.min.js"></script> 
+	<script src="js/jquery.min.js"></script>
+	<script src="js/excanvas.min.js"></script> 
+	<script src="js/chart.min.js" type="text/javascript"></script> 
+	<script src="js/bootstrap.js"></script>
+	<script src="js/base.js"></script>   
+
+  <style type="text/css">
+    .panel-heading {
+    width: 20em;
+    height: 2em;
+    text-align: center;	
+    background-color: lightgray;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    text-align: center;
+    }
+    .panel-body{
+	border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    }
+    </style>
+
+    <!--main navbar-->
+ <div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
+                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="ApplicantPage.php">LBASS Human Resource Information System </a>
+      <div class="nav-collapse">
+        <ul class="nav pull-right">
+            <ul class="dropdown-menu">
+              <li><a href="javascript:;">Settings</a></li>
+              <li><a href="javascript:;">Help</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="javascript:;">Profile</a></li>
+              <li><a href="javascript:;">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+          </div>
+          <!--/.nav-collapse --> 
+        </div>
+        <!-- /container --> 
+      </div>
+      <!-- /navbar-inner --> 
+    </div>
+    <!-- /navbar -->
+    <div class="subnavbar">
+      <div class="subnavbar-inner">
+        <div class="container">
+          <ul class="mainnav">
+            <li><a href="ApplicantPage.php"><i class="icon-home"></i><span>Home</span> </a> </li>
+            <li><a href="ApplicantGuidelines.html"><i class="icon-list-alt"></i><span>Guidelines</span> </a> </li>
+            <li class="active"><a href="#"><i class="icon-file"></i><span>Resume</span> </a> </li>
+          </ul>
+        </div>
+        <!-- /container --> 
+      </div>
+      <!-- /subnavbar-inner --> 
+    </div>
+    <!-- /subnavbar -->
+
+    <div class="container">	 <!--Panel Heading only-->
+ 	  <div class="row">
+ 	  	<div class="col-lg-6">
+	  <div class="panel-body">	
+	  </div>
+	  </div>
+	  </div>
+    </div>
+
+	<?php
+	error_reporting(0);
 	mysql_connect('localhost', 'root', '')
         or die(mysql_error());
 		
         mysql_select_db('lbas_hr') 
         or die(mysql_error());
+		
+		function getRandomString($length = 5) { //function for Generating Random Username
+            $validCharacters = "1234567890";
+            $validCharNumber = strlen($validCharacters);
+         
+            $result = "";
+            for ($i = 0; $i < $length; $i++) {
+                $index = mt_rand(0, $validCharNumber - 1);
+                $result .= $validCharacters[$index];
+            } 
+            return $result;
+        }
+        $resumeID=getRandomString(); //setting a PHP variable to the ID Number
 
 		
 		$updatePerson = "UPDATE person 
@@ -96,14 +215,14 @@
 						 		F_Name = '".$firstName."', 
 						 		M_Name = '".$middleName."',
 						 		B_Day = '".$bDay."',
-						 		Resume = '".$resume."',
-						 		C_Status = '".$civil."'
+						 		C_Status = '".$civil."',
+								Resume_ID = '".$resumeID."'
 				 		 		WHERE ID_No ='".$user."'";
 
 		
 
 		$updateResume = "INSERT INTO resume
-				 		 (ID_No, Email, M_No, T_No, Street, 
+				 		 (Resume_ID,ID_No, Email, M_No, T_No, Street, 
 						 City, Province, Z_Code, H_School, HS_Graduated, 
 						 College,College_Graduated, Course, Masteral, Course2, 
 						 Award1, Award2, Award3, Award4, Award5, 
@@ -113,7 +232,7 @@
 						 App_Department, App_Position, App_Level)
 
 
-		VALUES ('".$user."','".$email."','".$mobNumber."','".$telNumber."','".$street."',
+		VALUES ('".$resumeID."','".$user."','".$email."','".$mobNumber."','".$telNumber."','".$street."',
 				'".$city."','".$province."','".$zip."','".$highSchool."','".$HS_Grad."',
 				'".$college."','".$College_Grad."','".$degree."','".$masteral."','".$degree2."',
 				'".$award1."','".$award2."','".$award3."','".$award4."','".$award5."',
@@ -147,10 +266,43 @@
 		//Redirecting to Applicant Page once Resume is submitted
 		if ($checkUpdate1 && $checkUpdate2) { 
 			header('Location:ApplicantPage.php');			
-		 } 
-		else{
-			//header('Location:ApplicantSubmitFailed.php');
-			die('Invalid query: ' . mysql_error());
+        /*echo ("Your first name is ".$firstName."<br/>");
+        echo ("Your mid name is ".$middleName."<br/>");
+        echo ("Your last name is".$lastName."<br/>");
+        echo ("Your birthdate is".$bDay."<br/>");
+        echo ("Your Spouse's Name is".$spouseLName.", ".$spouseFName."<br/>");
+
+        echo "Resume";
+        echo ("Your email is".$email."<br/>");   
+        echo ("Your mobile number is".$mobNumber."<br/>");    
+        echo ("Your mobile number is".$telNumber."<br/>"); 
+       	echo ("Street:".$street ."<br/>");
+       	echo ("City: ".$city."<br/>");
+       	echo ("Zip Codesss:".$zip."<br/>");
+       	echo ("HS:".$highSchool."<br/>");
+       	echo ("You graduated in highschool by".$HS_Grad."<br/>");
+       	echo ("College yow: ".$college."<br/>");
+       	echo ("Degree mo bruh:".$degree."<br/>");
+       	echo ("Yead Grad:".$College_Grad."<br/>");
+       	echo ("Awards isa:".$award1."<br/>");
+       	echo ("Awards dalawa:".$award2."<br/>");
+       	echo ("Awards tatlo:".$award3."<br/>");
+       	echo ("Awards apat:".$award4."<br/>");
+       	echo ("Awards lima:".$award5."<br/>");
+       	echo ("Ang skill mo puta:".$skill1."<br/>");
+       	echo ("Ang skill mo puta:".$skill2."<br/>");
+       	echo ("Ang skill mo puta:".$skill3."<br/>");
+       	echo ("Ang skill mo puta:".$skill4."<br/>");
+       	echo ("Ang skill mo puta:".$skill5."<br/>");
+       	echo ("Ang exp mo dung:".$exp1."<br/>");
+       	echo ("Ang exp mo dung:".$exp2."<br/>");
+       	echo ("Ang exp mo dung:".$exp3."<br/>");
+       	echo ("Ang exp mo dung:".$exp4."<br/>");
+       	echo ("Ang exp mo dung:".$exp5."<br/>");
+		*/
+		}else{
+			header('Location:ApplicantSubmitFailed.php');
+			//die('Invalid query: ' . mysql_error());
 		}
 
 	?>

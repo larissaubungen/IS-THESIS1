@@ -1,119 +1,242 @@
 <?php
-  session_start();
-    if (!isset($_SESSION['ID_No'])) {
-    header('Location:login.php');
-  } 
-    else if ($_SESSION['ID_No'] != 'Admin'){
-      header('Location:ErrorAuthentication.php');  
-    }     
+error_reporting(0);
+if($_POST['Pass'] == "Select")
+{
+?>
+	<script type="text/javascript">
+	function successful (){
+		alert("The status of the applicant has been changed!");
+		
+	}
 
-	$user=$_SESSION['ID_No'];
-	?>
+<?php
+	$ID_No = $_POST['id'];
+	$hr = $_POST['hr'];
+	$test = $_POST['test'];
+	$teaching = $_POST['teaching'];
+	$coor = $_POST['coor'];
+	$principal = $_POST['principal'];
+	
+	mysql_connect("localhost", "root", "")
+			or die(mysql_error());
+	
+	mysql_select_db("lbas_hr") 
+		or die(mysql_error());
+
+	if(!empty($hr) && empty($test) && empty($teaching) && empty($coor) && empty($principal)){
+		
+		$sql = "UPDATE applicant_schedule 
+			   SET HR_Status = '".$hr."'
+			   WHERE ID_No='".$ID_No."'";
+			   
+		$sql2 = "UPDATE applicant_schedule 
+			   SET Teaching_Status = 'TBD'
+			   WHERE ID_No='".$ID_No."'";
+	
+		$result=mysql_query($sql);
+		$result2=mysql_query($sql2);
+			//condition that check if inserting is successful
+			if($result && $result2){
+				echo"successful();";
+			} else {
+				echo "&nbsp Error".mysql_error();
+			}
+				
+	}else if(empty($hr) && empty($test) && !empty($teaching) && empty($coor) && empty($principal)){
+		
+		$sql = "UPDATE applicant_schedule 
+			   SET Teaching_Status = '".$teaching."'
+			   WHERE ID_No='".$ID_No."'";
+			   
+		$sql2 = "UPDATE applicant_schedule 
+				SET Test_Status = 'TBD'
+				WHERE ID_No='".$ID_No."'";
+	
+		$result=mysql_query($sql);
+		$result2=mysql_query($sql2);
+			//condition that check if inserting is successful
+			if($result && $result2){
+				echo"successful();";
+			} else {
+				echo "&nbsp Error".mysql_error();
+			}
+		
+		
+	}else if(empty($hr) && !empty($test) && empty($teaching) && empty($coor) && empty($principal)){
+		
+		$sql = "UPDATE applicant_schedule 
+				SET Test_Status = '".$test."'
+				WHERE ID_No='".$ID_No."'";
+		
+		$sql2 = "UPDATE applicant_schedule 
+			   SET Coordinator_Status = 'TBD'
+			   WHERE ID_No='".$ID_No."'";
+	
+		$result=mysql_query($sql);
+		$result2=mysql_query($sql2);
+			//condition that check if inserting is successful
+			if($result && $result2){
+				echo"successful();";
+			} else {
+				echo "&nbsp Error".mysql_error();
+			}
+		
+	}else if(empty($hr) && empty($test) && empty($teaching) && !empty($coor) && empty($principal)){
+		
+		$sql = "UPDATE applicant_schedule 
+			   SET Coordinator_Status = '".$coor."'
+			   WHERE ID_No='".$ID_No."'";
+		
+		$sql2 = "UPDATE applicant_schedule 
+			   SET Principal_Status = 'TBD'
+			   WHERE ID_No='".$ID_No."'";
+		
+		$result=mysql_query($sql);
+		$result2=mysql_query($sql2);
+			//condition that check if inserting is successful
+			if($result && $result2){
+				echo"successful();";
+			} else {
+				echo "&nbsp Error".mysql_error();
+			}
+		
+	}else if(empty($hr) && empty($test) && empty($teaching) && empty($coor) && !empty($principal)){
+		
+		$sql = "UPDATE applicant_schedule 
+			   SET Principal_Status = '".$principal."'
+			   WHERE ID_No='".$ID_No."'";
+	
+		$result=mysql_query($sql);
+			//condition that check if inserting is successful
+			if($result){
+				echo"successful();";
+			} else {
+				echo "&nbsp Error".mysql_error();
+			}
+		
+	}
+
+}
+
+
+?>
+</script>
+
 <html>
   <head>
     <meta charset="utf-8">
-    <title>LBASS Applicant Resume</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
-            rel="stylesheet">
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/pages/dashboard.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="jquery/jquery-ui.css">
-    <link href="content/shared/styles/examples-offline.css" rel="stylesheet">
-    <link href="dateTimePicker/styles/kendo.common.min.css" rel="stylesheet">
-    <link href="dateTimePicker/styles/kendo.rtl.min.css" rel="stylesheet">
-    <link href="dateTimePicker/styles/kendo.default.min.css" rel="stylesheet">
-    <link href="dateTimePicker/styles/kendo.dataviz.min.css" rel="stylesheet">
-    <link href="dateTimePicker/styles/kendo.dataviz.default.min.css" rel="stylesheet">
-
-    
-           <!-- Placed at the end of the document so the pages load faster --> 
-	<script src="js/jquery-1.7.2.min.js"></script> 
-	<script src="js/excanvas.min.js"></script> 
-	<script src="js/chart.min.js" type="text/javascript"></script> 
-	<script src="js/bootstrap.js"></script>
-	<script src="js/base.js"></script>   
-
-  <style type="text/css">
-    .panel-heading {
-    width: 20em;
-    height: 2em;
-    text-align: center;	
-    background-color: lightgray;
-    border-bottom: 1px solid transparent;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    text-align: center;
-    }
-    .panel-body{
-	border-bottom: 1px solid transparent;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    }
-    #resume-label{
-    	text-indent: .5em;
-    }
-    td {
-    padding: 7px;
-	}
-  </style>
+   <title>LBASS HR Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
+        rel="stylesheet">
+<link href="css/font-awesome.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/pages/dashboard.css" rel="stylesheet">
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
 <body>
-	
-	<!--main navbar-->
- <div class="navbar navbar-fixed-top">
+<div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="ApplicantPage.php">LBASS Human Resource Information System </a>
+                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">LBASS Human Resource Information System </a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
+      
             <ul class="dropdown-menu">
               <li><a href="javascript:;">Settings</a></li>
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <?php
+              mysql_connect('localhost', 'root', '')
+              or die(mysql_error());  
+              mysql_select_db('lbas_hr') 
+              or die(mysql_error());
+
+              $user=$_SESSION['ID_No'];
+
+              $retrieveName = "SELECT `L_Name`, `F_Name`  
+                               FROM `person` 
+                               WHERE `ID_No` = '".$user."'";
+              $check = mysql_query($retrieveName);
+              while ($row = mysql_fetch_array($check)) {
+                $lastName = $row["L_Name"];
+                $firstName = $row["F_Name"];
+                echo "<i class='icon-user'> $lastName , $firstName </i>";
+                echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+              }?>
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
+              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
             </ul>
           </li>
         </ul>
-            <form class="navbar-search pull-right">
-              <input type="text" class="search-query" placeholder="Search">
-            </form>
-          </div>
-          <!--/.nav-collapse --> 
-        </div>
-        <!-- /container --> 
+        <form class="navbar-search pull-right">
+          <input type="text" class="search-query" placeholder="Search">
+        </form>
       </div>
-      <!-- /navbar-inner --> 
+      <!--/.nav-collapse --> 
     </div>
-    <!-- /navbar -->
-    <div class="subnavbar">
-      <div class="subnavbar-inner">
-        <div class="container">
-          <ul class="mainnav">
-            <li><a href="ApplicantPage.php"><i class="icon-home"></i><span>Home</span> </a> </li>
-            <li class="active"><a href="#"><i class="icon-file"></i><span>Resume</span> </a> </li>
+    <!-- /container --> 
+  </div>
+  <!-- /navbar-inner --> 
+</div>
+<!-- /navbar -->
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li class="active"><a href="index.html"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
+        <li><a href="index.html"><i class="icon-user"></i><span>Employees</span> </a> </li>
+        
+        <li><a href="reports.html"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
+        <li><a href="guidely.html"><i class="icon-table"></i><span>Attendance</span> </a></li>
+        <?php
+		$leaves=mysql_query("SELECT * 
+							 FROM leave_table 
+							 WHERE L_Status ='Pending'");
+		
+		if(mysql_num_rows($leaves) > 0){
+		?>
+		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests*</span></a>
+           <ul class="dropdown-menu">
+              <li><a href="HR_Resignation.php">Resignations</a></li>
+              <li><a href="HR_Transfer.php">Transfers</a></li>
+			  <li><a href="LeaveRequest.php">Leaves*</a></li>
+           </ul> 
+        </li>
+		<?php
+		}else{
+		?>
+		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+           <ul class="dropdown-menu">
+              <li><a href="HR_Resignation.php">Resignations</a></li>
+              <li><a href="HR_Transfer.php">Transfers</a></li>
+			  <li><a href="HR_Transfer.php">Leaves</a></li>
+           </ul> 
+        </li>
+		<?php
+		}
+		?>
+		
+        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="Signup.php">Add Applicant</a></li>
           </ul>
-        </div>
-        <!-- /container --> 
-      </div>
-      <!-- /subnavbar-inner --> 
-    </div>
-    <!-- /subnavbar -->
+        </li>
+       </div>
+    <!-- /container --> 
+  </div>
+  </div>
+  </div>
+  <!-- /subnavbar-inner --> 
+</div>
 
 <div class="container">	 <!--Panel Heading only-->
  	  <div class="row">
@@ -125,7 +248,6 @@
 			<thead>
 				<tr>
 					<th>Personal Information</th>
-					<th></th>
 					<th>Contact details</th>
 				</tr>
 			</thead>
@@ -140,6 +262,7 @@
 					mysql_select_db('lbas_hr') 
 						or die(mysql_error());
 						
+
 						 //retrieving details from the person table
     $applicantDetails = "SELECT DISTINCT person.L_Name, person.F_Name, person.M_Name,
     						 	person.B_Day, person.Gender, person.C_Status,
@@ -343,29 +466,168 @@
 		</div>';
 
 	  }
-	  		$result2 = mysql_query("
-						SELECT  
-						FROM 
-						WHERE ID_No = '$applicantID'");
+			
+				$result2 = mysql_query("
+						SELECT  HR_Status, Teaching_Status, Test_Status, Coordinator_Status, Principal_Status
+						FROM applicant_schedule
+						WHERE ID_No = '$applicantID'	
+					");	
+					if(mysql_num_rows($result2) > 0){
+					//$scheduleID= $row["Schedule_ID"];
+					$statusPending = 'Pending';
+					echo "<center>";
+					echo '<table id="tfhover" class="tftable" border="1">';
+					echo        '<tr>';
+					echo        '<th>Hiring Process</th>';
+					echo        '<th>Status</th>';
+					echo        '<th>Done</th>';
+					
+					while($row = mysql_fetch_array($result2)){
+					echo '<tr>';
+					
+					echo   '<td>' . '<b>HR Interview: </b>' .'</td>';
+					echo   '<td>' .  $row['HR_Status'] .  '</br>' . '</td>';
+					
+						if($row['HR_Status'] == $statusPending){
 						
-			echo '<center>';
-			echo '<table id="tfhover" class="tftable" border="1">';
-			echo        '<tr>';
-
-
-	  		if(mysql_num_rows($result2) > 0){
-			
+						?>
+							<td>
+							<form action="ApplicantDetails.php" method="post">
+							<input type="hidden" name="id" value="<?PHP echo $applicantID ?>"/>
+							<input type="hidden" name="hr" value="Done"/>
+							<input type="submit" value="Select" name="Pass"> 
+							</form>
+							</td>
+						<?php
+						
+						}else{
+						?>
+							<td>
+							</td>
+						<?php
+						}
+					echo '</tr>';
+						
+					echo '<tr>';
+					echo   '<td>' . '<b> Teaching demo: </b>' .'</td>';
+					echo   '<td>' .  $row['Teaching_Status'] .  '</br>' . '</td>';
+					
+						if ($row['Teaching_Status'] == $statusPending){ 
 				
-			
-			
-			
-			}
-			?>
+						?>
+							<td>
+							<form action="ApplicantDetails.php" method="post">
+							<input type="hidden" name="id" value="<?PHP echo $applicantID ?>"/>
+							<input type="hidden" name="teaching" value="Done"/>
+							<input type="submit" value="Select" name="Pass"> 
+							</form>
+							</td>
+						<?php
+						
+						}else{
+						?>
+							<td>
+							</td>
+						<?php	
+						
+						}
+					echo '</tr>';
+						
+					echo '<tr>';
+					echo   '<td>' . '<b> Test schedule: </b>' .'</td>';
+					echo   '<td>' .  $row['Test_Status'] .  '</br>' . '</td>';	
+						if($row['Test_Status'] == $statusPending){
+						
+						?>
+							<td>
+							<form action="ApplicantDetails.php" method="post">
+							<input type="hidden" name="id" value="<?PHP echo $applicantID ?>"/>
+							<input type="hidden" name="test" value="Done"/>
+							<input type="submit" value="Select" name="Pass"> 
+							</form>
+							</td>
+						<?php
+						}else{
+						?>
+							<td>
+							</td>
+						<?php
+						}				
+					echo '</tr>';
+					
+					echo '<tr>';
+					echo   '<td>' . '<b> Coordinator interview schedule: </b>' .'</td>';
+					echo   '<td>' .  $row['Coordinator_Status'] .  '</br>' . '</td>';	
+						if($row['Coordinator_Status'] == $statusPending){
+						
+						?>
+							<td>
+							<form action="ApplicantDetails.php" method="post">
+							<input type="hidden" name="id" value="<?PHP echo $applicantID ?>"/>
+							<input type="hidden" name="coor" value="Done"/>
+							<input type="submit" value="Select" name="Pass"> 
+							</form>
+							</td>
+						<?php
+						}else{
+						?>
+							<td>
+							</td>
+						<?php
+						}				
+					echo '</tr>';
+					
+					echo '<tr>';
+					echo   '<td>' . '<b> Principal interview schedule: </b>' .'</td>';
+					echo   '<td>' .  $row['Principal_Status'] .  '</br>' . '</td>';
+						
+						if($row['Principal_Status'] == $statusPending){
+						
+						?>
+							<td>
+							<form action="ApplicantDetails.php" method="post">
+							<input type="hidden" name="id" value="<?PHP echo $applicantID ?>"/>
+							<input type="hidden" name="principal" value="Done"/>
+							<input type="submit" value="Select" name="Pass"> 
+							</form>
+							</td>
+						<?php
+						}else{
+						?>
+							<td>
+							</td>
+						<?php
+						}				
+					echo '</tr>';
+					
+					}
+				}else{
+				}
+					
+					
+					echo '</table>';
+					
+						$result3 = mysql_query("
+						SELECT Principal_Status
+						FROM applicant_schedule
+						WHERE ID_No = '$applicantID'	
+					");
+					while($row = mysql_fetch_array($result3)){
+						if($row['Principal_Status'] == 'Done'){
+					?>
 	  	
-			<form action="ApplicantAccept.php" method="post">
-				<input type="submit" value="Accept">
-				<input type="hidden" class="hidden" name="applicantID" value="<?php echo $applicantID ?>">
-			</form>
+							<form action="ApplicantAccept.php" method="post">
+								<input type="submit" value="Accept">
+								<input type="hidden" class="hidden" name="applicantID" value="<?php echo $applicantID ?>">
+							</form>
+					<?php
+						}else{
+						
+						}
+					}
+					?>
+			
+					
 			</tbody>
 			</table>
 	  </div>
