@@ -6,15 +6,6 @@
 
 $user=$_SESSION['ID_No'];
 
-  $result = mysql_query("
-    SELECT  resignation.ID_No as ID_No
-    FROM resignation
-    WHERE ID_No = '" . $user . "' ");
-
-  while($result){
-    header('Location:SubmitResignFailed.php');
-  }  
-
   function getResignCode($length = 7) {
             $validCode = "1234567890qwerty";
             $validCharNumber = strlen($validCode);
@@ -27,7 +18,7 @@ $user=$_SESSION['ID_No'];
             }
             return $result;
         }
-        $RCode=getResignCode();
+        $ResignID=getResignCode();
 ?>
 
 <!DOCTYPE html>
@@ -153,9 +144,9 @@ $user=$_SESSION['ID_No'];
       <div class="container">
         <div class="form-group">
               <!--For Resignation Code-->
-          <input type="hidden" id="RCode" name="RCode" value="<?php echo "$RCode";?>">
-          <input type="hidden" id="D_Approve" name="D_Approve" value="0000-00-00">
-          
+          <input type="hidden" id="ResignID" name="ResignID" value="<?php echo "$ResignID";?>">
+          <input type="hidden" id="D_Approve" name="D_Approve" value="0000-00-00">         
+
            <label for="datepicker"></label>   
               Date for filing:
               <input type ="text"id="datepicker" name="dateFiled" required/>
@@ -173,13 +164,13 @@ $user=$_SESSION['ID_No'];
                      })
                     });   
                   </script>
-
-              <label>Reason:</label> <textarea form="resignation" name="reason" rows="3" col="3" required></textarea><br/>
+                </form>  
+              <label>Reason:</label> <textarea form="resignation" name="Reason" rows="3" col="3" required></textarea><br/>
               <br/>
-              <input type="submit" value="submit" onclick="return reminder();">
+              <input type="submit" value="submit" form="resignation" onclick="return reminder();">
         </div>
       </div>
-    </form>
+    
     </div>
 </body>
 </html>

@@ -69,6 +69,20 @@ $user=$_SESSION['ID_No'];
 									 OR `E_Position1` IS NULL 
 									 OR `E_Position1` IS NULL");
 
+		
+		$employeeRecommendation = mysql_query("SELECT DISTINCT 
+													person.ID_No, person.F_Name, person.L_Name, person.M_Name,  
+    												work.E_Position1, work.E_Position2, work.Department, work.Subject, work.Subject_Type, work.Level, work.Grade, 
+													TIMESTAMPDIFF(YEAR,work.Date_Assigned,CURDATE()) AS date_Employed
+												FROM person, work
+												WHERE 
+													person.CurrentWork_ID IS NOT NULL AND 
+												    work.ID_No LIKE person.ID_No AND 
+												    work.Work_ID IS NOT NULL AND
+													work.Date_Assigned IS NOT NULL AND 
+												    TIMESTAMPDIFF(YEAR,work.Date_Assigned,CURDATE()) >=3");
+
+
 		if($availEmployee === FALSE || $FreeEmployee === FALSE) { 
 		    die(mysql_error()); // TODO: better error handling
 		}

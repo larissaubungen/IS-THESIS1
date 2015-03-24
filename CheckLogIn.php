@@ -29,6 +29,9 @@ proper page
 					session_start();
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
+		//condition for no match found
+
+		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Admin'){
 
 		//condition for applicant with resume
 		}else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && $check['Resume_ID'] != null) {
@@ -49,11 +52,28 @@ proper page
 
 					
 		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
-					header('location:EmployeeProfileHome.php');
 					session_start();
+					//iniating a sessions variable and it's value
+					$_SESSION['ID_No']=$check['ID_No'];
+					header('location:EmployeeProfileHome.php');
+
+
+		}
+
+		/*else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
+
+					header('location:EmployeeResign.php');
+					//start of sessions
+					session_start();
+					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
 
-		}else{ header('location:ErrorLogIn.html');
+		}*/
+
+
+		} else { 
+
+			header('location:ErrorLogIn.html');
 
 		}
 	}

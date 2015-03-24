@@ -159,7 +159,10 @@
             <ul class="thumbnails">
         <?php
 
-        $user=$_SESSION['ID_No'];
+        //User that is currently logged in
+        $user=$_SESSION['ID_No']; 
+        //User that is currently logged in
+
         mysql_connect("localhost", "root", "")
         or die(mysql_error());
         mysql_select_db("lbas_hr") 
@@ -168,13 +171,13 @@
 
          
 
-            $department = "";
+        $department = "";
 
-            $result = mysql_query("
-            SELECT  F_Name, L_Name, ID_No, Department, Subject
-            FROM person 
-            WHERE ID_No LIKE '".$user."' 
-            "); 
+        $result = mysql_query("
+        SELECT ID_No, Department
+        FROM work 
+        WHERE ID_No LIKE '".$user."' 
+        "); 
 
 
         
@@ -187,9 +190,11 @@
 
 
         $getUser = mysql_query("
-            SELECT  ID_No, F_Name, L_Name, ID_No, Department
-            FROM person 
-            WHERE Department = '".$department."' AND ID_No != '".$user."'
+            SELECT ID_No, person.F_Name, person.L_Name, person.M_Name, work.Department
+            FROM work
+            INNER JOIN person
+            ON Department = '".$department."' 
+            
            "); 
 
 
