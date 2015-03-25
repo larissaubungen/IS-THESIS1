@@ -85,6 +85,7 @@
 	$dept=$_POST['department'];
 	$position=$_POST['position'];
 	$level=$_POST['level'];
+	$status = 'Yes';
 
 	?>
 
@@ -200,7 +201,7 @@
             $validCharacters = "1234567890";
             $validCharNumber = strlen($validCharacters);
          
-            $result = "";
+            $result = "Res";
             for ($i = 0; $i < $length; $i++) {
                 $index = mt_rand(0, $validCharNumber - 1);
                 $result .= $validCharacters[$index];
@@ -216,7 +217,8 @@
 						 		M_Name = '".$middleName."',
 						 		B_Day = '".$bDay."',
 						 		C_Status = '".$civil."',
-								Resume_ID = '".$resumeID."'
+								Resume_ID = '".$resumeID."',
+								Resume_Status = '".$status."'
 				 		 		WHERE ID_No ='".$user."'";
 
 		
@@ -266,40 +268,7 @@
 		//Redirecting to Applicant Page once Resume is submitted
 		if ($checkUpdate1 && $checkUpdate2) { 
 			header('Location:ApplicantPage.php');			
-        /*echo ("Your first name is ".$firstName."<br/>");
-        echo ("Your mid name is ".$middleName."<br/>");
-        echo ("Your last name is".$lastName."<br/>");
-        echo ("Your birthdate is".$bDay."<br/>");
-        echo ("Your Spouse's Name is".$spouseLName.", ".$spouseFName."<br/>");
-
-        echo "Resume";
-        echo ("Your email is".$email."<br/>");   
-        echo ("Your mobile number is".$mobNumber."<br/>");    
-        echo ("Your mobile number is".$telNumber."<br/>"); 
-       	echo ("Street:".$street ."<br/>");
-       	echo ("City: ".$city."<br/>");
-       	echo ("Zip Codesss:".$zip."<br/>");
-       	echo ("HS:".$highSchool."<br/>");
-       	echo ("You graduated in highschool by".$HS_Grad."<br/>");
-       	echo ("College yow: ".$college."<br/>");
-       	echo ("Degree mo bruh:".$degree."<br/>");
-       	echo ("Yead Grad:".$College_Grad."<br/>");
-       	echo ("Awards isa:".$award1."<br/>");
-       	echo ("Awards dalawa:".$award2."<br/>");
-       	echo ("Awards tatlo:".$award3."<br/>");
-       	echo ("Awards apat:".$award4."<br/>");
-       	echo ("Awards lima:".$award5."<br/>");
-       	echo ("Ang skill mo puta:".$skill1."<br/>");
-       	echo ("Ang skill mo puta:".$skill2."<br/>");
-       	echo ("Ang skill mo puta:".$skill3."<br/>");
-       	echo ("Ang skill mo puta:".$skill4."<br/>");
-       	echo ("Ang skill mo puta:".$skill5."<br/>");
-       	echo ("Ang exp mo dung:".$exp1."<br/>");
-       	echo ("Ang exp mo dung:".$exp2."<br/>");
-       	echo ("Ang exp mo dung:".$exp3."<br/>");
-       	echo ("Ang exp mo dung:".$exp4."<br/>");
-       	echo ("Ang exp mo dung:".$exp5."<br/>");
-		*/
+        
 		}else{
 			header('Location:ApplicantSubmitFailed.php');
 			//die('Invalid query: ' . mysql_error());
