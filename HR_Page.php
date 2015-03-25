@@ -8,12 +8,6 @@
     }
   ?>      
 <!DOCTYPE html>
-<?php
-	mysql_connect("localhost", "root", "")
-				or die(mysql_error());
-	mysql_select_db("lbas_hr") 
-				or die(mysql_error());
-?>
 <html lang="en">
 <head>
 <script>
@@ -38,7 +32,8 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
     <![endif]-->
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
+
+<div class="navbar navbar-fixed-top">  <!--main navbar-->
   <div class="navbar-inner">
     <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
                     class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">LBASS Human Resource Information System </a>
@@ -57,7 +52,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
               mysql_select_db('lbas_hr') 
               or die(mysql_error());
 
-              $user=$_SESSION['ID_No'];
+              $user=$_SESSION['ID_No']; 
 
               $retrieveName = "SELECT `L_Name`, `F_Name`  
                                FROM `person` 
@@ -66,17 +61,15 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
               while ($row = mysql_fetch_array($check)) {
                 $lastName = $row["L_Name"];
                 $firstName = $row["F_Name"];
-                echo "<i class='icon-user'> $lastName , $firstName </i>";
+                echo "<i class='icon-user'></i> $lastName , $firstName";
                 echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
               }?>
               <li><a href="javascript:;">Profile</a></li>
               <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
             </ul>
           </li>
-        </ul>
-        <form class="navbar-search pull-right">
-          <input type="text" class="search-query" placeholder="Search">
-        </form>
+        </ul>  
+        <!--form navbar was here-->
       </div>
       <!--/.nav-collapse --> 
     </div>
@@ -85,69 +78,67 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
   <!-- /navbar-inner --> 
 </div>
 <!-- /navbar -->
-<div class="subnavbar">
+
+<div class="subnavbar">  <!--subnavbar-->
   <div class="subnavbar-inner">
     <div class="container">
+
       <ul class="mainnav">
-        <li class="active"><a href="index.html"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
-        <li><a href="index.html"><i class="icon-user"></i><span>Employees</span> </a> </li>
-        
-        <li><a href="reports.html"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-        <li><a href="guidely.html"><i class="icon-table"></i><span>Attendance</span> </a></li>
-        <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
+        <li class="active"><a href="#"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
+        <li><a href="EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
+        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> 
+          <i class="icon-user"></i><span>Applicants</span> <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="ListOfApplicant.php">View Current Applicants</a></li>
+            <li><a href="Signup.php">Add Applicant Account</a></li>
+          </ul>   
+        </li>
+                
+        <li><a href="AttendancePage.php"><i class="icon-table"></i><span>Attendance</span> </a></li>
+        <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
+      
         <?php
 		            $leaves=mysql_query("SELECT * 
 							 FROM leave_table 
 							 WHERE L_Status ='Pending'");
-		
-		if(mysql_num_rows($leaves) > 0){
-		?>
-		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests*</span></a>
-           <ul class="dropdown-menu">
-              <li><a href="HR_Resignation.php">Resignations</a></li>
-              <li><a href="HR_Transfer.php">Transfers</a></li>
-			  <li><a href="LeaveRequest.php">Leaves*</a></li>
-           </ul> 
-        </li>
-		<?php
-		}else{
-		?>
-		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
-           <ul class="dropdown-menu">
-              <li><a href="HR_Resignation.php">Resignations</a></li>
-              <li><a href="HR_Transfer.php">Transfers</a></li>
-			  <li><a href="HR_Transfer.php">Leaves</a></li>
-           </ul> 
-        </li>
-		<?php
-		}
-		?>
-		
-        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="Signup.php">Add Applicant</a></li>
-          </ul>
-        </li>
-      <li class="active"><a href="http://localhost/IS-THESIS1/HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
-      <li><a href="http://localhost/IS-THESIS1/EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
-      
 
-      <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-      <li><a href="AttendancePage.php"><i class="icon-table"></i><span>Attendance</span> </a></li>
-      <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i>
-        <span>Applicants</span> <b class="caret"></b></a>
-        <ul class="dropdown-menu">
+        if ($leaves){ //if and else statement for handling the query
 
-          <li><a href="http://localhost/IS-THESIS1/ListOfApplicant.php">View Current Applicants</a></li>
-          <li><a href="http://localhost/IS-THESIS1/Signup.php">Add Applicant</a></li>
-        </ul>    
-      <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
-         <ul class="dropdown-menu">
-            <li><a href="HR_Resignation.php">Resignations</a></li>
-            <li><a href="HR_Transfer.php">Transfers</a></li>
-         </ul> 
-      </li>
-      </ul>
+          if(mysql_num_rows($leaves) > 0)
+          {
+            ?>
+              <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests*</span></a>
+               <ul class="dropdown-menu">
+                  <li><a href="HR_Resignation.php">Resignations</a></li>
+                  <li><a href="HR_Transfer.php">Transfers</a></li>
+                  <li><a href="LeaveRequest.php">Leaves*</a></li>
+               </ul> 
+              </li>
+            <?php 
+
+          }else{
+        		?>
+        		    <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+                   <ul class="dropdown-menu">
+                      <li><a href="HR_Resignation.php">Resignations</a></li>
+                      <li><a href="HR_Transfer.php">Transfers</a></li>
+        			  <li><a href="LeaveRequest.php">Leaves</a></li>
+                   </ul> 
+                </li>
+        		<?php
+		      }
+        }else{
+            ?>
+                <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+                   <ul class="dropdown-menu">
+                      <li><a href="HR_Resignation.php">Resignations</a></li>
+                      <li><a href="HR_Transfer.php">Transfers</a></li>
+                <li><a href="LeaveRequest.php">Leaves</a></li>
+                   </ul> 
+                </li>
+            <?php
+        }   ?>
+
     </div>
     <!-- /container --> 
   </div>
@@ -156,6 +147,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
   <!-- /subnavbar-inner --> 
 </div>
 <!-- /subnavbar -->
+
 <div class="main">
   <div class="main-inner">
     <div class="container">
