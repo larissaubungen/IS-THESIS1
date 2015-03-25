@@ -173,7 +173,7 @@ if($_POST['Pass'] == "Select")
                 echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
               }?>
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
+              <li><a href="logout.php">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -218,7 +218,7 @@ if($_POST['Pass'] == "Select")
            <ul class="dropdown-menu">
               <li><a href="HR_Resignation.php">Resignations</a></li>
               <li><a href="HR_Transfer.php">Transfers</a></li>
-			  <li><a href="HR_Transfer.php">Leaves</a></li>
+			  <li><a href="LeaveRequest.php">Leaves</a></li>
            </ul> 
         </li>
 		<?php

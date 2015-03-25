@@ -1,3 +1,9 @@
+<?php
+  session_start();
+    if (!isset($_SESSION['ID_No'])) {
+    header('Location:login.php');
+  } 
+  ?>   
 <html>
 <head>
 	<meta charset="utf-8">
@@ -38,11 +44,27 @@
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <?php
+              mysql_connect('localhost', 'root', '')
+              or die(mysql_error());  
+              mysql_select_db('lbas_hr') 
+              or die(mysql_error());
+
+              $user=$_SESSION['ID_No']; 
+
+              $retrieveName = "SELECT `L_Name`, `F_Name`  
+                               FROM `person` 
+                               WHERE `ID_No` = '".$user."'";
+              $check = mysql_query($retrieveName);
+              while ($row = mysql_fetch_array($check)) {
+                $lastName = $row["L_Name"];
+                $firstName = $row["F_Name"];
+                echo "<i class='icon-user'></i> $lastName , $firstName";
+                echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+              }?>
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
+              <li><a href="logout.php">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -72,10 +94,12 @@
     </div>
     <!-- /subnavbar -->
 
+    <div class="container">
     <div class="alert alert-danger" role="alert">
 
   		<div class="alert-link"> <b> Sorry, </b>
   		your resume was not submitted successfully. Please try again.</div>
 	</div>
+  </div>
 </body>
 </html>
