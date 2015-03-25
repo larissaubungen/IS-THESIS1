@@ -1,3 +1,13 @@
+<?php
+  session_start();
+    if (!isset($_SESSION['ID_No'])) {
+    header('Location:login.php');
+  } 
+
+  ?>  
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -143,8 +153,8 @@
         mysql_connect("localhost", "root", "")
         or die(mysql_error());
         mysql_select_db("lbas_hr") 
-        or die(mysql_error());
-        
+        or die(mysql_error()); 
+
 
         /*if condition must contain departments of Teachers (SMIT and Humanities)*/
        if($departmentofEmployee = 'SMIT' || $departmentofEmployee = 'Humanities' ) {
