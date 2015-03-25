@@ -219,15 +219,13 @@
 		$insert="INSERT INTO $tbl_name (ID_No, P_Word, E_Status , Resume_ID)
 				VALUES('". $userID ."', '". $password ."', 'Applicant', '".$ResID."')";
 		
-		$insert2="INSERT INTO $tbl_name2 (Resume_ID, ID_No)
-				VALUES('".$ResID."','". $userID ."')";
-				
+		
 				
 		$result=mysql_query($insert);
-		$result2=mysql_query($insert2);
+		//$result2=mysql_query($insert2);
 
 		//condition that check if inserting is successful
-				if($result && $result2){
+				if($result){
 					?>
 
 					<div class="account-container">	
