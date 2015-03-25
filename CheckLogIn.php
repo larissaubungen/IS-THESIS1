@@ -16,7 +16,7 @@ proper page
 		
 		//method for finding a match in the database from $userName, $userPass
 		$result = mysql_query("
-		SELECT  person.ID_No as 'ID_No', person.P_Word as 'password', person.E_Status as 'status', person.Resume_ID, person.Resume_Status
+		SELECT  person.ID_No as 'ID_No', person.P_Word as 'password', person.E_Status as 'status', person.Resume_Status
 		FROM person 
 		WHERE ID_No = '" . $userName . "' 
 		AND P_Word = '" . $userPass . "' 	
@@ -25,7 +25,7 @@ proper page
 	 	 $check=mysql_fetch_array($result);
 
 	 	 	 //condition for New Applicant without Accomplished Resume
-			 if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && IS_NULL($check['Resume_ID']) && IS_NULL($check['Resume_Status'])){					
+			 if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' &&  IS_NULL($check['Resume_Status'])){					
 						header('location:ApplicantResume2.php');						
 						session_start(); 					//start of sessions						
 						$_SESSION['ID_No']=$check['ID_No']; //iniating a sessions variable and it's value
@@ -37,7 +37,7 @@ proper page
 					$_SESSION['ID_No']=$check['ID_No'];
 
 			//condition for applicant with resume
-			}else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && $check['Resume_ID'] != null) 
+			}else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && $check['Resume_Status'] != null) 
 			{
 				header('location:ApplicantPage.php');		//start of sessions
 				session_start();							//iniating a sessions variable and it's value
