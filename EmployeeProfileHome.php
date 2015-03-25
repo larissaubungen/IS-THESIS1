@@ -53,7 +53,8 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
     <![endif]-->
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
+
+<div class="navbar navbar-fixed-top">  <!--main navbar-->
   <div class="navbar-inner">
     <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
                     class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">LBASS Human Resource Information System </a>
@@ -65,14 +66,14 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <?php
               mysql_connect('localhost', 'root', '')
               or die(mysql_error());  
               mysql_select_db('lbas_hr') 
               or die(mysql_error());
 
-              $user=$_SESSION['ID_No'];
+              $user=$_SESSION['ID_No']; 
 
               $retrieveName = "SELECT `L_Name`, `F_Name`  
                                FROM `person` 
@@ -81,19 +82,15 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
               while ($row = mysql_fetch_array($check)) {
                 $lastName = $row["L_Name"];
                 $firstName = $row["F_Name"];
-                echo "<i class='icon-user'> $lastName , $firstName </i>";
+                echo "<i class='icon-user'></i> $lastName , $firstName";
                 echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
               }?>
-
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
-
+              <li><a href="logout.php">Logout</a></li>
             </ul>
           </li>
-        </ul>
-        <form class="navbar-search pull-right">
-          <input type="text" class="search-query" placeholder="Search">
-        </form>
+        </ul>  
+        <!--form navbar was here-->
       </div>
       <!--/.nav-collapse --> 
     </div>
@@ -102,20 +99,21 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
   <!-- /navbar-inner --> 
 </div>
 <!-- /navbar -->
+
 <div class="subnavbar">
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
 
-        <li class="active"><a href="EmployeeProfileHome.php"><i class="icon-dashboard"></i><span>Home</span> </a> </li>
-        <li><a href="EmployeeProfilePage.php"><i class="icon-dashboard"></i><span>Profile</span> </a> </li>
-        <li><a href=""><i class="icon-list-alt"></i><span>Reports and Records</span> </a> </li>
+        <li class="active"><a href="EmployeeProfileHome.php"><i class="icon-home"></i><span>Home</span> </a> </li>
+        <li><a href="EmployeeProfilePage.php"><i class="icon-user"></i><span>Profile</span> </a> </li>
+        <li><a href="#"><i class="icon-file-text"></i><span>Reports and Records</span> </a> </li>
 
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
          <ul class="dropdown-menu">
-            <li><a href="">File for Leave</a></li>
-            <li><a href="">File for Transfer</a></li>
-            <li><a href="">File for Resignation</a></li>
+            <li><a href="LeaveList.php">File for Leave</a></li>
+            <li><a href="#">File for Transfer</a></li>
+            <li><a href="EmployeeResign.php">File for Resignation</a></li>
          </ul> 
       </li>
         </li>
@@ -128,6 +126,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
   <!-- /subnavbar-inner --> 
 </div>
 <!-- /subnavbar -->
+
 <div class="main">
   <div class="main-inner">
     <div class="container">

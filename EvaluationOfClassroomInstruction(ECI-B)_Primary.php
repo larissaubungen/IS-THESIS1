@@ -4,7 +4,11 @@
     header('Location:login.php');
   } 
 ?>  
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> origin/master
 
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +67,11 @@
               <li><a href="javascript:;">Help</a></li>
             </ul> 
           </li>
+<<<<<<< HEAD
          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+=======
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+>>>>>>> origin/master
             <?php
               mysql_connect('localhost', 'root', '')
               or die(mysql_error());  
@@ -81,6 +89,7 @@
                 $firstName = $row["F_Name"];
                 echo "<i class='icon-user'> $lastName , $firstName </i>";
                 echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+<<<<<<< HEAD
                 
               echo '<li><a href="javascript:;">Profile</a></li>
               <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>';
@@ -91,6 +100,21 @@
             </ul>
           </li>
         </ul>
+=======
+              }?>
+              <li><a href="javascript:;">Profile</a></li>
+              <li><a href="logout.php">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+            <form class="navbar-search pull-right">
+              <input type="text" class="search-query" placeholder="Search">
+            </form>            
+          </div>
+          <!--/.nav-collapse --> 
+        </div>
+        <!-- /container --> 
+>>>>>>> origin/master
       </div>
       <!--/.nav-collapse --> 
     </div>
@@ -115,6 +139,7 @@
 </div>
 <!-- /subnavbar -->
     <div class="well" align="center">
+<<<<<<< HEAD
     <h4>Evaluation of Class Instruction (ECI-B) for Intermediate and High School Students</h4>
     <br>
       
@@ -129,6 +154,48 @@
 
          <br>
 <div class="well" align="center">
+=======
+    <h4>Evaluation of Classroom Instruction(ECI-B) for Primary Students</h4>
+    <?php
+
+        $idNo = $_POST['id'];
+        mysql_connect("localhost", "root", "")
+        or die(mysql_error());
+        mysql_select_db("lbas_hr") 
+        or die(mysql_error());
+
+
+            $result = mysql_query("
+            SELECT *
+            FROM person 
+            WHERE person.ID_No = '$idNo' 
+            "); 
+
+
+          while($row = mysql_fetch_array($result)){
+          $firstName = $row["F_Name"];
+          $lastName = $row["L_Name"];
+          $middleName = $row["M_Name"];
+          $subjectType = $row['Subject_Type'];
+
+
+          echo '<h5>Name of Teacher:</h5>';
+
+        echo '<form action="SubmitEvalECIB.php" method="POST" onsubmit="target_popup(this)">';
+        echo '<input type="text" placeholder="Name of Teacher" value="'. $row['L_Name'] . "," . " " . $row['F_Name'] .  '" readonly>';
+        echo "<input type='hidden' name='id' value='$idNo'/>";
+
+        echo '<h5>Level/Section:</h5>';
+        echo '<input type="text" placeholder="(Grade,Section)"> <br>';
+
+        echo '<h5>Subject of Instruction:</h5>';
+        echo '<input type="text" placeholder="Subject of Instruction" value="' . $row['Subject_Type'] . '" readonly> <br>';
+
+        
+       }
+    ?>
+        <div class="well" align="center">
+>>>>>>> origin/master
         <table border="1">
             <thead>
                 <tr>

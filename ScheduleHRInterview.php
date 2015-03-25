@@ -1,4 +1,4 @@
-	<?php
+<?php
 error_reporting(0);
 if($_POST['schedule'] == "Submit")
 {
@@ -20,7 +20,6 @@ function successfulAlert (){
 	$hr_Comments=$_POST['comments'];
 	$ID_No = $_POST['id'];
 	$Status= 'Pending';
-
 
 	mysql_connect("localhost", "root", "")
 			or die(mysql_error());
@@ -79,7 +78,6 @@ function successfulAlert (){
 			} else {
 				echo "&nbsp Error".mysql_error();
 			}
-	
 	}
 }
 		
@@ -133,6 +131,6 @@ Hr Interview: <input type="text" value="<?php echo $hr_Date ?>" id="hr" placehol
 			  <input id="time1" value="<?php echo $hr_Time1?>" name="hrTime" required/></br>
 			  <textarea rows="4" cols="50" name="comments" placeholder="Comments"></textarea></br>
 <input type="hidden" name="id" value="<?PHP echo $idNo ?>"/>
-<input type='submit' value='Submit' class='Log' name='schedule'>;
+<input type='submit' value='Submit' class='Log' name='schedule'>
 </body>
 </html>

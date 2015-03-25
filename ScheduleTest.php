@@ -1,6 +1,6 @@
 <html>
 <?php
-//error_reporting(0);
+error_reporting(0);
 if($_POST['schedule'] == "Submit")
 {
 ?>
@@ -43,13 +43,15 @@ function successfulAlert (){
 			$sql = "UPDATE applicant_schedule 
 				   SET Test_Time = '$test_Time',
 					   Test_Date = '$test_Date',
-					   Test_Comments = '$test_Comments'
+					   Test_Comments = '$test_Comments',
+					   Test_Status = 'Pending'
 				   WHERE ID_No='$check'";
 		
 			$result=mysql_query($sql);
 		}
 					
 				if($result){
+				echo"successfulAlert();";
 				
 				} else {
 					echo "&nbsp Error";
@@ -104,9 +106,10 @@ function successfulAlert (){
 <?php
 	//$idNo = $_POST['id'];
 	$list = $_POST['list'];
+	/*
 	for($i = 0; $i < Sizeof($list); $i++){
 		echo "$list[$i]";
-	}	
+	}	*/
 	
 ?>
 <form action='ScheduleTest.php' method='post'>
@@ -115,7 +118,7 @@ Hr Interview: <input type="text" value="<?php echo $test_Date ?>" id="test" plac
 			  <textarea rows="4" cols="50" name="comments" placeholder="Comments"></textarea></br>			  
 <?php
 	for($i = 0; $i < Sizeof($list); $i++){
-		echo "$list[$i]";
+		//echo "$list[$i]";
 	echo "<input type='hidden' name='list[]' value='$list[$i]'/>";
 	}	
 ?>

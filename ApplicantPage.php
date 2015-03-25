@@ -1,14 +1,12 @@
 <?php
-  session_start();
+  
+session_start();
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
-  } 
-    else if ($_SESSION['ID_No'] != 'Applicant'){
-      header('Location:ErrorAuthentication.php');  
-    }
-  ?>      
 
-$user=$_SESSION['ID_No'];
+  } 
+
+  $user=$_SESSION['ID_No'];
 ?>
 
 <!DOCTYPE html>
@@ -85,17 +83,31 @@ $user=$_SESSION['ID_No'];
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <?php
+              mysql_connect('localhost', 'root', '')
+              or die(mysql_error());  
+              mysql_select_db('lbas_hr') 
+              or die(mysql_error());
+
+              $user=$_SESSION['ID_No']; 
+
+              $retrieveName = "SELECT `L_Name`, `F_Name`  
+                               FROM `person` 
+                               WHERE `ID_No` = '".$user."'";
+              $check = mysql_query($retrieveName);
+              while ($row = mysql_fetch_array($check)) {
+                $lastName = $row["L_Name"];
+                $firstName = $row["F_Name"];
+                echo "<i class='icon-user'></i> $lastName , $firstName";
+                echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+              }?>
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
+              <li><a href="logout.php">Logout</a></li>
             </ul>
           </li>
         </ul>
-            <form class="navbar-search pull-right">
-              <input type="text" class="search-query" placeholder="Search">
-            </form>
+
           </div>
           <!--/.nav-collapse --> 
         </div>
@@ -153,12 +165,12 @@ $user=$_SESSION['ID_No'];
 									//method for finding a match in the database from $userName, $userPass
 								$result = mysql_query("
 									SELECT  Schedule_ID, ID_No, HR_Date, HR_Time, HR_Status, Teaching_Date, 
-                  Teaching_Time, Teaching_Status, Test_Date, Test_Time, Test_Status, Coordinator_Date,
-                   Coordinator_Time, Coordinator_Status, Principal_Date, Principal_Time, Principal_Status, HR_Comments
+											Teaching_Time, Teaching_Status, Test_Date, Test_Time, Test_Status, Coordinator_Date,
+											Coordinator_Time, Coordinator_Status, Principal_Date, Principal_Time, Principal_Status, HR_Comments
 									FROM applicant_schedule
 									WHERE ID_No = '" . $user . "' 
 								");
-								
+								if(mysql_num_rows($result) > 0){
 								while($row = mysql_fetch_array($result)){
 								
 									$hr_Date=$row["HR_Date"];
@@ -177,34 +189,49 @@ $user=$_SESSION['ID_No'];
 									$principal_Time=$row["Principal_Time"];
 									$principal_Status=$row["Principal_Status"];
 									$hr_Comments=$row["HR_Comments"];
-								
+									
+									echo"<center>";
 									echo "HR interview date: $hr_Date </br>";
 									echo "HR interview time: $hr_Time </br>";
 									echo "HR interview Status: $hr_Status </br>";
+									echo "</br>";					
 									echo "Teaching demo date: $teaching_Date </br>";
 									echo "Teaching demo time: $teaching_Time </br>";
 									echo "Teaching demo Status: $teaching_Status </br>";
+									echo "</br>";
 									echo "Test date: $test_Date </br>";
 									echo "Test time: $test_Time </br>";
 									echo "Test Status: $test_Status </br>";
+									echo "</br>";
 									echo "Coordinator interview date: $coor_Date </br>";
 									echo "Coordinator interview time: $coor_Time </br>";
 									echo "Coordinator interview Status: $coor_Status </br>";
+									echo "</br>";
 									echo "Principal interview date: $principal_Date </br>";
 									echo "Principal interview time: $principal_Time </br>";
 									echo "Principal interview Status: $principal_Status </br>";
-									echo "HR comments: $hr_Comments </br>";
+									echo "</br>";
+									echo "HR comments: $hr_Comments </br>"; 
+
+									?>
+									<form action='schedule.php' method='post'>;
+									<textarea rows="4" cols="50" name="comments" placeholder="Comments"></textarea></br>
+									<?php
+									echo"<input type ='hidden' value='$user' name='id'>";
+									?>
+									<input type='submit' value='Submit' class='Log'>;
+									<?php
+									echo"</center>";
+								}
 								
+								}else{
+									echo"<div class='well'><center>";
+									echo"You haven't been scheduled yet";
+									echo"</center></div>";
 								}
 								
 								echo"</br>";	
-							?> 
-							<form action='schedule.php' method='post'>;
-							<textarea rows="4" cols="50" name="comments" placeholder="Comments"></textarea></br>
-							<?php
-							echo"<input type ='hidden' value='$user' name='id'>";
-							?>
-							<input type='submit' value='Submit' class='Log'>;
+								?>
           
 
             <!--User input for Date and Time-->
@@ -217,9 +244,5 @@ $user=$_SESSION['ID_No'];
                       </div>
             </div>
         <!--Activities and Dates Panel-->
-
-
- 
-
   </body>
 </html>

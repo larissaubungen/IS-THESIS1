@@ -2,7 +2,14 @@
   session_start();
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
+<<<<<<< HEAD
   } ?>  
+=======
+  } 
+
+  ?>  
+
+>>>>>>> origin/master
 
 
 <!DOCTYPE html>
@@ -64,7 +71,11 @@
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
+<<<<<<< HEAD
          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+=======
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+>>>>>>> origin/master
             <?php
               mysql_connect('localhost', 'root', '')
               or die(mysql_error());  
@@ -82,6 +93,7 @@
                 $firstName = $row["F_Name"];
                 echo "<i class='icon-user'> $lastName , $firstName </i>";
                 echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+<<<<<<< HEAD
                 
               echo '<li><a href="javascript:;">Profile</a></li>
               <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>';
@@ -95,6 +107,21 @@
         <form class="navbar-search pull-right">
           <input type="text" class="search-query" placeholder="Search">
         </form>
+=======
+              }?>
+              <li><a href="javascript:;">Profile</a></li>
+              <li><a href="logout.php">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+            <form class="navbar-search pull-right">
+              <input type="text" class="search-query" placeholder="Search">
+            </form>            
+          </div>
+          <!--/.nav-collapse --> 
+        </div>
+        <!-- /container --> 
+>>>>>>> origin/master
       </div>
       <!--/.nav-collapse --> 
     </div>
@@ -132,8 +159,14 @@
 
     <div class="well" align="center">
     <h4>General Perforamnce Evaluation (For Teachers)</h4>
+<<<<<<< HEAD
 
 <?php
+=======
+    <br>
+
+  <?php
+>>>>>>> origin/master
 
         $idNo = $_POST['id'];
         mysql_connect("localhost", "root", "")
@@ -143,6 +176,7 @@
 
 
             $result = mysql_query("
+<<<<<<< HEAD
             SELECT DISTINCT person.F_Name, person.L_Name, person.M_Name, 
                             work.ID_No, work.Level, work.Grade 
             
@@ -168,6 +202,33 @@
 
 
 
+=======
+            SELECT *
+            FROM person 
+            WHERE person.ID_No = '$idNo' 
+            "); 
+
+
+          while($row = mysql_fetch_array($result)){
+          $firstName = $row["F_Name"];
+          $lastName = $row["L_Name"];
+          $middleName = $row["M_Name"];
+          $subjectType = $row['Subject_Type'];
+
+        echo '<h5>Name of Teacher: </h5>';
+          echo '<form action="SubmitEvalGPETeachers.php" method="POST" onsubmit="target_popup(this)">';
+          echo '<input type="text" placeholder="Name of Teacher" value="'. $row['L_Name'] . "," . " " . $row['F_Name'] .  '" readonly>';
+          echo "<input type='hidden' name='id' value='$idNo'/>";
+        echo '<h5>Level/Section: (Subject muna ung lumalabas temporarily)</h5>';
+        
+        echo '<input type="text" placeholder="Level/Section" value="' . $row['Subject_Type'] . '" readonly> <br>';
+        
+        }
+
+
+
+  ?>
+>>>>>>> origin/master
         <div class="well" align="center">
         <table border="1">
             <thead>
