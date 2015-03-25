@@ -178,8 +178,8 @@
         
             $result = mysql_query("
             SELECT *
-            FROM person 
-            WHERE person.ID_No = '$idNo' AND E_Status = 'Admin'  
+            FROM person, work
+            WHERE person.ID_No = '$idNo' AND E_Status = 'Admin' and work.ID_No = '$idNo'
             "); 
         
         while($row = mysql_fetch_array($result)){
@@ -235,6 +235,7 @@
 
                 </div>
             </div>
+            
             <div class="panel panel-default">
                 <div class="panel-heading">Dont know yet <i class="fa fa-link fa-1x"></i>
 

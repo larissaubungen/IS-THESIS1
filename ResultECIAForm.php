@@ -4,9 +4,11 @@
     header('Location:login.php');
   } ?>  
 
+
+
 <html>
     <head>
-		<meta charset="utf-8">
+    <meta charset="utf-8">
         <title>LBASS Supervisor Evaluation</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -18,18 +20,18 @@
         <link href="css/font-awesome.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
         <link href="css/pages/dashboard.css" rel="stylesheet">
-		
-		<script type="text/javascript">
-	  
-	  function target_popup(form) {
-			window.open('', 'formpopup', 'width=200,height=200,resizeable,scrollbars');
-			form.target = 'formpopup';
-		}
-	
-	
-	  </script>
-		
-		
+    
+    <script type="text/javascript">
+    
+    function target_popup(form) {
+      window.open('', 'formpopup', 'width=200,height=200,resizeable,scrollbars');
+      form.target = 'formpopup';
+    }
+  
+  
+    </script>
+    
+    
     </head>
 <body>
 
@@ -45,7 +47,7 @@
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <?php
               mysql_connect('localhost', 'root', '')
               or die(mysql_error());  
@@ -121,35 +123,79 @@
                 AVG(Ques_18),
                 AVG(Ques_19),
                 AVG(Ques_20),
+                AVG(Ques_21),
+                AVG(Ques_22),
+                AVG(Ques_23),
+                AVG(Ques_24),
+                AVG(Ques_25),
+                AVG(Ques_26),
+                AVG(Ques_27),
+                AVG(Ques_28),
+                AVG(Ques_29),
+                AVG(Ques_30),
+                AVG(Ques_31),
+                AVG(Ques_32),
+                AVG(Ques_33),
+                AVG(Ques_34),
+                AVG(Ques_35),
+                AVG(Ques_36),
+                AVG(Ques_37),
+                AVG(Ques_38),
+                AVG(Ques_39),
+                AVG(Ques_40),
+                AVG(Ques_41),
+                AVG(Ques_42),
                 AVG(Result),
                 Count(Result)
-            FROM eval_gpe_nonteaching_2a
+            FROM eval_ecia_alllevels
             WHERE ID_No = $idNo
             "); 
             
           while($row = mysql_fetch_array($result)){
           
-          $ques_1 = ($row['AVG(Ques_1)']/5);
-          $ques_2 = ($row['AVG(Ques_2)']/5);
-          $ques_3 = ($row['AVG(Ques_3)']/5);
-          $ques_4 = ($row['AVG(Ques_4)']/5);
-          $ques_5 = ($row['AVG(Ques_5)']/5);
-          $ques_6 = ($row['AVG(Ques_6)']/5);
-          $ques_7 = ($row['AVG(Ques_7)']/5);
-          $ques_8 = ($row['AVG(Ques_8)']/5);
-          $ques_9 = ($row['AVG(Ques_9)']/5);
-          $ques_10 = ($row['AVG(Ques_10)']/5);
-          $ques_11 = ($row['AVG(Ques_11)']/5);
-          $ques_12 = ($row['AVG(Ques_12)']/5);
-          $ques_13 = ($row['AVG(Ques_13)']/5);
-          $ques_14 = ($row['AVG(Ques_14)']/5);
-          $ques_15 = ($row['AVG(Ques_15)']/5);
-          $ques_16 = ($row['AVG(Ques_16)']/5);
-          $ques_17 = ($row['AVG(Ques_17)']/5);
-          $ques_18 = ($row['AVG(Ques_18)']/5);
-          $ques_19 = ($row['AVG(Ques_19)']/5);
-          $ques_20 = ($row['AVG(Ques_20)']/5);
-          $ques_25 = ($row['AVG(Result)']/$row['Count(Result)']);
+          $ques_1 = ($row['AVG(Ques_1)']);
+          $ques_2 = ($row['AVG(Ques_2)']);
+          $ques_3 = ($row['AVG(Ques_3)']);
+          $ques_4 = ($row['AVG(Ques_4)']);
+          $ques_5 = ($row['AVG(Ques_5)']);
+          $ques_6 = ($row['AVG(Ques_6)']);
+          $ques_7 = ($row['AVG(Ques_7)']);
+          $ques_8 = ($row['AVG(Ques_8)']);
+          $ques_9 = ($row['AVG(Ques_9)']);
+          $ques_10 = ($row['AVG(Ques_10)']);
+          $ques_11 = ($row['AVG(Ques_11)']);
+          $ques_12 = ($row['AVG(Ques_12)']);
+          $ques_13 = ($row['AVG(Ques_13)']);
+          $ques_14 = ($row['AVG(Ques_14)']);
+          $ques_15 = ($row['AVG(Ques_15)']);
+          $ques_16 = ($row['AVG(Ques_16)']);  
+          $ques_17 = ($row['AVG(Ques_17)']);
+          $ques_18 = ($row['AVG(Ques_18)']);
+          $ques_19 = ($row['AVG(Ques_19)']);
+          $ques_20 = ($row['AVG(Ques_20)']);
+          $ques_21 = ($row['AVG(Ques_21)']);
+          $ques_22 = ($row['AVG(Ques_22)']);
+          $ques_23 = ($row['AVG(Ques_23)']);
+          $ques_24 = ($row['AVG(Ques_24)']);
+          $ques_25 = ($row['AVG(Ques_25)']);
+          $ques_26 = ($row['AVG(Ques_26)']);
+          $ques_27 = ($row['AVG(Ques_27)']);
+          $ques_28 = ($row['AVG(Ques_28)']);
+          $ques_29 = ($row['AVG(Ques_29)']);
+          $ques_30 = ($row['AVG(Ques_30)']);
+          $ques_31 = ($row['AVG(Ques_31)']);
+          $ques_32 = ($row['AVG(Ques_32)']);
+          $ques_33 = ($row['AVG(Ques_33)']);
+          $ques_34 = ($row['AVG(Ques_34)']);
+          $ques_35 = ($row['AVG(Ques_35)']);
+          $ques_36 = ($row['AVG(Ques_36)']);
+          $ques_37 = ($row['AVG(Ques_37)']);
+          $ques_38 = ($row['AVG(Ques_38)']);
+          $ques_39 = ($row['AVG(Ques_39)']);
+          $ques_40 = ($row['AVG(Ques_40)']);
+          $ques_41 = ($row['AVG(Ques_41)']);
+          $ques_42 = ($row['AVG(Ques_42)']);
+          $ques_ = ($row['AVG(Result)']/$row['Count(Result)']);
 
         }
 
@@ -181,9 +227,9 @@
 
     echo '<div class="well" align="center">';
     echo '<h4>General Performance Evaluation (For use of Supervisors for Non-Teaching Staff)</h4>';
-	  echo "<br>";
+    echo "<br>";
         echo '<form action="SubmitEvalNonTeaching2A.php" method="POST" onsubmit="target_popup(this)">';
-		echo '<h5>Name of Non-Teaching Employee: </h5>';
+    echo '<h5>Name of Non-Teaching Employee: </h5>';
         echo '<input type="text" placeholder="Name of Non-Teaching Employee" value="'. $row['L_Name'] . "," . " " . $row['F_Name'] .  '" readonly>';
          echo '<h5>Designation:</h5>';
    echo '<input type="text" placeholder="Designation" value="'. $row['E_Position1'] . "/" . $row['E_Position2'] . '" readonly> <br>';
@@ -318,30 +364,7 @@
                        echo '<td> 16. Enforcment/compliance with the garbage management & other pro-environment thrusts of school </td>';
                        echo '<td> &nbsp &nbsp &nbsp' . $ques_16 . '</td>';
                   echo '</tr>';
-                  
-                  echo '<tr>';
-                       echo '<td> 17. Willingness to go beyond official time when such may be occasionally needed  </td>';
-                       echo '<td> &nbsp &nbsp &nbsp' . $ques_17 . '</td>';
-                  echo '</tr>';
-
-                  echo '<tr>';
-                       echo '<td> 18. Practice of good grooming  </td>';
-                       echo '<td> &nbsp &nbsp &nbsp' . $ques_18 . '</td>';
-                  echo '</tr>';
-
-                  echo '<tr>';
-                       echo '<td> 19. Compliance with guidelines on the wearing of uniform </td>';
-                       echo '<td> &nbsp &nbsp &nbsp' . $ques_19 . '</td>';
-                  echo '</tr>';
-                  
-
-                  echo '<tr>';
-                       echo '<td> 20. Voluntarism (offering to be of help whenever possible) </td>';
-                       echo '<td> &nbsp &nbsp &nbsp' . $ques_20 . '</td>';
-                  echo '</tr>';
-
-
-                  
+                                
                   echo '<tr>';
                        echo '<br>';
                        echo '<td><h3>Result:</h3></td>';
@@ -351,7 +374,7 @@
             echo '</tbody>';
         echo '</table>';
             echo "<input type='submit' value='Submit' class='Log' name='eval'>";
-	echo '</form>';
+  echo '</form>';
     
   ?>
 </body>

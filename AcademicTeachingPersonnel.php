@@ -131,11 +131,10 @@
         or die(mysql_error());
         
             $result = mysql_query("
-            SELECT  F_Name, L_Name, ID_No
-            FROM person 
-            WHERE E_Status = 'Employee' AND E_Position1 = 'Teacher' OR E_Position1 = 'Licensed Teacher' 
-                                        OR E_Position2 ='Licensed Teacher'  
-            "); 
+            SELECT  F_Name, L_Name, person.ID_No, E_Position1
+            FROM person, work
+            WHERE E_Position1 LIKE '%Teacher%' and person.ID_No LIKE work.ID_No and (E_Status ='Employee') 
+            ");
         
         while($row = mysql_fetch_array($result)){
         

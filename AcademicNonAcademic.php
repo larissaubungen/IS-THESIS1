@@ -156,10 +156,11 @@
         or die(mysql_error());
         
             $result = mysql_query("
-            SELECT  F_Name, L_Name, ID_No
-            FROM person 
-            WHERE E_Status = 'Employee' AND Department = 'HR department' OR  Department = 'Accounting' OR  Department = 'Guidance Counselling'
-                                        OR Department = 'IT' OR Department = 'while'
+            SELECT  F_Name, L_Name, person.ID_No
+            FROM person, work
+            WHERE E_Status = 'Employee' AND (Department = 'HR' OR  Department = 'Accounting' OR  Department = 'Guidance Counselling'
+                                        OR Department = 'IT' OR Department = 'Library' or Department ='Registrar' or Department ='Principal & Directors Office' or Department = 'Others') and person.ID_No like work.iD_No
+
             "); 
         
           while($row = mysql_fetch_array($result)){

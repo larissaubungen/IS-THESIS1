@@ -108,9 +108,6 @@
             </ul>
           </li>
         </ul>
-        <form class="navbar-search pull-right">
-          <input type="text" class="search-query" placeholder="Search">
-        </form>
       </div>
       <!--/.nav-collapse --> 
     </div>
@@ -161,19 +158,15 @@
         mysql_select_db("lbas_hr") 
         or die(mysql_error());
         
-
-         
             $department = "";
             $subjectType= "";
 
             $result = mysql_query("
-            SELECT  F_Name, L_Name, ID_No, Department, Subject_Type
-            FROM person 
-            WHERE ID_No LIKE '".$user."' 
+            SELECT ID_No, Department, Subject_Type, E_Position1, E_Position2
+            FROM work 
+            WHERE ID_No LIKE '".$user."'
             "); 
 
-
-        
         while($row = mysql_fetch_array($result)){
           
         $department = $row["Department"];
@@ -183,22 +176,24 @@
         }
 
 
-        $getUser = mysql_query("
-            SELECT  ID_No, F_Name, L_Name, Department, Subject_Type
-            FROM person 
-            WHERE Department = '".$department."' OR 
-                  Subject_Type = '" . $subjectType . "' OR 
-                            Subject_Type = 'Science' AND 
-                            Subject_Type = 'Mathematics' AND
-                            Subject_Type = 'English' AND
-                            Subject_Type = 'MAPE' AND
-                            Subject_Type = 'Computer'
 
-                  AND ID_No != '". $user ."'
+    
+        $getUser = mysql_query("
+            SELECT DISTINCT person.F_Name, person.L_Name, person.M_Name,
+                            work.ID_No, work.Department, work.Subject_Type, work.Level, work.Grade 
+            FROM work, person
+            WHERE person.CurrentWork_ID = work.Work_ID AND 
+                  work.Department = '".$department."' AND (work.Subject_Type is null OR
+                  work.Subject_Type = '".$subjectType."' ) AND  
+                  work.ID_No != '". $user ."'
            "); 
 
+         
 
         while($row = mysql_fetch_array($getUser)){
+
+          //$levelOfTeacher = $getUser['work.Level'];
+          //$gradeOfTeacher = $getUser['work.Grade'];
 
             echo '<li class="span5 clearfix">';
             echo '<div class="thumbnail clearfix">';
@@ -206,10 +201,12 @@
              
               echo '<div class="caption" class="pull-left">';
                 
-                echo'<form action="EvaluationFormListForTeachers.php" method= "POST">';
+                echo'<form action="EvaluationFormList.php" method= "POST">';
                   echo "<input type='hidden' name='id' value='". $row['ID_No']."'/>";
-                  echo "<input type='hidden' name='dept' value='$department'/>";
-                  echo "<input type='hidden' name='dept' value='$subjectType'/>";
+                  echo "<input type='hidden' name='department' value='$department'/>";
+                  echo "<input type='hidden' name='subject' value='$subjectType'/>";
+                  //echo "<input type='hidden' name='level' value='". $levelOfTeacher."'/>";
+                  //echo "<input type='hidden' name='grade' value='". $gradeOfTeacher."'/>";
 
                   echo '<input type= "submit" class="btn btn-primary icon  pull-right" value="Evaluate">';
 
@@ -234,7 +231,7 @@
 
                */
 
-       }
+          }
                       echo'</div>';
                     echo'</div>';
                   echo'</li>';

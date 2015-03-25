@@ -29,11 +29,8 @@ proper page
 					session_start();
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
-<<<<<<< HEAD
-		//condition for no match found
 
-		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Admin'){
-=======
+		//condition for no match found
 
 		//condition for applicant with resume
 		}else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && $check['Resume'] == 'Yes') {
@@ -45,8 +42,8 @@ proper page
 			$_SESSION['ID_No']=$check['ID_No'];
 		}
 		//condition for employees
-		else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Admin'){
->>>>>>> origin/master
+		else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='HR'){
+
 					header('location:HR_Page.php');
 					//start of sessions
 					session_start();
@@ -55,8 +52,13 @@ proper page
 
 
 					
-		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
+		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee' || $check['status'] =='Admin'){
 					header('location:EmployeeProfileHome.php');
+
+					//start of sessions
+					session_start();
+					//iniating a sessions variable and it's value
+					$_SESSION['ID_No']=$check['ID_No'];
 
 
 		}
@@ -74,6 +76,13 @@ proper page
 		else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
 					header('location:EmployeesPage.php');
 
+					//start of sessions
+					session_start();
+					//iniating a sessions variable and it's value
+					$_SESSION['ID_No']=$check['ID_No'];
+
+		} else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Student') {
+					header('location:EvaluationFormListForStudents.php');
 					//start of sessions
 					session_start();
 					//iniating a sessions variable and it's value

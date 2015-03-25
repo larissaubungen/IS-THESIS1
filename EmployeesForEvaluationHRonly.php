@@ -174,7 +174,7 @@
         $department = "";
 
         $result = mysql_query("
-        SELECT ID_No, Department
+        SELECT ID_No, Department, Subject
         FROM work 
         WHERE ID_No LIKE '".$user."' 
         "); 
@@ -184,19 +184,22 @@
         while($row = mysql_fetch_array($result)){
           
         $department = $row["Department"];
+        $subject = $row["Subject"];
         
 
         }
 
 
         $getUser = mysql_query("
-            SELECT ID_No, person.F_Name, person.L_Name, person.M_Name, work.Department
-            FROM work
-            INNER JOIN person
-            ON Department = '".$department."' 
+            SELECT DISTINCT person.F_Name, person.L_Name, person.M_Name,
+                            work.ID_No, work.Department
+            FROM work, person
+            WHERE person.CurrentWork_ID = work.Work_ID AND
+                  work.Department = '".$department."' AND
+
+                  work.ID_No != '".$user."'
             
            "); 
-
 
 
         while($row = mysql_fetch_array($getUser)){
@@ -209,7 +212,8 @@
                 
                 echo'<form action="EvaluationFormList.php" method= "POST">';
                   echo "<input type='hidden' name='id' value='". $row['ID_No']."'/>";
-                  echo "<input type='hidden' name='dept' value='$department'/>";
+                  echo "<input type='hidden' name='department' value='$department'/>";
+                  echo "<input type='hidden' name='subject' value='$subject'/>";
 
                   echo '<input type= "submit" class="btn btn-primary icon  pull-right" value="Evaluate">';
 

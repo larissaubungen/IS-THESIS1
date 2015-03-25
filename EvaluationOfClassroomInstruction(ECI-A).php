@@ -1,3 +1,10 @@
+<?php
+  session_start();
+    if (!isset($_SESSION['ID_No'])) {
+    header('Location:login.php');
+  } ?>  
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -32,7 +39,7 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="#">LBASS Human Resource Information System </a>
+                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">LBASS Human Resource Information System </a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
       
@@ -41,45 +48,115 @@
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
+         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <?php
+              mysql_connect('localhost', 'root', '')
+              or die(mysql_error());  
+              mysql_select_db('lbas_hr') 
+              or die(mysql_error());
+
+              $user=$_SESSION['ID_No'];
+
+              $retrieveName = "SELECT `L_Name`, `F_Name`  
+                               FROM `person` 
+                               WHERE `ID_No` = '".$user."'";
+              $check = mysql_query($retrieveName);
+              while ($row = mysql_fetch_array($check)) {
+                $lastName = $row["L_Name"];
+                $firstName = $row["F_Name"];
+                echo "<i class='icon-user'> $lastName , $firstName </i>";
+                echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+                
+              echo '<li><a href="javascript:;">Profile</a></li>
+              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>';
+
+              }?>
+
+              
             </ul>
           </li>
         </ul>
-            
-          </div>
-          <!--/.nav-collapse --> 
-        </div>
-        <!-- /container --> 
+        <form class="navbar-search pull-right">
+          <input type="text" class="search-query" placeholder="Search">
+        </form>
       </div>
-      <!-- /navbar-inner --> 
+      <!--/.nav-collapse --> 
     </div>
-    <!-- /navbar -->
-    <div class="subnavbar">
-      <div class="subnavbar-inner">
-        <div class="container">
-          <ul class="mainnav">
-            <li class="active"><a href="#"><i class="icon-home"></i><span>Evaluation Form</span> </a> </li>
-          </ul>
-        </div>
-        <!-- /container --> 
-      </div>
-      <!-- /subnavbar-inner --> 
+    <!-- /container --> 
+  </div>
+  <!-- /navbar-inner --> 
+</div>
+<!-- /navbar -->
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+
+        <li class="active"><a href="EmployeeProfileHome.php"><i class="icon-dashboard"></i><span>Home</span> </a> </li>
+        <li><a href="EmployeeProfilePage.php"><i class="icon-dashboard"></i><span>Profile</span> </a> </li>
+        <li><a href=""><i class="icon-list-alt"></i><span>Reports and Records</span> </a> </li>
+
+        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+         <ul class="dropdown-menu">
+            <li><a href="">File for Leave</a></li>
+            <li><a href="">File for Transfer</a></li>
+            <li><a href="">File for Resignation</a></li>
+         </ul> 
+      </li>
+        </li>
+      </ul>
     </div>
-    <!-- /subnavbar -->
+    <!-- /container --> 
+  </div>
+  </div>
+  </div>
+  <!-- /subnavbar-inner --> 
+</div>
+<!-- /subnavbar -->
+
+
+
     <div class="well" align="center">
-    <h4>Evaluation of Advisory Work(EAHW-B)</h4>
-	
-	<form action='SubmitECIAForm.php' method='POST' onsubmit="target_popup(this)>
-        <h5>Name of Teacher:</h5>
-        <input type="text" placeholder="Name of Teacher">
-        <h5>Level/Section:</h5>
-        <input type="text" placeholder="(Grade,Section)"> <br>
-        <h5>Subject of Instruction:</h5>
-        <input type="text" placeholder="Subject of Instruction">
+    <h4>Evaluation of Classroom Instruction (ECI-A)</h4>
+
+<?php
+
+        $idNo = $_POST['id'];
+
+        mysql_connect("localhost", "root", "")
+        or die(mysql_error());
+        mysql_select_db("lbas_hr") 
+        or die(mysql_error());
+
+
+            $result = mysql_query("
+            SELECT DISTINCT person.F_Name, person.L_Name, person.M_Name, 
+                            work.ID_No, work.Subject_Type, work.Level, work.Grade
+            
+            FROM            person, work 
+            WHERE           person.ID_No = '$idNo' AND 
+                            person.CurrentWork_ID = work.Work_ID
+            "); 
+  
+
+
+     while($row = mysql_fetch_array($result)){
+        
+        echo '<h5>Name of Teacher: </h5>';
+        echo '<form action="SubmitECIAForm.php" method="POST">';
+          echo '<input type="text" placeholder="Name of Teacher" value="'. $row['L_Name'] . "," . " " . $row['F_Name'] .  '" readonly>';
+          echo "<input type='hidden' name='id' value='$idNo'/>";
+          echo '<h5>Level/Section:</h5>';
+        echo '<input type="text" placeholder="Level/Section:" value="'.$row['Level']. '/' .$row['Grade']  .'" readonly> <br>';
+        echo '<h5>Subject of Instruction:</h5>';
+        echo '<input type="text" placeholder="Subject of Instruction" value="'. $row['Subject_Type'] . '" readonly> <br>';
+        
+      }
+   ?>    
+   
+
+
+
 
         <h5>Type of Observation:</h5>
         <br>
@@ -87,7 +164,8 @@
         
         <input type="checkbox" name="clinicalVisit">Clinical Visit<br>
         <input type="checkbox" name="vehicle">Formal Visit
-       
+        
+        <br>
 
        
         <select name="typeOfObservation">
@@ -95,6 +173,7 @@
         <option>Unannounced</option>
 
         </select>
+        <br>
       
 
         <div class="well" align="center">
@@ -632,10 +711,15 @@
         <br><br>
             <center>
                
-                Comments and Other observations:<br />
-
+             <center>
+                
+                Comments:<br />
+                <textarea name="comments" id="comments">
                 
                 </textarea><br />
+              
+                
+            </center>
               
                
             </center>
