@@ -103,13 +103,11 @@ session_start();
                 echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
               }?>
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
+              <li><a href="logout.php">Logout</a></li>
             </ul>
           </li>
         </ul>
-            <form class="navbar-search pull-right">
-              <input type="text" class="search-query" placeholder="Search">
-            </form>
+
           </div>
           <!--/.nav-collapse --> 
         </div>
