@@ -3,15 +3,15 @@
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
   } 
-<<<<<<< HEAD
+
 ?>  
 
-=======
+
     else if ($_SESSION['ID_No'] != 'Employee'){
       header('Location:ErrorAuthentication.php');  
     }
   ?>      
->>>>>>> 28858e03f7c1da8c64f3262bb024a4483a363383
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
