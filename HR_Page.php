@@ -63,7 +63,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
                 echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
               }?>
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
+              <li><a href="logout.php">Logout</a></li>
             </ul>
           </li>
         </ul>  
