@@ -28,8 +28,6 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/pages/dashboard.css" rel="stylesheet">
 <link href="css/bootstrap-modal.css" rel="stylesheet" />
-<script src="js/boostrap2.js"></script>
-<script src="js/jquery-2.1.1.js"></script>
 
 
 <style> 
@@ -37,9 +35,11 @@
     text-indent: 1em;
   }
 </style> 
+
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
+
+<div class="navbar navbar-fixed-top">  <!--main navbar-->
   <div class="navbar-inner">
     <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
                     class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">LBASS Human Resource Information System </a>
@@ -58,7 +58,7 @@
               mysql_select_db('lbas_hr') 
               or die(mysql_error());
 
-              $user=$_SESSION['ID_No'];
+              $user=$_SESSION['ID_No']; 
 
               $retrieveName = "SELECT `L_Name`, `F_Name`  
                                FROM `person` 
@@ -67,17 +67,15 @@
               while ($row = mysql_fetch_array($check)) {
                 $lastName = $row["L_Name"];
                 $firstName = $row["F_Name"];
-                echo "<i class='icon-user'> $lastName , $firstName </i>";
+                echo "<i class='icon-user'></i> $lastName , $firstName";
                 echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
               }?>
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
+              <li><a href="logout.php">Logout</a></li>
             </ul>
           </li>
-        </ul>
-        <form class="navbar-search pull-right">
-          <input type="text" class="search-query" placeholder="Search">
-        </form>
+        </ul>  
+        <!--form navbar was here-->
       </div>
       <!--/.nav-collapse --> 
     </div>
@@ -87,70 +85,77 @@
 </div>
 <!-- /navbar -->
 
-<div class="subnavbar">
+<div class="subnavbar">  <!--subnavbar-->
   <div class="subnavbar-inner">
     <div class="container">
-      <ul class="mainnav">
-        <li><a href="http://localhost/IS-THESIS1/HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
-        <li><a href="http://localhost/IS-THESIS1/EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
-        
-        <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-        <li><a href="AttendancePage.php"><i class="icon-table"></i><span>Attendance</span> </a></li>
-         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i>
-        <span>Applicants</span> <b class="caret"></b></a>
-        <ul class="dropdown-menu">
 
-          <li><a href="http://localhost/IS-THESIS1/ListOfApplicant.php">View Current Applicants</a></li>
-          <li><a href="http://localhost/IS-THESIS1/Signup.php">Add Applicant</a></li>
-        </ul>   
+      <ul class="mainnav">
+        <li><a href="HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
+        <li><a href="EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
+        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> 
+          <i class="icon-user"></i><span>Applicants</span> <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="ListOfApplicant.php">View Current Applicants</a></li>
+            <li><a href="Signup.php">Add Applicant Account</a></li>
+          </ul>   
+        </li>
+                
+        <li><a href="AttendancePage.php"><i class="icon-table"></i><span>Attendance</span> </a></li>
+        <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
+      
         <?php
-              $leaves=mysql_query("SELECT * 
+                $leaves=mysql_query("SELECT * 
                FROM leave_table 
                WHERE L_Status ='Pending'");
-    error_reporting(0);
-    if(mysql_num_rows($leaves) > 0){
-    ?>
-    <li class="dropdown active"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests*</span></a>
-           <ul class="dropdown-menu">
-              <li><a href="HR_Resignation.php">Resignations</a></li>
-              <li><a href="HR_Transfer.php">Transfers</a></li>
-        <li><a href="LeaveRequest.php">Leaves*</a></li>
-           </ul> 
-        </li>
-    <?php
-    }else{
-    ?>
-    <li class="dropdown active"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
-           <ul class="dropdown-menu">
-              <li><a href="HR_Resignation.php">Resignations</a></li>
-              <li><a href="HR_Transfer.php">Transfers</a></li>
-        <li><a href="HR_Transfer.php">Leaves</a></li>
-           </ul> 
-        </li>
-    <?php
-    }
-    ?>
-       </ul>
+
+        if ($leaves){ //if and else statement for handling the query
+
+          if(mysql_num_rows($leaves) > 0)
+          {
+            ?>
+              <li class="active dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests*</span></a>
+               <ul class="dropdown-menu">
+                  <li><a href="HR_Resignation.php">Resignations</a></li>
+                  <li><a href="HR_Transfer.php">Transfers</a></li>
+                  <li><a href="LeaveRequest.php">Leaves*</a></li>
+               </ul> 
+              </li>
+            <?php 
+
+          }else{
+            ?>
+                <li class="active dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+                   <ul class="dropdown-menu">
+                      <li><a href="HR_Resignation.php">Resignations</a></li>
+                      <li><a href="HR_Transfer.php">Transfers</a></li>
+                <li><a href="LeaveRequest.php">Leaves</a></li>
+                   </ul> 
+                </li>
+            <?php
+          }
+        }else{
+            ?>
+                <li class="active dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+                   <ul class="dropdown-menu">
+                      <li><a href="HR_Resignation.php">Resignations</a></li>
+                      <li><a href="HR_Transfer.php">Transfers</a></li>
+                <li><a href="LeaveRequest.php">Leaves</a></li>
+                   </ul> 
+                </li>
+            <?php
+        }   ?>
+
     </div>
+
     <!-- /container --> 
+  </div>
+  </div>
   </div>
   <!-- /subnavbar-inner --> 
 </div>
 <!-- /subnavbar -->
 
-  <header></header>
 
-    <script>
-      $(document).ready(
-        function modal(){
-          $("#modal-1").getElementById().show();          
-        }
-      );
-    </script>       
-
-    <div class="container">
-       <div class="row">
-        <div class="span6">
 
   <div class="container">
        <div class="row">
@@ -165,18 +170,9 @@
             mysql_select_db("lbas_hr") 
               or die(mysql_error());   
 
-          $result = mysql_query(
-                  "SELECT DISTINCT person.F_Name, person.M_Name,person.L_Name, 
-                                   person.E_Position1, person.E_Position2,
-                                   person.Department, person.Subject,
-                                   resignation.reason, resignation.D_Filed, resignation.ID_No
-                  FROM person
-                  INNER JOIN resignation
-                  ON person.ID_No LIKE resignation.ID_No
-                  ORDER BY person.L_Name ASC") or die (mysql_error());
-
           echo "<h3>Resignation Request</h3><br/>";
 
+          error_reporting(0);
           $flag = $_POST["deleteFlag"]; //variable indicator if the Admin user approve the resignation
           $idNumber = $_POST["idNumber"]; 
 
@@ -225,191 +221,32 @@
           else{
             $flag = NULL;
           }
+          //empty variables for modal
+          $idNumber = "";
+          $firstName = "";
+          $middleName = "";
+          $lastName = "";
+          $position1 = "";
+          $position2 = "";
+          $dept = "";
+          $subj = "";
+          $subj_type = "";
+          $reason = "";
+          $clearance = "";
+
           //query for the list of resignation requests filtered to pending status
           $result = mysql_query("
-              SELECT DISTINCT person.F_Name as firstName, person.M_Name as middleName, person.L_Name as lastName,work.E_Position1 as position1, work.E_Position2 as position2, work.Department as dept, work.Level, work.Subject as subject, work.Subject_Type as subj_type, work.Grade as grade, work.Date_Assigned as dateAssigned,resignation.ID_No as resIDNo, resignation.Res_DateFiled as dateFiled, resignation.Reason
+              SELECT DISTINCT person.F_Name as firstName, person.M_Name as middleName, person.L_Name as lastName, person.CurrentWork_ID as currentWorkID,
+                              work.E_Position1 as position1, work.E_Position2 as position2, work.Department as dept, 
+                              work.Level, work.Subject as subject, work.Subject_Type as subj_type, work.Grade as grade, 
+                              work.Date_Assigned as dateAssigned,
+                              resignation.ID_No as resIDNo, resignation.Res_DateFiled as dateFiled, resignation.Reason
               FROM person, work, resignation
-              WHERE person.ID_No LIKE resignation.ID_No and resignation.Resign_ID Like person.Resign_ID and person.ID_No like work.ID_No and resignation.Res_Status LIKE 'Pending'");
-
+              WHERE person.ID_No LIKE resignation.ID_No and 
+                    resignation.Resign_ID Like person.Resign_ID and 
+                    person.ID_No like work.ID_No and resignation.Res_Status LIKE 'Pending'");
 
           while($row = mysql_fetch_array($result)){
-
-          $idNumber = $row["ID_No"];
-          $firstName = $row["F_Name"];
-          $lastName = $row["L_Name"];
-          $position1 = $row["E_Position1"];
-          $position2 = $row["E_Position2"];
-          $dept = $row["Department"];
-          $subj = $row["Subject"];
-          $reason = $row["reason"];
-
-
-          echo '<div class="thumbnail clearfix">';
-          echo '<img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style="margin-right:10px">';
-          echo '<div class="caption" class="pull-left">';
-
-           echo '<h4>';      
-             echo '<a href="#" >'. $firstName ." ". $lastName .'</a>';
-             echo '</h4>';
-             echo '<small><b>ID Number: </b>'. $idNumber .'</small><br/>';
-             echo'<form id="resignForm" action="HR_ResignRecommend.php" method= "POST">';
-             echo '<button type="button" class="btn btn-primary icon pull-right" data-toggle="modal" data-target="#modal-1" onclick="modal();">Approval</button>';
-
-              echo '<input type="hidden" id="firstName" name="firstName" value="'.$firstName.'">';
-              echo '<input type="hidden" id="lastName" name="lastName" value="'.$lastName.'">';
-              echo '<input type="hidden" id="idNumber" name="idNumber" value="'.$idNumber.'">';
-
-
-             if (is_null($position1) && !(is_null($position2))) {
-                echo '<small><b>Position 2: </b>'. $position2 .'</small><br/>';
-                echo '<small><b>Department: </b>'. $dept .'</small><br/>';  
-
-             }elseif (is_null($position2) && !(is_null($position1))) {
-                echo '<small><b>Position 1: </b>'. $position1 .'</small><br/>';  
-                echo '<small><b>Department: </b>'. $dept .'</small><br/>';
-
-             }else{
-                echo '<small><b>Position 1: </b>'. $position1 .'</small><br/>';  
-                echo '<small><b>Position 2: </b>'. $position2 .'</small><br/>';  
-                echo '<small><b>Department: </b>'. $dept .'</small><br/>';
-             }
-             echo '<small><b>Reason:</b>'.$reason.'</small>';
-      
-      echo '
-    <!--modal part-->  
-    <!--modal header-->  
-
-       <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h3>Resignation Approval</h3>
-        </div>
-
-    <!--modal body-->      
-      <div class="modal-body">
-        <p>Are you sure to approve the resignation request?</p>
-        <div class="well">
-
-          <p><b>ID number:</b>'." ". $row["ID_No"].'<br/>
-                <b>Name:</b>'." ".$lastName.", ".$firstName. '<br/>';
-
-                if (is_null($position1) && !(is_null($position2))) {
-                echo ' <b>Position 2: </b>'. $position2 .' <br/>';
-                echo ' <b>Department: </b>'. $dept .' <br/>';  
-
-             }elseif (is_null($position2) && !(is_null($position1))) {
-                echo ' <b>Position 1: </b>'. $position1 .' <br/>';  
-                echo ' <b>Department: </b>'. $dept .' <br/>';
-
-             }else{
-                echo ' <b>Position 1: </b>'. $position1 .' <br/>';  
-                echo ' <b>Position 2: </b>'. $position2 .' <br/>';  
-                echo ' <b>Department: </b>'. $dept .' <br/>';
-             }
-             echo ' <b>Reason: </b>'.$reason.'  </p><br/>';
-             echo $row['index'];
-             ?>
-      ';
-      
-      
-        
-          <p>ID Number:</p>
-          <p>Name:</p>
-          <p>Position:</p>
-          <p>Reason:</p>
-          <button type="button" class="btn" onclick="location='index.html'">Select Recommendations</button>
-        </div>
-        <div class="modal-footer">
-          <button type="button" data-dismiss="modal" class="btn">Close</button>
-          <button class="btn btn-primary" data-toggle="modal" href="#stack2">Approve</button>
-          
-        </div>
-      </div>
-
-      <div id="stack2" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h3>Resignation Approval</h3>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure to approve without replacement?</p>
-          <button type="button" class="btn" onclick="location='index.html'">Select Recommendations</button>
-          <!-- <button class="btn" data-toggle="modal" href="#stack3">Select</button> -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" data-dismiss="modal" class="btn">Return</button>
-          <button type="button" class="btn btn-primary">Proceed</button>
-        </div>
-      </div>      
-
-
-      echo ' <!--modal part-->
-      <div class="modal" id="modal-1" style="display:none;">
-          <div class="modal-dialog">            
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title">Resignation Approval</h3>
-            </div> <!--modal header-->
-
-            <div class="modal-body">
-              <p>Are you sure to approve the resignation request?</p>
-              <div class="well">
-              
-              <p><b>ID number:</b>'." ". $row["ID_No"].'<br/>
-                <b>Name:</b>'." ".$lastName.", ".$firstName. '<br/>';
-
-                if (is_null($position1) && !(is_null($position2))) {
-                echo ' <b>Position 2: </b>'. $position2 .' <br/>';
-                echo ' <b>Department: </b>'. $dept .' <br/>';  
-
-             }elseif (is_null($position2) && !(is_null($position1))) {
-                echo ' <b>Position 1: </b>'. $position1 .' <br/>';  
-                echo ' <b>Department: </b>'. $dept .' <br/>';
-
-             }else{
-                echo ' <b>Position 1: </b>'. $position1 .' <br/>';  
-                echo ' <b>Position 2: </b>'. $position2 .' <br/>';  
-                echo ' <b>Department: </b>'. $dept .' <br/>';
-             }
-             echo ' <b>Reason: </b>'.$reason.'  </p>';
-             ?>
-             <input type="button" class="btn btn-primary" value="See Recommendations" onclick="location='HR_ResignRecommend.php'">
-             <?php
-
-      echo'        
-            </div>
-            </div> <!--modal body-->
-
-            <div class="modal-footer">
-                <form action="HR_ResignRecommend.php" method="post" id="subForm">      
-                  <a href="" class="btn btn-default">Close</a>
-                 <input type="submit" class="btn btn-primary" value="Approve">
-                </form>
-            </div> <!--modal footer-->
-          </div> <!--modal content-->
-      </div> <!--modal dialogue-->
-      </div> <!--modal-->
-      </div> <!--Container-->';
-                    echo'</div>';
-                  echo'</div>';
-                echo'</li>';
-            echo '</form>';   
-          }
-
-          ?>          
-                </div>
-        <!-- /span6 --> 
-      </div>
-      <!-- /row --> 
-
-      
-
-     
-
-  <footer></footer>
-
-<?php
 
           $idNumber = $row["resIDNo"];
           $firstName = $row["firstName"];
@@ -421,6 +258,10 @@
           $subj = $row["subject"];
           $subj_type = $row["subj_type"];
           $reason = $row["Reason"];
+          $clearance = "Cleared";
+
+
+          $currentWorkID = $row['currentWorkID']; //for value passing only
 
           echo '<li class="span5 clearfix" style="list-style:none;">';
           echo '<div class="thumbnail clearfix">';
@@ -428,7 +269,7 @@
           echo '<div class="caption" class="pull-left">';
 
            echo '<h4>';      
-             echo '<a href="#" >'. $lastName .", ". $firstName .". ". $middleName .'</a>';
+             echo '<a href="#" >'. $lastName .", ". $firstName ." ". $middleName.'</a>';
              echo '</h4>';
              echo '<small><b>ID Number: </b>'. $idNumber .'</small><br/>';            
              echo '<button type="button" class="demo btn btn-primary icon pull-right" data-toggle="modal" href="#stack1">Approval</button>';
@@ -450,10 +291,14 @@
                 echo '<small><b>Position 2: </b>'. $position2 .'</small><br/>';  
                 echo '<small><b>Department: </b>'. $dept .'</small><br/>';
              }
-             echo '<small><b>Reason: </b>'.$reason.'</small>';
+             echo '<small><b>Reason: </b>'.$reason.'</small><br/>';
+             echo '<small><b>Clearance: </b> '.$clearance.'</small>';
             ?>
           </div>
         </li>
+        <?php
+          }
+        ?>
   <!--Modal Part-->
 
 <header></header>
@@ -486,10 +331,21 @@
           echo ' <p><b>Department: </b>'. $dept .' <br/>'.'  </p>';
        }
        echo ' <p><b>Reason: </b>'.$reason.'  </p>';
+       echo '<small><b>Clearance: </b> '.$clearance.'</small>';
 
       ?>
     </div>
-    <button type="button" class="btn" onclick="location='HR_ResignRecommend.php'">Select Recommendations</button>
+      <form action="HR_ResignRecommend.php" method="post">
+        <?php
+        echo '<input type="hidden" id="idNumber" name="id" value="'.$idNumber.'">';
+        echo '<input type="hidden" id="currentWorkID" name="currentWorkID" value="'.$currentWorkID.'">';
+        echo '<input type="hidden" id="firstName" name="firstName" value="'.$firstName.'">';
+        echo '<input type="hidden" id="middleName" name="middleName" value="'.$middleName.'">';
+        echo '<input type="hidden" id="lastName" name="lastName" value="'.$lastName.'">';
+        echo '<input type="hidden" id="dept" name="dept" value="'.$dept.'">';
+      ?>
+      <input type="submit" class="btn btn-default" value="Select Recommendations">
+      </form>
 
 
   </div>
@@ -507,8 +363,18 @@
   </div>
   <div class="modal-body">
     <p>Are you sure to approve without replacement?</p>
-     <button type="button" class="btn" onclick="location='HR_ResignRecommend.php'">Select Recommendations</button>    
-    
+
+     <form action="HR_ResignRecommend.php" method="post">
+        <?php
+        echo '<input type="hidden" id="idNumber" name="idNumber" value="'.$idNumber.'">';
+        echo '<input type="hidden" id="currentWorkID" name="currentWorkID" value="'.$currentWorkID.'">';
+        echo '<input type="hidden" id="firstName" name="firstName" value="'.$firstName.'">';
+        echo '<input type="hidden" id="middleName" name="middleName" value="'.$middleName.'">';
+        echo '<input type="hidden" id="lastName" name="lastName" value="'.$lastName.'">';
+        echo '<input type="hidden" id="dept" name="dept" value="'.$dept.'">';
+      ?>
+      <input type="submit" class="btn btn-default" value="Select Recommendations">
+      </form>
 
     <!-- <button class="btn" data-toggle="modal" href="#stack3">Select</button>  -->
   </div>
@@ -535,9 +401,7 @@
     </form>
   </div>
 </div>
-<?php
-    }
-?>
+<!--while loop end tag ends here-->
 
 <footer></footer>
           
