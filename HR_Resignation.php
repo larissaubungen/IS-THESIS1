@@ -29,6 +29,7 @@
 <link href="css/pages/dashboard.css" rel="stylesheet">
 <link href="css/bootstrap-modal.css" rel="stylesheet" />
 
+
 <style> 
   p{
     text-indent: 1em;
@@ -157,7 +158,7 @@
           $idNumber = $_POST["idNumber"]; 
 
           date_default_timezone_set('Asia/Manila'); //Setting up the timezone to Philippines   
-           $today = date('Y-m-d', strtotime($date .' -1 day'));  //setting the date 1 day late because of the timezone problem?
+           $today = date('Y-m-d', strtotime($date));  //setting the date 1 day late because of the timezone problem?
            $date = date_create($today, timezone_open('Asia/Manila')); //creating procedural date
            $datePH = date_format($date, 'Y-m-d'); //formating the date today
 
@@ -165,25 +166,37 @@
            $approvedStat = "Approve";
 
           if (!(is_null($flag))){  //approving the list based on the flag
-            /*
+            
             $approveResign = mysql_query("
             UPDATE `person`,`resignation`,`work`
             SET person.E_Status= 'NULL', person.CurrentWork_ID = 'NULL', person.Archive = '".$archiveYES."',
                 resignation.Res_Status = '".$approvedStat."', resignation.Res_Date = '".$datePH."', work.ID_No ='NULL'
             WHERE person.ID_No = '".$idNumber."' AND resignation.ID_No = '".$idNumber."' AND work.ID_No= '".$idNumber."'                  
-              ");
+              ");  
 
             if ($approveResign) {
                 //dismissible alert for approval success
-              */?>            
-              <div id="alert" class="alert alert-success alert-dismissible" role="alert" onclick="close()">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" onclick="close">&times;</span></button>
-                <strong>Resignation Approved.</strong> 
-              </div>
-                
-            <?php /*}else{
+              ?>            
+              
+              <div class="bs-example">
+                <div class="alert alert-success" id="alert">
+                  <a href="#" class="close" data-dismiss="alert">&times;</a>
+                  <strong>Resignation Approved.</strong> 
+                </div>
+             </div> 
+            <?php }else{
+              ?>
+
+              <div class="bs-example">
+                <div class="alert alert-danger" id="alert">
+                  <a href="#" class="close" data-dismiss="alert">&times;</a>
+                  <strong>Resignation Approval request failed.</strong> 
+                </div>
+             </div> 
+
+             <?php
                 $flag = NULL;
-              }*/
+              }
 
            }
           else{
@@ -276,7 +289,7 @@
 
       ?>
     </div>
-    <button type="button" class="btn" onclick="location='index.html'">Select Recommendations</button>
+    <button type="button" class="btn" onclick="location='HR_ResignRecommend.php'">Select Recommendations</button>
 
 
   </div>
@@ -294,7 +307,7 @@
   </div>
   <div class="modal-body">
     <p>Are you sure to approve without replacement?</p>
-     <button type="button" class="btn" onclick="location='index.html'">Select Recommendations</button>    
+     <button type="button" class="btn" onclick="location='HR_ResignRecommend.php'">Select Recommendations</button>    
     
 
     <!-- <button class="btn" data-toggle="modal" href="#stack3">Select</button>  -->
@@ -341,9 +354,6 @@
         function modal(){
           $("#stack1").getElementById().show();          
         }
-       function close(){
-          $("#alert").getElementById().hide();
-        }
       );
 </script>  
 <script src="js/jquery-1.7.2.min.js"></script> 
@@ -352,5 +362,15 @@
 <script src="js/chart.min.js" type="text/javascript"></script> 
 <script language="javascript" type="text/javascript" src="js/full-calendar/fullcalendar.min.js"></script>
 <script src="js/base.js"></script> 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".close").click(function(){
+    $("#alert").alert();
+  });
+});
+</script>
 </body>
 </html>
