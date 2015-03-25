@@ -3,21 +3,11 @@
 session_start();
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
-<<<<<<< HEAD
+
   } 
-  ?>      
-=======
-    }
-/*
->>>>>>> origin/master
 
-    else if ($_SESSION['ID_No'] != 'Applicant'){
-      header('Location:ErrorAuthentication.php');  
- }*/
-$user=$_SESSION['ID_No'];
+  $user=$_SESSION['ID_No'];
 ?>
-       
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -93,11 +83,27 @@ $user=$_SESSION['ID_No'];
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <?php
+              mysql_connect('localhost', 'root', '')
+              or die(mysql_error());  
+              mysql_select_db('lbas_hr') 
+              or die(mysql_error());
+
+              $user=$_SESSION['ID_No']; 
+
+              $retrieveName = "SELECT `L_Name`, `F_Name`  
+                               FROM `person` 
+                               WHERE `ID_No` = '".$user."'";
+              $check = mysql_query($retrieveName);
+              while ($row = mysql_fetch_array($check)) {
+                $lastName = $row["L_Name"];
+                $firstName = $row["F_Name"];
+                echo "<i class='icon-user'></i> $lastName , $firstName";
+                echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+              }?>
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
+              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -221,9 +227,9 @@ $user=$_SESSION['ID_No'];
 								}
 								
 								}else{
-									echo"<center>";
+									echo"<div class='well'><center>";
 									echo"You haven't been scheduled yet";
-									echo"</center>";
+									echo"</center></div>";
 								}
 								
 								echo"</br>";	
@@ -240,9 +246,5 @@ $user=$_SESSION['ID_No'];
                       </div>
             </div>
         <!--Activities and Dates Panel-->
-
-
- 
-
   </body>
 </html>
