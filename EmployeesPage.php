@@ -2,19 +2,7 @@
   session_start();
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
-<<<<<<< HEAD
   } 
-
-?>  
-
-
-    else if ($_SESSION['ID_No'] != 'Employee'){
-=======
-  }
-    else if ($_SESSION['ID_No'] != 'Admin'){
->>>>>>> origin/master
-      header('Location:ErrorAuthentication.php');  
-    }
   ?>      
 
 <!DOCTYPE html>
