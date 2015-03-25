@@ -38,11 +38,17 @@
 	$LNChild8 = $_POST['LNChild8'];
 	$LNChild9 = $_POST['LNChild9'];
 	$LNChild10 = $_POST['LNChild10'];
-
+	
 	//getting value from the Calendar
-	//$birth = array($_POST['date_select2_month'],$_POST['date_select2_day'], $_POST['date_select2_year']);
-	//$bDay = implode(" ", $birth);
-	$bDay = $_POST['date_select2'];
+	$birth = array($_POST['date_select2_year'], $_POST['date_select2_month'],$_POST['date_select2_day']);
+	$bDay = implode("-", $birth);
+	//$bDay = ;
+	//echo "Birthday: $bDay";
+
+
+	$birth = array($_POST['date_select2_month'],$_POST['date_select2_day'], $_POST['date_select2_year']);
+	$bDay = implode(" ", $birth);
+	//	$bDay = $_POST['date_select2'];
 
 	$email = $_POST['email'];
 	$street = $_POST['street'];
@@ -56,8 +62,6 @@
 	$college = $_POST['college'];
 	$College_Grad = $_POST['College_Grad'];
 	$degree = $_POST['degree'];	
-	$masteral = $_POST['masteral'];
-	$degree2 = $_POST['degree2'];
 	$award1=$_POST['Award1'];
 	$award2=$_POST['Award2'];
 	$award3=$_POST['Award3'];
@@ -81,7 +85,6 @@
 	$dept=$_POST['department'];
 	$position=$_POST['position'];
 	$level=$_POST['level'];
-	$resume = "Yes";
 
 	?>
 
@@ -131,18 +134,8 @@
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     }
-    #resume-label{
-    	text-indent: .5em;
-    }
-    td {
-    padding: 7px;
-	}
-	input{
-		background-color: rgba(0,0,0,0.1);
-	}
+    </style>
 
-  </style>
-  <body>
     <!--main navbar-->
  <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
@@ -202,43 +195,44 @@
 		
         mysql_select_db('lbas_hr') 
         or die(mysql_error());
+		
+		function getRandomString($length = 5) { //function for Generating Random Username
+            $validCharacters = "1234567890";
+            $validCharNumber = strlen($validCharacters);
+         
+            $result = "";
+            for ($i = 0; $i < $length; $i++) {
+                $index = mt_rand(0, $validCharNumber - 1);
+                $result .= $validCharacters[$index];
+            } 
+            return $result;
+        }
+        $resumeID=getRandomString(); //setting a PHP variable to the ID Number
 
+		
 		$updatePerson = "UPDATE person 
-						 SET 	`L_Name` = '".$lastName."', 
-						 		`F_Name` = '".$firstName."', 
-						 		`M_Name` = '".$middleName."',
-						 		`B_Day` = '".$bDay."',
-						 		`Resume` = '".$resume."',
-						 		`C_Status` = '".$civil."'
-				 		 		WHERE `ID_No` ='".$user."'";
+						 SET 	L_Name = '".$lastName."', 
+						 		F_Name = '".$firstName."', 
+						 		M_Name = '".$middleName."',
+						 		B_Day = '".$bDay."',
+						 		C_Status = '".$civil."',
+								Resume_ID = '".$resumeID."'
+				 		 		WHERE ID_No ='".$user."'";
 
-		$updateFamily = "INSERT INTO `family`
-						(`ID_No`, `Spouse_Lname`, `Spouse_Fname`, `Spouse_Mname`, `Child1_Fname`,
-						`Child1_Lname`, `Child2_Fname`, `Child2_Lname`, `Child3_Fname`, `Child3_Lname`, 
-						`Child4_Fname`, `Child4_Lname`, `Child5_Fname`, `Child5_Lname`, `Child6_Fname`,
-						`Child6_Lname`, `Child7_Fname`, `Child7_Lname`, `Child8_Fname`, `Child8_Lname`,
-						`Child9_Fname`, `Child9_Lname`, `Child10_Fname`, `Child10_Lname`)
+		
 
-		VALUES ('".$user."','".$Spouse_Lname."','".$Spouse_Fname."','".$Spouse_Mname."',
-				'".$Child1_Fname."','".$Child1_Lname."','".$Child2_Fname."','".$Child2_Lname."',
-				'".$Child3_Fname."','".$Child3_Lname."','".$Child4_Fname."','".$Child4_Lname."',
-				'".$Child5_Fname."','".$Child5_Lname."','".$Child6_Fname."','".$Child6_Lname."',
-				'".$Child7_Fname."','".$Child5_Lname."','".$Child8_Fname."','".$Child8_Lname."',
-				'".$Child9_Fname."','".$Child9_Lname."','".$Child10_Fname."','".$Child10_Fname."')";	
+		$updateResume = "INSERT INTO resume
+				 		 (Resume_ID,ID_No, Email, M_No, T_No, Street, 
+						 City, Province, Z_Code, H_School, HS_Graduated, 
+						 College,College_Graduated, Course, Masteral, Course2, 
+						 Award1, Award2, Award3, Award4, Award5, 
+						 Org_Aff1, Org_Aff2, Org_Aff3, Org_Aff4, Org_Aff5, 
+						 T_Skills1, T_Skills2, T_Skills3, T_Skills4, T_Skills5, 
+						 Experience1, Experience2, Experience3, Experience4, Experience5, 
+						 App_Department, App_Position, App_Level)
 
 
-		$updateResume = "INSERT INTO `resume`
-				 		 (`ID_No`, `Email`, `M_No`, `T_No`, `Street`, 
-						 `City`, `Province`, `Z_Code`, `H_School`, `HS_Graduated`, 
-						 `College`,`College_Graduated`, `Course`, `Masteral`, `Course2`, 
-						 `Award1`, `Award2`, `Award3`, `Award4`, `Award5`, 
-						 `Org_Aff1`, `Org_Aff2`, `Org_Aff3`, `Org_Aff4`, `Org_Aff5`, 
-						 `T_Skills1`, `T_Skills2`, `T_Skills3`, `T_Skills4`, `T_Skills5`, 
-						 `Experience1`, `Experience2`, `Experience3`, `Experience4`, `Experience5`, 
-						 `App_Department`, `App_Position`, `App_Level`)
-
-
-		VALUES ('".$user."','".$email."','".$mobNumber."','".$telNumber."','".$street."',
+		VALUES ('".$resumeID."','".$user."','".$email."','".$mobNumber."','".$telNumber."','".$street."',
 				'".$city."','".$province."','".$zip."','".$highSchool."','".$HS_Grad."',
 				'".$college."','".$College_Grad."','".$degree."','".$masteral."','".$degree2."',
 				'".$award1."','".$award2."','".$award3."','".$award4."','".$award5."',
@@ -247,20 +241,69 @@
 				'".$skill5."','".$exp1."','".$exp2."','".$exp3."','".$exp4."',
 				'".$exp5."','".$dept."','".$position."','".$level."')";
 
+		if($Spouse_Lname != '' or $Child1_Fname != ''){
+		$updateFamily = "INSERT INTO family
+						(ID_No, Spouse_Lname, Spouse_Fname, Spouse_Mname, Child1_Fname,
+						Child1_Lname, Child2_Fname, Child2_Lname, Child3_Fname, Child3_Lname, 
+						Child4_Fname, Child4_Lname, Child5_Fname, Child5_Lname, Child6_Fname,
+						Child6_Lname, Child7_Fname, Child7_Lname, Child8_Fname, Child8_Lname,
+						Child9_Fname, Child9_Lname, Child10_Fname, Child10_Lname)
+
+		VALUES ('".$user."','".$Spouse_Lname."','".$Spouse_Fname."','".$Spouse_Mname."',
+				'".$Child1_Fname."','".$Child1_Lname."','".$Child2_Fname."','".$Child2_Lname."',
+				'".$Child3_Fname."','".$Child3_Lname."','".$Child4_Fname."','".$Child4_Lname."',
+				'".$Child5_Fname."','".$Child5_Lname."','".$Child6_Fname."','".$Child6_Lname."',
+				'".$Child7_Fname."','".$Child5_Lname."','".$Child8_Fname."','".$Child8_Lname."',
+				'".$Child9_Fname."','".$Child9_Lname."','".$Child10_Fname."','".$Child10_Fname."')";	
+		
+			$checkUpdate3 = msql_query($updateFamily);
+		}
+		
 		$checkUpdate1 = mysql_query($updatePerson);
 		$checkUpdate2 = mysql_query($updateResume);
-		$checkUpdate3 = msql_query($updateFamily);
+		
 
 		//Redirecting to Applicant Page once Resume is submitted
-		if ($checkUpdate1 && $checkUpdate2 && $checkUpdate3) { 
+		if ($checkUpdate1 && $checkUpdate2) { 
 			header('Location:ApplicantPage.php');			
-		 } 
+        /*echo ("Your first name is ".$firstName."<br/>");
+        echo ("Your mid name is ".$middleName."<br/>");
+        echo ("Your last name is".$lastName."<br/>");
+        echo ("Your birthdate is".$bDay."<br/>");
+        echo ("Your Spouse's Name is".$spouseLName.", ".$spouseFName."<br/>");
 
-		//Redirecting to SubmitFailed
-		else{
+        echo "Resume";
+        echo ("Your email is".$email."<br/>");   
+        echo ("Your mobile number is".$mobNumber."<br/>");    
+        echo ("Your mobile number is".$telNumber."<br/>"); 
+       	echo ("Street:".$street ."<br/>");
+       	echo ("City: ".$city."<br/>");
+       	echo ("Zip Codesss:".$zip."<br/>");
+       	echo ("HS:".$highSchool."<br/>");
+       	echo ("You graduated in highschool by".$HS_Grad."<br/>");
+       	echo ("College yow: ".$college."<br/>");
+       	echo ("Degree mo bruh:".$degree."<br/>");
+       	echo ("Yead Grad:".$College_Grad."<br/>");
+       	echo ("Awards isa:".$award1."<br/>");
+       	echo ("Awards dalawa:".$award2."<br/>");
+       	echo ("Awards tatlo:".$award3."<br/>");
+       	echo ("Awards apat:".$award4."<br/>");
+       	echo ("Awards lima:".$award5."<br/>");
+       	echo ("Ang skill mo puta:".$skill1."<br/>");
+       	echo ("Ang skill mo puta:".$skill2."<br/>");
+       	echo ("Ang skill mo puta:".$skill3."<br/>");
+       	echo ("Ang skill mo puta:".$skill4."<br/>");
+       	echo ("Ang skill mo puta:".$skill5."<br/>");
+       	echo ("Ang exp mo dung:".$exp1."<br/>");
+       	echo ("Ang exp mo dung:".$exp2."<br/>");
+       	echo ("Ang exp mo dung:".$exp3."<br/>");
+       	echo ("Ang exp mo dung:".$exp4."<br/>");
+       	echo ("Ang exp mo dung:".$exp5."<br/>");
+		*/
+		}else{
 			header('Location:ApplicantSubmitFailed.php');
+			//die('Invalid query: ' . mysql_error());
 		}
-
 
 	?>
 </body>

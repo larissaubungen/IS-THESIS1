@@ -133,6 +133,7 @@ $user=$_SESSION['ID_No'];
 									 OR `E_Position2` IS NULL 
 									 OR `E_Position1` IS NULL 
 									 OR `E_Position1` IS NULL");
+
 		
 		$employeeRecommendation = mysql_query("SELECT DISTINCT 
 													person.ID_No, person.F_Name, person.L_Name, person.M_Name,  

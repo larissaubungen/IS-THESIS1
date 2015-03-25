@@ -103,7 +103,6 @@
         <li><a href=""><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
         <li><a href=""><i class="icon-table"></i><span>Attendance</span> </a></li>
         <li><a href=""><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
-        <li><a href=""><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="http://localhost/IS-THESIS1/Signup.php">Add Applicant</a></li>

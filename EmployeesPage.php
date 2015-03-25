@@ -2,12 +2,17 @@
   session_start();
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
+<<<<<<< HEAD
   } 
 
 ?>  
 
 
     else if ($_SESSION['ID_No'] != 'Employee'){
+=======
+  }
+    else if ($_SESSION['ID_No'] != 'Admin'){
+>>>>>>> origin/master
       header('Location:ErrorAuthentication.php');  
     }
   ?>      
@@ -44,29 +49,14 @@
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-       <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <?php
-              mysql_connect('localhost', 'root', '')
-              or die(mysql_error());  
-              mysql_select_db('lbas_hr') 
-              or die(mysql_error());
-
-              $user=$_SESSION['ID_No'];
-
-              $retrieveName = "SELECT `L_Name`, `F_Name`  
-                               FROM `person` 
-                               WHERE `ID_No` = '".$user."'";
-              $check = mysql_query($retrieveName);
-              while ($row = mysql_fetch_array($check)) {
-                $lastName = $row["L_Name"];
-                $firstName = $row["F_Name"];
-                echo "<i class='icon-user'> $lastName , $firstName </i>";
-                echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
-              }?>
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
+            <ul class="dropdown-menu">
               <li><a href="javascript:;">Profile</a></li>
               <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>
             </ul>
-          </li>        </ul>
+          </li>
+        </ul>
         <form class="navbar-search pull-right">
           <input type="text" class="search-query" placeholder="Search">
         </form>
@@ -124,153 +114,5 @@
             <!-- /widget-content --> 
           </div>
           </div>
-
-
-          <!-- /widget -->
-          <div class="col-lg-6">
-          <div class="widget">
-            <div class="widget-header"> <i class="icon-signal"></i>
-              <h3> General Employee Attendance</h3>
-            </div>
-            <!-- /widget-header -->
-            <div class="widget-content">
-              <canvas id="area-chart" class="chart-holder" height="250" width="1150"> </canvas>
-              <!-- /area-chart --> 
-            </div>
-            <!-- /widget-content --> 
-          </div>
-          <!-- /widget -->
-        </div>
-
-      
-        </div>
-        <!-- /span6 --> 
-      </div>
-
-
-<!-- Placed at the end of the document so the pages load faster --> 
-<script src="js/jquery-1.7.2.min.js"></script> 
-<script src="js/excanvas.min.js"></script> 
-<script src="js/chart.min.js" type="text/javascript"></script> 
-<script src="js/bootstrap.js"></script>
-<script language="javascript" type="text/javascript" src="js/full-calendar/fullcalendar.min.js"></script>
- 
-<script src="js/base.js"></script> 
-<script>     
-
-        var lineChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-				{
-				    fillColor: "rgba(220,220,220,0.5)",
-				    strokeColor: "rgba(220,220,220,1)",
-				    pointColor: "rgba(220,220,220,1)",
-				    pointStrokeColor: "#fff",
-				    data: [65, 59, 90, 81, 56, 55, 40]
-				},
-				{
-				    fillColor: "rgba(151,187,205,0.5)",
-				    strokeColor: "rgba(151,187,205,1)",
-				    pointColor: "rgba(151,187,205,1)",
-				    pointStrokeColor: "#fff",
-				    data: [28, 48, 40, 19, 96, 27, 100]
-				}
-			]
-
-        }
-
-        var myLine = new Chart(document.getElementById("area-chart").getContext("2d")).Line(lineChartData);
-
-
-        var barChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-				{
-				    fillColor: "rgba(220,220,220,0.5)",
-				    strokeColor: "rgba(220,220,220,1)",
-				    data: [65, 59, 90, 81, 56, 55, 40]
-				},
-				{
-				    fillColor: "rgba(151,187,205,0.5)",
-				    strokeColor: "rgba(151,187,205,1)",
-				    data: [28, 48, 40, 19, 96, 27, 100]
-				}
-			]
-
-        }    
-
-        $(document).ready(function() {
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-        var calendar = $('#calendar').fullCalendar({
-          header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-          },
-          selectable: true,
-          selectHelper: true,
-          select: function(start, end, allDay) {
-            var title = prompt('Event Title:');
-            if (title) {
-              calendar.fullCalendar('renderEvent',
-                {
-                  title: title,
-                  start: start,
-                  end: end,
-                  allDay: allDay
-                },
-                true // make the event "stick"
-              );
-            }
-            calendar.fullCalendar('unselect');
-          },
-          editable: true,
-          events: [
-            {
-              title: 'All Day Event',
-              start: new Date(y, m, 1)
-            },
-            {
-              title: 'Long Event',
-              start: new Date(y, m, d+5),
-              end: new Date(y, m, d+7)
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: new Date(y, m, d-3, 16, 0),
-              allDay: false
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: new Date(y, m, d+4, 16, 0),
-              allDay: false
-            },
-            {
-              title: 'Meeting',
-              start: new Date(y, m, d, 10, 30),
-              allDay: false
-            },
-            {
-              title: 'Lunch',
-              start: new Date(y, m, d, 12, 0),
-              end: new Date(y, m, d, 14, 0),
-              allDay: false
-            },
-            {
-              title: 'Birthday Party',
-              start: new Date(y, m, d+1, 19, 0),
-              end: new Date(y, m, d+1, 22, 30),
-              allDay: false
-            },
-           
-          ]
-        });
-      });
-    </script><!-- /Calendar -->
 </body>
 </html>

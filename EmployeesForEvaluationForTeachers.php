@@ -167,8 +167,8 @@
             $subject= "";
 
             $result = mysql_query("
-            SELECT  F_Name, L_Name, ID_No, Department, Subject
-            FROM person 
+            SELECT  F_Name, L_Name, M_Name, ID_No, Department, Subject, Subject_Type,
+            FROM person, work
             WHERE ID_No LIKE '".$user."' 
             "); 
 
@@ -178,15 +178,17 @@
           
         $department = $row["Department"];
         $subject = $row["Subject"];
+        $subjectType = $row["Subject_Type"];
         
 
         }
 
 
         $getUser = mysql_query("
-            SELECT  ID_No, F_Name, L_Name, ID_No, Department
-            FROM person 
+            SELECT  ID_No, F_Name, L_Name, ID_No, CurrentWork_ID, Department, Subject, Subject_Type, Level, Grade, 
+            FROM person, work
             WHERE Department = '".$department."' AND 
+                  Subject_Type = '".$subjectType."' 
                   Subject = '" . $subject . "'   OR Subject = 'Biology' AND
                   ID_No != '".$user."'
            "); 
@@ -204,6 +206,7 @@
                   echo "<input type='hidden' name='id' value='". $row['ID_No']."'/>";
                   echo "<input type='hidden' name='dept' value='$department'/>";
                   echo "<input type='hidden' name='dept' value='$subject'/>";
+
 
                   echo '<input type= "submit" class="btn btn-primary icon  pull-right" value="Evaluate">';
 

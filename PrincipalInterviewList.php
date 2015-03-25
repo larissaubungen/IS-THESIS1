@@ -13,7 +13,7 @@
 		$result = mysql_query("
 				  SELECT  F_Name, L_Name, applicant_schedule.ID_No, applicant_schedule.Schedule_ID, HR_Status, Teaching_Status, Test_Status
 				  FROM person, applicant_schedule
-				  WHERE E_Status = 'Applicant' AND HR_Status = 'Pass' AND Teaching_Status = 'Pass' and Test_Status = 'Pass' AND applicant_schedule.ID_No LIKE person.ID_No AND Coordinator_Status = 'Pass'
+				  WHERE E_Status = 'Applicant' AND HR_Status = 'Done' AND Teaching_Status = 'Done' and Test_Status = 'Done' AND applicant_schedule.ID_No LIKE person.ID_No AND Coordinator_Status = 'Done'
 				");
 				
 			echo "<form action='SchedulePrincipalInterview.php' method='POST'>";
