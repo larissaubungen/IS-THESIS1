@@ -24,7 +24,7 @@ proper page
 			//&& is_null($check['Resume']) || $check['Resume'] == 'no'
 		$check=mysql_fetch_array($result);
 		 if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && IS_NULL($check['Resume'] )){
-					header('location:ApplicantResume.php');
+					header('location:ApplicantResume2.php');
 					//start of sessions
 					session_start();
 					//iniating a sessions variable and it's value
