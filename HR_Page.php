@@ -99,40 +99,6 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
 		            $leaves=mysql_query("SELECT * 
 							 FROM leave_table 
 							 WHERE L_Status ='Pending'");
-<<<<<<< HEAD
-		
-		if(mysql_num_rows($leaves) > 0){
-		?>
-		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests*</span></a>
-           <ul class="dropdown-menu">
-              <li><a href="HR_Resignation.php">Resignations</a></li>
-              <li><a href="HR_Transfer.php">Transfers</a></li>
-			  <li><a href="LeaveRequest.php">Leaves*</a></li>
-			  <li><a href="RetirementList.php">Retirement</a></li>
-           </ul> 
-        </li>
-		<?php
-		}else{
-		?>
-		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
-           <ul class="dropdown-menu">
-              <li><a href="HR_Resignation.php">Resignations</a></li>
-              <li><a href="HR_Transfer.php">Transfers</a></li>
-			  <li><a href="HR_Transfer.php">Leaves</a></li>
-			  <li><a href="RetirementList.php">Retirement</a></li>
-           </ul> 
-        </li>
-		<?php
-		}
-		?>
-		
-        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="Signup.php">Add Applicant</a></li>
-          </ul>
-        </li>
-     </div>
-=======
 
         if ($leaves){ //if and else statement for handling the query
 
@@ -173,7 +139,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
 
     </div>
 
->>>>>>> origin/master
+
     <!-- /container --> 
   </div>
   </div>
@@ -568,7 +534,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
 			list($hour,$minute,$seconds)=explode(":", $row['HR_Time']);
 			?>
 			{
-<<<<<<< HEAD
+
 			  title: 'Applicant human resource interview (<?php echo"$fName "?> <?php echo"$lName"?>) ',
               start: new Date(<?php echo $year; ?>,<?php echo $month; ?>-1, <?php echo $day; ?>, <?php echo $hour; ?>, <?php echo $minute; ?>),
 			  allDay: false
@@ -666,20 +632,18 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
 			?>
 			{
 			  title: 'Principal Interview (<?php echo"$fName "?> <?php echo"$lName"?>) ',
-=======
+
 			  title: 'Applicant human resource interview',
->>>>>>> origin/master
+
               start: new Date(<?php echo $year; ?>,<?php echo $month; ?>-1, <?php echo $day; ?>, <?php echo $hour; ?>, <?php echo $minute; ?>),
 			  allDay: false
 			
 			},
 			<?php
 			}
-<<<<<<< HEAD
+
 		  ?>
-=======
-		  ?>  
->>>>>>> origin/master
+
           ]
         });
       });
