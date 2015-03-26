@@ -90,7 +90,7 @@
     <div class="container">
 
       <ul class="mainnav">
-        <li><a href="HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
+        <li ><a href="HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
         <li><a href="EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> 
           <i class="icon-user"></i><span>Applicants</span> <b class="caret"></b></a>
@@ -160,81 +160,99 @@
   <div class="container">
        <div class="row">
         <div class="span6">
-          <div class="stackable">
 
-           <?php
+          <h3>Resignation Request</h3><br/>
 
-           mysql_connect("localhost", "root", "")
-                or die(mysql_error());
-            
-            mysql_select_db("lbas_hr") 
-              or die(mysql_error());   
+    <?php
 
-          echo "<h3>Resignation Request</h3><br/>";
+     mysql_connect("localhost", "root", "")
+          or die(mysql_error());
+      
+      mysql_select_db("lbas_hr") 
+        or die(mysql_error()); 
 
-          error_reporting(0);
-          $flag = $_POST["deleteFlag"]; //variable indicator if the Admin user approve the resignation
-          $idNumber = $_POST["idNumber"]; 
+      error_reporting(0); //for hiding the unidentified index
+      $flag = $_POST["deleteFlag"]; //variable indicator if the Admin user approve the resignation
+      $disFlag = $_POST["disapproveFlag"];
+      $idNumber = $_POST["idNumber"]; 
 
-          date_default_timezone_set('Asia/Manila'); //Setting up the timezone to Philippines   
-           $today = date('Y-m-d', strtotime($date));  //setting the date 1 day late because of the timezone problem?
-           $date = date_create($today, timezone_open('Asia/Manila')); //creating procedural date
-           $datePH = date_format($date, 'Y-m-d'); //formating the date today
+      date_default_timezone_set('Asia/Manila'); //Setting up the timezone to Philippines   
+      $today = date('Y-m-d', strtotime($date));  //setting the date 1 day late because of the timezone problem?
+      $date = date_create($today, timezone_open('Asia/Manila')); //creating procedural date
+      $datePH = date_format($date, 'Y-m-d'); //formating the date today
 
-           $archiveYES = "Yes";
-           $approvedStat = "Approve";
+      $archiveYES = "Yes";
+      $approvedStat = "Approve";
 
-          if (!(is_null($flag))){  //approving the list based on the flag
-            
-            $approveResign = mysql_query("
-            UPDATE `person`,`resignation`,`work`
-            SET person.E_Status= 'NULL', person.CurrentWork_ID = 'NULL', person.Archive = '".$archiveYES."',
-                resignation.Res_Status = '".$approvedStat."', resignation.Res_Date = '".$datePH."', work.ID_No ='NULL'
-            WHERE person.ID_No = '".$idNumber."' AND resignation.ID_No = '".$idNumber."' AND work.ID_No= '".$idNumber."'                  
-              ");  
+      if (!(is_null($flag))){  //approving the list based on the flag
+      
+         $approveResign = mysql_query("UPDATE `person`,`resignation`,`work`
+                                       SET person.E_Status= NULL, person.CurrentWork_ID = NULL, person.Archive = '".$archiveYES."',
+                                       resignation.Res_Status = '".$approvedStat."', resignation.Res_Date = CURDATE(), work.ID_No = NULL
+                                       WHERE person.ID_No = '".$idNumber."' AND resignation.ID_No = '".$idNumber."' AND work.ID_No= '".$idNumber."'                  
+              "); 
 
-            if ($approveResign) {
-                //dismissible alert for approval success
-              ?>            
-              
-              <div class="bs-example">
-                <div class="alert alert-success" id="alert">
-                  <a href="#" class="close" data-dismiss="alert">&times;</a>
-                  <strong>Resignation Approved.</strong> 
-                </div>
-             </div> 
-            <?php }else{
-              ?>
+          if ($approveResign) {   //dismissible alert for approval success
+            ?>                
+                <div class="bs-example">
+                  <div class="alert alert-success" id="alert">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>Resignation Approved.</strong> 
+                  </div>
+               </div>    
+            <?php 
+          }else{
+            ?>
 
-              <div class="bs-example">
-                <div class="alert alert-danger" id="alert">
-                  <a href="#" class="close" data-dismiss="alert">&times;</a>
-                  <strong>Resignation Approval request failed.</strong> 
-                </div>
-             </div> 
+                <div class="bs-example">
+                  <div class="alert alert-danger" id="alert">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>Resignation Approval request failed.</strong> 
+                  </div>
+               </div> 
 
-             <?php
-                $flag = NULL;
-              }
-
-           }
-          else{
+               <?php
+                  $flag = NULL;
+                }
+      }else{
             $flag = NULL;
-          }
-          //empty variables for modal
-          $idNumber = "";
-          $firstName = "";
-          $middleName = "";
-          $lastName = "";
-          $position1 = "";
-          $position2 = "";
-          $dept = "";
-          $subj = "";
-          $subj_type = "";
-          $reason = "";
-          $clearance = "";
+          }  
 
-          //query for the list of resignation requests filtered to pending status
+        if(!(is_null($disFlag))){
+          $disapproveResign =mysql_query("UPDATE person INNER JOIN resignation
+                                          ON person.Resign_ID LIKE resignation.Resign_ID
+                                          SET person.Resign_ID = NULL,
+                                              resignation.Res_Status = 'Disapprove',
+                                              resignation.Res_Date = CURDATE()
+                                          WHERE person.ID_No = '".$idNumber."' AND resignation.ID_No = '".$idNumber."' ");
+            if ($disapproveResign) {   //dismissible alert for approval success
+            ?>                
+                <div class="bs-example">
+                  <div class="alert alert-success" id="alert">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>Resignation Disapproved.</strong> 
+                  </div>
+               </div>    
+            <?php 
+          }else{
+            ?>
+
+                <div class="bs-example">
+                  <div class="alert alert-danger" id="alert">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>Resignation Disapproval request failed.</strong> 
+                  </div>
+               </div> 
+
+               <?php
+                  $disFlag = NULL;
+                }
+
+        }else{
+             $disFlag = NULL;
+        }
+
+       //query for the list of resignation requests filtered to pending status
           $result = mysql_query("
               SELECT DISTINCT person.F_Name as firstName, person.M_Name as middleName, person.L_Name as lastName, person.CurrentWork_ID as currentWorkID,
                               work.E_Position1 as position1, work.E_Position2 as position2, work.Department as dept, 
@@ -260,25 +278,29 @@
           $reason = $row["Reason"];
           $clearance = "Cleared";
 
-
           $currentWorkID = $row['currentWorkID']; //for value passing only
 
-          echo '<li class="span5 clearfix" style="list-style:none;">';
-          echo '<div class="thumbnail clearfix">';
+      echo '<li class="span7 clearfix" style="list-style:none;">';
+        echo '<div class="thumbnail clearfix">';
           echo '<img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style="margin-right:10px">';
-          echo '<div class="caption" class="pull-left">';
+            echo '<div class="caption" >';
 
            echo '<h4>';      
              echo '<a href="#" >'. $lastName .", ". $firstName ." ". $middleName.'</a>';
-             echo '</h4>';
-             echo '<small><b>ID Number: </b>'. $idNumber .'</small><br/>';            
-             echo '<button type="button" class="demo btn btn-primary icon pull-right" data-toggle="modal" href="#stack1">Approval</button>';
 
+             //<a data-toggle="modal" data-target="#modal-1" onclick="modal();" style="padding-left:2em; color:black"> See List of Jobs</a>
+
+             echo '<button type="button" class="demo btn btn-success icon pull-right" data-toggle="modal" data-target="#modal-1">Approve</button>';
+             echo '<button type="button" style="margin-right:1em;" class="demo btn btn-danger icon pull-right" data-toggle="modal" data-target="#modal-2">Disapprove</button>';
+             echo '</h4>';
+             
+             echo '<small><b>ID Number: </b>'. $idNumber .'</small><br/>'; 
+             
               if (is_null($position1) && !(is_null($position2))) {
                 echo '<small><b>Position 2: </b>'. $position2 .'</small><br/>';
                 if (!is_null($dept)) {
                    echo '<small><b>Department: </b>'. $dept .'</small><br/>';  
-                }               
+                }  
 
              }else if (is_null($position2) && !(is_null($position1))) {
                 echo '<small><b>Position 1: </b>'. $position1 .'</small><br/>';  
@@ -291,6 +313,17 @@
                 echo '<small><b>Position 2: </b>'. $position2 .'</small><br/>';  
                 echo '<small><b>Department: </b>'. $dept .'</small><br/>';
              }
+
+          echo '<form action="HR_ResignRecommend.php" method="post">';
+            echo '<input type="hidden" id="idNumber" name="idNumber" value="'.$idNumber.'">';
+            echo '<input type="hidden" id="currentWorkID" name="currentWorkID" value="'.$currentWorkID.'">';
+            echo '<input type="hidden" id="firstName" name="firstName" value="'.$firstName.'">';
+            echo '<input type="hidden" id="middleName" name="middleName" value="'.$middleName.'">';
+            echo '<input type="hidden" id="lastName" name="lastName" value="'.$lastName.'">';
+            echo '<input type="hidden" id="dept" name="dept" value="'.$dept.'">';
+          echo '<input type="submit" class="btn btn-default icon pull-right" style="display:inline-block;" value="Select Recommendations">
+                </form>';     
+                
              echo '<small><b>Reason: </b>'.$reason.'</small><br/>';
              echo '<small><b>Clearance: </b> '.$clearance.'</small>';
             ?>
@@ -299,112 +332,101 @@
         <?php
           }
         ?>
-  <!--Modal Part-->
-
-<header></header>
-<div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Resignation Approval</h3>
-  </div>
-  <div class="modal-body">
-    <h4>Are you sure to approve the resignation request?<br/></h4>
-    <div class="well">
-      <?php
-
-      echo '<p><b>ID number:</b> '.$idNumber.'<br/>'.'  </p>';
-      echo '<p><b>Name:</b>'." ".$lastName.", ".$firstName. '<br/>'.'  </p>';
-
-          if (is_null($position1) && !(is_null($position2))) {
-          echo ' <p><b>Position 2: </b>'. $position2 .' <br/>'.'  </p>';
-            if (!is_null($dept)) {
-                echo ' <p><b>Department: </b>'. $dept .' <br/>'.'  </p>';    
-            }
-       }elseif (is_null($position2) && !(is_null($position1))) {
-          echo ' <p><b>Position 1: </b>'. $position1 .' <br/>'.'  </p>';  
-         if (!is_null($dept)) {
-                echo ' <p><b>Department: </b>'. $dept .' <br/>'.'  </p>';    
-            } 
-       }else{
-          echo ' <p><b>Position 1: </b>'. $position1 .' <br/>'.'  </p>';  
-          echo ' <p><b>Position 2: </b>'. $position2 .' <br/>'.'  </p>';  
-          echo ' <p><b>Department: </b>'. $dept .' <br/>'.'  </p>';
-       }
-       echo ' <p><b>Reason: </b>'.$reason.'  </p>';
-       echo '<small><b>Clearance: </b> '.$clearance.'</small>';
-
-      ?>
-    </div>
-      <form action="HR_ResignRecommend.php" method="post">
-        <?php
-        echo '<input type="hidden" id="idNumber" name="id" value="'.$idNumber.'">';
-        echo '<input type="hidden" id="currentWorkID" name="currentWorkID" value="'.$currentWorkID.'">';
-        echo '<input type="hidden" id="firstName" name="firstName" value="'.$firstName.'">';
-        echo '<input type="hidden" id="middleName" name="middleName" value="'.$middleName.'">';
-        echo '<input type="hidden" id="lastName" name="lastName" value="'.$lastName.'">';
-        echo '<input type="hidden" id="dept" name="dept" value="'.$dept.'">';
-      ?>
-      <input type="submit" class="btn btn-default" value="Select Recommendations">
-      </form>
 
 
-  </div>
-  <div class="modal-footer">
-    <button type="button" data-dismiss="modal" class="btn">Close</button>
-    <button class="btn btn-primary" data-toggle="modal" href="#stack2">Approve</button>
-    
-  </div>
-</div>
 
-<div id="stack2" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Resignation Approval</h3>
-  </div>
-  <div class="modal-body">
-    <p>Are you sure to approve without replacement?</p>
-
-     <form action="HR_ResignRecommend.php" method="post">
-        <?php
-        echo '<input type="hidden" id="idNumber" name="idNumber" value="'.$idNumber.'">';
-        echo '<input type="hidden" id="currentWorkID" name="currentWorkID" value="'.$currentWorkID.'">';
-        echo '<input type="hidden" id="firstName" name="firstName" value="'.$firstName.'">';
-        echo '<input type="hidden" id="middleName" name="middleName" value="'.$middleName.'">';
-        echo '<input type="hidden" id="lastName" name="lastName" value="'.$lastName.'">';
-        echo '<input type="hidden" id="dept" name="dept" value="'.$dept.'">';
-      ?>
-      <input type="submit" class="btn btn-default" value="Select Recommendations">
-      </form>
-
-    <!-- <button class="btn" data-toggle="modal" href="#stack3">Select</button>  -->
-  </div>
-  <div class="modal-footer">
-    
-
-    <form id="resignForm" action="HR_Resignation.php" method= "POST">
-      <?php
-        echo '<input type="hidden" id="deleteFlag" name="deleteFlag" value="'.$flag.'">';
-        echo '<input type="hidden" id="idNumber" name="idNumber" value="'.$idNumber.'">';
-        echo '<input type="hidden" id="firstName" name="firstName" value="'.$firstName.'">';
-        echo '<input type="hidden" id="middleName" name="middleName" value="'.$middleName.'">';
-        echo '<input type="hidden" id="lastName" name="lastName" value="'.$lastName.'">';
-        echo '<input type="hidden" id="Reason" name="Reason" value="'.$reason.'">';
-        echo '<input type="hidden" id="Position1" name="Position1" value="'.$position1.'">';
-        echo '<input type="hidden" id="Position2" name="Position2" value="'.$position2.'">';
-        echo '<input type="hidden" id="dept" name="dept" value="'.$dept.'">';
-        echo '<input type="hidden" id="subject" name="subject" value="'.$subj.'">';
-        echo '<input type="hidden" id="subj_type" name="subj_type" value="'.$subj_type.'">';
-
-      ?>
-      <button type="button" data-dismiss="modal" class="btn">Return</button>
-        <input type="submit" class="btn btn-primary" value="Proceed">      
-    </form>
-  </div>
-</div>
-<!--while loop end tag ends here-->
-
-<footer></footer>
+      </div>
+     </div> 
+   </div>
           
+    <!--Modal Part for APPROVAL Prompt-->
+
+        <header></header>
+        <div class="modal" id="modal-1" style="display:none;">
+          <div class="modal-dialog">            
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Resignation Approval</h3>
+            </div> <!--modal header-->
+
+            <div class="modal-body"> 
+                <p>Are you sure to <strong>APPROVE</strong> the resignation request without employee replacement?</p>
+             
+            </div>
+            </div> <!--modal body-->
+
+            <div class="modal-footer">
+
+              <form id="resignForm" action="HR_Resignation.php" method= "POST">
+        <?php
+          echo '<input type="hidden" id="deleteFlag" name="deleteFlag" value="'.$flag.'">';
+          echo '<input type="hidden" id="idNumber" name="idNumber" value="'.$idNumber.'">';
+          echo '<input type="hidden" id="firstName" name="firstName" value="'.$firstName.'">';
+          echo '<input type="hidden" id="middleName" name="middleName" value="'.$middleName.'">';
+          echo '<input type="hidden" id="lastName" name="lastName" value="'.$lastName.'">';
+          echo '<input type="hidden" id="Reason" name="Reason" value="'.$reason.'">';
+          echo '<input type="hidden" id="Position1" name="Position1" value="'.$position1.'">';
+          echo '<input type="hidden" id="Position2" name="Position2" value="'.$position2.'">';
+          echo '<input type="hidden" id="dept" name="dept" value="'.$dept.'">';
+          echo '<input type="hidden" id="subject" name="subject" value="'.$subj.'">';
+          echo '<input type="hidden" id="subj_type" name="subj_type" value="'.$subj_type.'">';
+
+        ?>
+            <button type="button" data-dismiss="modal" class="btn">Return</button>
+              <input type="submit" class="btn btn-primary" value="Proceed">      
+          </form>
+                </div> <!--modal footer-->
+              </div> <!--modal content-->
+          </div> <!--modal dialogue-->
+          </div> <!--modal-->
+          </div> <!--Container-->
+    <footer></footer>
+    <!--END OF Modal Part for APPROVAL Prompt-->
+
+    <!--Modal Part for DISAPPROVAL Prompt-->
+
+     <header></header>
+        <div class="modal" id="modal-2" style="display:none;">
+          <div class="modal-dialog">            
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Resignation Approval</h3>
+            </div> <!--modal header-->
+
+            <div class="modal-body"> 
+                <p>Are you sure to <strong>DISAPPROVE</strong> the resignation request without employee replacement?</p>
+             
+            </div>
+            </div> <!--modal body-->
+
+            <div class="modal-footer">
+
+              <form id="resignForm" action="HR_Resignation.php" method= "POST">
+        <?php
+          echo '<input type="hidden" id="disapproveFlag" name="disapproveFlag" value="'.$disFlag.'">';
+          echo '<input type="hidden" id="idNumber" name="idNumber" value="'.$idNumber.'">';
+          echo '<input type="hidden" id="firstName" name="firstName" value="'.$firstName.'">';
+          echo '<input type="hidden" id="middleName" name="middleName" value="'.$middleName.'">';
+          echo '<input type="hidden" id="lastName" name="lastName" value="'.$lastName.'">';
+          echo '<input type="hidden" id="Reason" name="Reason" value="'.$reason.'">';
+          echo '<input type="hidden" id="Position1" name="Position1" value="'.$position1.'">';
+          echo '<input type="hidden" id="Position2" name="Position2" value="'.$position2.'">';
+          echo '<input type="hidden" id="dept" name="dept" value="'.$dept.'">';
+          echo '<input type="hidden" id="subject" name="subject" value="'.$subj.'">';
+          echo '<input type="hidden" id="subj_type" name="subj_type" value="'.$subj_type.'">';
+
+        ?>
+            <button type="button" data-dismiss="modal" class="btn">Return</button>
+              <input type="submit" class="btn btn-primary" value="Proceed">      
+          </form>
+                </div> <!--modal footer-->
+              </div> <!--modal content-->
+          </div> <!--modal dialogue-->
+          </div> <!--modal-->
+          </div> <!--Container-->
+    <footer></footer>
 
 <!-- Placed at the end of the document so the pages load faster -->
 
@@ -413,13 +435,7 @@
 <script src="js/jquery-2.1.1.js"></script>
 <script src="js/bootstrap-modalmanager.js"></script>
 <script src="js/bootstrap-modal.js"></script>
-<script>
-      $(document).ready(
-        function modal(){
-          $("#stack1").getElementById().show();          
-        }
-      );
-</script>  
+
 <script src="js/jquery-1.7.2.min.js"></script> 
 <script src="js/boostrap.min.js"></script> 
 <script src="js/excanvas.min.js"></script> 
