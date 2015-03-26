@@ -1,3 +1,10 @@
+<?php
+  session_start();
+    if (!isset($_SESSION['ID_No'])) {
+    header('Location:login.php');
+  } ?>  
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,11 +95,31 @@
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
+         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <?php
+              mysql_connect('localhost', 'root', '')
+              or die(mysql_error());  
+              mysql_select_db('lbas_hr') 
+              or die(mysql_error());
+
+              $user=$_SESSION['ID_No'];
+
+              $retrieveName = "SELECT `L_Name`, `F_Name`  
+                               FROM `person` 
+                               WHERE `ID_No` = '".$user."'";
+              $check = mysql_query($retrieveName);
+              while ($row = mysql_fetch_array($check)) {
+                $lastName = $row["L_Name"];
+                $firstName = $row["F_Name"];
+                echo "<i class='icon-user'> $lastName , $firstName </i>";
+                echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+                
+              echo '<li><a href="javascript:;">Profile</a></li>
+              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>';
+
+              }?>
+
+              
             </ul>
           </li>
         </ul>
@@ -111,17 +138,24 @@
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li><a href="HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
-        <li class="active"><a href="EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
-        
-        <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-        <li><a href="guidely.html"><i class="icon-table"></i><span>Attendance</span> </a></li>
-        <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
-        <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
-  
+
+        <li class="active"><a href="EmployeeProfileHome.php"><i class="icon-dashboard"></i><span>Home</span> </a> </li>
+        <li><a href="EmployeeProfilePage.php"><i class="icon-dashboard"></i><span>Profile</span> </a> </li>
+        <li><a href=""><i class="icon-list-alt"></i><span>Reports and Records</span> </a> </li>
+
+        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+         <ul class="dropdown-menu">
+            <li><a href="">File for Leave</a></li>
+            <li><a href="">File for Transfer</a></li>
+            <li><a href="">File for Resignation</a></li>
+         </ul> 
+      </li>
+        </li>
       </ul>
     </div>
     <!-- /container --> 
+  </div>
+  </div>
   </div>
   <!-- /subnavbar-inner --> 
 </div>
@@ -129,25 +163,43 @@
 
 
 
+
 <hr class="">
 <div class="container target">
     <div class="row">
-        <div class="col-sm-10">
+        
 
 
        <?php
 
        $idNo = $_POST['id'];
-       $departmentofEmployee = $_POST['dept'];
+       $subjectofEmployee = $_POST['subject'];
+       $departmentofEmployee = $_POST['department'];
+      
 
         mysql_connect("localhost", "root", "")
         or die(mysql_error());
         mysql_select_db("lbas_hr") 
         or die(mysql_error());
+
+        /*$result = mysql_query("
+            SELECT work.Level
+            FROM work 
+            WHERE ID_No LIKE '".$idNo."'
+            "); 
+
+        while($row = mysql_fetch_array($result)){
+          
+        $level = $row["Level"];
         
 
-        /*if condition must contain all other departments*/
-       if($departmentofEmployee = 'HR department' || $departmentofEmployee = 'Accounting' ) {
+        }
+        
+        echo "$level";*/
+
+       if($departmentofEmployee == 'Human Resource Department' || $departmentofEmployee == 'Accounting Department' ||
+          $departmentofEmployee == 'Registrar' || $departmentofEmployee == 'IT Department' || $departmentofEmployee == 'Director/Principal' ||
+          $departmentofEmployee == 'Library' || $departmentofEmployee == 'Clinic' || $departmentofEmployee == 'Student Formation Center') {
 
             
                echo '<center>';
@@ -168,7 +220,51 @@
                         echo '</table>';
               echo '</center>';                          
 
-       } else {
+       } else if ($departmentofEmployee == 'SMIT' || $departmentofEmployee == 'Humanities') {
+
+      
+               echo '<center>';
+               echo '<table>';
+                   echo '<table style="width:50%">';
+                        echo '<tr>';
+                        echo '<td><strong>General Performance Evaluation for Teachers</td>';            
+                            echo'<form action="GPEforTeachers.php" method= "POST">';
+                              echo "<input type='hidden' name='id' value='$idNo'/>";
+                              echo "<input type='hidden' name='subject' value='$subjectofEmployee'/>";
+                              echo '<td><input type="submit" value="Go to evaluation form"></td>'; 
+                            echo'</form>';
+
+                      echo '</tr>';
+
+                    echo '<tr>';
+                      echo '<td><strong>Evaluation Of Classroom Instruction(ECI-A)</td>';
+                        echo'<form action="EvaluationOfClassroomInstruction(ECI-A).php" method= "POST">';
+                          echo "<input type='hidden' name='id' value='$idNo'/>";
+                          echo "<input type='hidden' name='subject' value='$subjectofEmployee'/>";
+                          echo '<td><input type="submit" value="Go to evaluation form"></td>'; 
+                        echo'</form>';
+                      echo '</tr>';  
+
+
+                      /*echo '<tr>';
+                        echo '<td><strong>Evaluation Of Classroom Instruction for Intermmediate and Higschool Students(ECI-B)</td>';
+                        echo'<form action="EvaluationOfClassroomInstruction(ECI-B)_Inter_HS.php" method= "POST">';
+                          echo "<input type='hidden' name='id' value='$idNo'/>";
+                          echo '<td><input type="submit" value="Go to evaluation form"></td>'; 
+                        echo'</form>';
+                      echo '</tr>';
+
+                      echo '<tr>';
+                        echo '<td><strong>Evaluation Of Classroom Instruction for Primary Students(ECI-B)</td>';
+                          echo'<form action="EvaluationOfClassroomInstruction(ECI-B)_Primary.php" method= "POST">';
+                            echo "<input type='hidden' name='id' value='$idNo'/>";
+                            echo '<td><input type="submit" value="Go to evaluation form"></td>'; 
+                          echo'</form>';  
+                      echo '</tr>';*/
+                   
+                        echo '</table>';
+              echo '</center>';                          
+
 
        }
 

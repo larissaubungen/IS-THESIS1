@@ -178,8 +178,8 @@
         
             $result = mysql_query("
             SELECT *
-            FROM person 
-            WHERE person.ID_No = '$idNo' 
+            FROM person, work 
+            WHERE person.ID_No = '$idNo' and work.ID_No = '$idNo' 
             "); 
         
         while($row = mysql_fetch_array($result)){
@@ -361,9 +361,9 @@
 
                                               echo '<tr>';
                                                 echo '<td><strong>GPE for Non-Teaching Staff (2-A)</td>';
-                                                   echo'<form action="ResultGPE_2AForm.php" method= "POST">';
+                                                   echo'<form action="ResultGPE_2BForm.php" method= "POST">';
                                                       echo "<input type='hidden' name='id' value='$idNo'/>";
-                                                       echo '<td><input type="submit" value="Go to evaluation form"></td>';
+                                                       echo '<td><input type="submit" value="See Results"></td>';
                                                    echo'</form>';  
                                               echo '</tr>';
 

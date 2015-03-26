@@ -131,6 +131,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
           </ul>
         </li>
      </div>
+
 <?php
         if ($leaves){ //if and else statement for handling the query
 
@@ -662,6 +663,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
 			?>
 			{
 			  title: 'Principal Interview (<?php echo"$fName "?> <?php echo"$lName"?>) ',
+			  title: 'Applicant human resource interview',
               start: new Date(<?php echo $year; ?>,<?php echo $month; ?>-1, <?php echo $day; ?>, <?php echo $hour; ?>, <?php echo $minute; ?>),
 			  allDay: false
 			

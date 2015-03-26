@@ -4,13 +4,17 @@
     header('Location:login.php');
   } 
 ?>  
+<<<<<<< HEAD
+
+=======
  
+>>>>>>> origin/master
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Evaluation of Class Instruction(ECI-B) for Primary Students</title>
+        <title>Evaluation of Classroom Instruction(ECI-B)</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,29 +45,33 @@
 
                 <!--Javascript code to calculate result of radio buttons for evaluation form result-->
     <script type="text/javascript">
-        function target_popup(form) {
-			window.open('', 'formpopup', 'width=200,height=200,resizeable,scrollbars');
-			form.target = 'formpopup';
-		}
-            
+       function target_popup(form) {
+      window.open('', 'formpopup', 'width=200,height=200,resizeable,scrollbars');
+      form.target = 'formpopup';
+    }
     </script>
       <!--Javascript code to calculate result of radio buttons for evaluation form result-->   
     </head>
 <body>
 
+
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="#">LBASS Human Resource Information System </a>
+                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">LBASS Human Resource Information System </a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
       
             <ul class="dropdown-menu">
               <li><a href="javascript:;">Settings</a></li>
               <li><a href="javascript:;">Help</a></li>
-            </ul>
+            </ul> 
           </li>
+<<<<<<< HEAD
+         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+=======
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+>>>>>>> origin/master
             <?php
               mysql_connect('localhost', 'root', '')
               or die(mysql_error());  
@@ -81,6 +89,18 @@
                 $firstName = $row["F_Name"];
                 echo "<i class='icon-user'> $lastName , $firstName </i>";
                 echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+<<<<<<< HEAD
+                
+              echo '<li><a href="javascript:;">Profile</a></li>
+              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>';
+
+              }?>
+
+              
+            </ul>
+          </li>
+        </ul>
+=======
               }?>
               <li><a href="javascript:;">Profile</a></li>
               <li><a href="logout.php">Logout</a></li>
@@ -94,23 +114,47 @@
           <!--/.nav-collapse --> 
         </div>
         <!-- /container --> 
+>>>>>>> origin/master
       </div>
-      <!-- /navbar-inner --> 
+      <!--/.nav-collapse --> 
     </div>
-    <!-- /navbar -->
-    <div class="subnavbar">
-      <div class="subnavbar-inner">
-        <div class="container">
-          <ul class="mainnav">
-            <li class="active"><a href="#"><i class="icon-home"></i><span>Evaluation Form</span> </a> </li>
-          </ul>
-        </div>
-        <!-- /container --> 
-      </div>
-      <!-- /subnavbar-inner --> 
+    <!-- /container --> 
+  </div>
+  <!-- /navbar-inner --> 
+</div>
+<!-- /navbar -->
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+
+               </li>
+      </ul>
     </div>
-    <!-- /subnavbar -->
+    <!-- /container --> 
+  </div>
+  </div>
+  </div>
+  <!-- /subnavbar-inner --> 
+</div>
+<!-- /subnavbar -->
     <div class="well" align="center">
+<<<<<<< HEAD
+    <h4>Evaluation of Class Instruction (ECI-B) for Intermediate and High School Students</h4>
+    <br>
+      
+        <form action='SubmitEvalECIBPrimary.php' method='POST' onsubmit="target_popup(this)">
+        <h5>Name of Teacher:</h5>
+        <input type="text" name="idNo" placeholder="ID Number of Teacher">
+        <h5>Subject:</h5>
+        <input type="text" placeholder="Subject">
+        <h5>Level/Section:</h5>
+        <input type="text" placeholder="(Grade,Section)"> <br>
+
+
+         <br>
+<div class="well" align="center">
+=======
     <h4>Evaluation of Classroom Instruction(ECI-B) for Primary Students</h4>
     <?php
 
@@ -151,6 +195,7 @@
        }
     ?>
         <div class="well" align="center">
+>>>>>>> origin/master
         <table border="1">
             <thead>
                 <tr>

@@ -1,3 +1,9 @@
+<?php
+  session_start();
+    if (!isset($_SESSION['ID_No'])) {
+    header('Location:login.php');
+  } ?>  
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -28,7 +34,7 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="#">LBASS Human Resource Information System </a>
+                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">LBASS Human Resource Information System </a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
       
@@ -37,42 +43,66 @@
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <?php
+              mysql_connect('localhost', 'root', '')
+              or die(mysql_error());  
+              mysql_select_db('lbas_hr') 
+              or die(mysql_error());
+
+              $user=$_SESSION['ID_No'];
+
+              $retrieveName = "SELECT `L_Name`, `F_Name`  
+                               FROM `person` 
+                               WHERE `ID_No` = '".$user."'";
+              $check = mysql_query($retrieveName);
+              while ($row = mysql_fetch_array($check)) {
+                $lastName = $row["L_Name"];
+                $firstName = $row["F_Name"];
+                echo "<i class='icon-user'> $lastName , $firstName </i>";
+                echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+                
+              echo '<li><a href="javascript:;">Profile</a></li>
+              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>';
+
+              }?>
+
+              
             </ul>
           </li>
         </ul>
-            
-              <input type="text" class="search-query" placeholder="Search">
-            
-          </div>
-          <!--/.nav-collapse --> 
-        </div>
-        <!-- /container --> 
       </div>
-      <!-- /navbar-inner --> 
+      <!--/.nav-collapse --> 
     </div>
-    <!-- /navbar -->
-    <div class="subnavbar">
-      <div class="subnavbar-inner">
-        <div class="container">
-          <ul class="mainnav">
-            <li class="active"><a href="#"><i class="icon-home"></i><span>Evaluation Form</span> </a> </li>
-          </ul>
-        </div>
-        <!-- /container --> 
-      </div>
-      <!-- /subnavbar-inner --> 
+    <!-- /container --> 
+  </div>
+  <!-- /navbar-inner --> 
+</div>
+<!-- /navbar -->
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+
+        
+         </ul> 
+      </li>
+        </li>
+      </ul>
     </div>
-    <!-- /subnavbar -->
+    <!-- /container --> 
+  </div>
+  </div>
+  </div>
+  <!-- /subnavbar-inner --> 
+</div>
+<!-- /subnavbar -->
+
     <div class="well" align="center">
-    <h4>Evaluation of Advisory Work(EAHW-B)</h4>
+    <h4>Evaluation of Advisory Work(EAW-B)</h4>
 		<form action='SubmitEAWBForm.php' method='POST' onsubmit="target_popup(this)">
         <h5>Name of Teacher:</h5>
-        <input type="text" placeholder="Name of Teacher">
+        <input type="text" name="idNo" placeholder="ID Number of Teacher">
         <h5>Level/Section:</h5>
         <input type="text" placeholder="(Grade,Section)"> <br>
         <div class="well" align="center">
@@ -97,7 +127,7 @@
                     <td>of the quality required by the job</td>
                 </tr>
                 <tr>
-                    <td>Fair(2.50-3.49)</td>
+                    <td>Fair</td>
                     <td>"just to get by"</td>
                 </tr>
                  <tr>

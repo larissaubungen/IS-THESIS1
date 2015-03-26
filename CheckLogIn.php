@@ -21,6 +21,48 @@ proper page
 		WHERE ID_No = '" . $userName . "' 
 		AND P_Word = '" . $userPass . "' 	
 			");
+<<<<<<< HEAD
+			//&& is_null($check['Resume']) || $check['Resume'] == 'no'
+		$check=mysql_fetch_array($result);
+		 if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && IS_NULL($check['Resume'] )){
+					header('location:ApplicantResume.php');
+					//start of sessions
+					session_start();
+					//iniating a sessions variable and it's value
+					$_SESSION['ID_No']=$check['ID_No'];
+
+		//condition for no match found
+
+		//condition for applicant with resume
+		}else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && $check['Resume'] == 'Yes') {
+			
+			header('location:ApplicantPage.php');
+			//start of sessions
+				session_start();
+			//iniating a sessions variable and it's value
+			$_SESSION['ID_No']=$check['ID_No'];
+		}
+		//condition for employees
+		else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='HR'){
+
+					header('location:HR_Page.php');
+					//start of sessions
+					session_start();
+					//iniating a sessions variable and it's value
+					$_SESSION['ID_No']=$check['ID_No'];
+
+
+					
+		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee' || $check['status'] =='Admin'){
+					header('location:EmployeeProfileHome.php');
+
+					//start of sessions
+					session_start();
+					//iniating a sessions variable and it's value
+					$_SESSION['ID_No']=$check['ID_No'];
+
+=======
+>>>>>>> origin/master
 
 		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Admin'){
 					header('location:HR_Page.php');
@@ -64,6 +106,30 @@ proper page
 
 			header('location:ErrorLogIn.html');
 
+<<<<<<< HEAD
+		}*/
+
+		else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
+					header('location:EmployeesPage.php');
+
+					//start of sessions
+					session_start();
+					//iniating a sessions variable and it's value
+					$_SESSION['ID_No']=$check['ID_No'];
+
+		} else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Student') {
+					header('location:EvaluationFormListForStudents.php');
+					//start of sessions
+					session_start();
+					//iniating a sessions variable and it's value
+					$_SESSION['ID_No']=$check['ID_No'];
+
+		} else { 
+
+			header('location:ErrorLogIn.html');
+
+		}
+=======
 			//condition for applicant with resume
 			}else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && $check['Resume_Status'] != null) 
 			{
@@ -86,4 +152,5 @@ proper page
 			}else { 
 				header('location:ErrorLogIn.html');
 			}
+>>>>>>> origin/master
 ?>

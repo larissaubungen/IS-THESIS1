@@ -1,3 +1,10 @@
+<?php
+  session_start();
+    if (!isset($_SESSION['ID_No'])) {
+    header('Location:login.php');
+  } ?>  
+
+
 <html>
     <head>
 		<meta charset="utf-8">
@@ -30,7 +37,7 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="#">LBASS Human Resource Information System </a>
+                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">LBASS Human Resource Information System </a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
       
@@ -39,40 +46,102 @@
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
+         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <?php
+              mysql_connect('localhost', 'root', '')
+              or die(mysql_error());  
+              mysql_select_db('lbas_hr') 
+              or die(mysql_error());
+
+              $user=$_SESSION['ID_No'];
+
+              $retrieveName = "SELECT `L_Name`, `F_Name`  
+                               FROM `person` 
+                               WHERE `ID_No` = '".$user."'";
+              $check = mysql_query($retrieveName);
+              while ($row = mysql_fetch_array($check)) {
+                $lastName = $row["L_Name"];
+                $firstName = $row["F_Name"];
+                echo "<i class='icon-user'> $lastName , $firstName </i>";
+                echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+                
+              echo '<li><a href="javascript:;">Profile</a></li>
+              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>';
+
+              }?>
+
+              
             </ul>
           </li>
         </ul>
-          </div>
-          <!--/.nav-collapse --> 
-        </div>
-        <!-- /container --> 
+        <form class="navbar-search pull-right">
+          <input type="text" class="search-query" placeholder="Search">
+        </form>
       </div>
-      <!-- /navbar-inner --> 
+      <!--/.nav-collapse --> 
     </div>
-    <!-- /navbar -->
-    <div class="subnavbar">
-      <div class="subnavbar-inner">
-        <div class="container">
-          <ul class="mainnav">
-            <li class="active"><a href="#"><i class="icon-home"></i><span>Evaluation Form</span> </a> </li>
-          </ul>
-        </div>
-        <!-- /container --> 
-      </div>
-      <!-- /subnavbar-inner --> 
+    <!-- /container --> 
+  </div>
+  <!-- /navbar-inner --> 
+</div>
+<!-- /navbar -->
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+
+        <li class="active"><a href="EmployeeProfileHome.php"><i class="icon-dashboard"></i><span>Home</span> </a> </li>
+        <li><a href="EmployeeProfilePage.php"><i class="icon-dashboard"></i><span>Profile</span> </a> </li>
+        <li><a href=""><i class="icon-list-alt"></i><span>Reports and Records</span> </a> </li>
+
+        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+         <ul class="dropdown-menu">
+            <li><a href="">File for Leave</a></li>
+            <li><a href="">File for Transfer</a></li>
+            <li><a href="">File for Resignation</a></li>
+         </ul> 
+      </li>
+        </li>
+      </ul>
     </div>
-    <!-- /subnavbar -->
+    <!-- /container --> 
+  </div>
+  </div>
+  </div>
+  <!-- /subnavbar-inner --> 
+</div>
+<!-- /subnavbar -->
+
+
     <div class="well" align="center">
     <h4>Evaluation of Advisory Work and Homeroom Work(EAHW-A)</h4>
-	
+	     <h5>Name of Teacher:</h5>
+        <br>
         <form action='SubmitEAHWAForm.php' method='POST'onsubmit="target_popup(this)">
-		<h5>Name of Teacher:</h5>
-        <input type="text" placeholder="Name of Teacher" name="idNo" >
+      
+    <select id="idNo" name="idNo">
+        <?php
+
+         mysql_connect('localhost', 'root', '')
+              or die(mysql_error());  
+              mysql_select_db('lbas_hr') 
+              or die(mysql_error());
+
+          $result = mysql_query("
+            SELECT work.ID_No, work.E_Position1, work.E_Position2
+            FROM work 
+            WHERE work.E_Position1='Teacher' OR work.E_Position2='Teacher'
+
+            ");     
+
+          while ($row = mysql_fetch_array($result)) {
+             $teachers = $row['ID_No'];
+            echo '<option>' . $teachers. '</option>';
+          }
+        
+        ?>
+
+      </select>
         <h5>Level/Section:</h5>
         <input type="text" placeholder="(Grade,Section)"> <br>
         <div class="well" align="center">
@@ -85,23 +154,23 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Outstanding(4.85-5.00)</td>
+                    <td>Outstanding</td>
                     <td>exceptional/excellent</td>
                 </tr>
                 <tr>
-                    <td>Very Satisfactory(4.21-4.84)</td>
+                    <td>Very Satisfactory</td>
                     <td>way beyond what is expected</td>
                 </tr>
                 <tr>
-                    <td>Satisfactory(3.50-4.20)</td>
+                    <td>Satisfactory</td>
                     <td>of the quality required by the job</td>
                 </tr>
                 <tr>
-                    <td>Fair(2.50-3.49)</td>
+                    <td>Fair</td>
                     <td>"just to get by"</td>
                 </tr>
                  <tr>
-                    <td>Unsatisfactory(1.00-2.49)</td>
+                    <td>Unsatisfactory</td>
                     <td>unacceptable/poor</td>
                 </tr>
             </tbody>
@@ -119,11 +188,11 @@
                   <tr>
 					
                         <td> 1. Developing a "homeroom" relationship in the advisory class  </td>
-                        <td><input type="radio" name="1" value="1"> 1<br></td>
-                        <td><input type="radio" name="1" value="2"> 2<br></td>
-                        <td><input type="radio" name="1" value="3"> 3<br></td>
-                        <td><input type="radio" name="1" value="4"> 4<br></td>    
-                        <td><input type="radio" name="1" value="5"> 5<br></td>
+                        <td><input type="radio" name="1" value="1"> 1&nbsp</td>
+                        <td><input type="radio" name="1" value="2"> 2&nbsp&nbsp&nbsp&nbsp</td>
+                        <td><input type="radio" name="1" value="3"> 3&nbsp&nbsp&nbsp&nbsp</td>
+                        <td><input type="radio" name="1" value="4"> 4&nbsp&nbsp&nbsp&nbsp</td>    
+                        <td><input type="radio" name="1" value="5"> 5&nbsp&nbsp&nbsp&nbsp</td>
                   </tr>
                   <tr>
                         <td> 2. Creating a physical classroom setting conducive to a homeroom atmosphere </td>
@@ -312,7 +381,32 @@
             </tbody>
         </table>
         <br>
-            <input type='submit' value='Submit' class='Log' name='eval'>
+
+         <br><br>
+            <center>
+               
+             <center>
+                
+                Comments:<br />
+                <textarea name="comments" id="comments">
+                
+                </textarea><br />
+              
+                
+            </center>
+              
+               
+            </center>
+
+        <br><br>
+        <center>
+        
+        </center>
+        <br>
+
+           <input type='submit' value='Submit' class='Log' name='eval'>
+          
+
 	</form>
 </body>
 </html>

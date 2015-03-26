@@ -1,3 +1,10 @@
+<?php
+  session_start();
+    if (!isset($_SESSION['ID_No'])) {
+    header('Location:login.php');
+  } ?>  
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -178,8 +185,8 @@
         
             $result = mysql_query("
             SELECT *
-            FROM person 
-            WHERE person.ID_No = '$idNo' 
+            FROM person, work 
+            WHERE person.ID_No = '$idNo' and work.ID_No = '$idNo'
             "); 
         
         while($row = mysql_fetch_array($result)){
@@ -348,27 +355,38 @@
                                     echo '<table>';
                                         echo '<table style="width:80%">';
                                               
-                                              echo '<tr>';
+                                              /*echo '<tr>';
                                                 echo '<td><strong>Evaluation Of Advisory and HomeroomWork (EAHW-A)</td>';
                                                 echo '<td><a href="ResultEAHWForm.php"> See Results </a></td>';      
-                                              echo '</tr>';
+                                              echo '</tr>';*/
+
                                               echo '<tr>';
                                                 echo '<td><strong>Evaluation Of Classroom Instruction (ECI-A)</td>';
-                                                echo '<td><a href=" "> See Results </a></td>';
+                                                echo'<form action="ResultECIAForm.php" method= "POST">';
+                                                      echo "<input type='hidden' name='id' value='$idNo'/>";
+                                                       echo '<td><input type="submit" value="See Results"></td>';
+                                                   echo'</form>';  
                                               echo '</tr>';
-                                              echo '<tr>';
+                                             
+                                             /* echo '<tr>';
                                                 echo '<td><strong>Evaluation Of Classroom Instruction(ECI-B) (For Highschool and Intermmediate )</td>';
                                                 echo '<td><a href=" "> See Results </a></td>';
                                               echo '</tr>';
                                               echo '<tr>';
                                                 echo '<td><strong>Evaluation Of Classroom Instruction(ECI-B) (For Primary )</td>';
                                                 echo '<td><a href=" "> See Results </a></td>';
-                                              echo '</tr>';
+                                              echo '</tr>';*/
+                                              
                                               echo '<tr>';
                                                 echo '<td><strong>GPE for Teachers</td>';
-                                                echo '<td><a href=" "> See Results </a></td>';
+                                                echo'<form action="ResultGPETeachers.php" method= "POST">';
+                                                      echo "<input type='hidden' name='id' value='$idNo'/>";
+                                                       echo '<td><input type="submit" value="See Results"></td>';
+                                                   echo'</form>';  
+
                                               echo '</tr>';
 
+                                              
                                         echo '</table>';
                                         echo '</center>';
 

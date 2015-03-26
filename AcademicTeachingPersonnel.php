@@ -133,7 +133,11 @@
             $result = mysql_query("
             SELECT  F_Name, L_Name, person.ID_No, E_Position1
             FROM person, work
+<<<<<<< HEAD
+            WHERE E_Position1 LIKE '%Teacher%' and person.ID_No LIKE work.ID_No and (E_Status ='Employee') 
+=======
             WHERE E_Position1 LIKE '%Teacher%' and person.ID_No LIKE work.ID_No and (E_Status = 'Probationary' or E_Status ='Regular Employee') 
+>>>>>>> origin/master
             ");
         
         while($row = mysql_fetch_array($result)){

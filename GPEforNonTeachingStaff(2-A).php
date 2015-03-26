@@ -133,21 +133,18 @@
 
 
             $result = mysql_query("
-            SELECT *
-            FROM person 
-            WHERE person.ID_No = '$idNo' 
+            SELECT DISTINCT person.F_Name, person.L_Name, person.M_Name, 
+                            work.ID_No, work.E_Position1, work.E_Position2
+            
+            FROM            person, work 
+            WHERE           person.ID_No = '$idNo' AND 
+                            person.CurrentWork_ID = work.Work_ID
             "); 
   
 
 
      while($row = mysql_fetch_array($result)){
-          $firstName = $row["F_Name"];
-          $lastName = $row["L_Name"];
-          $middleName = $row["M_Name"];
-          $ePosition1 = $row["E_Position1"];
-          $ePosition2 = $row["E_Position2"];
-
-
+        
         echo '<h5>Name of Non-Teaching Employee: </h5>';
 		    echo '<form action="SubmitEvalNonTeaching2A.php" method="POST">';
           echo '<input type="text" placeholder="Name of Non-Teaching Employee" value="'. $row['L_Name'] . "," . " " . $row['F_Name'] .  '" readonly>';
@@ -424,9 +421,8 @@
             <br><br>
             <center>
                 
-                Comments:<br />
+                Comments and Remarks:<br />
                 <textarea name="comments" id="comments">
-                
                 </textarea><br />
               
                 

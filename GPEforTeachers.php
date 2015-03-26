@@ -2,10 +2,14 @@
   session_start();
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
+<<<<<<< HEAD
+  } ?>  
+=======
   } 
 
   ?>  
 
+>>>>>>> origin/master
 
 
 <!DOCTYPE html>
@@ -58,7 +62,7 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="#">LBASS Human Resource Information System </a>
+                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">LBASS Human Resource Information System </a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
       
@@ -67,7 +71,11 @@
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
+<<<<<<< HEAD
+         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+=======
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+>>>>>>> origin/master
             <?php
               mysql_connect('localhost', 'root', '')
               or die(mysql_error());  
@@ -85,6 +93,21 @@
                 $firstName = $row["F_Name"];
                 echo "<i class='icon-user'> $lastName , $firstName </i>";
                 echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+<<<<<<< HEAD
+                
+              echo '<li><a href="javascript:;">Profile</a></li>
+              <li><a href="http://localhost/IS-THESIS1/logout.php">Logout</a></li>';
+
+              }?>
+
+              
+            </ul>
+          </li>
+        </ul>
+        <form class="navbar-search pull-right">
+          <input type="text" class="search-query" placeholder="Search">
+        </form>
+=======
               }?>
               <li><a href="javascript:;">Profile</a></li>
               <li><a href="logout.php">Logout</a></li>
@@ -98,27 +121,52 @@
           <!--/.nav-collapse --> 
         </div>
         <!-- /container --> 
+>>>>>>> origin/master
       </div>
-      <!-- /navbar-inner --> 
+      <!--/.nav-collapse --> 
     </div>
-    <!-- /navbar -->
-    <div class="subnavbar">
-      <div class="subnavbar-inner">
-        <div class="container">
-          <ul class="mainnav">
-            <li class="active"><a href="#"><i class="icon-home"></i><span>Evaluation Form</span> </a> </li>
-          </ul>
-        </div>
-        <!-- /container --> 
-      </div>
-      <!-- /subnavbar-inner --> 
+    <!-- /container --> 
+  </div>
+  <!-- /navbar-inner --> 
+</div>
+<!-- /navbar -->
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+
+        <li class="active"><a href="EmployeeProfileHome.php"><i class="icon-dashboard"></i><span>Home</span> </a> </li>
+        <li><a href="EmployeeProfilePage.php"><i class="icon-dashboard"></i><span>Profile</span> </a> </li>
+        <li><a href=""><i class="icon-list-alt"></i><span>Reports and Records</span> </a> </li>
+
+        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+         <ul class="dropdown-menu">
+            <li><a href="">File for Leave</a></li>
+            <li><a href="">File for Transfer</a></li>
+            <li><a href="">File for Resignation</a></li>
+         </ul> 
+      </li>
+        </li>
+      </ul>
     </div>
-    <!-- /subnavbar -->
+    <!-- /container --> 
+  </div>
+  </div>
+  </div>
+  <!-- /subnavbar-inner --> 
+</div>
+<!-- /subnavbar -->
+
     <div class="well" align="center">
     <h4>General Perforamnce Evaluation (For Teachers)</h4>
+<<<<<<< HEAD
+
+<?php
+=======
     <br>
 
   <?php
+>>>>>>> origin/master
 
         $idNo = $_POST['id'];
         mysql_connect("localhost", "root", "")
@@ -128,6 +176,33 @@
 
 
             $result = mysql_query("
+<<<<<<< HEAD
+            SELECT DISTINCT person.F_Name, person.L_Name, person.M_Name, 
+                            work.ID_No, work.Level, work.Grade 
+            
+            FROM            person, work 
+            WHERE           person.ID_No = '$idNo' AND 
+                            person.CurrentWork_ID = work.Work_ID
+            "); 
+  
+
+
+     while($row = mysql_fetch_array($result)){
+        
+        echo '<h5>Name of Teacher: </h5>';
+        echo '<form action="SubmitEvalGPETeachers.php" method="POST">';
+          echo '<input type="text" placeholder="Name of Teacher" value="'. $row['L_Name'] . "," . " " . $row['F_Name'] .  '" readonly>';
+          echo "<input type='hidden' name='id' value='$idNo'/>";
+          echo '<h5>Level/Section:</h5>';
+        echo '<input type="text" placeholder="Level/Section:" value="'.$row['Level']. '/' .$row['Grade']  .'" readonly> <br>';
+        
+      }
+   ?>    
+   
+
+
+
+=======
             SELECT *
             FROM person 
             WHERE person.ID_No = '$idNo' 
@@ -153,6 +228,7 @@
 
 
   ?>
+>>>>>>> origin/master
         <div class="well" align="center">
         <table border="1">
             <thead>
@@ -212,10 +288,10 @@
                         </td>
                   
 						<td><input id="rdo_1" type="radio" value="1" name="" > 1&nbsp</td>
-                        <td><input id="rdo_2" type="radio" value="2" name="" > 2&nbsp&nbsp&nbsp&nbsp</td>
-                        <td><input id="rdo_3" type="radio" value="3" name="" > 3&nbsp&nbsp&nbsp&nbsp</td>
-                        <td><input id="rdo_4" type="radio" value="4" name="" > 4&nbsp&nbsp&nbsp&nbsp</td>    
-                        <td><input id="rdo_5" type="radio" value="5" name="" > 5&nbsp&nbsp&nbsp&nbsp</td>
+                        <td><input id="rdo_2" type="radio" value="2" name="1" > 2&nbsp&nbsp&nbsp&nbsp</td>
+                        <td><input id="rdo_3" type="radio" value="3" name="1" > 3&nbsp&nbsp&nbsp&nbsp</td>
+                        <td><input id="rdo_4" type="radio" value="4" name="1" > 4&nbsp&nbsp&nbsp&nbsp</td>    
+                        <td><input id="rdo_5" type="radio" value="5" name="1" > 5&nbsp&nbsp&nbsp&nbsp</td>
                   
                   </tr>
                
