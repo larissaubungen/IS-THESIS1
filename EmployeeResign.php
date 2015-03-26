@@ -26,13 +26,15 @@ $user=$_SESSION['ID_No'];
 <head>
 	<title>LBASS Employee Resignation Request Page</title>
 	<meta  charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
-            rel="stylesheet">
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/pages/dashboard.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
+          rel="stylesheet">
+  <link href="css/font-awesome.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/pages/dashboard.css" rel="stylesheet">
 
     <link rel="stylesheet" href="styles/kendo.common.min.css">
     <link rel="stylesheet" href="styles/kendo.rtl.min.css">
@@ -44,8 +46,9 @@ $user=$_SESSION['ID_No'];
     <link href="css/bootstrap.min.css" rel="stylesheet">    
     <link rel="stylesheet" href="js/jquery1.11.3/jquery-ui.css">
 
-    <script src="js/jquery-1.9.1.min.js"></script>
+   <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/kendo.all.min.js"></script>
+
 
     <!--Boostrap
       <script src="js/jquery.min.js"></script>
@@ -54,8 +57,6 @@ $user=$_SESSION['ID_No'];
   -->
     
     <script type="text/javascript">
-       
-    
       function reminder()
       {
         confirm("Reminder: \n Please ensure your submission with letter of resignation. \n Your request will be subject for HR's approval.");
@@ -78,14 +79,18 @@ $user=$_SESSION['ID_No'];
     	#date_select2_year{
     		width: 5em;
     	}
+      .subnavbar{
+        margin-top: 4em;
+      }
+      #Requests li:hover > ul {display:list-item;}
     </style>
 </head>
 <body>
-			<!--Main Navbar-->
-	<div class="navbar navbar-fixed-top">
+
+	<div class="navbar navbar-fixed-top">  <!--main navbar-->
   <div class="navbar-inner">
     <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="#">LBASS Human Resource Information System </a>
+                    class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">LBASS Human Resource Information System </a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
       
@@ -94,37 +99,66 @@ $user=$_SESSION['ID_No'];
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <?php
+              mysql_connect('localhost', 'root', '')
+              or die(mysql_error());  
+              mysql_select_db('lbas_hr') 
+              or die(mysql_error());
+
+              $user=$_SESSION['ID_No']; 
+
+              $retrieveName = "SELECT `L_Name`, `F_Name`  
+                               FROM `person` 
+                               WHERE `ID_No` = '".$user."'";
+              $check = mysql_query($retrieveName);
+              while ($row = mysql_fetch_array($check)) {
+                $lastName = $row["L_Name"];
+                $firstName = $row["F_Name"];
+                echo "<i class='icon-user'></i> $lastName , $firstName";
+                echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+              }?>
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
+              <li><a href="logout.php">Logout</a></li>
             </ul>
           </li>
-        </ul>
-            <form class="navbar-search pull-right">
-              <input type="text" class="search-query" placeholder="Search">
-            </form>
-          </div>
-          <!--/.nav-collapse --> 
-        </div>
-        <!-- /container --> 
+        </ul>  
+        <!--form navbar was here-->
       </div>
-      <!-- /navbar-inner --> 
+      <!--/.nav-collapse --> 
     </div>
-    <!-- /navbar -->
-    <div class="subnavbar">
-      <div class="subnavbar-inner">
-        <div class="container">
-          <ul class="mainnav">
-            <li class="active"><a href="#"><i class="icon-home"></i><span>Resign</span> </a> </li>  
-          </ul>
-        </div>
-        <!-- /container --> 
-      </div>
-      <!-- /subnavbar-inner --> 
+    <!-- /container --> 
+  </div>
+  <!-- /navbar-inner --> 
+</div>
+<!-- /navbar -->
+
+<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+
+        <li><a href="EmployeeProfileHome.php"><i class="icon-home"></i><span>Home</span> </a> </li>
+        <li><a href="EmployeeProfilePage.php"><i class="icon-user"></i><span>Profile</span> </a> </li>
+        <li><a href="#"><i class="icon-file-text"></i><span>Reports and Records</span> </a> </li>
+
+        <li id="Requests" class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+         <ul class="dropdown-menu">
+            <li><a href="LeaveList.php">File for Leave</a></li>
+            <li><a href="#">File for Transfer</a></li>
+            <li class="active"><a href="#">File for Resignation</a></li>
+         </ul> 
+      </li>
+        </li>
+      </ul>
     </div>
-    <!-- /subnavbar -->
+    <!-- /container --> 
+  </div>
+  </div>
+  </div>
+  <!-- /subnavbar-inner --> 
+</div>
+<!-- /subnavbar -->
 
 
     <div class="container">
@@ -140,8 +174,6 @@ $user=$_SESSION['ID_No'];
 		<table id="datepicker" class="dp_calendar" style="display:none;font-size:14px;" cellpadding="0" cellspacing="0"></table>   
 
       -->
-
-      <div class="container">
         <div class="form-group">
               <!--For Resignation Code-->
           <input type="hidden" id="ResignID" name="ResignID" value="<?php echo "$ResignID";?>">
@@ -169,8 +201,8 @@ $user=$_SESSION['ID_No'];
               <br/>
               <input type="submit" value="submit" form="resignation" onclick="return reminder();">
         </div>
-      </div>
     
     </div>
+
 </body>
 </html>

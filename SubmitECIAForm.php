@@ -1,3 +1,11 @@
+ <?php
+  session_start();
+    if (!isset($_SESSION['ID_No'])) {
+    header('Location:login.php');
+  } 
+?>  
+
+
  <script type="text/javascript">
 
 		
@@ -15,9 +23,11 @@
 	
 	mysql_select_db("lbas_hr") 
 		or die(mysql_error());
+
+		$user=$_SESSION['ID_No'];
 		
 		$tbl_name = 'eval_ecia_alllevels';
-		$idNo = $_POST['idNo'];
+		$idNo = $_POST['id'];
 		$ques_1=$_POST['1'];
 		$ques_2=$_POST['2'];
 		$ques_3=$_POST['3'];
@@ -69,10 +79,10 @@
 		echo "percentage = $final";
 		
 		$insert="INSERT INTO $tbl_name (ID_No,Ques_1, Ques_2, Ques_3, Ques_4, Ques_5, Ques_6, Ques_7, Ques_8, Ques_9, Ques_10, Ques_11, Ques_12, Ques_13, Ques_14, Ques_15, Ques_16, Ques_17, Ques_18, Ques_19, Ques_20, Ques_21, Ques_22, Ques_23, Ques_24
-										,Ques_25 ,Ques_26 ,Ques_27 ,Ques_28 ,Ques_29 ,Ques_30 ,Ques_31 ,Ques_32 ,Ques_33 ,Ques_34 ,Ques_35 ,Ques_36 ,Ques_37 ,Ques_38 ,Ques_39 ,Ques_40 ,Ques_41 ,Ques_42 , Result, Date)
+										,Ques_25 ,Ques_26 ,Ques_27 ,Ques_28 ,Ques_29 ,Ques_30 ,Ques_31 ,Ques_32 ,Ques_33 ,Ques_34 ,Ques_35 ,Ques_36 ,Ques_37 ,Ques_38 ,Ques_39 ,Ques_40 ,Ques_41 ,Ques_42 , Result, Date, Evaluator_ID)
 				VALUES('". $idNo ."', '". $ques_1 ."', '".$ques_2."', '".$ques_3."', '".$ques_4."', '".$ques_5."', '".$ques_6."', '".$ques_7."', '".$ques_8."', '".$ques_9."', '".$ques_10."', '".$ques_11."', '".$ques_12."', '".$ques_13."', '".$ques_14."', '".$ques_15."', '".$ques_16."', '".$ques_17."', '".$ques_18."',
 					   '".$ques_19."', '".$ques_20."', '".$ques_21."', '".$ques_22."', '".$ques_23."', '".$ques_24."', '".$ques_25."', '".$ques_26."', '".$ques_27."', '".$ques_28."', '".$ques_29."', '".$ques_30."', '".$ques_31."', '".$ques_32."', '".$ques_33."', '".$ques_34."', '".$ques_35."', '".$ques_36."', '".$ques_37."', '".$ques_38."', '".$ques_39."'
-					   , '".$ques_40."', '".$ques_41."', '".$ques_42."', '".$final."', '".$date."' )";
+					   , '".$ques_40."', '".$ques_41."', '".$ques_42."', '".$final."', '".$date."', '".$user."' )";
 		
 		
 		$result=mysql_query($insert);

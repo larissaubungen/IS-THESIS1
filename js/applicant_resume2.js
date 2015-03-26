@@ -469,7 +469,7 @@ $("#department").change(function(){
 
     	$("input[name='status']").change(function(){ //Displaying Spouse Label and Textboxes
 
-			   if($(this).val()=="married")
+			   if($(this).val()=="Married")
 			   {
 			      $("#FNspouseName").show();
        			  $("#LNspouseName").show();
@@ -477,7 +477,7 @@ $("#department").change(function(){
        			  $('#lbl_spouse').show();
        			  $('#td_spouse').show();
 			   }
-			   else if($(this).val()=="single")
+			   else if($(this).val()=="Single" || $(this).val()=="Divorced" || $(this).val()=="Widowed")
 			   {
 			   	$('#td_spouse').hide();
 			   }
