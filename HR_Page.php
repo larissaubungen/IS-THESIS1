@@ -99,6 +99,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
 		            $leaves=mysql_query("SELECT * 
 							 FROM leave_table 
 							 WHERE L_Status ='Pending'");
+<<<<<<< HEAD
 		
 		if(mysql_num_rows($leaves) > 0){
 		?>
@@ -663,7 +664,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
 			?>
 			{
 			  title: 'Principal Interview (<?php echo"$fName "?> <?php echo"$lName"?>) ',
-			  title: 'Applicant human resource interview',
+			
               start: new Date(<?php echo $year; ?>,<?php echo $month; ?>-1, <?php echo $day; ?>, <?php echo $hour; ?>, <?php echo $minute; ?>),
 			  allDay: false
 			
@@ -671,6 +672,8 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
 			<?php
 			}
 		  ?>
+
+		  
           ]
         });
       });
