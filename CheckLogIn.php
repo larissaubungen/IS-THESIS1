@@ -21,19 +21,20 @@ proper page
 		WHERE ID_No = '" . $userName . "' 
 		AND P_Word = '" . $userPass . "' 	
 			");
-
+<<<<<<< HEAD
 			//&& is_null($check['Resume']) || $check['Resume'] == 'no'
 		$check=mysql_fetch_array($result);
-		 if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && IS_NULL($check['Resume_Status'] )){
-					header('location:ApplicantResume2.php');						
-					session_start(); 					//start of sessions						
-					$_SESSION['ID_No']=$check['ID_No']; //iniating a sessions variable and it's value
-
+		 if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && IS_NULL($check['Resume'] )){
+					header('location:ApplicantResume.php');
+					//start of sessions
+					session_start();
+					//iniating a sessions variable and it's value
+					$_SESSION['ID_No']=$check['ID_No'];
 
 		//condition for no match found
 
 		//condition for applicant with resume
-		}else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && $check['Resume_Status'] == 'Yes' || $check['Resume_Status'] != null) {
+		}else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && $check['Resume'] == 'Yes') {
 			
 			header('location:ApplicantPage.php');
 			//start of sessions
@@ -42,7 +43,7 @@ proper page
 			$_SESSION['ID_No']=$check['ID_No'];
 		}
 		//condition for employees
-		else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='HR' || $check['status'] =='Admin'){
+		else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='HR'){
 
 					header('location:HR_Page.php');
 					//start of sessions
@@ -52,7 +53,7 @@ proper page
 
 
 					
-		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee' ){
+		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee' || $check['status'] =='Admin'){
 					header('location:EmployeeProfileHome.php');
 
 					//start of sessions
@@ -60,6 +61,61 @@ proper page
 					//iniating a sessions variable and it's value
 					$_SESSION['ID_No']=$check['ID_No'];
 
+=======
+>>>>>>> origin/master
+
+		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Admin'){
+					header('location:HR_Page.php');
+					//start of sessions
+					session_start();
+					//iniating a sessions variable and it's value
+					$_SESSION['ID_No']=$check['ID_No'];
+		//condition foFr applicant with resume
+		}else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && $check['Resume_ID'] != null) {
+			
+			header('location:ApplicantPage.php');
+			//start of sessions
+				session_start();
+			//iniating a sessions variable and it's value
+			$_SESSION['ID_No']=$check['ID_No'];
+		}
+		//condition for employees
+		else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Admin'){
+					header('location:HR_Page.php');
+					//start of sessions
+					session_start();
+					//iniating a sessions variable and it's value
+					$_SESSION['ID_No']=$check['ID_No'];
+	 	 $check=mysql_fetch_array($result);
+
+	 	 	 //condition for New Applicant without Accomplished Resume
+			 if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' &&  IS_NULL($check['Resume_Status'])){					
+						header('location:ApplicantResume2.php');						
+						session_start(); 					//start of sessions						
+						$_SESSION['ID_No']=$check['ID_No']; //iniating a sessions variable and it's value
+
+			//condition for Admin / HR Officer User
+			}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Admin'){
+					header('location:HR_Page.php'); 		//start of sessions
+					session_start();						//iniating a sessions variable and it's value
+					$_SESSION['ID_No']=$check['ID_No'];
+					header('location:EmployeeProfileHome.php');
+
+
+		}else { 
+
+			header('location:ErrorLogIn.html');
+
+<<<<<<< HEAD
+		}*/
+
+		else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
+					header('location:EmployeesPage.php');
+
+					//start of sessions
+					session_start();
+					//iniating a sessions variable and it's value
+					$_SESSION['ID_No']=$check['ID_No'];
 
 		} else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Student') {
 					header('location:EvaluationFormListForStudents.php');
@@ -73,4 +129,28 @@ proper page
 			header('location:ErrorLogIn.html');
 
 		}
+=======
+			//condition for applicant with resume
+			}else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && $check['Resume_Status'] != null) 
+			{
+				header('location:ApplicantPage.php');		//start of sessions
+				session_start();							//iniating a sessions variable and it's value
+				$_SESSION['ID_No']=$check['ID_No'];
+			}
+			//condition for employees
+			else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee')
+			{
+						header('location:EmployeeProfileHome.php');
+						session_start();					//start of sessions						
+						$_SESSION['ID_No']=$check['ID_No']; //iniating a sessions variable and it's value
+						
+			//error message
+			}else if($check['ID_No'] != $userName && $check['password'] != $userPass ){					
+						header('location:ErrorLogIn.html');
+
+			//error message
+			}else { 
+				header('location:ErrorLogIn.html');
+			}
+>>>>>>> origin/master
 ?>
