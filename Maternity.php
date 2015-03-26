@@ -21,7 +21,6 @@
   <link href="css/font-awesome.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <link href="css/pages/dashboard.css" rel="stylesheet">
-
   
 	
 </head>
@@ -104,15 +103,15 @@
             <!-- /widget-header -->
             <div class="widget-content">
 
-  <form action="InsertLeave.php" method="post">
-			Select start day: <input type="text" value="" id="paternityStart" placeholder="Start Date" name="sickStart" class="selector"/>
-			Select end day:   <input type="text" value="" id="paternityEnd" placeholder="Start Date" name="sickEnd" class="selector" />
+  <form action='' method='post'>
+			Select start day: <input type="text" value="" id="startDate" placeholder="Start Date" name="paternityStart" class="selector" />
+			Select end day: <input type="text" value="" id="endDate" placeholder="Start Date" name="paternityStart" class="selector"  />
 			Reason: <textarea rows="4" cols="50" value="" name="reason" placeholder ="reason"></textarea>
-  <input type="submit" value="Submit">
-  </form>
+			<input type="submit" value="Submit">
+			</form>
+			</form>
 <?php
-	$maxDate = $_POST['paternityTotal']-1;
-	//echo "maxdate: $maxDate ";
+	$maxDate = $_POST['maternityTotal']-1;
 	
 ?>
 
@@ -120,7 +119,7 @@
   var gap = <?php echo $maxDate; ?>;
   	$("#startDate").kendoDatePicker({
       	min: new Date(),
-        format: "yyyy-MM-dd",
+        format: "dd/MM/yyyy",
       	change:function(e){
 			var start_date = new Date(this.value());
 			var max_date = new Date(start_date.getTime() + gap*86400000);
@@ -131,7 +130,7 @@
 		}
     });
     $("#endDate").kendoDatePicker({
-        format: "yyyy-MM-dd"
+        format: "dd/MM/yyyy"
 	});
   </script>
 		

@@ -3,7 +3,6 @@
     if (!isset($_SESSION['ID_No'])) {
     header('Location:login.php');
   }
-  error_reporting(0);
   ?>      
 
 <!DOCTYPE html>
@@ -131,81 +130,94 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
 <!-- /subnavbar -->
             <!-- /widget-header -->
             <div class="widget-content">
+			<div class="shortcuts"> 
+
 <?php
+	$user=$_SESSION['ID_No'];
+	mysql_connect("localhost", "root", "")
+        or die(mysql_error());
+    mysql_select_db("lbas_hr") 
+        or die(mysql_error());
 		
-
-		mysql_connect("localhost", "root", "")
-		or die(mysql_error());
-	mysql_select_db("lbas_hr") 
-		or die(mysql_error());
-
-		 	
-			$approve=$_POST['approve'];
-			$decline=$_POST['decline'];
-			$status="Approve";
-			$status2="Decline";
-			$comments=$_POST['comments'];
-			echo "$comments </br>";
+		$sickTotal = 0;
+		$paternityTotal =0;
+		$maternityTotal =0;
+		$bereavmentTotal =0;
+		
+		$sick = mysql_query("
+            SELECT SUM(CASE WHEN DATEDIFF(L_End, L_Start) = '0' THEN 1 ELSE DATEDIFF(L_End, L_Start) END) as summed_column
+			FROM leave_table 
+			where ID_No = '$user' and L_Status = 'Approve' and L_Type ='Sick'
+		");
+		while($row = mysql_fetch_array($sick)){
+		
 			
-			//echo "$reservation";
-
-			for($i = 0; $i < Sizeof($decline); $i++){
-			echo "$decline[$i]";
-			}	
-			
-			$merge = array_merge((array)$approve, (array)$decline);
-			
-			for($i=0; $i < Sizeof($merge); $i++){
-				
-				$change=$comments[$i];
-				$check=$merge[$i];
-				$sql = "UPDATE leave_table
-						SET HR_Comments='$change' 
-						WHERE leave_table.Leave_ID = '$check'" ;
-				$result=mysql_query($sql);
-			}
-			
-		 if( empty( $approve ) )
-		{
-		    
-		}else{
-			for($i=0; $i < sizeof($approve); $i++){
-				
-				$change=$approve[$i];
-				
-				$sql = "UPDATE leave_table
-						SET L_Status = '$status'
-						WHERE leave_table.Leave_ID = '$change'" ;
-				$result=mysql_query($sql);
-			}
-		//condition that check if inserting is successful
-				if($result){
-				} else {
-					die('Invalid query: ' . mysql_error());
-				}
-			}
-				
-		if( empty( $decline ) )
-		{
-		    
-		}else{
-			for($i=0; $i < sizeof($decline); $i++){
-				$change=$decline[$i];
-				
-				$sql = "UPDATE leave_table
-						SET L_Status = '$status2' 
-						WHERE leave_table.Leave_ID = '$change'" ;
-				$result=mysql_query($sql);
-			}
-		//condition that check if inserting is successful
-				if($result){
-
-				  } else {
-					die('Invalid query: ' . mysql_error());
-				}
+			$appSick = $row['summed_column'];
+			$sickTotal = 5 - $appSick;
+		?>
+		<form action="sick.php" method="POST">
+		<input type = "hidden" name="sickTotal" value="<?php echo "$sickTotal"?>">
+		<input type="Submit" class="shortcut-btn btn-danger" value="File For Sick Leave (Left:<?php echo "$sickTotal"?>)">
+		</br>
+		</form>
+		<?php
 		}
-
-				echo'<form action="hr_page.php">';
-				echo'Success!';
-				echo'<input type="submit" value="home">';		
-?>
+		$paternity = mysql_query("
+            SELECT SUM(CASE WHEN DATEDIFF(L_End, L_Start) = '0' THEN 1 ELSE DATEDIFF(L_End, L_Start) END) as summed_column 
+			FROM leave_table 
+			where ID_No = '9283158370' and L_Status = 'Approve' and L_Type = 'paternity'
+		");
+		while($row = mysql_fetch_array($paternity)){
+			$appPaternity = $row['summed_column'];
+			$paternityTotal = 7 - $appPaternity;
+		?>
+		<form action="Paternity.php">
+			<input type = "hidden" name="paternityTotal" value="<?php$paternityTotal ?>">
+			<input type="Submit" class="shortcut-btn btn-danger" value="File For Paternity Leave(Left:<?php echo "$paternityTotal"?>)">
+			</br>
+		</form>
+		<?php
+		}
+		$maternity = mysql_query("
+            SELECT SUM(CASE WHEN DATEDIFF(L_End, L_Start) = '0' THEN 1 ELSE DATEDIFF(L_End, L_Start) END) as summed_column 
+			FROM leave_table 
+			where ID_No = '9283158370' and L_Status = 'Approved' and L_Type = 'maternity'
+		");
+		while($row = mysql_fetch_array($maternity)){
+			$appMaternity = $row['summed_column'];
+			$maternityTotal = 60 - $appMaternity;
+		?>
+		<form action="Maternity.php">
+			<input type = "hidden" name="maternityTotal" value="<?php$maternityTotal ?>">
+			<input type="Submit" class="shortcut-btn btn-danger" value="File For Maternity Leave(Left:<?php echo "$maternityTotal"?>)">
+			</br>
+		</form>
+		<?php
+		}
+		
+		$bereavment = mysql_query("
+            SELECT SUM(CASE WHEN DATEDIFF(L_End, L_Start) = '0' THEN 1 ELSE DATEDIFF(L_End, L_Start) END) as summed_column 
+			FROM leave_table 
+			where ID_No = '9283158370' and L_Status = 'Approve' and L_Type = 'bereavment'
+		");
+		
+		while($row = mysql_fetch_array($bereavment)){
+			$appBereavment = $row['summed_column'];
+			$bereavmentTotal = 4 - $appBereavment;
+			
+		?>	
+		<form action="Vacation.php">
+			<input type = "hidden" name="bereavmentTotal" value="<?php$bereavmentTotal ?>">
+			<input type="Submit" class="shortcut-btn btn-danger" value="file for Bereavment Leave(Left:<?php echo "$bereavmentTotal"?>)">
+			</br>
+		</form>
+		<?php
+		}
+			?>
+			<!-- /shortcuts --> 
+            </div>
+            <!-- /widget-content --> 
+          </div>
+          </div>
+</body>
+</html>

@@ -32,8 +32,12 @@ proper page
 		//condition for no match found
 
 		}else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Admin'){
-
-		//condition for applicant with resume
+					header('location:HR_Page.php');
+					//start of sessions
+					session_start();
+					//iniating a sessions variable and it's value
+					$_SESSION['ID_No']=$check['ID_No'];
+		//condition foFr applicant with resume
 		}else if ($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Applicant' && $check['Resume_ID'] != null) {
 			
 			header('location:ApplicantPage.php');
@@ -58,20 +62,7 @@ proper page
 					header('location:EmployeeProfileHome.php');
 
 
-		}
-
-		/*else if($check['ID_No'] == $userName && $check['password'] == $userPass && $check['status'] =='Employee'){
-
-					header('location:EmployeeResign.php');
-					//start of sessions
-					session_start();
-					//iniating a sessions variable and it's value
-					$_SESSION['ID_No']=$check['ID_No'];
-
-		}*/
-
-
-		} else { 
+		}else { 
 
 			header('location:ErrorLogIn.html');
 

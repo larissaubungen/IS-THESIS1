@@ -5,9 +5,9 @@
         or die(mysql_error());
         
             $result = mysql_query("
-            SELECT  F_Name, L_Name, ID_No, Department, TIMESTAMPDIFF(YEAR,B_Day,CURDATE()) AS age
-            FROM person
-			where B_Day IS NOT NULL AND TIMESTAMPDIFF(YEAR,B_Day,CURDATE()) > 1
+            SELECT  F_Name, L_Name, person.ID_No, Department, TIMESTAMPDIFF(YEAR,B_Day,CURDATE()) AS age
+            FROM person,work
+			where B_Day IS NOT NULL AND TIMESTAMPDIFF(YEAR,B_Day,CURDATE()) > 1 and person.ID_No like work.ID_No
               
             "); 
 

@@ -108,13 +108,13 @@
             
           while($row = mysql_fetch_array($result)){
           
-          $ques_1 = ($row['AVG(Ques_1)']/5)* 100;
-          $ques_2 = ($row['AVG(Ques_2)']/5)* 100;
-          $ques_3 = ($row['AVG(Ques_3)']/5)* 100;
-          $ques_4 = ($row['AVG(Ques_4)']/5)* 100;
-          $ques_5 = ($row['AVG(Ques_5)']/5)* 100;
-          $ques_6 = ($row['AVG(Ques_6)']/5)* 100;
-          $ques_7 = ($row['AVG(Ques_7)']/5)* 100;
+          $ques_1 = ($row['AVG(Ques_1)']/5);
+          $ques_2 = ($row['AVG(Ques_2)']/5);
+          $ques_3 = ($row['AVG(Ques_3)']/5);
+          $ques_4 = ($row['AVG(Ques_4)']/5);
+          $ques_5 = ($row['AVG(Ques_5)']/5);
+          $ques_6 = ($row['AVG(Ques_6)']/5);
+          $ques_7 = ($row['AVG(Ques_7)']/5);
           $ques_8 = ($row['AVG(Ques_8)']/5)* 100;
           $ques_9 = ($row['AVG(Ques_9)']/5)* 100;
           $ques_10 = ($row['AVG(Ques_10)']/5)* 100;
