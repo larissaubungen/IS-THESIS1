@@ -15,9 +15,9 @@
 	$gender = $_POST['sex'];
 	$civil = $_POST['status'];
 
-	$spouseFName = $_POST['spouseFName'];
-	$spouseMName = $_POST['spouseMName'];
-	$spouseLName = $_POST['spouseLName'];
+	$spouseFName = $_POST['FNspouseName'];
+	$spouseMName = $_POST['MNspouseName'];
+	$spouseLName = $_POST['LNspouseName'];
 	$FNChild1 = $_POST['FNChild1'];
 	$FNChild2 = $_POST['FNChild2'];
 	$FNChild3 = $_POST['FNChild3']; 

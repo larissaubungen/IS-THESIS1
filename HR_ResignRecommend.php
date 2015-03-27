@@ -163,6 +163,7 @@ $user=$_SESSION['ID_No'];
 	mysql_select_db("lbas_hr") 
 		or die(mysql_error());
 
+
 		$firstName = $_POST['firstName'];
 		$middleName = $_POST['middleName'];
 		$lastName = $_POST['lastName'];
@@ -171,10 +172,17 @@ $user=$_SESSION['ID_No'];
 
 		echo "<h3>Recommended Replacement/Substitute for <a href='#'>".$lastName." , ".$firstName." ". $middleName.".". "</a></h3>"; 
 		
-
-		$applicantDepartment = mysql_query("SELECT DISTINCT person.ID_No as ID_No, person.F_Name as F_Name, person.M_Name as M_Name, person.L_Name as L_Name, resume.App_Department as App_Department
+    //restricted applicants (finished resume, has orgs, exps, or awards)
+		$applicantDepartment = mysql_query("SELECT DISTINCT person.ID_No as ID_No, person.F_Name as F_Name, person.M_Name as M_Name, person.L_Name as L_Name, 
+                                                        resume.App_Department as App_Department, resume.App_Position as App_Position
 										   	 FROM person, resume
-									   		 WHERE person.ID_No LIKE resume.ID_No AND person.E_Status = 'Applicant' AND resume.App_Department = '".$dept."' ");
+									   		 WHERE person.ID_No LIKE resume.ID_No AND person.E_Status = 'Applicant' AND 
+                               (resume.Award1 is not NULL AND resume.Award1 != '' OR resume.Award2 is not NULL AND resume.Award2 != '' OR
+                               resume.Award3 is not NULL AND resume.Award3 !='' OR resume.Experience1 is not NULL AND resume.Experience1!= '' OR
+                               resume.Experience2 is not NULL AND resume.Experience2 != '' OR resume.Experience3 is not NULL AND resume.Experience3!= '' OR
+                                resume.Org_Aff1 is not NULL AND resume.Org_Aff1!= '' OR resume.Org_Aff2 is not NULL AND resume.Org_Aff2!= '' OR
+                                resume.Org_Aff3 is not NULL AND resume.Org_Aff3!= '')
+                                AND resume.App_Department = '".$dept."' ");
 
 		$employeeRecommendation = mysql_query("SELECT DISTINCT 
 													person.ID_No, person.F_Name, person.L_Name, person.M_Name,  
@@ -210,12 +218,12 @@ $user=$_SESSION['ID_No'];
 			$appDept = $row['App_Department'];
 
 		echo "<hr/>";	
-
+    echo '<li class="span7 clearfix" style="list-style:none;">';
 		  echo '<div class="thumbnail clearfix">';
           echo '<img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style="margin-right:10px">';
           echo '<div class="caption" class="pull-left">';
           echo '<h4>';      
-          echo '<a href="#" >'. $Fname . " " . $Mname .". " .$Lname.'</a>';
+          echo '<a href="#" >'. $Lname . ", " . $Fname ." " .$Mname.'</a>';
           echo '</h4>';
           echo '<small><b>ID Number: </b>'. $idNumber .'</small><br/>';
           echo '<small><b>Department: </b>'. $appDept .'</small><br/>';
@@ -257,7 +265,7 @@ $user=$_SESSION['ID_No'];
           echo '<img src="http://placehold.it/320x200" alt="ALT NAME" class="pull-left span2 clearfix" style="margin-right:10px">';
           echo '<div class="caption" class="pull-left">';
           echo '<h4>';      
-          echo '<a href="#" >'. $Fname . " " . $Mname .". " .$Lname.'</a>';
+          echo '<a href="#" >'. $Lname . ", " . $Fname ." " .$Mname.'</a>';
           echo '</h4>';
           echo '<small><b>ID Number: </b>'. $idNumber .'</small><br/>';
           echo '<small><b>Current Job Position 1: </b>'. $currentPosition .'</small><br/>';

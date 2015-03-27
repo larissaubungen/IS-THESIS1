@@ -117,7 +117,7 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
            <ul class="dropdown-menu">
               <li><a href="HR_Resignation.php">Resignations</a></li>
               <li><a href="HR_Transfer.php">Transfers</a></li>
-			  <li><a href="HR_Transfer.php">Leaves</a></li>
+			  <li><a href="LeaveRequest.php">Leaves</a></li>
 			  <li><a href="RetirementList.php">Retirement</a></li>
            </ul> 
         </li>
@@ -131,45 +131,6 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
           </ul>
         </li>
      </div>
-
-<?php
-        if ($leaves){ //if and else statement for handling the query
-
-          if(mysql_num_rows($leaves) > 0)
-          {
-            ?>
-              <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests*</span></a>
-               <ul class="dropdown-menu">
-                  <li><a href="HR_Resignation.php">Resignations</a></li>
-                  <li><a href="HR_Transfer.php">Transfers</a></li>
-                  <li><a href="LeaveRequest.php">Leaves*</a></li>
-               </ul> 
-              </li>
-            <?php 
-
-          }else{
-        		?>
-        		    <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
-                   <ul class="dropdown-menu">
-                      <li><a href="HR_Resignation.php">Resignations</a></li>
-                      <li><a href="HR_Transfer.php">Transfers</a></li>
-        			  <li><a href="LeaveRequest.php">Leaves</a></li>
-                   </ul> 
-                </li>
-        		<?php
-		      }
-        }else{
-            ?>
-                <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
-                   <ul class="dropdown-menu">
-                      <li><a href="HR_Resignation.php">Resignations</a></li>
-                      <li><a href="HR_Transfer.php">Transfers</a></li>
-                <li><a href="LeaveRequest.php">Leaves</a></li>
-                   </ul> 
-                </li>
-            <?php
-        }   ?>
-
     </div>
 
     <!-- /container --> 
@@ -179,7 +140,6 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
   <!-- /subnavbar-inner --> 
 </div>
 <!-- /subnavbar -->
-
 <div class="main">
   <div class="main-inner">
     <div class="container">
