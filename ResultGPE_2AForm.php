@@ -94,6 +94,7 @@
 
     <?php
     $idNo = $_POST['id'];
+	$date = $_POST['date'];
   mysql_connect("localhost", "root", "")
       or die(mysql_error());
   
@@ -124,32 +125,32 @@
                 AVG(Result),
                 Count(Result)
             FROM eval_gpe_nonteaching_2a
-            WHERE ID_No = $idNo
+            WHERE ID_No = '".$idNo."' AND YEAR(Date) = '".$date."'
             "); 
             
           while($row = mysql_fetch_array($result)){
           
-          $ques_1 = ($row['AVG(Ques_1)']/5);
-          $ques_2 = ($row['AVG(Ques_2)']/5);
-          $ques_3 = ($row['AVG(Ques_3)']/5);
-          $ques_4 = ($row['AVG(Ques_4)']/5);
-          $ques_5 = ($row['AVG(Ques_5)']/5);
-          $ques_6 = ($row['AVG(Ques_6)']/5);
-          $ques_7 = ($row['AVG(Ques_7)']/5);
-          $ques_8 = ($row['AVG(Ques_8)']/5);
-          $ques_9 = ($row['AVG(Ques_9)']/5);
-          $ques_10 = ($row['AVG(Ques_10)']/5);
-          $ques_11 = ($row['AVG(Ques_11)']/5);
-          $ques_12 = ($row['AVG(Ques_12)']/5);
-          $ques_13 = ($row['AVG(Ques_13)']/5);
-          $ques_14 = ($row['AVG(Ques_14)']/5);
-          $ques_15 = ($row['AVG(Ques_15)']/5);
-          $ques_16 = ($row['AVG(Ques_16)']/5);
-          $ques_17 = ($row['AVG(Ques_17)']/5);
-          $ques_18 = ($row['AVG(Ques_18)']/5);
-          $ques_19 = ($row['AVG(Ques_19)']/5);
-          $ques_20 = ($row['AVG(Ques_20)']/5);
-          $ques_25 = ($row['AVG(Result)']/$row['Count(Result)']);
+          $ques_1 = ($row['AVG(Ques_1)']);
+          $ques_2 = ($row['AVG(Ques_2)']);
+          $ques_3 = ($row['AVG(Ques_3)']);
+          $ques_4 = ($row['AVG(Ques_4)']);
+          $ques_5 = ($row['AVG(Ques_5)']);
+          $ques_6 = ($row['AVG(Ques_6)']);
+          $ques_7 = ($row['AVG(Ques_7)']);
+          $ques_8 = ($row['AVG(Ques_8)']);
+          $ques_9 = ($row['AVG(Ques_9)']);
+          $ques_10 = ($row['AVG(Ques_10)']);
+          $ques_11 = ($row['AVG(Ques_11)']);
+          $ques_12 = ($row['AVG(Ques_12)']);
+          $ques_13 = ($row['AVG(Ques_13)']);
+          $ques_14 = ($row['AVG(Ques_14)']);
+          $ques_15 = ($row['AVG(Ques_15)']);
+          $ques_16 = ($row['AVG(Ques_16)']);
+          $ques_17 = ($row['AVG(Ques_17)']);
+          $ques_18 = ($row['AVG(Ques_18)']);
+          $ques_19 = ($row['AVG(Ques_19)']);
+          $ques_20 = ($row['AVG(Ques_20)']);
+          $ques_25 = ($row['AVG(Result)']);
 
         }
 
@@ -350,7 +351,7 @@
 
             echo '</tbody>';
         echo '</table>';
-            echo "<input type='submit' value='Submit' class='Log' name='eval'>";
+            //echo "<input type='submit' value='Submit' class='Log' name='eval'>";
 	echo '</form>';
     
   ?>

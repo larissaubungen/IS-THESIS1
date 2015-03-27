@@ -147,245 +147,16 @@
 				
 			</thead>
 				<tbody>
-				<?php
-					$applicantID = $_POST['id'];
-					//$firstName ='adasdasdasd';
-					
-					mysql_connect('localhost', 'root', '')
-						or die(mysql_error());
+<?php
+		mysql_connect('localhost', 'root', '')
+			or die(mysql_error());
 		
-					mysql_select_db('lbas_hr') 
-						or die(mysql_error());
-						
-
-						 //retrieving details from the person table
-    $applicantDetails = "SELECT DISTINCT person.L_Name, person.F_Name, person.M_Name,
-    						 	person.B_Day, person.Gender, person.C_Status,
-                                E_Position1, E_Position2,Department, Subject, Level, 
-    						 	resume.Email, resume.M_No, resume.T_No, 
-    						 	resume.Street, resume.City, resume.Province, 
-		  						resume.Z_Code, resume.H_School, 
-							 resume.HS_Graduated, resume.College, resume.College_Graduated, 
-							 resume.Course, resume.Masteral, resume.Course2, resume.Award1, 
-							 resume.Award2, resume.Award3, resume.Award4, resume.Award5, 
-							 resume.Org_Aff1, resume.Org_Aff2, resume.Org_Aff3, resume.Org_Aff4, 
-							 resume.Org_Aff5, resume.T_Skills1, resume.T_Skills2, resume.T_Skills3, 
-							 resume.T_Skills4, resume.T_Skills5, resume.Experience1, resume.Experience2, 
-							 resume.Experience3, resume.Experience4, resume.Experience5, resume.ID_No
-					  FROM person, resume, work
-					  WHERE person.ID_No = '".$applicantID."' AND person.ID_No LIKE resume.ID_No  " ;
-		$query = mysql_query($applicantDetails);
-
-	  while($row = mysql_fetch_array($query))
-	  {
-	  		$appIDNum = $row["ID_No"];
-	  		$lastName = $row["L_Name"];
-	  		$firstName = $row["F_Name"];
-	  		$middleName = $row["M_Name"];
-	  		$bDay = $row["B_Day"];
-	  		$gender = $row["Gender"];
-	  		$civil = $row["C_Status"];
-
-	  		$email = $row["Email"];
-	  		$mobNumber = $row["M_No"];
-	  		$telNumber = $row["T_No"];
-	  		$street = $row["Street"];
-	  		$city = $row["City"];
-	  		$province = $row["Province"];
-	  		$zip = $row["Z_Code"];
-	  		$highSchool = $row["H_School"];
-	  		$HS_Grad = $row["HS_Graduated"];
-	  		$college = $row["College"];
-	  		$College_Grad = $row["College_Graduated"];
-	  		$degree = $row["Course"];
-	  		$masteral = $row["Masteral"];
-	  		$degree2 = $row["Course2"];
-	  		$skill1 = $row["T_Skills1"];
-	  		$skill2 = $row["T_Skills2"];
-	  		$skill3 = $row["T_Skills3"];
-	  		$skill4 = $row["T_Skills4"];
-	  		$skill5 = $row["T_Skills5"];
-
-	  		$award1 = $row["Award1"];
-	  		$award2 = $row["Award2"];
-	  		$award3 = $row["Award3"];
-	  		$award4 = $row["Award4"];
-	  		$award5 = $row["Award5"];
-	  		$org1 = $row["Org_Aff1"];
-	  		$org2 = $row["Org_Aff2"];
-	  		$org3 = $row["Org_Aff3"];
-	  		$org4 = $row["Org_Aff4"];
-	  		$org5 = $row["Org_Aff5"];
-	  		$exp1 = $row["Experience1"];
-	  		$exp2 = $row["Experience2"];
-	  		$exp3 = $row["Experience3"];
-	  		$exp4 = $row["Experience4"];
-	  		$exp5 = $row["Experience5"];
+        mysql_select_db('lbas_hr') 
+			or die(mysql_error());
 			
-			$position = $row["E_Position1"];
-			$department = $row ["Department"];
-			$subject = $row ["Subject"];
-			$level = $row ["Level"];
-
-
-		echo '<div class="container"><!--Panel Heading only-->
-				<div class="row">
-					<div class="col-lg-6">
-				
-				<div class="panel-body">	   
-				<!--/Panel Heading only-->';
-		echo ' <div class="table-responsive">	<!--Resume Form into table-->';
-		echo ' <table class="table">
-					<thead>
-				<tr>
-					<th>Personal Information</th>
-					<th></th>
-					<th>Contact details</th>
-				</tr>
-				</thead>
-				<tbody>	
-				<tr>
-					<td id="resume-label">First Name: </td>
-					<td>'.$firstName.'</td>
-					<td id="resume-label">E-mail: </td>
-					<td>'.$email.'</td>
-				</tr>	
-				<tr>
-					<td id="resume-label">Last Name:</td>
-					<td>'.$lastName.'</td>
-					<td id="resume-label">Mobile Number: </td>
-					<td>'.$mobNumber.'
-					</td>
-				</tr>
-				<tr>
-					<td id="resume-label">Middle Name:</td>
-					<td>'.$middleName.'</td>
-					<td id="resume-label">Telephone Number: </td>
-					<td>'.$telNumber.'</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<td id="resume-label">Gender:</td>
-					<td>'.$gender.'<br>
-					</td>				
-				</tr>
-				<tr>
-					<td id="resume-label"><br>Civil Status: <br>
-						<label id="lbl_spouse" style="display:none;">Spouse:</label>
-					</td> 
-					<td>'.$civil.'</td>
-				</tr>
-				<tr>
-				<tr>
-					<td id="resume-label"><br>Birthdate:</td>
-					<td>'.$bDay.'</td>
-				</tr>
-				<tr></tr>
-				<tr>
-					<td id="resume-label"><br><b>Job Description</b></td>					
-				</tr>
-				<tr>
-					<td id="resume-label">Position:</td>
-					<td>'.$position.'</td>
-				</tr>
-				<tr>
-					<td id="resume-label">Department:</td>
-					<td>'.$department.'</td>
-				</tr>
-				<tr>
-					<td id="resume-label">Subject:</td>
-					<td>'.$subject.'</td>
-				</tr>
-				<tr>
-					<td id="resume-label">Level:</td>
-					<td>'.$level.'</td>
-				</tr>
-				<tr>
-					<td id="resume-label"><br><b>Education</b></td>
-					<td id="resume-label"></td>
-					<td id="resume-label"><br><b>Address</b></td>					
-				</tr>
-				<tr>
-					<td id="resume-label">High School:</td>
-					<td>'.$highSchool.'</td>
-					<td id="resume-label">Street:</td>
-					<td>'.$street.'</td>
-				</tr>
-				<tr>
-					<td id="resume-label">Year Graduated:</td>
-					<td>'.$HS_Grad.'</td>
-					<td id="resume-label">City:</td>
-					<td>'.$city.'</td>
-				</tr>
-				<tr>
-					<td id="resume-label">College/University:</td>
-					<td>'.$college.'</td>
-					<td id="resume-label">Province:</td>
-					<td>'.$province.'</td>
-				</tr>
-				<tr>
-					<td id="resume-label">College Degree:</td>
-					<td>'.$degree.'</td>
-					<td id="resume-label">Zip Code:</td>
-					<td>'.$zip.'</td>					
-				</tr>
-				<tr>
-					<td id="resume-label">Year Graduated:</td>
-					<td>'.$College_Grad.'</td>
-				</tr>	
-				<tr>
-					<td id="resume-label">Masteral Degree:</td>
-					<td>'.$degree2.'</td>
-				</tr>
-				<tr>
-					<td id="resume-label">College/University:</td>
-					<td>'.$masteral.'</td>
-				</tr>
-				<tr>
-					<td id="resume-label"><br><b>Awards</b></td>
-					<td></td>
-					<td id="resume-label"><br><b>Organization(s) Affiliated</b></td>
-				</tr>
-				<tr>
-					<td><textarea readonly>'.$award1.',  '.$award2.'
-								,  '.$award3.',  '.$award4.'
-								,  '.$award5.'
-								 </textarea></td>
-
-					<td></td>
-
-					<td><textarea readonly>'.$org1.', '.$org2.'
-								,'.$org3.', '.$org4.'
-								,'.$org5.'</textarea></td>
-				</tr>	
-				</tr>
-				<tr>
-					<td id="resume-label"><br><b>Experience</b></td>
-					<td></td>
-					<td id="resume-label"><br><b>Specialties and Technical Skills</b></td>
-				</tr>
-				<tr>
-					<td><textarea readonly>'.$exp1.', '.$exp2.'
-								,'.$exp3.', '.$exp4.'
-								,'.$exp5.'</textarea></td>
-					<td></td>
-					<td><textarea readonly>'.$skill1.', '.$skill2.'
-								,'.$skill3.', '.$skill4.'
-								,'.$skill5.'</textarea></td>
-				</tr>
-				</tbody>
-					</table>
-				  	</script>
-					
-			  </div>
-			</div>
-		</div>
-		</div>
-		</div>';
-
-	  }
-	  
-		$result = mysql_query("
+			$idNo= "6694432324";
+			
+			$result = mysql_query("
 				SELECT  Department, Level
 				FROM work
 				WHERE ID_No = '".$idNo."'
@@ -575,4 +346,10 @@
 				echo '</table>';
                 echo '</center>';
 			}
-}
+			
+			
+			
+			
+			
+	}
+?>

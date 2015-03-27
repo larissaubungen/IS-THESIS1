@@ -212,7 +212,7 @@
 
                   </tr>
                   <tr>
-                        <td> 4. Building of unity through kinf feedback; not talking behind others' back and engaging in negative talk </td>
+                        <td> 4. Building of unity through kind feedback; not talking behind others' back and engaging in negative talk </td>
                   
                         <td><input id="rdo_1" type="radio" value="1" name="4" > 1<br></td>
                         <td><input id="rdo_2" type="radio" value="2" name="4" > 2<br></td>

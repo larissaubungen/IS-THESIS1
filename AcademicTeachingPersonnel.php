@@ -134,7 +134,7 @@
             SELECT  F_Name, L_Name, person.ID_No, E_Position1
             FROM person, work
 
-            WHERE E_Position1 LIKE '%Teacher%' and person.ID_No LIKE work.ID_No and (E_Status = 'Probationary' or E_Status ='Regular Employee') 
+            WHERE E_Position1 LIKE '%Teacher%' and person.ID_No LIKE work.ID_No and (E_Status = 'Probationary' or E_Status ='Employee') 
 
             ");
         

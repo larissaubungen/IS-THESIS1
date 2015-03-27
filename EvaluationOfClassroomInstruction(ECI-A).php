@@ -141,11 +141,11 @@
             "); 
   
 
-
+echo '<form action="SubmitECIAForm.php" method="POST">';
      while($row = mysql_fetch_array($result)){
         
         echo '<h5>Name of Teacher: </h5>';
-        echo '<form action="SubmitECIAForm.php" method="POST">';
+        
           echo '<input type="text" placeholder="Name of Teacher" value="'. $row['L_Name'] . "," . " " . $row['F_Name'] .  '" readonly>';
           echo "<input type='hidden' name='id' value='$idNo'/>";
           echo '<h5>Level/Section:</h5>';

@@ -96,6 +96,7 @@
 
     <?php
     $idNo = $_POST['id'];
+	$date = $_POST['date'];
   mysql_connect("localhost", "root", "")
       or die(mysql_error());
   
@@ -122,7 +123,7 @@
                 AVG(Result),
                 Count(Result)
             FROM eval_gpe_teachers
-            WHERE ID_No = $idNo
+            WHERE ID_No = '".$idNo."' AND YEAR(Date) = '".$date."'
             "); 
             
           while($row = mysql_fetch_array($result)){

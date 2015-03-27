@@ -1,113 +1,25 @@
-<?php
-  session_start();
-    if (!isset($_SESSION['ID_No'])) {
-    header('Location:login.php');
-  } ?>  
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
     <meta charset="utf-8">
-    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-
-<?php
-
-        $idNo = $_POST['id'];
-        mysql_connect("localhost", "root", "")
-        or die(mysql_error());
-        mysql_select_db("lbas_hr") 
-        or die(mysql_error());
-        
-            $result = mysql_query("
-            SELECT *
-            FROM person 
-            WHERE person.ID_No = '$idNo' 
-            "); 
-        
-        while($row = mysql_fetch_array($result)){
-                    $firstName = $row["F_Name"];
-                    $lastName = $row["L_Name"];
-                    $middleName = $row["M_Name"];
-
-                echo '<title>' . $firstName . ' ' . $middleName . '.' . ' '. $lastName .  '</title>';
-                    
-                 }
-        ?> 
-
-
-
-
-
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
+   <title>LBASS HR Applicant Details</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
         rel="stylesheet">
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/pages/dashboard.css" rel="stylesheet">
-
-    <style>
-       table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-        }
-    </style>
-
-    <!--CSS code for profiles-->
-    <style type="text/css">
-        .user-row {
-         margin-bottom: 14px;
-        }
-
-        .user-row:last-child {
-            margin-bottom: 0;
-        }
-
-        .dropdown-user {
-            margin: 13px 0;
-            padding: 5px;
-            height: 100%;
-        }
-
-        .dropdown-user:hover {
-            cursor: pointer;
-        }
-
-        .table-user-information > tbody > tr {
-            border-top: 1px solid rgb(221, 221, 221);
-        }
-
-        .table-user-information > tbody > tr:first-child {
-            border-top: 0;
-        }
-
-
-        .table-user-information > tbody > tr > td {
-            border-top: 0;
-        }
-
-    </style>
-
-     <!--CSS code for profiles-->
-
-      <!--Javascript code for profiles-->
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <!--Javascript code for profiles-->
+<link href="css/font-awesome.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/pages/dashboard.css" rel="stylesheet">
+<link href="css/bootstrap-modal.css" rel="stylesheet" />
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 </head>
 <body>
 
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-fixed-top">  <!--main navbar-->
   <div class="navbar-inner">
     <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
                     class=></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">LBASS Human Resource Information System </a>
@@ -119,17 +31,31 @@
               <li><a href="javascript:;">Help</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Let Rivera (Dummy Data)<b class="caret"></b></a>
-            <ul class="dropdown-menu">
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <?php
+              mysql_connect('localhost', 'root', '')
+              or die(mysql_error());  
+              mysql_select_db('lbas_hr') 
+              or die(mysql_error());
+
+              $user=$_SESSION['ID_No']; 
+
+              $retrieveName = "SELECT `L_Name`, `F_Name`  
+                               FROM `person` 
+                               WHERE `ID_No` = '".$user."'";
+              $check = mysql_query($retrieveName);
+              while ($row = mysql_fetch_array($check)) {
+                $lastName = $row["L_Name"];
+                $firstName = $row["F_Name"];
+                echo "<i class='icon-user'></i> $lastName , $firstName";
+                echo "<b class='caret'></b></a><ul class='dropdown-menu'/>";
+              }?>
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
+              <li><a href="logout.php">Logout</a></li>
             </ul>
           </li>
-        </ul>
-        <form class="navbar-search pull-right">
-          <input type="text" class="search-query" placeholder="Search">
-        </form>
+        </ul>  
+        <!--form navbar was here-->
       </div>
       <!--/.nav-collapse --> 
     </div>
@@ -138,654 +64,516 @@
   <!-- /navbar-inner --> 
 </div>
 <!-- /navbar -->
-<div class="subnavbar">
+
+
+<div class="subnavbar">  <!--subnavbar-->
   <div class="subnavbar-inner">
     <div class="container">
+
       <ul class="mainnav">
         <li><a href="HR_Page.php"><i class="icon-dashboard"></i><span>HR Dashboard</span> </a> </li>
-        <li class="active"><a href="EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
-        
-        <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-        <li><a href="guidely.html"><i class="icon-table"></i><span>Attendance</span> </a></li>
-        <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
-        <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
-        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
+        <li><a href="EmployeesPage.php"><i class="icon-user"></i><span>Employees</span> </a> </li>
+        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> 
+          <i class="icon-user"></i><span>Applicants</span> <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="icons.html">Icons</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="pricing.html">Pricing Plans</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="signup.html">Signup</a></li>
-            <li><a href="error.html">404</a></li>
-          </ul>
+            <li><a href="ListOfApplicant.php">View Current Applicants</a></li>
+            <li><a href="Signup.php">Add Applicant Account</a></li>
+          </ul>   
         </li>
-      </ul>
+                
+        <li><a href="AttendancePage.php"><i class="icon-table"></i><span>Attendance</span> </a></li>
+        <li><a href="ReportsPage.php"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
+      
+        <?php
+                $leaves=mysql_query("SELECT * 
+               FROM leave_table 
+               WHERE L_Status ='Pending'");
+
+        if ($leaves){ //if and else statement for handling the query
+
+          if(mysql_num_rows($leaves) > 0)
+          {
+            ?>
+              <li class="active dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests*</span></a>
+               <ul class="dropdown-menu">
+                  <li><a href="HR_Resignation.php">Resignations</a></li>
+                  <li><a href="HR_Transfer.php">Transfers</a></li>
+                  <li><a href="LeaveRequest.php">Leaves*</a></li>
+               </ul> 
+              </li>
+            <?php 
+
+          }else{
+            ?>
+                <li class="active dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+                   <ul class="dropdown-menu">
+                      <li><a href="HR_Resignation.php">Resignations</a></li>
+                      <li><a href="HR_Transfer.php">Transfers</a></li>
+                <li><a href="LeaveRequest.php">Leaves</a></li>
+                   </ul> 
+                </li>
+            <?php
+          }
+        }else{
+            ?>
+                <li class="active dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list"></i><span>Requests</span></a>
+                   <ul class="dropdown-menu">
+                      <li><a href="HR_Resignation.php">Resignations</a></li>
+                      <li><a href="HR_Transfer.php">Transfers</a></li>
+                <li><a href="LeaveRequest.php">Leaves</a></li>
+                   </ul> 
+                </li>
+            <?php
+        }   ?>
+
     </div>
+
     <!-- /container --> 
+  </div>
+  </div>
   </div>
   <!-- /subnavbar-inner --> 
 </div>
 <!-- /subnavbar -->
 
+<div class="container">	 <!--Panel Heading only-->
+ 	  <div class="row">
+ 	  	<div class="col-lg-6">
+ 	  <div class="panel-heading"><h4 class="panel-title">Employee Profile</h4></div>
+	  <div class="panel-body">	   <!--/Panel Heading only-->
+		  <div class="table-responsive">	<!--Resume Form into table-->
+		  <table class="table"> 
+			<thead>
+				
+			</thead>
+				<tbody>
+				<?php
+					$idNo = $_POST['id'];
+					//$firstName ='adasdasdasd';
+					
+					mysql_connect('localhost', 'root', '')
+						or die(mysql_error());
+		
+					mysql_select_db('lbas_hr') 
+						or die(mysql_error());
+						
+
+						 //retrieving details from the person table
+    $applicantDetails = "SELECT DISTINCT person.L_Name, person.F_Name, person.M_Name,
+    						 	person.B_Day, person.Gender, person.C_Status,
+                                E_Position1, E_Position2,Department, Subject, Level, 
+    						 	resume.Email, resume.M_No, resume.T_No, 
+    						 	resume.Street, resume.City, resume.Province, 
+		  						resume.Z_Code, resume.H_School, 
+							 resume.HS_Graduated, resume.College, resume.College_Graduated, 
+							 resume.Course, resume.Masteral, resume.Course2, resume.Award1, 
+							 resume.Award2, resume.Award3, resume.Award4, resume.Award5, 
+							 resume.Org_Aff1, resume.Org_Aff2, resume.Org_Aff3, resume.Org_Aff4, 
+							 resume.Org_Aff5, resume.T_Skills1, resume.T_Skills2, resume.T_Skills3, 
+							 resume.T_Skills4, resume.T_Skills5, resume.Experience1, resume.Experience2, 
+							 resume.Experience3, resume.Experience4, resume.Experience5, resume.ID_No
+					  FROM person, resume, work
+					  WHERE person.ID_No = '".$idNo."' AND person.ID_No LIKE resume.ID_No  " ;
+		$query = mysql_query($applicantDetails);
+
+	  while($row = mysql_fetch_array($query))
+	  {
+	  		$appIDNum = $row["ID_No"];
+	  		$lastName = $row["L_Name"];
+	  		$firstName = $row["F_Name"];
+	  		$middleName = $row["M_Name"];
+	  		$bDay = $row["B_Day"];
+	  		$gender = $row["Gender"];
+	  		$civil = $row["C_Status"];
+
+	  		$email = $row["Email"];
+	  		$mobNumber = $row["M_No"];
+	  		$telNumber = $row["T_No"];
+	  		$street = $row["Street"];
+	  		$city = $row["City"];
+	  		$province = $row["Province"];
+	  		$zip = $row["Z_Code"];
+	  		$highSchool = $row["H_School"];
+	  		$HS_Grad = $row["HS_Graduated"];
+	  		$college = $row["College"];
+	  		$College_Grad = $row["College_Graduated"];
+	  		$degree = $row["Course"];
+	  		$masteral = $row["Masteral"];
+	  		$degree2 = $row["Course2"];
+	  		$skill1 = $row["T_Skills1"];
+	  		$skill2 = $row["T_Skills2"];
+	  		$skill3 = $row["T_Skills3"];
+	  		$skill4 = $row["T_Skills4"];
+	  		$skill5 = $row["T_Skills5"];
+
+	  		$award1 = $row["Award1"];
+	  		$award2 = $row["Award2"];
+	  		$award3 = $row["Award3"];
+	  		$award4 = $row["Award4"];
+	  		$award5 = $row["Award5"];
+	  		$org1 = $row["Org_Aff1"];
+	  		$org2 = $row["Org_Aff2"];
+	  		$org3 = $row["Org_Aff3"];
+	  		$org4 = $row["Org_Aff4"];
+	  		$org5 = $row["Org_Aff5"];
+	  		$exp1 = $row["Experience1"];
+	  		$exp2 = $row["Experience2"];
+	  		$exp3 = $row["Experience3"];
+	  		$exp4 = $row["Experience4"];
+	  		$exp5 = $row["Experience5"];
+			
+			$position = $row["E_Position1"];
+			$department = $row ["Department"];
+			$subject = $row ["Subject"];
+			$level = $row ["Level"];
 
 
-<hr class="">
-<div class="container target">
-    <div class="row">
-        <div class="col-sm-10">
+		echo '<div class="container"><!--Panel Heading only-->
+				<div class="row">
+					<div class="col-lg-6">
+				
+				<div class="panel-body">	   
+				<!--/Panel Heading only-->';
+		echo ' <div class="table-responsive">	<!--Resume Form into table-->';
+		echo ' <table class="table">
+					<thead>
+				<tr>
+					<th>Personal Information</th>
+					<th></th>
+					<th>Contact details</th>
+				</tr>
+				</thead>
+				<tbody>	
+				<tr>
+					<td id="resume-label">First Name: </td>
+					<td>'.$firstName.'</td>
+					<td id="resume-label">E-mail: </td>
+					<td>'.$email.'</td>
+				</tr>	
+				<tr>
+					<td id="resume-label">Last Name:</td>
+					<td>'.$lastName.'</td>
+					<td id="resume-label">Mobile Number: </td>
+					<td>'.$mobNumber.'
+					</td>
+				</tr>
+				<tr>
+					<td id="resume-label">Middle Name:</td>
+					<td>'.$middleName.'</td>
+					<td id="resume-label">Telephone Number: </td>
+					<td>'.$telNumber.'</td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td id="resume-label">Gender:</td>
+					<td>'.$gender.'<br>
+					</td>				
+				</tr>
+				<tr>
+					<td id="resume-label"><br>Civil Status: <br>
+						<label id="lbl_spouse" style="display:none;">Spouse:</label>
+					</td> 
+					<td>'.$civil.'</td>
+				</tr>
+				<tr>
+				<tr>
+					<td id="resume-label"><br>Birthdate:</td>
+					<td>'.$bDay.'</td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td id="resume-label"><br><b>Job Description</b></td>					
+				</tr>
+				<tr>
+					<td id="resume-label">Position:</td>
+					<td>'.$position.'</td>
+				</tr>
+				<tr>
+					<td id="resume-label">Department:</td>
+					<td>'.$department.'</td>
+				</tr>
+				<tr>
+					<td id="resume-label">Subject:</td>
+					<td>'.$subject.'</td>
+				</tr>
+				<tr>
+					<td id="resume-label">Level:</td>
+					<td>'.$level.'</td>
+				</tr>
+				<tr>
+					<td id="resume-label"><br><b>Education</b></td>
+					<td id="resume-label"></td>
+					<td id="resume-label"><br><b>Address</b></td>					
+				</tr>
+				<tr>
+					<td id="resume-label">High School:</td>
+					<td>'.$highSchool.'</td>
+					<td id="resume-label">Street:</td>
+					<td>'.$street.'</td>
+				</tr>
+				<tr>
+					<td id="resume-label">Year Graduated:</td>
+					<td>'.$HS_Grad.'</td>
+					<td id="resume-label">City:</td>
+					<td>'.$city.'</td>
+				</tr>
+				<tr>
+					<td id="resume-label">College/University:</td>
+					<td>'.$college.'</td>
+					<td id="resume-label">Province:</td>
+					<td>'.$province.'</td>
+				</tr>
+				<tr>
+					<td id="resume-label">College Degree:</td>
+					<td>'.$degree.'</td>
+					<td id="resume-label">Zip Code:</td>
+					<td>'.$zip.'</td>					
+				</tr>
+				<tr>
+					<td id="resume-label">Year Graduated:</td>
+					<td>'.$College_Grad.'</td>
+				</tr>	
+				<tr>
+					<td id="resume-label">Masteral Degree:</td>
+					<td>'.$degree2.'</td>
+				</tr>
+				<tr>
+					<td id="resume-label">College/University:</td>
+					<td>'.$masteral.'</td>
+				</tr>
+				<tr>
+					<td id="resume-label"><br><b>Awards</b></td>
+					<td></td>
+					<td id="resume-label"><br><b>Organization(s) Affiliated</b></td>
+				</tr>
+				<tr>
+					<td><textarea readonly>'.$award1.',  '.$award2.'
+								,  '.$award3.',  '.$award4.'
+								,  '.$award5.'
+								 </textarea></td>
 
+					<td></td>
 
-       <?php
+					<td><textarea readonly>'.$org1.', '.$org2.'
+								,'.$org3.', '.$org4.'
+								,'.$org5.'</textarea></td>
+				</tr>	
+				</tr>
+				<tr>
+					<td id="resume-label"><br><b>Experience</b></td>
+					<td></td>
+					<td id="resume-label"><br><b>Specialties and Technical Skills</b></td>
+				</tr>
+				<tr>
+					<td><textarea readonly>'.$exp1.', '.$exp2.'
+								,'.$exp3.', '.$exp4.'
+								,'.$exp5.'</textarea></td>
+					<td></td>
+					<td><textarea readonly>'.$skill1.', '.$skill2.'
+								,'.$skill3.', '.$skill4.'
+								,'.$skill5.'</textarea></td>
+				</tr>
+				</tbody>
+					</table>
+				  	</script>
+					
+			  </div>
+			</div>
+		</div>
+		</div>
+		</div>';
+		
+	  }
 
-        $idNo = $_POST['id'];
-        mysql_connect("localhost", "root", "")
-        or die(mysql_error());
-        mysql_select_db("lbas_hr") 
-        or die(mysql_error());
-        
-            $result = mysql_query("
-            SELECT *
-            FROM person, work 
-            WHERE person.ID_No = '$idNo' and work.ID_No = '$idNo'
-            "); 
-        
-        while($row = mysql_fetch_array($result)){
-                    $firstName = $row["F_Name"];
-                    $lastName = $row["L_Name"];
-                    $middleName = $row["M_Name"];
-                    $birthday = $row["B_Day"];
-                    $gender = $row["Gender"];
-                    $cStatus = $row["C_Status"];
-                    $eStatus = $row["E_Status"];
-                    $department = $row["Department"];
-                    $ePosition1 = $row["E_Position1"];
-                    $ePosition2 = $row["E_Position2"];
+	  
+	  	$result = mysql_query("
+				SELECT  Department, Level
+				FROM work
+				WHERE ID_No = '".$idNo."'
 
-          echo '<h1 class="">' . $firstName . ' ' . $middleName . '.' . ' '. $lastName . '</h1>';
-         echo '<br><br>
-          
-        </div>
-      <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.lagunabelairschool.com.ph/images/danenberg.jpg"></a>
+            ");
+			
+			while($row = mysql_fetch_array($result)){
+			$department = $row['Department'];
+			$level = $row['Level'];
+			
+			if($department == 'Humanities' || $department == 'SMIT' && $level == 'Primary'){	
+				echo '<center>';
+				echo '<table>';
+				echo '<table style="width:50%">';
+				echo '<tr>';
+                echo '<td><strong>General Performance Evaluation for Teachers</td>';            
+                echo'<form action="ListGPETeachers.php" method= "POST">';
+					echo "<input type='hidden' name='id' value='$idNo'/>";
+					echo '<td><input type="submit" value="Go to results"></td>'; 
+                echo'</form>';
+                echo '</tr>';
 
-        </div>
-    </div>
-  <br>
-    <div class="row">
-        <div class="col-sm-3">
-            <!--left col-->
-            <ul class="list-group">';
+                echo '<tr>';
+                echo '<td><strong>Evaluation Of Classroom Instruction(ECI-A)</td>';
+                echo'<form action="ListECIA.php" method= "POST">';
+					echo "<input type='hidden' name='id' value='$idNo'/>";
+                    echo '<td><input type="submit" value="Go to results"></td>'; 
+                echo'</form>';
+                echo '</tr>';
 
-          
+				echo '<tr>';
+                echo '<td><strong>Evaluation Of Classroom Instruction(ECI-B)</td>';
+                echo'<form action="ListECIBPrimary.php" method= "POST">';
+					echo "<input type='hidden' name='id' value='$idNo'/>";
+                    echo '<td><input type="submit" value="Go to results"></td>'; 
+                echo'</form>';
+                echo '</tr>';
+                echo '</table>';
+                echo '</center>';
+				
+			}else if($department == 'Humanities' || $department == 'SMIT' && $level == 'Intermediate' || $level =='Highschool'){	
+				echo '<center>';
+				echo '<table>';
+				echo '<table style="width:50%">';
+				echo '<tr>';
+                echo '<td><strong>General Performance Evaluation for Teachers</td>';            
+                echo'<form action="ListGPETeachers.php" method= "POST">';
+					echo "<input type='hidden' name='id' value='$idNo'/>";
+					echo '<td><input type="submit" value="Go to results"></td>'; 
+                echo'</form>';
+                echo '</tr>';
 
+                echo '<tr>';
+                echo '<td><strong>Evaluation Of Classroom Instruction(ECI-A)</td>';
+                echo'<form action="ListECIA.php" method= "POST">';
+					echo "<input type='hidden' name='id' value='$idNo'/>";
+                    echo '<td><input type="submit" value="Go to results"></td>'; 
+                echo'</form>';
+                echo '</tr>';
 
+				echo '<tr>';
+                echo '<td><strong>Evaluation Of Classroom Instruction(ECI-B)</td>';
+                echo'<form action="ListECIBHS_Inter.php" method= "POST">';
+					echo "<input type='hidden' name='id' value='$idNo'/>";
+                    echo '<td><input type="submit" value="Go to results"></td>'; 
+                echo'</form>';
+                echo '</tr>';
+                echo '</table>';
+                echo '</center>';                          				
+			}else if($department == 'Human Resource Department' || $department == 'Accounting Department' ||$department == 'Registrar' || $department == 'IT Department' || $department == 'Director/Principal' || $department == 'Student Formation Center'){
+					 
+				echo '<center>';
+				echo '<table>';
+				echo '<table style="width:50%">';
+                    echo '<tr>';
+					echo '<td><strong>General Performance Evaluation (2-A)</td>';                  
+					echo'<form action="ListGPE_2A.php" method= "POST">';
+                    echo "<input type='hidden' name='id' value='$idNo'/>";
+                    echo '<td><input type="submit" value="Go to results"></td>';
+					echo'</form>';  
+                    echo '</tr>';
+                echo '</table>';
+				echo '</center>';
 
-
-             echo '<li class="list-group-item text" contenteditable="false">Profile</li>';
-             echo '<li class="list-group-item text-left"><span class="pull-left"><strong class="">Full Name: </strong></span>' . '&nbsp&nbsp' . $firstName . ' ' . $middleName . '.' . ' '. $lastName .   '</li>';
-             echo '<li class="list-group-item text-left"><span class="pull-left"><strong class="">Position/s and Occupation/s: </strong></span>' . '<br>' . '<br>' . $ePosition1 . '<br>' . '<br>' .  $ePosition2 . '</li>';
-             echo '<li class="list-group-item text-left"><span class="pull-left"><strong class="">Department: </strong></span>' . '&nbsp&nbsp' . $department . '</li>';
-                    
-                 }
-        ?>
-
-            </ul>
-           <div class="panel panel-default">
-             <div class="panel-heading">Dont know yet
-
-                </div>
-                <div class="panel-body"><i style="color:green" class="fa fa-check-square"></i> text text text
-
-
-
-
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">Dont know yet <i class="fa fa-link fa-1x"></i>
-
-                </div>
-                <div class="panel-body"><a href="http://bootply.com" class="">Text text text</a>
-
-                </div>
-            </div>
-          
-            <ul class="list-group">
-                <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i>
-
-                </li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Absent</strong></span> 125</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Tardy</strong></span> 13</li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Leavess</strong></span> 37</li>
-                        <li class="list-group-item text-right"><span class="pull-left"><strong class="">Teaching load</strong></span> 78</li>
-            </ul>
-            <div class="panel panel-default">
-                <div class="panel-heading">Dont know yet</div>
-                <div class="panel-body">  <i class="fa fa-facebook fa-2x"></i>  <i class="fa fa-github fa-2x"></i> 
-                    <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i>  <i class="fa fa-google-plus fa-2x"></i>
-
-                </div>
-            </div>
-        </div>
-        <!--/col-3-->
-               <div class="col-sm-9" contenteditable="false" style="">
-            <div class="panel panel-default">
-
-
-                    <link type="text/css" rel="stylesheet" href="http://onlinehtmltools.com/tab-generator/skins/skin4/top.css"></script>
-
-                    <div class="tabs_holder">
-                     <ul>
-                      <li><a href="#your-tab-id-1">Profile</a></li>
-                      <li class="tab_selected"><a href="#your-tab-id-2">Records</a></li>
-                     </ul>
-                     <div class="content_holder">
-                      <div id="your-tab-id-1">
-                        
-
-                            <?php
-                                
-                                echo '<div id="profile">';
-                                echo '<div class="panel-body">';
-
-                                
-                                    echo '<center>';
-                                    echo '<table>';
-                                        echo '<table style="width:50%">';
-                                              
-                                              echo '<tr>';
-                                                echo '<td><strong>Full Name</td>';
-                                                echo '<td>'  . $firstName . ' ' . $middleName . '.' . ' '. $lastName .   '</td>';      
-                                              echo '</tr>';
-                                              echo '<tr>';
-                                                echo '<td><strong>Birthday</td>';
-                                                echo '<td>' . $birthday . '</td>';
-                                              echo '</tr>';
-                                              echo '<tr>';
-                                                echo '<td><strong>Gender</td>';
-                                                echo '<td>' . $gender . '</td>';
-                                              echo '</tr>';
-                                              echo '<tr>';
-                                                echo '<td><strong>Civil Status</td>';
-                                                echo '<td>' . $cStatus . '</td>';
-                                              echo '</tr>';
-                                        echo '</table>';
-                                        echo '</center>';
-
-                                echo '</div>';
-
-
-
-                                echo '</div>
-                            </div>';
-                                
-
-                            ?>
-
-                      </div>
-                      
-
-
-
-
-                      <div id="your-tab-id-2">
-                       
-                        <?php
-                                
-                                echo '<div id="profile">';
-                                echo '<div class="panel-body">';
-
-                                
-
-                                /*
-                                  USED TO FILTER EVALUATION RESULTS FORMS FROM DIFFERENT YEARS
-
-
-                                */
-                                        echo 'Year: <select>
-                                                    <option>2012</option>
-                                                    <option>2012</option>
-                                                    </select>';
-
-
-
-                                    echo '<br>';
-                                    echo '<br>';
-
-                                    echo '<center>';
-                                    echo '<table>';
-                                        echo '<table style="width:80%">';
-                                              
-                                              /*echo '<tr>';
-                                                echo '<td><strong>Evaluation Of Advisory and HomeroomWork (EAHW-A)</td>';
-                                                echo '<td><a href="ResultEAHWForm.php"> See Results </a></td>';      
-                                              echo '</tr>';*/
-
-                                              echo '<tr>';
-                                                echo '<td><strong>Evaluation Of Classroom Instruction (ECI-A)</td>';
-                                                echo'<form action="ResultECIAForm.php" method= "POST">';
-                                                      echo "<input type='hidden' name='id' value='$idNo'/>";
-                                                       echo '<td><input type="submit" value="See Results"></td>';
-                                                   echo'</form>';  
-                                              echo '</tr>';
-                                             
-                                             /* echo '<tr>';
-                                                echo '<td><strong>Evaluation Of Classroom Instruction(ECI-B) (For Highschool and Intermmediate )</td>';
-                                                echo '<td><a href=" "> See Results </a></td>';
-                                              echo '</tr>';
-                                              echo '<tr>';
-                                                echo '<td><strong>Evaluation Of Classroom Instruction(ECI-B) (For Primary )</td>';
-                                                echo '<td><a href=" "> See Results </a></td>';
-                                              echo '</tr>';*/
-                                              
-                                              echo '<tr>';
-                                                echo '<td><strong>GPE for Teachers</td>';
-                                                echo'<form action="ResultGPETeachers.php" method= "POST">';
-                                                      echo "<input type='hidden' name='id' value='$idNo'/>";
-                                                       echo '<td><input type="submit" value="See Results"></td>';
-                                                   echo'</form>';  
-
-                                              echo '</tr>';
-
-                                              
-                                        echo '</table>';
-                                        echo '</center>';
-
-
-
-                                echo '</div>';
-
-
-
-                                echo '</div>';
-                                
-
-                            ?>
-
-
-
-
-                      </div>
-                     </div><!-- /.content_holder -->
-                    </div><!-- /.tabs_holder -->
-
-                    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
-                    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
-                    <script type="text/javascript" src="http://onlinehtmltools.com/tab-generator/skinable_tabs.min.js"></script>
-                    
-                    <script type="text/javascript">
-                      $('.tabs_holder').skinableTabs({
-                        effect: 'basic_display',
-                        skin: 'skin4',
-                        position: 'top'
-                      });
-                    </script>
-
-            <div class="panel panel-default target">
-                <div class="panel-heading" contenteditable="false">Dont know yet</div>
-                <div class="panel-body">
-                  <div class="row">
-        <div class="col-md-4">
-          <div class="thumbnail">
-            <img alt="300x200" src="http://www.lagunabelairschool.com.ph/images/danenberg.jpg">
-            <div class="caption">
-              <h3>
-                
-              </h3>
-              <p>
+				echo '<tr>';
+                echo '<td><strong>General Performance Evaluation (2-B)</td>';
+                echo'<form action="ListGPE_2B.php" method= "POST">';
+					echo "<input type='hidden' name='id' value='$idNo'/>";
+                    echo '<td><input type="submit" value="Go to results"></td>'; 
+                echo'</form>';
+                echo '</tr>';
+                echo '</table>';
+                echo '</center>';
+					
+			}else if ($department == 'Library'){
+				
+				echo '<center>';
+				echo '<table>';
+				echo '<table style="width:50%">';
+                    echo '<tr>';
+					echo '<td><strong>General Performance Evaluation (2-A)</td>';                  
+					echo'<form action="ListGPE_2AForm.php" method= "POST">';
+                    echo "<input type='hidden' name='id' value='$idNo'/>";
+                    echo '<td><input type="submit" value="Go to results"></td>';
+					echo'</form>';  
+                    echo '</tr>';
                
-              </p>
-              <p>
-              
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="thumbnail">
-            <img alt="300x200" src="http://www.lagunabelairschool.com.ph/images/danenberg.jpg">
-            <div class="caption">
-              <h3>
+					echo '<tr>';
+					echo '<td><strong>General Performance Evaluation (2-B)</td>';
+					echo'<form action="ListGPE_2B.php" method= "POST">';
+					echo "<input type='hidden' name='id' value='$idNo'/>";
+                    echo '<td><input type="submit" value="Go to results"></td>'; 
+					echo'</form>';
+					echo '</tr>';
                 
-              </h3>
-              <p>
-                
-              </p>
-              <p>
-              
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="thumbnail">
-            <img alt="300x200" src="http://www.lagunabelairschool.com.ph/images/danenberg.jpg">
-            <div class="caption">
-              <h3>
-                
-              </h3>
-              <p>
-                
-              </p>
-              <p>
-              
-              </p>
-            </div>
-                </div>
-                 
-            </div>
-                     
-            </div>
-                 
-        </div>
-              
-    </div>
-           <div class="panel panel-default">
-                <div class="panel-heading">DOnt know yet</div>
-                <div class="panel-body"> Description
-
-                </div>
-</div></div>
-
-
-            <div id="push"></div>
-        </div>
-       
-        
-        <script src="/plugins/bootstrap-select.min.js"></script>
-        <script src="/codemirror/jquery.codemirror.js"></script>
-        <script src="/beautifier.js"></script>
-        <script>
-          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-          ga('create', 'UA-40413119-1', 'bootply.com');
-          ga('send', 'pageview');
-        </script>
-        <script>
-        jQuery.fn.shake = function(intShakes, intDistance, intDuration, foreColor) {
-            this.each(function() {
-                if (foreColor && foreColor!="null") {
-                    $(this).css("color",foreColor); 
-                }
-                $(this).css("position","relative"); 
-                for (var x=1; x<=intShakes; x++) {
-                $(this).animate({left:(intDistance*-1)}, (((intDuration/intShakes)/4)))
-                .animate({left:intDistance}, ((intDuration/intShakes)/2))
-                .animate({left:0}, (((intDuration/intShakes)/4)));
-                $(this).css("color",""); 
-            }
-          });
-        return this;
-        };
-        </script>
-        <script>
-        $(document).ready(function() {
-        
-            $('.tw-btn').fadeIn(3000);
-            $('.alert').delay(5000).fadeOut(1500);
-            
-            $('#btnLogin').click(function(){
-                $(this).text("...");
-                $.ajax({
-                    url: "/loginajax",
-                    type: "post",
-                    data: $('#formLogin').serialize(),
-                    success: function (data) {
-                        //console.log('data:'+data);
-                        if (data.status==1&&data.user) { //logged in
-                            $('#menuLogin').hide();
-                            $('#lblUsername').text(data.user.username);
-                            $('#menuUser').show();
-                            /*
-                            $('#completeLoginModal').modal('show');
-                            $('#btnYes').click(function() {
-                                window.location.href="/";
-                            });
-                            */
-                        }
-                        else {
-                            $('#btnLogin').text("Login");
-                            prependAlert("#spacer",data.error);
-                            $('#btnLogin').shake(4,6,700,'#CC2222');
-                            $('#username').focus();
-                        }
-                    },
-                    error: function (e) {
-                        $('#btnLogin').text("Login");
-                        console.log('error:'+JSON.stringify(e));
-                    }
-                });
-            });
-            $('#btnRegister').click(function(){
-                $(this).text("Wait..");
-                $.ajax({
-                    url: "/signup?format=json",
-                    type: "post",
-                    data: $('#formRegister').serialize(),
-                    success: function (data) {
-                        console.log('data:'+JSON.stringify(data));
-                        if (data.status==1) {
-                            $('#btnRegister').attr("disabled","disabled");
-                            $('#formRegister').text('Thanks. You can now login using the Login form.');
-                        }
-                        else {
-                            prependAlert("#spacer",data.error);
-                            $('#btnRegister').shake(4,6,700,'#CC2222');
-                            $('#btnRegister').text("Sign Up");
-                            $('#inputEmail').focus();
-                        }
-                    },
-                    error: function (e) {
-                        $('#btnRegister').text("Sign Up");
-                        console.log('error:'+e);
-                    }
-                });
-            });
-            
-            $('.loginFirst').click(function(){
-                $('#navLogin').trigger('click');
-                return false;
-            });
-            
-            $('#btnForgotPassword').on('click',function(){
-                $.ajax({
-                    url: "/resetPassword",
-                    type: "post",
-                    data: $('#formForgotPassword').serializeObject(),
-                    success: function (data) {
-                        if (data.status==1){
-                            prependAlert("#spacer",data.msg);
-                            return true;
-                        }
-                        else {
-                            prependAlert("#spacer","Your password could not be reset.");
-                            return false;
-                        }
-                    },
-                    error: function (e) {
-                        console.log('error:'+e);
-                    }
-                });
-            });
-            
-            $('#btnContact').click(function(){
-                
-                $.ajax({
-                    url: "/contact",
-                    type: "post",
-                    data: $('#formContact').serializeObject(),
-                    success: function (data) {
-                        if (data.status==1){
-                            prependAlert("#spacer","Thanks. We got your message and will get back to you shortly.");
-                             $('#contactModal').modal('hide');
-                            return true;
-                        }
-                        else {
-                            prependAlert("#spacer",data.error);
-                            return false;
-                        }
-                    },
-                    error: function (e) {
-                        console.log('error:'+e);
-                    }
-                });
-                return false;
-            });
-            
-            /*
-            $('.nav .dropdown-menu input').on('click touchstart',function(e) {
-                e.stopPropagation();
-            });
-            */
-            
-            
-            
-            
-            
-        });
-        $.fn.serializeObject = function()
-        {
-            var o = {};
-            var a = this.serializeArray();
-            $.each(a, function() {
-                if (o[this.name] !== undefined) {
-                    if (!o[this.name].push) {
-                        o[this.name] = [o[this.name]];
-                    }
-                    o[this.name].push(this.value || '');
-                } else {
-                    o[this.name] = this.value || '';
-                }
-            });
-            return o;
-        };
-        var prependAlert = function(appendSelector,msg){
-            $(appendSelector).after('<div class="alert alert-info alert-block affix" id="msgBox" style="z-index:1300;margin:14px!important;">'+msg+'</div>');
-            $('.alert').delay(3500).fadeOut(1000);
-        }
-        </script>
-        <!-- Quantcast Tag -->
-        <script type="text/javascript">
-        var _qevents = _qevents || [];
-        
-        (function() {
-        var elem = document.createElement('script');
-        elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
-        elem.async = true;
-        elem.type = "text/javascript";
-        var scpt = document.getElementsByTagName('script')[0];
-        scpt.parentNode.insertBefore(elem, scpt);
-        })();
-        
-        _qevents.push({
-        qacct:"p-0cXb7ATGU9nz5"
-        });
-        </script>
-        <noscript>
-        &amp;amp;amp;amp;amp;amp;amp;lt;div style="display:none;"&amp;amp;amp;amp;amp;amp;amp;gt;
-        &amp;amp;amp;amp;amp;amp;amp;lt;img src="//pixel.quantserve.com/pixel/p-0cXb7ATGU9nz5.gif" border="0" height="1" width="1" alt="Quantcast"/&amp;amp;amp;amp;amp;amp;amp;gt;
-        &amp;amp;amp;amp;amp;amp;amp;lt;/div&amp;amp;amp;amp;amp;amp;amp;gt;
-        </noscript>
-        <!-- End Quantcast tag -->
-        <div id="completeLoginModal" class="modal hide">
-            <div class="modal-header">
-                <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
-                 <h3>Do you want to proceed?</h3>
-            </div>
-            <div class="modal-body">
-                <p>This page must be refreshed to complete your login.</p>
-                <p>You will lose any unsaved work once the page is refreshed.</p>
-                <br><br>
-                <p>Click "No" to cancel the login process.</p>
-                <p>Click "Yes" to continue...</p>
-            </div>
-            <div class="modal-footer">
-              <a href="#" id="btnYes" class="btn danger">Yes, complete login</a>
-              <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
-            </div>
-        </div>
-        <div id="forgotPasswordModal" class="modal hide">
-            <div class="modal-header">
-                <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
-                 <h3>Password Lookup</h3>
-            </div>
-            <div class="modal-body">
-                  <form class="form form-horizontal" id="formForgotPassword">    
-                  <div class="control-group">
-                      <label class="control-label" for="inputEmail">Email</label>
-                      <div class="controls">
-                          <input name="_csrf" id="token" type="hidden" value="CkMEALL0JBMf5KSrOvu9izzMXCXtFQ/Hs6QUY=">
-                          <input type="email" name="email" id="inputEmail" placeholder="you@youremail.com" required="">
-                          <span class="help-block"><small>Enter the email address you used to sign-up.</small></span>
-                      </div>
-                  </div>
-                  </form>
-            </div>
-            <div class="modal-footer pull-center">
-                <a href="#" data-dismiss="modal" aria-hidden="true" class="btn">Cancel</a>  
-              <a href="#" data-dismiss="modal" id="btnForgotPassword" class="btn btn-success">Reset Password</a>
-            </div>
-            
-        </div>
-        <div id="upgradeModal" class="modal hide">
-            <div class="modal-header">
-                <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
-                 <h4>Would you like to upgrade?</h4>
-            </div>
-            <div class="modal-body">
-                  <p class="text-center"><strong></strong></p>
-                  <h1 class="text-center">$4<small>/mo</small></h1>
-                  <p class="text-center"><small>Unlimited plys. Unlimited downloads. No Ads.</small></p>
-                  <p class="text-center"><img src="/assets/i_visa.png" width="50" alt="visa"> <img src="/assets/i_mc.png" width="50" alt="mastercard"> <img src="/assets/i_amex.png" width="50" alt="amex"> <img src="/assets/i_discover.png" width="50" alt="discover"> <img src="/assets/i_paypal.png" width="50" alt="paypal"></p>
-            </div>
-            <div class="modal-footer pull-center">
-              <a href="/upgrade" class="btn btn-block btn-huge btn-success"><strong>Upgrade Now</strong></a>
-              <a href="#" data-dismiss="modal" class="btn btn-block btn-huge">No Thanks, Maybe Later</a>
-            </div>
-        </div>
-        <div id="contactModal" class="modal hide">
-            <div class="modal-header">
-                <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
-                <h3>Contact Us</h3>
-                <p>suggestions, questions or feedback</p>
-            </div>
-            <div class="modal-body">
-                  <form class="form form-horizontal" id="formContact">
-                      <input name="_csrf" id="token" type="hidden" value="CkMEALL0JBMf5KSrOvu9izzMXCXtFQ/Hs6QUY=">
-                      <div class="control-group">
-                          <label class="control-label" for="inputSender">Name</label>
-                          <div class="controls">
-                              <input type="text" name="sender" id="inputSender" class="input-large" placeholder="Your name">
-                          </div>
-                      </div>
-                      <div class="control-group">
-                          <label class="control-label" for="inputMessage">Message</label>
-                          <div class="controls">
-                              <textarea name="notes" rows="5" id="inputMessage" class="input-large" placeholder="Type your message here"></textarea>
-                          </div>
-                      </div>
-                      <div class="control-group">
-                          <label class="control-label" for="inputEmail">Email</label>
-                          <div class="controls">
-                              <input type="text" name="email" id="inputEmail" class="input-large" placeholder="you@youremail.com (for reply)" required="">
-                          </div>
-                      </div>
-                  </form>
-            </div>
-            <div class="modal-footer pull-center">
-                <a href="#" data-dismiss="modal" aria-hidden="true" class="btn">Cancel</a>     
-                <a href="#" data-dismiss="modal" aria-hidden="true" id="btnContact" role="button" class="btn btn-success">Send</a>
-            </div>
-        </div>
-        
-        
-        
-  
-  <script src="/plugins/bootstrap-pager.js"></script>
-</div>
-
-
-
-</body>
-</html>
+					echo '<tr>';
+					echo '<td><strong>Evalution For Librian (Form-C) </td>';
+					echo'<form action="ListLibrianFormC.php" method= "POST">';
+					echo "<input type='hidden' name='id' value='$idNo'/>";
+                    echo '<td><input type="submit" value="Go to results"></td>'; 
+					echo'</form>';
+					echo '</tr>';
+					
+				echo '</table>';
+                echo '</center>';
+			} else if ($department == 'Guidance Counselling'){
+				
+				echo '<center>';
+				echo '<table>';
+				echo '<table style="width:50%">';
+                    echo '<tr>';
+					echo '<td><strong>General Performance Evaluation (2-A)</td>';                  
+					echo'<form action="ListGPE_2AForm.php" method= "POST">';
+                    echo "<input type='hidden' name='id' value='$idNo'/>";
+                    echo '<td><input type="submit" value="Go to results"></td>';
+					echo'</form>';  
+                    echo '</tr>';
+               
+					echo '<tr>';
+					echo '<td><strong>General Performance Evaluation (2-B)</td>';
+					echo'<form action="ListGPE_2B.php" method= "POST">';
+					echo "<input type='hidden' name='id' value='$idNo'/>";
+                    echo '<td><input type="submit" value="Go to results"></td>'; 
+					echo'</form>';
+					echo '</tr>';
+					
+					echo '<tr>';
+					echo '<td><strong>Evaluation for Guidance Counsellor (Form c)</td>';
+					echo'<form action="ListGuidanceFormC.php" method= "POST">';
+					echo "<input type='hidden' name='id' value='$idNo'/>";
+                    echo '<td><input type="submit" value="Go to results"></td>'; 
+					echo'</form>';
+					echo '</tr>';
+			
+				echo '</table>';
+                echo '</center>';
+			
+			}else if($department == 'Clinic'){
+				
+				echo '<center>';
+				echo '<table>';
+				echo '<table style="width:50%">';
+                    echo '<tr>';
+					echo '<td><strong>General Performance Evaluation (2-A)</td>';                  
+					echo'<form action="ListGPE_2AForm.php" method= "POST">';
+                    echo "<input type='hidden' name='id' value='$idNo'/>";
+                    echo '<td><input type="submit" value="Go to results"></td>';
+					echo'</form>';  
+                    echo '</tr>';
+               
+					echo '<tr>';
+					echo '<td><strong>General Performance Evaluation (2-B)</td>';
+					echo'<form action="ListGPE_2B.php" method= "POST">';
+					echo "<input type='hidden' name='id' value='$idNo'/>";
+                    echo '<td><input type="submit" value="Go to results"></td>'; 
+					echo'</form>';
+					echo '</tr>';
+					
+					echo '<tr>';
+					echo '<td><strong>Evaluation for School Nurse(Form c)</td>';
+					echo'<form action="ListNurseFormC.php" method= "POST">';
+					echo "<input type='hidden' name='id' value='$idNo'/>";
+                    echo '<td><input type="submit" value="Go to results"></td>'; 
+					echo'</form>';
+					echo '</tr>';
+			
+				echo '</table>';
+                echo '</center>';
+			}
+		}

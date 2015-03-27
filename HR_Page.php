@@ -99,7 +99,6 @@ window.open(localhost/ISTHESIS/,'win2','status=no,toolbar=no,scrollbars=yes,titl
 		            $leaves=mysql_query("SELECT * 
 							 FROM leave_table 
 							 WHERE L_Status ='Pending'");
-<<<<<<< HEAD
 		
 		if(mysql_num_rows($leaves) > 0){
 		?>

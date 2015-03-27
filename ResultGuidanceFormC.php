@@ -96,9 +96,7 @@
 
     <?php
     $idNo = $_POST['id'];
-	//$idNo = 'Admin';
 	$date = $_POST['date'];
-	
   mysql_connect("localhost", "root", "")
       or die(mysql_error());
   
@@ -116,42 +114,10 @@
                 AVG(Ques_8),
                 AVG(Ques_9),
                 AVG(Ques_10),
-                AVG(Ques_11),
-                AVG(Ques_12),
-                AVG(Ques_13),
-                AVG(Ques_14),
-                AVG(Ques_15),
-                AVG(Ques_16),
-                AVG(Ques_17),
-                AVG(Ques_18),
-                AVG(Ques_19),
-                AVG(Ques_20),
-                AVG(Ques_21),
-                AVG(Ques_22),
-                AVG(Ques_23),
-                AVG(Ques_24),
-                AVG(Ques_25),
-                AVG(Ques_26),
-                AVG(Ques_27),
-                AVG(Ques_28),
-                AVG(Ques_29),
-                AVG(Ques_30),
-                AVG(Ques_31),
-                AVG(Ques_32),
-                AVG(Ques_33),
-                AVG(Ques_34),
-                AVG(Ques_35),
-                AVG(Ques_36),
-                AVG(Ques_37),
-                AVG(Ques_38),
-                AVG(Ques_39),
-                AVG(Ques_40),
-                AVG(Ques_41),
-                AVG(Ques_42),
                 AVG(Result),
                 Count(Result)
-            FROM eval_ecia_alllevels
-            WHERE ID_No = '".$idNo."' AND YEAR(Date) = '2015'
+            FROM eval_guidancecounselor
+            WHERE ID_No = '".$idNo."' AND YEAR(Date) = '".$date."'
             "); 
             
           while($row = mysql_fetch_array($result)){
@@ -172,33 +138,7 @@
           $ques_14 = ($row['AVG(Ques_14)']);
           $ques_15 = ($row['AVG(Ques_15)']);
           $ques_16 = ($row['AVG(Ques_16)']);  
-          $ques_17 = ($row['AVG(Ques_17)']);
-          $ques_18 = ($row['AVG(Ques_18)']);
-          $ques_19 = ($row['AVG(Ques_19)']);
-          $ques_20 = ($row['AVG(Ques_20)']);
-          $ques_21 = ($row['AVG(Ques_21)']);
-          $ques_22 = ($row['AVG(Ques_22)']);
-          $ques_23 = ($row['AVG(Ques_23)']);
-          $ques_24 = ($row['AVG(Ques_24)']);
-          $ques_25 = ($row['AVG(Ques_25)']);
-          $ques_26 = ($row['AVG(Ques_26)']);
-          $ques_27 = ($row['AVG(Ques_27)']);
-          $ques_28 = ($row['AVG(Ques_28)']);
-          $ques_29 = ($row['AVG(Ques_29)']);
-          $ques_30 = ($row['AVG(Ques_30)']);
-          $ques_31 = ($row['AVG(Ques_31)']);
-          $ques_32 = ($row['AVG(Ques_32)']);
-          $ques_33 = ($row['AVG(Ques_33)']);
-          $ques_34 = ($row['AVG(Ques_34)']);
-          $ques_35 = ($row['AVG(Ques_35)']);
-          $ques_36 = ($row['AVG(Ques_36)']);
-          $ques_37 = ($row['AVG(Ques_37)']);
-          $ques_38 = ($row['AVG(Ques_38)']);
-          $ques_39 = ($row['AVG(Ques_39)']);
-          $ques_40 = ($row['AVG(Ques_40)']);
-          $ques_41 = ($row['AVG(Ques_41)']);
-          $ques_42 = ($row['AVG(Ques_42)']);
-          $ques_43= ($row['AVG(Result)']/$row['Count(Result)']);
+          $ques_25 = ($row['AVG(Result)']/$row['Count(Result)']);
 
         }
 
@@ -214,7 +154,7 @@
             $result = mysql_query("
             SELECT *
             FROM person, work 
-            WHERE person.ID_No = '$idNo' and work.ID_No = '".$date."' 
+            WHERE person.ID_No = '$idNo' and work.ID_No = '$idNo' 
             "); 
   
 
@@ -282,101 +222,68 @@
             echo '<tbody>';
                   
                   echo'<tr>';
-                        echo '<td> 1. Desire for personal and professional growth and improvement </td>';
+                        echo '<td> 1. Has a general program that respons to the needs of the <br> students </td>';
                         echo '<td> &nbsp &nbsp &nbsp'. $ques_1 . '</td>';
                   echo '</tr>';
                   
                   echo '<tr>';
-                        echo'<td> 2. Submission of neat, accurate, well organized and gramatically correct reports </td>';
+                        echo'<td> 2. Enjoys the turst and confidence of the students </td>';
                         echo '<td> &nbsp &nbsp &nbsp' . $ques_2 . '</td>';
                   echo '</tr>';
                   
                   echo '<tr>';
-                       echo '<td> 3. Compliance with policies and directive ageter these have been discussed </td>';
+                       echo '<td> 3. Effectively assists students when they go there </td>';
                        echo '<td> &nbsp &nbsp &nbsp' . $ques_3 . '</td>';
                   echo '</tr>';
                   
                   echo '<tr>';
-                       echo '<td> 4. Acceptance of tasks/assignements given </td>';
+                       echo '<td> 4. Has staff who are approachable and welcoming </td>';
                        echo '<td> &nbsp &nbsp &nbsp' . $ques_4 . '</td>';
                   echo '</tr>';
 
                   echo '<tr>';
-                       echo '<td> 5. Judicious use of time; systemization of work; planning for tasks ahead </td>';
+                       echo '<td> 5.  Effectively coordinates/facilitates concerns of students</td>';
                        echo '<td> &nbsp &nbsp &nbsp' . $ques_5 . '</td>';
                   echo '</tr>';
 
 
                   echo '<tr>';
-                       echo '<td>6. Building of unity through kinf feedback; not talking behind others back and engaging in negative talk </td>';
+                       echo '<td>6.Implements effective career guidance activities</td>';
                        echo '<td> &nbsp &nbsp &nbsp' . $ques_6 . '</td>';
                   echo '</tr>';
 
 
                   echo '<tr>';
-                       echo '<td> 7. Building and open, hamonious relationship w/ supervisors </td>';
+                       echo '<td> 7. Implements effective personality development activities </td>';
                        echo '<td> &nbsp &nbsp &nbsp' . $ques_7 . '</td>';
                   echo '</tr>';
 
 
                   echo '<tr>';
-                       echo '<td> 8. Maintenance of a pleasant disposition toward job and persons around  </td>';
+                       echo '<td> 8. Has a well-organized system in place  </td>';
                        echo '<td> &nbsp &nbsp &nbsp' . $ques_8 . '</td>';
                   echo '</tr>';
 
 
                   echo '<tr>';
-                       echo '<td> 9. Handling of problems arising from the work and workplace </td>';
+                       echo '<td> 9. Has clear rules and regulations</td>';
                        echo '<td> &nbsp &nbsp &nbsp' . $ques_9 . '</td>';
                   echo '</tr>';
 
                    echo '<tr>';
-                       echo '<td> 10. Resourcefulness and creativity in doing assigned tasks </td>';
+                       echo '<td> 10. Strictly implements its rules and regulations </td>';
                        echo '<td> &nbsp &nbsp &nbsp' . $ques_10 . '</td>';
                   echo '</tr>';
-                  
-
-                  echo '<tr>';
-                       echo '<td>  11. Flexibility in responding to variances in working conditions </td>';
-                       echo '<td> &nbsp &nbsp &nbsp' . $ques_11 . '</td>';
-                  echo '</tr>';
-
-                  echo '<tr>';
-                       echo '<td> 12. Exercise of discretion and confidentiality required by the job </td>';
-                       echo '<td> &nbsp &nbsp &nbsp' . $ques_12 . '</td>';
-                  echo '</tr>';
-
-                  echo '<tr>';
-                       echo '<td>13. Effort to live out the LBASS core values and serve as a role model for students </td>';
-                       echo '<td> &nbsp &nbsp &nbsp' . $ques_13 . '</td>';
-                  echo '</tr>';
-
-
-                  echo '<tr>';
-                       echo '<td> 14. Sensitivity, tact and prudence in dealing with students and parents </td>';
-                       echo '<td> &nbsp &nbsp &nbsp' . $ques_14 . '</td>';
-                  echo '</tr>';
-
-                  echo '<tr>';
-                       echo '<td> 15. Enforcement/compliance with guidelines on energy-saving, cost-cutting; care for school properties</td>';
-                       echo '<td> &nbsp &nbsp &nbsp' . $ques_15 . '</td>';
-                  echo '</tr>';
-
-
-                  echo '<tr>';
-                       echo '<td> 16. Enforcment/compliance with the garbage management & other pro-environment thrusts of school </td>';
-                       echo '<td> &nbsp &nbsp &nbsp' . $ques_16 . '</td>';
-                  echo '</tr>';
+                 
                                 
                   echo '<tr>';
                        echo '<br>';
                        echo '<td><h3>Result:</h3></td>';
-                       echo '<td> &nbsp &nbsp &nbsp' . $ques_43. '</td>';
+                       echo '<td> &nbsp &nbsp &nbsp' . $ques_25 . '</td>';
                   echo '</tr>';
 
             echo '</tbody>';
         echo '</table>';
-            echo "<input type='submit' value='Submit' class='Log' name='eval'>";
   echo '</form>';
     
   ?>
